@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baratisimo</title>
+    <link rel="shortcut icon" href="images/airplane.png"/>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+    <body>
+      <!-- Titulo de la pagina -->
+      <header>
+        <div class="container"><h1>&nbsp;&nbsp;Baratisimo <span class="glyphicon glyphicon-plane avion"></span></h1></div>
+      </header>
+      <!-- Menu de Navegacion -->
+      <nav class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="index.html">Principal</a></li>
+              <li><a href="informacion.html">Informacion</a></li>
+              <li><a href="historia.html">Historia</a></li>
+              <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Bar slider -->
+      <section class="section-white">
+  <div class="container">
+
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="images/img1.jpg" alt="...">
+          <div class="carousel-caption">
+            <h2>España</h2>
+            <p>Descuento del 50% en tu viaje</p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="images/img3.png" alt="...">
+          <div class="carousel-caption">
+            <h2>Italia</h2>
+            <p>Descuento del 20% en tu viaje</p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="images/img4.jpg" alt="...">
+          <div class="carousel-caption">
+            <h2>Austria</h2>
+            <p>Descuento del 25% en tu viaje</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+  </div>
+</section>
+      <hr>
+      <!-- Search Option -->
+      <div class="container jumbo">
+        <h3>Vuelo</h3>
+      <div class="row">
+        <div class="col-xs-4">
+          <p>Origen</p>
+        </div>
+        <div class="col-xs-4">
+          <p>Destino</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
+            <input type="text" class="form-control" placeholder="Escriba la ciudad" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
+            <input type="text" class="form-control" placeholder="Escriba la ciudad" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <h4><input type="radio" name="tipo" value="Ida"> Ida y Vuelta</h4>
+        </div>
+        <div class="col-xs-2">
+          <h4><input type="radio" name="tipo" value="Vuelta"> Ida</h4>
+        </div>
+      </div> <!--Primera linea-->
+      <div class="row">
+        <div class="col-xs-4">
+          <p>Fecha ida</p>
+        </div>
+        <div class="col-xs-4">
+          <p>Fecha regreso</p>
+        </div>
+        <div class="col-xs-4">
+          <p>Pasajeros</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <form action="/action_page.php">
+            <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+            <input type="date" class="form-control" name="bday">
+          </div>
+          </form>
+        </div>
+        <div class="col-xs-4">
+          <form action="/action_page.php">
+            <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+            <input type="date" class="form-control" name="bday">
+          </div>
+          </form>
+        </div>
+        <div class="col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
+            <input type="text" class="form-control" placeholder="Escriba la cantidad" aria-describedby="basic-addon1">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <input type="button" class="btn btn-group-justified btn-default" id="btn-search" value="Buscar Viaje">
+        </div>
+      </div>
+      <br>
+    </div>
+      <hr>
+      <br>
+      <!-- Footer -->
+      <div class="container">
+        <footer class="footer">
+          <p>&copy; 2017 Baratisimo, Inc.</p>
+        </footer>
+      </div>
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>

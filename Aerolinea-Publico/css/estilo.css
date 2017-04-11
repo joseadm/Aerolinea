@@ -1,0 +1,50 @@
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.jumbo {
+  background-color: #006699;
+  color: white;
+  border-radius: 5px;
+}
+
+.carousel-caption {
+  margin-bottom: 150px;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+}
+
+.main {
+	background:#f2f2f2;
+}
+
+.color1 {
+	background: #34495e;
+	color:#fff;
+}
+
+
+
+#exito{
+  display: none;
+}
+
+aside {
+	background:#c0392b;
+	color:#fff;
+}
+
+@media (min-width: 100px) {
+  .carousel-caption {
+    margin-bottom: 20px;
+  }
+}
