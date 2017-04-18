@@ -132,7 +132,28 @@
     </div>
   </div>
 </div>
-
+<!--Mapa -->
+<center>
+<h3>Direccion</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = {lat: 10.0000000, lng: -84.0000000};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCrBPdUq4LdDfDmPsb2UP_sUwfocMGsJVc &callback=initMap">
+    </script>
+    </center>
+<!--............................................. -->
 <!-- Success message -->
 <div class="alert alert-success" role="alert" id="exito">Exito al enviar <i class="glyphicon glyphicon-thumbs-up"></i> Gracias por contactarnos, nos comunicaremos pronto</div>
 
