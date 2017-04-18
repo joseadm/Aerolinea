@@ -79,3 +79,7 @@ aside {
   color: #fff;
   background-color: #428bca;
 }
+ #map {
+        height: 200px;
+        width: 80%;
+}
