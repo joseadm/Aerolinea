@@ -32,6 +32,12 @@ revive: function (k,v) {
 		if(v instanceof Object && v._class == 'Vuelo') {
 			return new Vuelo(v.codigo,v.aeropuerto_origen,v.aeropuerto_destino,v.avion,v.fecha,v.estado);
 		}
+		if(v instanceof Object && v._class == 'Cliente') {
+			return new Cliente(v.usuario,v.contraseña,v.nombre, v.apellidos,v.correo,v.fechaNac,v.telefono,v.celular);
+		}
+		if(v instanceof Object && v._class == 'Direccion') {
+			return new Direccion(v.latitud,v.longitud);
+		}
 		return v;
 	},
 
@@ -53,6 +59,12 @@ replacer: function (k,v) {
 		}
 		if (v instanceof Vuelo) {
 			v._class="Vuelo";
+		}
+		if (v instanceof CLiente) {
+			v._class="Cliente";
+		}
+		if (v instanceof Direccion) {
+			v._class="Direccion";
 		}
 		return v;
 	}
