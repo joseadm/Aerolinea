@@ -1,5 +1,6 @@
 var arrayUsuarios;
 function pageLoad(event) {
+    document.getElementById("formulario").reset();
     addEventListeners();
     loadSpaces();
     loadList();
@@ -176,6 +177,7 @@ function doSubmit() {
     
     window.alert("Usuario agregado"+ correo.value + nombre.value);
     document.getElementById("formulario").reset();
+    window.location="../html/index.html";
 }
 function initMap() {
     var uluru = {lat: 10.0000000, lng: -84.0000000};
