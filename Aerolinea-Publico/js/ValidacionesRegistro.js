@@ -1,4 +1,4 @@
-var arrayEstudiantes;
+var arrayUsuarios;
 function pageLoad(event) {
     addEventListeners();
     loadSpaces();
@@ -16,70 +16,98 @@ function initMap() {
         });
 }
 function loadSpaces() {
-    let carnet = document.getElementById("carnet");
-    let nombre = document.getElementById("nombre");
+    let  usuario= document.getElementById("usuario");
+    let password = document.getElementById("password");
     let apellidos = document.getElementById("apellidos");
-    let canton = document.getElementById("canton");
-    let distrito = document.getElementById("distrito");
-    let provincia = document.getElementById("provincia");
+    let nombre = document.getElementById("nombre");
+    let correo = document.getElementById("correo");
+    /*let fechaNacimiento = document.getElementById("fechaNacimiento");*/
+    let telefono = document.getElementById("telefono");
+    let celular = document.getElementById("celular");
 
-    carnet.value = "116290538";
-    apellidos.value = "Chen W.";
-    nombre.value = "Michael";
+   usuario.value= "jose manuel";
 }
 
 function loadList() {
-    arrayEstudiantes = Storage.retrieve("Estudiantes");
-    if (arrayEstudiantes == null) {
-        arrayEstudiantes = [];
-        Storage.store("Estudiantes", arrayEstudiantes);
+    arrayUsuarios = Storage.retrieve("Usuarios");
+    if (arrayUsuarios == null) {
+        arrayUsuarios = [];
+        Storage.store("Usuarios", arrayUsuarios);
     }
-    listEstudiantes(arrayEstudiantes);
+    listUsuarios(arrayUsuarios);
 }
 function addEventListeners() {
-    let carnet = document.getElementById("carnet");
+    let usuario= document.getElementById("usuario");
+    let password = document.getElementById("password");
     let apellidos = document.getElementById("apellidos");
     let nombre = document.getElementById("nombre");
+    let correo = document.getElementById("correo");
+   /* let fechaNacimiento = document.getElementById("fechaNacimiento");*/
+    let telefono = document.getElementById("telefono");
+    let celular = document.getElementById("celular");
 
-    addFocusBlur(carnet);
-    addFocusBlur(nombre);
-    addFocusBlur(apellidos);
+    usuario.addEventListener("focus",doFocus);
+	usuario.addEventListener("blur",doBlur); 
+	nombre.addEventListener("focus",doFocus);
+	nombre.addEventListener("blur",doBlur); 
+	apellidos.addEventListener("focus",doFocus);
+	apellidos.addEventListener("blur",doBlur); 
+	password.addEventListener("focus",doFocus);
+	password.addEventListener("blur",doBlur); 
+	correo.addEventListener("focus",doFocus);
+	correo.addEventListener("blur",doBlur); 
+	/*fechaNacimiento.addEventListener("focus",doFocus);
+	fechaNacimiento.addEventListener("blur",doBlur); */
+    telefono.addEventListener("focus",doFocus);
+	telefono.addEventListener("blur",doBlur); 
+    celular.addEventListener("focus",doFocus);
+	celular.addEventListener("blur",doBlur); 
 
     let formulario = document.getElementById("formulario");
     formulario.addEventListener("submit", doValidate);
-
-    let borrar = document.getElementById("borrar");
-    borrar.addEventListener("click", doBorrar);
-
-    let clear = document.getElementById("clear");
-    clear.addEventListener("click", doClear);
+}
+function doFocus(event){
+	event.target.classList.add("focus");
+}
+function doBlur(event){
+	event.target.classList.remove("focus");
 }
 
-function addFocusBlur(element) {
-    element.addEventListener("focus", (event) => event.target.classList.add("focus"));
-    element.addEventListener("blur", (event) => event.target.classList.remove("focus"));
-}
 function doValidate(event) {
     let formulario = event.target;
     let elements = formulario.elements;
 
-    let carnet = elements.namedItem("carnet");
+    let usuario = elements.namedItem("usuario");
+    let password = elements.namedItem("password");
     let apellidos = elements.namedItem("apellidos");
     let nombre = elements.namedItem("nombre");
+    let correo = elements.namedItem("correo");
+   /* let fechaNacimiento = elements.namedItem("fechaNacimiento");*/
+    let telefono = elements.namedItem("telefono");
+    let celular = elements.namedItem("celular");
 
     let error = false;
 
-    error = isBlank(carnet);
+    error = isBlank(usuario);
+    error = isBlank(password);
     error = isBlank(nombre);
     error = isBlank(apellidos);
+    error = isBlank(correo);
+   /* error = isBlank(fechaNacimiento);*/
+    error = isBlank(telefono);
+    error = isBlank(celular);
 
     if (error) {
         event.preventDefault();
         return;
     }
     
-    if(isRepeated(carnet)) {
-        window.alert("ESTE ESTUDIANTE YA EXISTE!");
+    if(isRepeated(usuario)) {
+        window.alert("USUARIO YA EXISTE!");
+        event.preventDefault();
+    }
+    if(isRepeatedC(correo)) {
+        window.alert("Este correo ya tiene cuenta");
         event.preventDefault();
     }
 }
@@ -92,26 +120,13 @@ function isBlank(element) {
     }
 }
 
-function isRepeated(carnet) {
-    let index = arrayEstudiantes.findIndex( (est) => est.carnet === carnet.value );
+function isRepeated(usuario) {
+    let index = arrayUsuarios.findIndex( (est) => est.usuario === usuario.value );
     return (index != -1)? true : false;
 }
-
-function doBorrar(event) {
-    if(!confirm("¿Estás seguro de querer borrar este estudiante?"))
-        return;
-    let carnet = document.getElementById("carnet").value;
-    let index = arrayEstudiantes.findIndex( (est) => est.carnet === carnet );
-    if(index != -1) {
-        arrayEstudiantes.splice(index, 1);
-        Storage.store("Estudiantes", arrayEstudiantes);
-        listEstudiantes(arrayEstudiantes);
-    }
-    document.getElementById("formulario").reset();
-}
-
-function doClear(event) {
-    document.getElementById("formulario").reset();
+function isRepeatedC(correo) {
+    let index = arrayUsuarios.findIndex( (est) => est.correo === correo.value );
+    return (index != -1)? true : false;
 }
 
 function doSubmit() {
@@ -119,105 +134,96 @@ function doSubmit() {
     let apellidos = document.getElementById("apellidos").value;
     let nombre = document.getElementById("nombre").value;
 
-    let examenes = new Examenes();
-    let estudiante = new Estudiante(carnet, apellidos, nombre, examenes);
-    arrayEstudiantes.push(estudiante);
+    let usuario = new Usuario(carnet, apellidos, nombre, examenes);
+    arrayUsuarios.push(usuario);
 
-    Storage.store("Estudiantes", arrayEstudiantes);
+    Storage.store("Usuarios", arrayUsuarios);
     
     let listado = document.getElementById("listado");
-    listEstudiante(listado, estudiante);
+    listUsuario(listado, usuario);
 
     document.getElementById("formulario").reset();
 }
 
-function listEstudiantes(arrayEstudiantes) {
+function listUsuarios(arrayUsuarios) {
     let listado = document.getElementById("listado");
     listado.innerHTML = "";
-    for (let i in arrayEstudiantes) {
-        listEstudiante(listado, arrayEstudiantes[i]);
+    for (let i in arrayUsuarios) {
+        listUsuario(listado, arrayUsuarios[i]);
     }
 }
 
-function listEstudiante(listado, estudiante) {
+function listUsuario(listado, usuario) {
     let tr = document.createElement("tr");
     let td;
 
     td = document.createElement("td");
-    td.appendChild(document.createTextNode(estudiante.carnet));
+    td.appendChild(document.createTextNode(usuario.carnet));
     tr.appendChild(td);
 
     td = document.createElement("td");
-    td.appendChild(document.createTextNode(estudiante.apellidos));
+    td.appendChild(document.createTextNode(usuario.apellidos));
     tr.appendChild(td);
 
     td = document.createElement("td");
-    td.appendChild(document.createTextNode(estudiante.nombre));
+    td.appendChild(document.createTextNode(usuario.nombre));
     tr.appendChild(td);
 
     let input;
-    let examenes = estudiante.examenes.arrayExamenes;
+    let examenes = usuario.examenes.arrayExamenes;
     let id;
 
-    id = estudiante.carnet.concat("Examen1");
+    id = usuario.carnet.concat("Examen1");
     td = document.createElement("td");
     input = "<input type='text' id='" + id +"' value='" + examenes[0] + "'>";
     td.innerHTML = input;
     tr.appendChild(td);
 
-    id = estudiante.carnet.concat("Examen2");
+    id = usuario.carnet.concat("Examen2");
     td = document.createElement("td");
     input = "<input type='text' id='" + id +"' value='" + examenes[1] + "'>";
     td.innerHTML = input;
     tr.appendChild(td);
 
-    id = estudiante.carnet.concat("Examen3");
+    id = usuario.carnet.concat("Examen3");
     td = document.createElement("td");
     input = "<input type='text' id='" + id +"' value='" + examenes[2] + "'>";
     td.innerHTML = input;
     tr.appendChild(td);
 
-    id = estudiante.carnet.concat("Promedio");
+    id = usuario.carnet.concat("Promedio");
     td = document.createElement("td");
     label = "<label class='centerText' id='" + id + "' for='promedio'></label>";
     td.innerHTML = label;
     tr.appendChild(td);
 
     listado.appendChild(tr);
-    inputExamListener(estudiante);
-    setPromedio(estudiante);
+    inputExamListener(usuario);
+    setPromedio(usuario);
 }
 
-function inputExamListener(estudiante) {
+function inputExamListener(usuario) {
     let element;
     let id;
 
-    id = estudiante.carnet.concat("Examen1");
+    id = usuario.carnet.concat("Examen1");
     element = document.getElementById(id);
-    addListener(element, estudiante, 0);
-    id = estudiante.carnet.concat("Examen2");
+    addListener(element, usuario, 0);
+    id = usuario.carnet.concat("Examen2");
     element = document.getElementById(id);
-    addListener(element, estudiante, 1);
-    id = estudiante.carnet.concat("Examen3");
+    addListener(element, usuario, 1);
+    id = usuario.carnet.concat("Examen3");
     element = document.getElementById(id);
-    addListener(element, estudiante, 2);
+    addListener(element, usuario, 2);
 }
 
-function addListener(element, estudiante, i) {
+function addListener(element, usuario, i) {
     addFocusBlur(element);
     element.className += " centerText";
     element.addEventListener("blur", (event) => {
-         estudiante.examenes.arrayExamenes[i] = parseFloat(event.target.value);
-         setPromedio(estudiante);
+         usuario.examenes.arrayExamenes[i] = parseFloat(event.target.value);
+         setPromedio(usuario);
     })
-}
-
-function setPromedio(estudiante) {
-    let id = estudiante.carnet.concat("Promedio");
-    label = document.getElementById(id);
-    label.innerHTML = estudiante.examenes.getPromedio();
-    Storage.store("Estudiantes", arrayEstudiantes);
-    
 }
 
 document.addEventListener("DOMContentLoaded", pageLoad)
