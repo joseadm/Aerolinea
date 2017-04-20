@@ -10,12 +10,12 @@ function loadSpaces() {
     let apellidos = document.getElementById("apellidos");
     let nombre = document.getElementById("nombre");
     let correo = document.getElementById("correo");
-    /*let fechaNacimiento = document.getElementById("fechaNacimiento");*/
+    let fechaNacimiento = document.getElementById("fechaNacimiento");
     let telefono = document.getElementById("telefono");
     let celular = document.getElementById("celular");
 	let direccion = document.getElementById("direccion");
 
-   usuario.value= "jose manuel";
+   
 }
 
 function loadList() {
@@ -31,7 +31,7 @@ function addEventListeners() {
     let apellidos = document.getElementById("apellidos");
     let nombre = document.getElementById("nombre");
     let correo = document.getElementById("correo");
-   /* let fechaNacimiento = document.getElementById("fechaNacimiento");*/
+   let fechaNacimiento = document.getElementById("fechaNacimiento");
     let telefono = document.getElementById("telefono");
     let celular = document.getElementById("celular");
 
@@ -45,8 +45,8 @@ function addEventListeners() {
 	password.addEventListener("blur",doBlur); 
 	correo.addEventListener("focus",doFocus);
 	correo.addEventListener("blur",doBlur); 
-	/*fechaNacimiento.addEventListener("focus",doFocus);
-	fechaNacimiento.addEventListener("blur",doBlur); */
+	fechaNacimiento.addEventListener("focus",doFocus);
+	fechaNacimiento.addEventListener("blur",doBlur);
     telefono.addEventListener("focus",doFocus);
 	telefono.addEventListener("blur",doBlur); 
     celular.addEventListener("focus",doFocus);
@@ -61,7 +61,7 @@ function doFocus(event){
 function doBlur(event){
 	event.target.classList.remove("focus");
 }
-
+/* validar espacios del form----------------------------------------------------------*/
 function doValidate(event) {
     let formulario = event.target;
     let elements = formulario.elements;
@@ -71,23 +71,61 @@ function doValidate(event) {
     let apellidos = elements.namedItem("apellidos");
     let nombre = elements.namedItem("nombre");
     let correo = elements.namedItem("correo");
-   /* let fechaNacimiento = elements.namedItem("fechaNacimiento");*/
+    let fechaNacimiento = elements.namedItem("fechaNacimiento");
     let telefono = elements.namedItem("telefono");
     let celular = elements.namedItem("celular");
 	let direccion = document.getElementById("direccion");
 
     let error = false;
-
     error = isBlank(usuario);
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
     error = isBlank(password);
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
     error = isBlank(nombre);
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
     error = isBlank(apellidos);
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
     error = isBlank(correo);
-   /* error = isBlank(fechaNacimiento);*/
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
+    error = isBlank(fechaNacimiento);
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
     error = isBlank(telefono);
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
     error = isBlank(celular);
-	error = isBlank(direccion);
-
+     if (error) {
+        event.preventDefault();
+         window.alert("Llene todos los campos");
+        return;
+    }
+	/*error = isBlank(direccion);*/
     if (error) {
         event.preventDefault();
          window.alert("Llene todos los campos");
@@ -103,7 +141,7 @@ function doValidate(event) {
         event.preventDefault();
     }
 }
-
+/* ----------------------------------------------------------------------------------------*/
 function isBlank(element) {
     element.classList.remove("invalid");
     if (element.value.length == 0) {
@@ -122,21 +160,21 @@ function isRepeatedC(correo) {
 }
 
 function doSubmit() {
-    let user= document.getElementById("usuario");
-    let password = document.getElementById("password");
-    let apellidos = document.getElementById("apellidos");
-    let nombre = document.getElementById("nombre");
-    let correo = document.getElementById("correo");
-   /* let fechaNacimiento = document.getElementById("fechaNacimiento");*/
-    let telefono = document.getElementById("telefono");
-    let celular = document.getElementById("celular");
+    let user= document.getElementById("usuario").value;
+    let password = document.getElementById("password").value;
+    let apellidos = document.getElementById("apellidos").value;
+    let nombre = document.getElementById("nombre").value;
+    let correo = document.getElementById("correo").value;
+    let fechaNacimiento = document.getElementById("fechaNacimiento").value;
+    let telefono = document.getElementById("telefono").value;
+    let celular = document.getElementById("celular").value;
 
-    let usuario = new Usuario(user,password,nombre,apellidos,correo,0,0,telefono,celular);
+    let usuario = new Usuario(user,password,nombre,apellidos,correo,fechaNacimiento,0,telefono,celular);
     arrayUsuarios.push(usuario);
 
     Storage.store("Usuarios", arrayUsuarios);
     
-
+    window.alert("Usuario agregado"+ correo.value + nombre.value);
     document.getElementById("formulario").reset();
 }
 function initMap() {
