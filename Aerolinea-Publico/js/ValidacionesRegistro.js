@@ -4,17 +4,6 @@ function pageLoad(event) {
     loadSpaces();
     loadList();
 }
-function initMap() {
-        var uluru = {lat: 10.0000000, lng: -84.0000000};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-}
 function loadSpaces() {
     let  usuario= document.getElementById("usuario");
     let password = document.getElementById("password");
@@ -24,6 +13,7 @@ function loadSpaces() {
     /*let fechaNacimiento = document.getElementById("fechaNacimiento");*/
     let telefono = document.getElementById("telefono");
     let celular = document.getElementById("celular");
+	let direccion = document.getElementById("direccion");
 
    usuario.value= "jose manuel";
 }
@@ -84,6 +74,7 @@ function doValidate(event) {
    /* let fechaNacimiento = elements.namedItem("fechaNacimiento");*/
     let telefono = elements.namedItem("telefono");
     let celular = elements.namedItem("celular");
+	let direccion = document.getElementById("direccion");
 
     let error = false;
 
@@ -95,6 +86,7 @@ function doValidate(event) {
    /* error = isBlank(fechaNacimiento);*/
     error = isBlank(telefono);
     error = isBlank(celular);
+	error = isBlank(direccion);
 
     if (error) {
         event.preventDefault();
@@ -147,5 +139,52 @@ function doSubmit() {
 
     document.getElementById("formulario").reset();
 }
+function initMap() {
+    var uluru = {lat: 10.0000000, lng: -84.0000000};
 
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: uluru
+    });
+
+    var marker = new google.maps.Marker({position: uluru, map: map, title: 'Click to zoom'});
+    marker.addListener('click', function () {
+        map.setZoom(8);
+        marker.setPosition(uluru);
+        map.setCenter(marker.getPosition());
+    });
+
+    google.maps.event.addListener(map, 'click', function (e) {
+        placeMarker(e.latLng, map,marker);
+    });
+
+}
+
+
+
+function placeMarker(position, map,marker) {
+       var geocoder = new google.maps.Geocoder;
+        var infowindow = new google.maps.InfoWindow;
+        
+        marker.setPosition(position);
+        geocodeLatLng(geocoder,map,infowindow,position,marker);
+        map.panTo(position);
+}
+   
+function geocodeLatLng(geocoder, map, infowindow,position,marker) {
+
+        geocoder.geocode({'location': position}, function(results, status) {
+          if (status === 'OK') {
+            if (results[1]) {
+              infowindow.setContent(results[0].formatted_address);
+              infowindow.open(map, marker);
+              document.getElementById("direccion").value = results[0].formatted_address;
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+}
 document.addEventListener("DOMContentLoaded", pageLoad)
