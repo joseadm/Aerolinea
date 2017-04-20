@@ -34,7 +34,6 @@ function loadList() {
         arrayUsuarios = [];
         Storage.store("Usuarios", arrayUsuarios);
     }
-    listUsuarios(arrayUsuarios);
 }
 function addEventListeners() {
     let usuario= document.getElementById("usuario");
@@ -99,6 +98,7 @@ function doValidate(event) {
 
     if (error) {
         event.preventDefault();
+         window.alert("Llene todos los campos");
         return;
     }
     
@@ -130,100 +130,22 @@ function isRepeatedC(correo) {
 }
 
 function doSubmit() {
-    let carnet = document.getElementById("carnet").value;
-    let apellidos = document.getElementById("apellidos").value;
-    let nombre = document.getElementById("nombre").value;
+    let user= document.getElementById("usuario");
+    let password = document.getElementById("password");
+    let apellidos = document.getElementById("apellidos");
+    let nombre = document.getElementById("nombre");
+    let correo = document.getElementById("correo");
+   /* let fechaNacimiento = document.getElementById("fechaNacimiento");*/
+    let telefono = document.getElementById("telefono");
+    let celular = document.getElementById("celular");
 
-    let usuario = new Usuario(carnet, apellidos, nombre, examenes);
+    let usuario = new Usuario(user,password,nombre,apellidos,correo,0,0,telefono,celular);
     arrayUsuarios.push(usuario);
 
     Storage.store("Usuarios", arrayUsuarios);
     
-    let listado = document.getElementById("listado");
-    listUsuario(listado, usuario);
 
     document.getElementById("formulario").reset();
-}
-
-function listUsuarios(arrayUsuarios) {
-    let listado = document.getElementById("listado");
-    listado.innerHTML = "";
-    for (let i in arrayUsuarios) {
-        listUsuario(listado, arrayUsuarios[i]);
-    }
-}
-
-function listUsuario(listado, usuario) {
-    let tr = document.createElement("tr");
-    let td;
-
-    td = document.createElement("td");
-    td.appendChild(document.createTextNode(usuario.carnet));
-    tr.appendChild(td);
-
-    td = document.createElement("td");
-    td.appendChild(document.createTextNode(usuario.apellidos));
-    tr.appendChild(td);
-
-    td = document.createElement("td");
-    td.appendChild(document.createTextNode(usuario.nombre));
-    tr.appendChild(td);
-
-    let input;
-    let examenes = usuario.examenes.arrayExamenes;
-    let id;
-
-    id = usuario.carnet.concat("Examen1");
-    td = document.createElement("td");
-    input = "<input type='text' id='" + id +"' value='" + examenes[0] + "'>";
-    td.innerHTML = input;
-    tr.appendChild(td);
-
-    id = usuario.carnet.concat("Examen2");
-    td = document.createElement("td");
-    input = "<input type='text' id='" + id +"' value='" + examenes[1] + "'>";
-    td.innerHTML = input;
-    tr.appendChild(td);
-
-    id = usuario.carnet.concat("Examen3");
-    td = document.createElement("td");
-    input = "<input type='text' id='" + id +"' value='" + examenes[2] + "'>";
-    td.innerHTML = input;
-    tr.appendChild(td);
-
-    id = usuario.carnet.concat("Promedio");
-    td = document.createElement("td");
-    label = "<label class='centerText' id='" + id + "' for='promedio'></label>";
-    td.innerHTML = label;
-    tr.appendChild(td);
-
-    listado.appendChild(tr);
-    inputExamListener(usuario);
-    setPromedio(usuario);
-}
-
-function inputExamListener(usuario) {
-    let element;
-    let id;
-
-    id = usuario.carnet.concat("Examen1");
-    element = document.getElementById(id);
-    addListener(element, usuario, 0);
-    id = usuario.carnet.concat("Examen2");
-    element = document.getElementById(id);
-    addListener(element, usuario, 1);
-    id = usuario.carnet.concat("Examen3");
-    element = document.getElementById(id);
-    addListener(element, usuario, 2);
-}
-
-function addListener(element, usuario, i) {
-    addFocusBlur(element);
-    element.className += " centerText";
-    element.addEventListener("blur", (event) => {
-         usuario.examenes.arrayExamenes[i] = parseFloat(event.target.value);
-         setPromedio(usuario);
-    })
 }
 
 document.addEventListener("DOMContentLoaded", pageLoad)
