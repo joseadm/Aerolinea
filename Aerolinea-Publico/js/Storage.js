@@ -25,7 +25,7 @@ revive: function (k,v) {
 		}
 		if(v instanceof Object && v._class == 'Direccion') {
 			return new Direccion(v.latitud,v.longitud);
-		
+		}
 		if(v instanceof Object && v._class == 'Tiquete') {
 			return new Tiquete(v.numero,v.usuario,v.vuelo,v.asiento,v.fecha,v.precio);
 		}
