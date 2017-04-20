@@ -23,6 +23,9 @@ revive: function (k,v) {
 		if(v instanceof Object && v._class == 'Ciudad') {
 			return new Ciudad(v.codigo,v.nombre,v.pais);
 		}
+		if(v instanceof Object && v._class == 'Direccion') {
+			return new Direccion(v.latitud,v.longitud);
+		
 		if(v instanceof Object && v._class == 'Tiquete') {
 			return new Tiquete(v.numero,v.usuario,v.vuelo,v.asiento,v.fecha,v.precio);
 		}
@@ -31,12 +34,6 @@ revive: function (k,v) {
 		}
 		if(v instanceof Object && v._class == 'Vuelo') {
 			return new Vuelo(v.codigo,v.aeropuerto_origen,v.aeropuerto_destino,v.avion,v.fecha,v.estado);
-		}
-		if(v instanceof Object && v._class == 'Cliente') {
-			return new Cliente(v.usuario,v.contraseña,v.nombre, v.apellidos,v.correo,v.fechaNac,v.telefono,v.celular);
-		}
-		if(v instanceof Object && v._class == 'Direccion') {
-			return new Direccion(v.latitud,v.longitud);
 		}
 		return v;
 	},
@@ -51,6 +48,9 @@ replacer: function (k,v) {
 		if (v instanceof Ciudad) {
 			v._class="Ciudad";
 		}
+		if (v instanceof Direccion) {
+			v._class="Direccion";
+		}
 		if (v instanceof Tiquete) {
 			v._class="Tiquete";
 		}
@@ -59,12 +59,6 @@ replacer: function (k,v) {
 		}
 		if (v instanceof Vuelo) {
 			v._class="Vuelo";
-		}
-		if (v instanceof CLiente) {
-			v._class="Cliente";
-		}
-		if (v instanceof Direccion) {
-			v._class="Direccion";
 		}
 		return v;
 	}
