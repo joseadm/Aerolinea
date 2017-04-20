@@ -4,7 +4,17 @@ function pageLoad(event) {
     loadSpaces();
     loadList();
 }
-
+function initMap() {
+        var uluru = {lat: 10.0000000, lng: -84.0000000};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+}
 function loadSpaces() {
     let carnet = document.getElementById("carnet");
     let nombre = document.getElementById("nombre");
