@@ -17,6 +17,12 @@ function addEventListeners() {
     let formularioSesion = document.getElementById("formularioSesion");
     formularioSesion.addEventListener("submit", iniciarSesion);
 }
+function doFocus(event){
+	event.target.classList.add("focus");
+}
+function doBlur(event){
+	event.target.classList.remove("focus");
+}
 /*-----------------------PARTE DE INICIO DE SESION----------------------------------- */
 function loadList() {
     arrayUsuarios = Storage.retrieve("Usuarios");
