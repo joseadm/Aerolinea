@@ -6,19 +6,18 @@ function pageLoad(event) {
     loadList();
 }
 function loadSpaces() {
-    let  usuario= document.getElementById("usuario");
-    let password = document.getElementById("password");
-    let apellidos = document.getElementById("apellidos");
-    let nombre = document.getElementById("nombre");
-    let correo = document.getElementById("correo");
-    let fechaNacimiento = document.getElementById("fechaNacimiento");
-    let telefono = document.getElementById("telefono");
-    let celular = document.getElementById("celular");
-	let direccion = document.getElementById("direccion");
+    var  usuario= document.getElementById("usuario");
+    var password = document.getElementById("password");
+    var apellidos = document.getElementById("apellidos");
+    var nombre = document.getElementById("nombre");
+    var correo = document.getElementById("correo");
+    var fechaNacimiento = document.getElementById("fechaNacimiento");
+    var telefono = document.getElementById("telefono");
+    var celular = document.getElementById("celular");
+	var direccion = document.getElementById("direccion");
 
    
 }
-
 function loadList() {
     arrayUsuarios = Storage.retrieve("Usuarios");
     if (arrayUsuarios == null) {
@@ -27,14 +26,14 @@ function loadList() {
     }
 }
 function addEventListeners() {
-    let usuario= document.getElementById("usuario");
-    let password = document.getElementById("password");
-    let apellidos = document.getElementById("apellidos");
-    let nombre = document.getElementById("nombre");
-    let correo = document.getElementById("correo");
-   let fechaNacimiento = document.getElementById("fechaNacimiento");
-    let telefono = document.getElementById("telefono");
-    let celular = document.getElementById("celular");
+    var usuario= document.getElementById("usuario");
+    var password = document.getElementById("password");
+    var apellidos = document.getElementById("apellidos");
+    var nombre = document.getElementById("nombre");
+    var correo = document.getElementById("correo");
+   var fechaNacimiento = document.getElementById("fechaNacimiento");
+    var telefono = document.getElementById("telefono");
+    var celular = document.getElementById("celular");
 
     usuario.addEventListener("focus",doFocus);
 	usuario.addEventListener("blur",doBlur); 
@@ -53,7 +52,7 @@ function addEventListeners() {
     celular.addEventListener("focus",doFocus);
 	celular.addEventListener("blur",doBlur); 
 
-    let formulario = document.getElementById("formulario");
+    var formulario = document.getElementById("formulario");
     formulario.addEventListener("submit", doValidate);
 }
 function doFocus(event){
@@ -64,20 +63,20 @@ function doBlur(event){
 }
 /* validar espacios del form----------------------------------------------------------*/
 function doValidate(event) {
-    let formulario = event.target;
-    let elements = formulario.elements;
+    var formulario = event.target;
+    var elements = formulario.elements;
 
-    let usuario = elements.namedItem("usuario");
-    let password = elements.namedItem("password");
-    let apellidos = elements.namedItem("apellidos");
-    let nombre = elements.namedItem("nombre");
-    let correo = elements.namedItem("correo");
-    let fechaNacimiento = elements.namedItem("fechaNacimiento");
-    let telefono = elements.namedItem("telefono");
-    let celular = elements.namedItem("celular");
-	let direccion = document.getElementById("direccion");
+    var usuario = elements.namedItem("usuario");
+    var password = elements.namedItem("password");
+    var apellidos = elements.namedItem("apellidos");
+    var nombre = elements.namedItem("nombre");
+    var correo = elements.namedItem("correo");
+    var fechaNacimiento = elements.namedItem("fechaNacimiento");
+    var telefono = elements.namedItem("telefono");
+    var celular = elements.namedItem("celular");
+	var direccion = document.getElementById("direccion");
 
-    let error = false;
+    var error = false;
     error = isBlank(usuario);
      if (error) {
         event.preventDefault();
@@ -152,25 +151,25 @@ function isBlank(element) {
 }
 
 function isRepeated(usuario) {
-    let index = arrayUsuarios.findIndex( (est) => est.usuario === usuario.value );
+    var index = arrayUsuarios.findIndex( (est) => est.usuario === usuario.value );
     return (index != -1)? true : false;
 }
 function isRepeatedC(correo) {
-    let index = arrayUsuarios.findIndex( (est) => est.correo === correo.value );
+    var index = arrayUsuarios.findIndex( (est) => est.correo === correo.value );
     return (index != -1)? true : false;
 }
 
 function doSubmit() {
-    let user= document.getElementById("usuario").value;
-    let password = document.getElementById("password").value;
-    let apellidos = document.getElementById("apellidos").value;
-    let nombre = document.getElementById("nombre").value;
-    let correo = document.getElementById("correo").value;
-    let fechaNacimiento = document.getElementById("fechaNacimiento").value;
-    let telefono = document.getElementById("telefono").value;
-    let celular = document.getElementById("celular").value;
+    var user= document.getElementById("usuario").value;
+    var password = document.getElementById("password").value;
+    var apellidos = document.getElementById("apellidos").value;
+    var nombre = document.getElementById("nombre").value;
+    var correo = document.getElementById("correo").value;
+    var fechaNacimiento = document.getElementById("fechaNacimiento").value;
+    var telefono = document.getElementById("telefono").value;
+    var celular = document.getElementById("celular").value;
 
-    let usuario = new Usuario(user,password,nombre,apellidos,correo,fechaNacimiento,0,telefono,celular);
+    var usuario = new Usuario(user,password,nombre,apellidos,correo,fechaNacimiento,0,telefono,celular);
     arrayUsuarios.push(usuario);
 
     Storage.store("Usuarios", arrayUsuarios);
