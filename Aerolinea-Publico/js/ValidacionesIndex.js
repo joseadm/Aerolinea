@@ -4,7 +4,6 @@ function pageLoad(event) {
     crearBotones();
     addEventListeners();
     loadList();
-    cargarBotones();
 }
 function addEventListeners() {
     let correo= document.getElementById("correo");
@@ -15,8 +14,12 @@ function addEventListeners() {
 	correo.addEventListener("focus",doFocus);
 	correo.addEventListener("blur",doBlur); 
     
-    let formularioSesion = document.getElementById("formularioSesion");
-    formularioSesion.addEventListener("submit", iniciarSesion);
+    /*let formularioSesion = document.getElementById("formularioSesion");
+    formularioSesion.addEventListener("submit", iniciarSesion);*/
+    var incioSesionBoton= document.getElementById("inicioSesion");
+    incioSesionBoton.addEventListener("click",iniciarSesion);
+    var cerrarSesion= document.getElementById("cerrarSesion");
+    cerrarSesion.addEventListener("click",cierraSesion);
 }
 function doFocus(event){
 	event.target.classList.add("focus");
@@ -46,7 +49,7 @@ function crearBotones(){
 
         let button = document.createElement("button");
         button.setAttribute("id","inicioSesion");
-        button.setAttribute("type","submit");
+        button.setAttribute("type","button");
         button.setAttribute("class","btn btn-success");
         let botonInicio= "Iniciar Sesion";
         button.innerHTML = botonInicio;
@@ -80,6 +83,7 @@ function cargarBotones(){
         document.getElementById("password").style.display = 'none';
         document.getElementById("crearCuenta").style.display = 'none';
         document.getElementById("inicioSesion").style.display = 'none';
+        document.getElementById("cerrarSesion").style.display = 'initial';
     }
 }
 function loadList() {
@@ -95,12 +99,22 @@ function iniciarSesion(){
     if(usuarioCorrecto(correo,password)){
         window.alert("Bienvenido");
         user=1;
+        cargarBotones();
     }else{
         window.alert("error inicio de sesion");
     }
     
 }
+function cierraSesion(){
+        document.getElementById("cerrarSesion").style.display = 'none';
+        document.getElementById("correo").style.display = 'initial';
+        document.getElementById("password").style.display = 'initial';
+        document.getElementById("crearCuenta").style.display = 'initial';
+        document.getElementById("inicioSesion").style.display = 'initial';
 
+        document.getElementById("password").value ="";
+        user=0;
+}
 function usuarioCorrecto(correo, password) {
     let index = arrayUsuarios.findIndex( ((est) => est.correo === correo.value) && ((est) => est.contrasena === password.value) );
     return (index != -1)? true : false;
