@@ -14,9 +14,9 @@ function loadSpaces() {
     var fechaNacimiento = document.getElementById("fechaNacimiento");
     var telefono = document.getElementById("telefono");
     var celular = document.getElementById("celular");
-	var direccion = document.getElementById("direccion");
+	  var direccion = document.getElementById("direccion");
 
-   
+
 }
 function loadList() {
     arrayUsuarios = Storage.retrieve("Usuarios");
@@ -36,21 +36,21 @@ function addEventListeners() {
     var celular = document.getElementById("celular");
 
     usuario.addEventListener("focus",doFocus);
-	usuario.addEventListener("blur",doBlur); 
+	usuario.addEventListener("blur",doBlur);
 	nombre.addEventListener("focus",doFocus);
-	nombre.addEventListener("blur",doBlur); 
+	nombre.addEventListener("blur",doBlur);
 	apellidos.addEventListener("focus",doFocus);
-	apellidos.addEventListener("blur",doBlur); 
+	apellidos.addEventListener("blur",doBlur);
 	password.addEventListener("focus",doFocus);
-	password.addEventListener("blur",doBlur); 
+	password.addEventListener("blur",doBlur);
 	correo.addEventListener("focus",doFocus);
-	correo.addEventListener("blur",doBlur); 
+	correo.addEventListener("blur",doBlur);
 	fechaNacimiento.addEventListener("focus",doFocus);
 	fechaNacimiento.addEventListener("blur",doBlur);
     telefono.addEventListener("focus",doFocus);
-	telefono.addEventListener("blur",doBlur); 
+	telefono.addEventListener("blur",doBlur);
     celular.addEventListener("focus",doFocus);
-	celular.addEventListener("blur",doBlur); 
+	celular.addEventListener("blur",doBlur);
 
     var formulario = document.getElementById("formulario");
     formulario.addEventListener("submit", doValidate);
@@ -131,7 +131,7 @@ function doValidate(event) {
          window.alert("Llene todos los campos");
         return;
     }
-    
+
     if(isRepeated(usuario)) {
         window.alert("USUARIO YA EXISTE!");
         event.preventDefault();
@@ -173,7 +173,7 @@ function doSubmit() {
     arrayUsuarios.push(usuario);
 
     Storage.store("Usuarios", arrayUsuarios);
-    
+
     window.alert("Usuario agregado"+ correo.value + nombre.value);
     document.getElementById("formulario").reset();
     window.location="../html/index.html";
@@ -204,12 +204,12 @@ function initMap() {
 function placeMarker(position, map,marker) {
        var geocoder = new google.maps.Geocoder;
         var infowindow = new google.maps.InfoWindow;
-        
+
         marker.setPosition(position);
         geocodeLatLng(geocoder,map,infowindow,position,marker);
         map.panTo(position);
 }
-   
+
 function geocodeLatLng(geocoder, map, infowindow,position,marker) {
 
         geocoder.geocode({'location': position}, function(results, status) {

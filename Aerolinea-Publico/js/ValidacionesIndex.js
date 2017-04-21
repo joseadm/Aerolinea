@@ -172,7 +172,7 @@ function loadListAeropuertos() {
     }
 }
 function buscar(){
-
+  
 }
 function iniciarSesion(){
     let correo= document.getElementById("correo");
