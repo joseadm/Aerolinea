@@ -61,49 +61,53 @@
             </table>
         </div>
         <div class="container">
-        <div id="pago" class="jumbotron">
-        <div class="container">
-          <form class="" action="" method="post">
-          <table>
-            <thead>
-              <tr>
-                <th colspan="2"><img src="images/tarjetas.png" alt="forma de pago"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Numero de tarjeta: </td>
-                <td><input class="form-control" type="text" value="" id="numeroTarjeta"></td>
-              </tr>
-              <tr>
-                <td>Fecha de vencimiento: </td>
-                <td>
-                  <select class="form-control" id="expirationMonth" name="expirationMonth">
-              			<option>Enero</option><option>Febrero</option><option>Marzo</option>
-              			<option>Abril</option><option>Mayo</option><option>Junio</option>
-                    <option>Julio</option><option>Agosto</option><option>Setiembre</option>
-              			<option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
-      			      </select>
-                </td>
-                <td>
-                  <select class="form-control" id="expirationYear" name="expirationYear">
-              			<option>2017</option><option>2018</option><option>2019</option>
-              			<option>2020</option><option>2021</option><option>2022</option>
-                    <option>2023</option><option>2024</option><option>2025</option>
-              			<option>2026</option><option>2027</option><option>2028</option>
-      			      </select>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="submit" name="cobrar" value="Cobrar"></td>
-                <td><input type="button" name="cancelar" value="Cancelar"></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
+      <div id="pago" class="jumbotron">
+        <div class="row">
+          <div id="imagenTarjeta" class="container">
+            <img src="../images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
+          </div>
         </div>
-      </div>
-    </div>
+        <hr>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputType" class="col-md-5 control-label">Numero de Tarjeta: </label>
+              <div class="col-md-7">
+                  <input type="text" class="form-control" id="inputType" placeholder="1234567890">
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="inputType" class="col-md-5 control-label">Fecha de vencimiento: </label>
+              <div class="col-md-3">
+                  <select class="form-control" id="expirationMonth" name="expirationMonth" placeholder="Mes">
+                    <option>Enero</option><option>Febrero</option><option>Marzo</option>
+                    <option>Abril</option><option>Mayo</option><option>Junio</option>
+                    <option>Julio</option><option>Agosto</option><option>Setiembre</option>
+                    <option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+                  </select>
+              </div>
+              <div class="col-md-1">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              </div>
+              <div class="col-md-3">
+                <select class="form-control" id="expirationYear" name="expirationYear" placeholder="Anio">
+                  <option>2017</option><option>2018</option><option>2019</option>
+                  <option>2020</option><option>2021</option><option>2022</option>
+                  <option>2023</option><option>2024</option><option>2025</option>
+                  <option>2026</option><option>2027</option><option>2028</option>
+                </select>
+              </div>
+          </div>
+          <hr class="my-4">
+          <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8 text-center">
+            <input type="button" class="btn btn-default btn-lg" value="Aceptar">
+            <input type="button" class="btn btn-default btn-lg" value="Cancelar">
+          </div>
+          </div>
+          </form>
+          </div>
+        </div>
       <hr>
       <br><br><br>
       <!-- Footer -->
