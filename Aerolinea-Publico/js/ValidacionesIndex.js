@@ -117,7 +117,10 @@ function cierraSesion(){
 }
 function usuarioCorrecto(correo, password) {
     let index = arrayUsuarios.findIndex( ((est) => est.correo === correo.value) && ((est) => est.contrasena === password.value) );
-    return (index != -1)? true : false;
+        if(index != -1){
+            return true;
+        }
+        return false;
 }
 /**----------------------------------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", pageLoad)
