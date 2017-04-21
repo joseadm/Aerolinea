@@ -36,12 +36,19 @@ function iniciarSesion(){
     let password = document.getElementById("password");
     if(usuarioCorrecto(correo,password)){
         window.alert("Bienvenido");
+        document.getElementById("correo").style.display = 'none';
+        document.getElementById("password").style.display = 'none';
+        document.getElementById("crearCuenta").style.display = 'none';
+        document.getElementById("inicioSesion").style.display = 'none';
+    }else{
+        window.alert("error inicio de sesion");
     }
+    
 }
 
 function usuarioCorrecto(correo, password) {
     let index = arrayUsuarios.findIndex( ((est) => est.correo === correo.value) && ((est) => est.contrasena === password.value) );
-    return (index != -1)? false : true;
+    return (index != -1)? true : false;
 }
 /**----------------------------------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", pageLoad)
