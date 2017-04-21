@@ -9,14 +9,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../js/Ciudad.js"></script>
 	<script type="text/javascript" src="../js/Aeropuerto.js"></script>
 	<script type="text/javascript" src="../js/Avion.js"></script>
-	<script type="text/javascript" src="../js/Ciudad.js"></script>
 	<script type="text/javascript" src="../js/Tiquete.js"></script>
 	<script type="text/javascript" src="../js/Usuario.js"></script>
 	<script type="text/javascript" src="../js/Direccion.js"></script>
 	<script type="text/javascript" src="../js/Vuelo.js"></script>
-  <script type="text/javascript" src="../js/ValidacionesIndex.js"></script>
+	<script type="text/javascript" src="../js/ValidacionesIndex.js"></script>
 	<script type="text/javascript" src="../js/Storage.js"></script>
   </head>
     <body>
@@ -111,21 +111,21 @@
       <div class="row">
         <div class="col-xs-4">
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
-            <input type="text" class="form-control" placeholder="Escriba la ciudad" aria-describedby="basic-addon1">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
+            <select id="aero_origen" name="aero_origen" class="form-control" ></select>
           </div>
         </div>
         <div class="col-xs-4">
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
-            <input type="text" class="form-control" placeholder="Escriba la ciudad" aria-describedby="basic-addon1">
+            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
+            <select id="aero_destino" name="aero_destino" class="form-control" ></select>
           </div>
         </div>
         <div class="col-xs-2">
-          <h4><input type="radio" name="tipo" value="Ida"> Ida y vuelta</h4>
+          <h4><input type="radio" id="ida" name="tipo" value="Ida"> Ida y vuelta</h4>
         </div>
         <div class="col-xs-2">
-          <h4><input type="radio" name="tipo" value="Vuelta"> Ida</h4>
+          <h4><input type="radio" id="vuelta" name="tipo" value="Vuelta"> Ida</h4>
         </div>
       </div> <!--Primera linea-->
       <div class="row">
@@ -144,7 +144,7 @@
           <form action="/action_page.php">
             <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-            <input type="date" class="form-control" name="bday">
+            <input id="fecha_ida" type="date" class="form-control" name="bday">
           </div>
           </form>
         </div>
@@ -152,7 +152,7 @@
           <form action="/action_page.php">
             <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-            <input type="date" class="form-control" name="bday">
+            <input id="fecha_regreso" type="date" class="form-control" name="bday">
           </div>
           </form>
         </div>
@@ -165,7 +165,7 @@
 			<option>4</option>
 			<option>5</option>
 			<option>6</option>
-			</select>
+            </select>
           </div>
         </div>
       </div>

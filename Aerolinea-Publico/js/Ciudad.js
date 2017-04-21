@@ -6,5 +6,8 @@ Ciudad.prototype={
 		this.codigo=codigo;
 		this.nombre=nombre;
 		this.pais=pais;
+	},
+        info: function () {
+		return this.codigo+this.nombre+this.pais;
 	}
 }

@@ -1,3 +1,5 @@
+
+
 ﻿Storage = {
 store : function (id, object){
 			return localStorage.setItem(id, JSON.stringify(object,this.replacer));
@@ -14,14 +16,14 @@ retrieve: function (id){
 		},
 
 revive: function (k,v) {
+		if(v instanceof Object && v._class == 'Ciudad') {
+			return new Ciudad(v.codigo,v.nombre,v.pais);
+		}
 		if (v instanceof Object && v._class == 'Aeropuerto') {
 			return new Aeropuerto(v.codigo,v.nombre,v.ciudad);
 		}
 		if(v instanceof Object && v._class == 'Avion') {
 			return new Avion(v.codigo,v.annio,v.modelo,v.marca,v.cant_pasajeros,v.cant_filas,v.cant_asientos);
-		}
-		if(v instanceof Object && v._class == 'Ciudad') {
-			return new Ciudad(v.codigo,v.nombre,v.pais);
 		}
 		if(v instanceof Object && v._class == 'Direccion') {
 			return new Direccion(v.latitud,v.longitud);
@@ -39,14 +41,14 @@ revive: function (k,v) {
 	},
 
 replacer: function (k,v) {
+		if (v instanceof Ciudad) {
+			v._class="Ciudad";
+		}
 		if (v instanceof Aeropuerto) {
 			v._class="Aeropuerto";
 		}
 		if (v instanceof Avion) {
 			v._class="Avion";
-		}
-		if (v instanceof Ciudad) {
-			v._class="Ciudad";
 		}
 		if (v instanceof Direccion) {
 			v._class="Direccion";
