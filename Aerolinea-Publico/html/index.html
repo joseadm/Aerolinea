@@ -101,62 +101,46 @@
       <div class="container jumbo">
         <h3>Vuelo</h3>
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-sm-4 col-md-4">
           <p>Origen</p>
-        </div>
-        <div class="col-xs-4">
-          <p>Destino</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-4">
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
             <select id="aero_origen" name="aero_origen" class="form-control" ></select>
-          </div>
+          </div> <br>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <p>Destino</p>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
             <select id="aero_destino" name="aero_destino" class="form-control" ></select>
-          </div>
+          </div> <br>
         </div>
-        <div class="col-xs-2">
-          <h4><input type="radio" id="ida" name="tipo" value="Ida"> Ida y vuelta</h4>
-        </div>
-        <div class="col-xs-2">
-          <h4><input type="radio" id="vuelta" name="tipo" value="Vuelta"> Ida</h4>
-        </div>
-      </div> <!--Primera linea-->
-      <div class="row">
-        <div class="col-xs-4">
-          <p>Fecha ida</p>
-        </div>
-        <div class="col-xs-4">
-          <p>Fecha regreso</p>
-        </div>
-        <div class="col-xs-4">
-          <p>Número de Pasajeros</p>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <p>Tipo</p>
+          <h4><input type="radio" id="ida" name="tipo" value="Ida"> Ida y vuelta &nbsp;&nbsp;<input type="radio" id="vuelta" name="tipo" value="Vuelta"> Ida</h4>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <p>Fecha ida</p>
           <form action="/action_page.php">
             <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             <input id="fecha_ida" type="date" class="form-control" name="bday">
-          </div>
+          </div> <br>
           </form>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <p>Fecha regreso</p>
           <form action="/action_page.php">
             <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             <input id="fecha_regreso" type="date" class="form-control" name="bday">
-          </div>
+          </div>  <br>
           </form>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <p>Número de Pasajeros</p>
           <div class="form-group">
             <select class="form-control" id="listPassengers" name="passengers">
 			<option>1</option>
@@ -169,7 +153,7 @@
           </div>
         </div>
       </div>
-      <br><br> 
+      <br>
       <div class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">

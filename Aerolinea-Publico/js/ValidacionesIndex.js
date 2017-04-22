@@ -48,10 +48,10 @@ function doBlur(event){
 /*-----------------------   PARTE DE BUSQUEDA DE VUELOS-------------------------------*/
 function ciudades(){
 
-        var ciudad1 = new Ciudad("SJO","San Jos�","Costa Rica");
-        var ciudad2 = new Ciudad("MEX","Ciudad de M�xico","M�xico");
+        var ciudad1 = new Ciudad("SJO","San Jose","Costa Rica");
+        var ciudad2 = new Ciudad("MEX","Ciudad de Mexico","Mexico");
         var ciudad3 = new Ciudad("MIA","Miami","Estados Unidos");
-        var ciudad4 = new Ciudad("MAD","Madrid","Espa�a");
+        var ciudad4 = new Ciudad("MAD","Madrid","Espana");
         var ciudad5 = new Ciudad("ROM","Roma","Italia");
         var ciudad6 = new Ciudad("VIE","Viena","Austria");
 
@@ -67,11 +67,8 @@ function opciones(){
     var select  = document.getElementById("aero_origen");
     var select2 = document.getElementById("aero_destino");
     for(index in arrayCiudades) {
-     select.options[select.options.length] = new Option(arrayCiudades[index].info(),arrayCiudades[index].info());
-
-}
-    for(index in arrayCiudades) {
-    select2.options[select2.options.length] = new Option(arrayCiudades[index].info(),arrayCiudades[index].info());
+     select.options[select.options.length] = new Option(arrayCiudades[index].info());
+     select2.options[select2.options.length] = new Option(arrayCiudades[index].info());
 }
 }
 
@@ -106,7 +103,7 @@ function crearBotones(){
         let input2 = document.createElement("input");
         input2.setAttribute("id","password");
         input2.setAttribute("name","password");
-        input2.setAttribute("placeholder","contraseña");
+        input2.setAttribute("placeholder","Contraseña");
         input2.setAttribute("class","form-control");
         input2.setAttribute("type","password");
         form.appendChild(input2);
@@ -172,7 +169,7 @@ function loadListAeropuertos() {
     }
 }
 function buscar(){
-  
+
 }
 function iniciarSesion(){
     let correo= document.getElementById("correo");
