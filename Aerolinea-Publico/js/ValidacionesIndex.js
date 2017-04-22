@@ -1,3 +1,4 @@
+var promo; // Arreglo de vuelos en promocion
 var arrayUsuarios;
 var ciudad;
 var aeropuerto;
@@ -5,6 +6,7 @@ var arrayCiudades;
 var arrayAeropuertos;
 let user;
 function pageLoad(event) {
+    loadCarousel();
     crearBotones();
     addEventListeners();
     loadListUsuarios();
@@ -13,6 +15,10 @@ function pageLoad(event) {
     ciudades();
     opciones();
 }
+function loadCarousel() {
+    //promo.push(new Vuelo(111,,aeropuerto_destino,avion,fecha,estado));
+}
+
 function addEventListeners() {
     let correo= document.getElementById("correo");
     let password = document.getElementById("password");
