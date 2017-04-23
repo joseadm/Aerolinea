@@ -1,28 +1,36 @@
+var promo; // Arreglo de vuelos en promocion
+var buscados;
 var arrayUsuarios;
 var ciudad;
 var aeropuerto;
 var arrayCiudades;
 var arrayAeropuertos;
+var arrayVuelos;
 let user;
 function pageLoad(event) {
-    crearBotones();
+    cargarBotones();
     addEventListeners();
     loadListUsuarios();
     loadListCiudades();
     loadListAeropuertos();
-    ciudades();
+    //--------
+    initCiudades();
     opciones();
+    initVuelos();
+    initPromo();
+    showPromos();
 }
+
 function addEventListeners() {
-    let correo= document.getElementById("correo");
-    let password = document.getElementById("password");
-    let aero_origen = document.getElementById("aero_origen");
-    let aero_destino = document.getElementById("aero_destino");
-    let fecha_ida = document.getElementById("fecha_ida");
-    let fecha_regreso = document.getElementById("fecha_regreso");
-    let ida = document.getElementById("ida");
-    let vuelta = document.getElementById("vuelta");
-    let pasajeros = document.getElementById("listPassengers");
+    var correo= document.getElementById("correo");
+    var password = document.getElementById("password");
+    var aero_origen = document.getElementById("aero_origen");
+    var aero_destino = document.getElementById("aero_destino");
+    var fecha_ida = document.getElementById("fecha_ida");
+    var fecha_regreso = document.getElementById("fecha_regreso");
+    var ida = document.getElementById("ida");
+    var vuelta = document.getElementById("vuelta");
+    var pasajeros = document.getElementById("listPassengers");
 
 
 	password.addEventListener("focus",doFocus);
@@ -36,8 +44,8 @@ function addEventListeners() {
     incioSesionBoton.addEventListener("click",iniciarSesion);
     var cerrarSesion= document.getElementById("cerrarSesion");
     cerrarSesion.addEventListener("click",cierraSesion);
-    var buscar = document.getElementById("btn-search");
-    buscar.addEventListener("click",buscar);
+    var botonBuscar = document.getElementById("btn_search");
+    botonBuscar.addEventListener("click",buscar);
 }
 function doFocus(event){
 	event.target.classList.add("focus");
@@ -46,32 +54,24 @@ function doBlur(event){
 	event.target.classList.remove("focus");
 }
 /*-----------------------   PARTE DE BUSQUEDA DE VUELOS-------------------------------*/
-function ciudades(){
+function initCiudades(){
 
-        var ciudad1 = new Ciudad("SJO","San Jos�","Costa Rica");
-        var ciudad2 = new Ciudad("MEX","Ciudad de M�xico","M�xico");
-        var ciudad3 = new Ciudad("MIA","Miami","Estados Unidos");
-        var ciudad4 = new Ciudad("MAD","Madrid","Espa�a");
-        var ciudad5 = new Ciudad("ROM","Roma","Italia");
-        var ciudad6 = new Ciudad("VIE","Viena","Austria");
-
-        arrayCiudades.push(ciudad1);
-        arrayCiudades.push(ciudad2);
-        arrayCiudades.push(ciudad3);
-        arrayCiudades.push(ciudad4);
-        arrayCiudades.push(ciudad5);
-        arrayCiudades.push(ciudad6);
+        arrayCiudades=[
+          new Ciudad("SJO","San Jose","Costa Rica"),
+          new Ciudad("CAN","Cancun","Mexico"),
+          new Ciudad("MIA","Miami","Estados Unidos"),
+          new Ciudad("MAD","Madrid","Espana"),
+          new Ciudad("ROM","Roma","Italia"),
+          new Ciudad("VIE","Viena","Austria")
+      ];
 
 }
 function opciones(){
     var select  = document.getElementById("aero_origen");
     var select2 = document.getElementById("aero_destino");
-    for(index in arrayCiudades) {
-     select.options[select.options.length] = new Option(arrayCiudades[index].info(),arrayCiudades[index].info());
-
-}
-    for(index in arrayCiudades) {
-    select2.options[select2.options.length] = new Option(arrayCiudades[index].info(),arrayCiudades[index].info());
+    for(i=0; i<arrayCiudades.length; i++) {
+     select.options[select.options.length] = new Option(arrayCiudades[i].info());
+     select2.options[select2.options.length] = new Option(arrayCiudades[i].info());
 }
 }
 
@@ -92,62 +92,16 @@ function aeropuertos(){
 
 }
 /*-----------------------PARTE DE INICIO DE SESION----------------------------------- */
-function crearBotones(){
-        let form = document.getElementById("formularioSesion");
 
-        let input = document.createElement("input");
-        input.setAttribute("id","correo");
-        input.setAttribute("name","correo");
-        input.setAttribute("placeholder","Email");
-        input.setAttribute("class","form-control");
-        input.setAttribute("type","text");
-        form.appendChild(input);
-
-        let input2 = document.createElement("input");
-        input2.setAttribute("id","password");
-        input2.setAttribute("name","password");
-        input2.setAttribute("placeholder","contraseña");
-        input2.setAttribute("class","form-control");
-        input2.setAttribute("type","password");
-        form.appendChild(input2);
-
-        let button = document.createElement("button");
-        button.setAttribute("id","inicioSesion");
-        button.setAttribute("type","button");
-        button.setAttribute("class","btn btn-success");
-        let botonInicio= "Iniciar Sesion";
-        button.innerHTML = botonInicio;
-        form.appendChild(button);
-
-        let a = document.createElement("a");
-        a.setAttribute("href","registro.html");
-        a.setAttribute("id","crearCuenta");
-        a.setAttribute("type","button");
-        a.setAttribute("class","btn btn-primary");
-        let botonCrear= "Crear cuenta"
-        a.innerHTML = botonCrear;
-        form.appendChild(a);
-
-        let button2 = document.createElement("button");
-        button2.setAttribute("id","cerrarSesion");
-        button2.setAttribute("type","button");
-        button2.setAttribute("class","btn btn-danger");
-        let botonInicio2= "Cerrar Sesion";
-        button2.innerHTML = botonInicio2;
-        form.appendChild(button2);
-
-       cargarBotones();
-
-}
 function cargarBotones(){
     if(user!=1){ /*Nadie a iniciado sesion */
-        document.getElementById("cerrarSesion").style.display = 'none';
+        document.getElementById("ulPrincipal").style.display = 'none';
     }else{
         document.getElementById("correo").style.display = 'none';
         document.getElementById("password").style.display = 'none';
         document.getElementById("crearCuenta").style.display = 'none';
         document.getElementById("inicioSesion").style.display = 'none';
-        document.getElementById("cerrarSesion").style.display = 'initial';
+        document.getElementById("ulPrincipal").style.display = 'initial';
     }
 }
 function loadListUsuarios() {
@@ -172,7 +126,7 @@ function loadListAeropuertos() {
     }
 }
 function buscar(){
-  
+
 }
 function iniciarSesion(){
     let correo= document.getElementById("correo");
@@ -187,7 +141,7 @@ function iniciarSesion(){
 
 }
 function cierraSesion(){
-        document.getElementById("cerrarSesion").style.display = 'none';
+        document.getElementById("ulPrincipal").style.display = 'none';
         document.getElementById("correo").style.display = 'initial';
         document.getElementById("password").style.display = 'initial';
         document.getElementById("crearCuenta").style.display = 'initial';
@@ -203,5 +157,86 @@ function usuarioCorrecto(correo, password) {
         }
         return false;
 }
+function initPromo() {
+    promo=[
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","200"),
+    new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","80"),
+    new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","60"),
+    new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","200"),
+    new Vuelo("MIA-SJO","Miami","San Jose","A340","12/08/17","Disponible","40")
+  ];
+}
+function initVuelos() {
+    arrayVuelos=[
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","70"),
+    new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
+    new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
+    new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
+    new Vuelo("MIA-SJO","Miami","San Jose","A340","12/08/17","Disponible","50")
+  ];
+}
+function showPromos() {
+  var circulos; var titulo;
+  var li; var lista;
+  var div1; var div2;
+  var img1; var precio;
+  var boton;
+  for(i=0; i<promo.length; i++) {
+  // -----------Agregar nuevo circulo---------------
+  circulos = document.getElementById("circulos");
+  li =document.createElement("li");
+  li.setAttribute("data-target","#carousel-generic");
+  li.setAttribute("data-slide-to",i+1);
+  circulos.appendChild(li);
+  // ----------Agregar nuevo item----------------
+  lista = document.getElementById("listaCarousel");
+  div1 = document.createElement("div");
+  div1.setAttribute("class", "item");
+  img1 = document.createElement("img");
+  img1.setAttribute("src","../images/"+promo[i].aeropuerto_destino+".jpg");
+  div1.appendChild(img1);
+  div2 = document.createElement("div");
+  div2.setAttribute("class","carousel-caption");
+  titulo = document.createElement("h2");
+  titulo.appendChild(document.createTextNode(promo[i].aeropuerto_origen+" "+promo[i].aeropuerto_destino));
+  precio = document.createElement("h5");
+  precio.appendChild(document.createTextNode("Obten tu viaje por tan solo "+promo[i].precio+"$"));
+  boton = document.createElement("button");
+  boton.setAttribute("class","btn btn-primary");
+  boton.appendChild(document.createTextNode("Ordenar"));
+  div2.appendChild(titulo);
+  div2.appendChild(precio);
+  div2.appendChild(boton);
+  div1.appendChild(div2);
+  lista.appendChild(div1);
+ }
+}
+function showBuscado() {
+  var listaBuscados = document.getElementById("listaBuscados");
+  listaBuscados.innerHTML="";
+  var li; var li_image;
+  for(i=0; i<buscados.length; i++) {
+    li_image = document.createElement("img");
+    li_image.setAttribute("src","../images/"+buscados[i].aeropuerto_destino+".jpg");
+    li_image.height = "80"; li_image.width = "100";
+    li = document.createElement("li");
+    li.appendChild(li_image);
+    li.appendChild(document.createTextNode(" "+buscados[i].aeropuerto_origen+" - "+buscados[i].aeropuerto_destino+" "+buscados[i].precio+"$"));
+    listaBuscados.appendChild(li);
+    listaBuscados.appendChild(document.createElement("hr"));
+  }
+}
+function buscar() {
+  var origenVuelo = document.getElementById("aero_origen");
+  var destinoVuelo = document.getElementById("aero_destino");
+  buscados = arrayVuelos.filter(
+    function(v) {return (v.aeropuerto_origen==origenVuelo.value && v.aeropuerto_destino==destinoVuelo.value);}
+  );
+  showBuscado();
+}
+
+
 /**----------------------------------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", pageLoad)

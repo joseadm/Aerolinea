@@ -35,7 +35,7 @@ revive: function (k,v) {
 			return new Usuario(v.usuario,v.contrasena,v.nombre,v.apellidos,v.correo,v.fecha_nac,v.direccion,v.telf_trabajo,v.celular);
 		}
 		if(v instanceof Object && v._class == 'Vuelo') {
-			return new Vuelo(v.codigo,v.aeropuerto_origen,v.aeropuerto_destino,v.avion,v.fecha,v.estado);
+			return new Vuelo(v.codigo,v.aeropuerto_origen,v.aeropuerto_destino,v.avion,v.fecha,v.estado,v.precio);
 		}
 		return v;
 	},
@@ -65,4 +65,3 @@ replacer: function (k,v) {
 		return v;
 	}
 };
-
