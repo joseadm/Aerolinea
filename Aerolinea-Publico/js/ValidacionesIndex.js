@@ -170,6 +170,19 @@ function initPromo() {
 function initVuelos() {
     arrayVuelos=[
     new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
     new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","70"),
     new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
     new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
@@ -215,8 +228,19 @@ function showPromos() {
 }
 function showBuscado() {
   var listaBuscados = document.getElementById("listaBuscados");
+  var listaPaginacion = document.getElementById("pagination");
   listaBuscados.innerHTML="";
   var li; var li_image;
+  var numeroPaginas = buscados.length /10;
+  for( j=1; j <= numeroPaginas+1; j++){
+    var lip = document.createElement("li");
+    lip.setAttribute("id",j);
+    var a = document.createElement("a");
+    a.setAttribute("href","#");
+    a.innerHTML = j;    
+    lip.appendChild(a);
+    listaPaginacion.appendChild(lip);
+  }
   for(i=0; i<buscados.length; i++) {
     li_image = document.createElement("img");
     li_image.setAttribute("src","../images/"+buscados[i].aeropuerto_destino+".jpg");
