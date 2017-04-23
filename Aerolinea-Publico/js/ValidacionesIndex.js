@@ -141,7 +141,7 @@ function iniciarSesion(){
 
 }
 function cierraSesion(){
-        document.getElementById("cerrarSesion").style.display = 'none';
+        document.getElementById("ulPrincipal").style.display = 'none';
         document.getElementById("correo").style.display = 'initial';
         document.getElementById("password").style.display = 'initial';
         document.getElementById("crearCuenta").style.display = 'initial';
