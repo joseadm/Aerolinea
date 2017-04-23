@@ -111,3 +111,7 @@ aside {
 }
 
 .img-center {margin:0 auto;}
+
+#listaBuscados {
+  list-style: none;
+}

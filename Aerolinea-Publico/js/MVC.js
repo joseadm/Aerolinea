@@ -39,8 +39,12 @@ AirlineModel.prototype={
       new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible"),
       new Vuelo("MIA-SJO","Miami","San Jose","A340","12/08/17","Disponible")
     ];
+  },
+  getPromo: function() {
+    return promo;
   }
 }
+
 // ---------------------CONTROLLER--------------------
 function AirlineController(model, view) {
   this.AirlineController(model, view);
@@ -69,7 +73,10 @@ AirlineController.prototype={
     //this.view.showPromo(model.promo[1]);
   },
   listaCiudades: function() {
-
+    for(i=0; i<4; i++) {
+      console.log(model.ciudades[i].info());
+      this.view.listaCiudad(ciudades[i]);
+    }
   }
 }
 
@@ -80,16 +87,15 @@ var controller;
   function pageLoad(event){
     model = new AirlineModel();
     controller = new AirlineController(model, window);
-  //  controller.listaCiudades();
-    //controller.showPromos(); // Crea promociones en la pagina
+    controller.listaCiudades();
+    controller.showPromos(); // Crea promociones en la pagina
     showBuscados();
     var buscar = document.getElementById("btn-search");
     buscar.addEventListener("click",controller.buscar);
   }
   // Dibuja todos los vuelos buscados
   function showBuscados() {
-    for(i=0; i<2; i++)
-      console.log(model.promo[i]);
+
   }
   // Dibuja un vuelo buscado
   function showBuscado(vuelo) {

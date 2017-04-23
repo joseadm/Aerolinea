@@ -44,8 +44,8 @@
               <li><a href="contacto.html">Contacto</a></li>
             </ul>
             <form id ="formularioSesion"class="navbar-form navbar-right">
-                  <input id= "correo" name="correo" placeholder="Email" class="form-control" type="text"></input>
-                  <input id= "password" name="password" placeholder="contraseña" class="form-control" type="password"></input>
+                  <input id= "correo" name="correo" placeholder="Correo Electronico" class="form-control" type="text"></input>
+                  <input id= "password" name="password" placeholder="Contraseña" class="form-control" type="password"></input>
                   <button id="inicioSesion" type="button"  class="btn btn-success">Iniciar Sesion</button>
                   <a href="registro.html" id="crearCuenta" type="button"  class="btn btn-primary">Crear Cuenta</a>
             </form>
@@ -70,31 +70,16 @@
       <!-- Indicators -->
       <ol class="carousel-indicators" id="circulos">
         <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-generic" data-slide-to="2"></li>
       </ol>
 
       <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
+      <div class="carousel-inner" id="listaCarousel">
+         <div class="item active">
           <img src="../images/img1.jpg" alt="...">
           <div class="carousel-caption">
-            <h2>España</h2>
-            <p>Descuento del 50% en tu viaje</p>
-          </div>
-        </div>
-        <div class="item">
-          <img src="../images/img3.png" alt="...">
-          <div class="carousel-caption">
-            <h2>Italia</h2>
-            <p>Descuento del 20% en tu viaje</p>
-          </div>
-        </div>
-        <div class="item">
-          <img src="../images/img4.jpg" alt="...">
-          <div class="carousel-caption">
-            <h2>Austria</h2>
-            <p>Descuento del 25% en tu viaje</p>
+            <h2>Madrid Roma</h2>
+            <p>Obten tu viaje por tan solo 200$</p>
+            <button type="button" class="btn btn-primary">Ordenar</button>
           </div>
         </div>
       </div>
@@ -171,12 +156,28 @@
       <div class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
-          <input type="button" class="btn btn-group-justified btn-default" id="btn-search" value="Buscar Viaje">
+          <input type="button" class="btn btn-group-justified btn-default" id="btn_search" value="Buscar Viaje">
         </div>
       </div>
       <br>
     </div>
       <hr>
+      <!-- Tabla de vuelos -->
+    <div class="container">
+     <div class="row">
+        <ul id="listaBuscados">
+        </ul>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+      <ul class="pagination pull-right">
+        <!--Ingreso de paginacion-->
+      </ul>
+      </div>
+    </div>
+    </div>
+
+
       <br><br><br>
       <!-- Footer -->
       <div class="container">
