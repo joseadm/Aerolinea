@@ -1,6 +1,6 @@
 
 
-﻿Storage = {
+Storage = {
 store : function (id, object){
 			return localStorage.setItem(id, JSON.stringify(object,this.replacer));
 		},
@@ -41,27 +41,27 @@ revive: function (k,v) {
 	},
 
 replacer: function (k,v) {
-		if (v instanceof Ciudad) {
+		/*if (v instanceof Ciudad) {
 			v._class="Ciudad";
-		}
-		if (v instanceof Aeropuerto) {
+		}*/
+		/*if (v instanceof Aeropuerto) {
 			v._class="Aeropuerto";
-		}
-		if (v instanceof Avion) {
+		}*/
+		/*if (v instanceof Avion) {
 			v._class="Avion";
-		}
+		}*/
 		if (v instanceof Direccion) {
 			v._class="Direccion";
 		}
-		if (v instanceof Tiquete) {
+		/*if (v instanceof Tiquete) {
 			v._class="Tiquete";
-		}
+		}*/
 		if (v instanceof Usuario) {
 			v._class="Usuario";
 		}
-		if (v instanceof Vuelo) {
+		/*if (v instanceof Vuelo) {
 			v._class="Vuelo";
-		}
+		}*/
 		return v;
 	}
 };
