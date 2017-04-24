@@ -174,6 +174,16 @@ function initVuelos() {
     new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
     new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
     new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","70"),
+    new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
+    new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
+    new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","70"),
+    new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
+    new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
+    new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
     new Vuelo("MIA-SJO","Miami","San Jose","A340","12/08/17","Disponible","50"),
 
     new Vuelo("SJO-ROM","San Jose","Roma","A320","05/08/17","Disponible","100"),
@@ -222,18 +232,26 @@ function showPromos() {
 }
 function showBuscado() {
   var listaBuscados = document.getElementById("listaBuscados");
-  listaBuscados.innerHTML="";
   var li; var li_image; var j=buscados.length;
   for(i=0; i<buscados.length; i++) {
     li_image = document.createElement("img");
     li_image.setAttribute("src","../images/"+buscados[i].aeropuerto_destino+".jpg");
     li_image.height = "80"; li_image.width = "100";
-    li = document.createElement("li");
-    li.appendChild(li_image);
-    li.appendChild(document.createTextNode(" "+buscados[i].aeropuerto_origen+" - "+buscados[i].aeropuerto_destino+" "+buscados[i].precio+"$"));
-    listaBuscados.appendChild(li);
-    listaBuscados.appendChild(document.createElement("hr"));
-    paginacion();
+    tr = document.createElement("tr");
+    td1= document.createElement("td");
+    td2= document.createElement("td");
+    td3= document.createElement("td");
+    td4= document.createElement("td");
+    td1.appendChild(li_image);
+    td2.appendChild(document.createTextNode(buscados[i].aeropuerto_origen));
+    td3.appendChild(document.createTextNode(buscados[i].aeropuerto_destino));
+    td4.appendChild(document.createTextNode(buscados[i].precio));
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+    listaBuscados.appendChild(tr);
   }
 }
 function buscar() {
@@ -242,43 +260,9 @@ function buscar() {
   buscados = arrayVuelos.filter(
     function(v) { return true; }//return (v.aeropuerto_origen==origenVuelo.value && v.aeropuerto_destino==destinoVuelo.value);}
   );
-  //showBuscado();
-  paginacion();
+  showBuscado();
 }
 
-function paginacion() {
-  for(i=0; i<buscados.length; i++) {
-  // Si es la primera
-  if(i==10) {
-    var j = i;
-    var lista = document.getElementById("paginas");
-    var li = document.createElement("li");
-    li.setAttribute("class","active");
-    var a = document.createElement("a");
-    a.appendChild(document.createTextNode("1"));
-    li.appendChild(a);
-    li.addEventListener("click",function(e){showBuscados2(j);}); // Muestra primeros 10
-    lista.appendChild(li);
-    showBuscados2(j);
-  }
-}
-}
-
-function showBuscados2(j) {
-  var listaBuscados = document.getElementById("listaBuscados");
-  listaBuscados.innerHTML="";
-  var li; var li_image;
-  for(i=0; i<j; i++) {
-    li_image = document.createElement("img");
-    li_image.setAttribute("src","../images/"+buscados[i].aeropuerto_destino+".jpg");
-    li_image.height = "80"; li_image.width = "100";
-    li = document.createElement("li");
-    li.appendChild(li_image);
-    li.appendChild(document.createTextNode(" "+buscados[i].aeropuerto_origen+" - "+buscados[i].aeropuerto_destino+" "+buscados[i].precio+"$"));
-    listaBuscados.appendChild(li);
-    listaBuscados.appendChild(document.createElement("hr"));
-  }
-}
 
 /**----------------------------------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", pageLoad)
