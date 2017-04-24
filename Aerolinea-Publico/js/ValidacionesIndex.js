@@ -230,9 +230,15 @@ function showPromos() {
   lista.appendChild(div1);
  }
 }
+/*Paginacion----------------------------------------------------------------*/
+$(document).ready(function() {
+    $('#paginacion').DataTable( {
+        "scrollX": true
+    } );
+} );
 function showBuscado() {
   var listaBuscados = document.getElementById("listaBuscados");
-  var li; var li_image; var j=buscados.length;
+  var tr; var li_image; var j=buscados.length;
   for(i=0; i<buscados.length; i++) {
     li_image = document.createElement("img");
     li_image.setAttribute("src","../images/"+buscados[i].aeropuerto_destino+".jpg");

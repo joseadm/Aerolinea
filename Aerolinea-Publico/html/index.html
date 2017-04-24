@@ -21,11 +21,6 @@
   <!--<script type="text/javascript" src="../js/MVC.js"></script>-->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
 		<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#paginacion').DataTable();
-			} );
-		</script>
   </head>
     <body>
       <!-- Titulo de la pagina -->
@@ -172,7 +167,7 @@
       <!-- Tabla de vuelos............................................................... -->
       <div class="container">
 
-            <table id="paginacion" class="display" cellspacing="0" width="100%">
+            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
             <thead>
             <tr><th>Foto</th><th>Salida</th><th>Destino</th><th>Precio</th></tr>
             </thead>
