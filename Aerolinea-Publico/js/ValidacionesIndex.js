@@ -269,24 +269,38 @@ function idaVuelta(){
   }
 }
 
-function asignarRegreso(){
+/*function asignarRegreso(){
   var fechaRegreso = document.getElementById("fecha_regreso").value;
   if(fechaRegreso.value == '') return;
   //apartar un tiquete/vuelo para ese dia
+}*/
+
+function buscarDeRegreso(){
+  var origenVuelo = document.getElementById("aero_origen");
+  var destinoVuelo = document.getElementById("aero_destino");
+  var regreso = document.getElementById("fecha_regreso");
+  var aux;
+  aux = arrayVuelos.filter(
+    function(v) { return (v.aeropuerto_origen==destinoVuelo.value && v.aeropuerto_destino==origenVuelo.value && v.fecha==fecha_regreso.value);}
+  );
+  for(i=0; i<aux.length; i++) {
+  buscados.push(aux[i]);
+}
+  showBuscado();
 }
 
 function buscar() {
   var origenVuelo = document.getElementById("aero_origen");
   var destinoVuelo = document.getElementById("aero_destino");
   var ida = document.getElementById("fecha_ida");
-  var regreso = document.getElementById("fecha_regreso");
-  var radioIdaVuelta = document.getElementById("ida");
-  //if(ida.checked && ida.value != '' && vuelta.value != '')
+  var radio = document.getElementById("ida");
   buscados = arrayVuelos.filter(
     function(v) { return (v.aeropuerto_origen==origenVuelo.value && v.aeropuerto_destino==destinoVuelo.value && v.fecha==fecha_ida.value);}
   );
   showBuscado();
-  //else {alert("Por favor llene ambas fechas de ida y vuelta");}
+  if(radio.checked){
+    buscarDeRegreso();
+  }
 }
 
   function showBuscado() {
