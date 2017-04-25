@@ -6,8 +6,13 @@ var aeropuerto;
 var arrayCiudades;
 var arrayAeropuertos;
 var arrayVuelos;
+var  promoData =[];
 let user;
 function pageLoad(event) {
+  initPromoData();
+  $('#paginacion').DataTable( {
+      data: promoData
+  } );
     cargarBotones();
     addEventListeners();
     loadListUsuarios();
@@ -54,6 +59,23 @@ function doBlur(event){
 	event.target.classList.remove("focus");
 }
 /*-----------------------   PARTE DE BUSQUEDA DE VUELOS-------------------------------*/
+function initPromoData() {
+    /*promoData=[
+      [
+        "Tiger Nixon",
+                "System Architect",
+                "Edinburgh",
+                "5421",
+      ],
+      [
+        "Tiger Nixon",
+        "System Architect",
+        "Edinburgh",
+        "5421",
+      ]
+    ];*/
+}
+
 function initCiudades(){
 
         arrayCiudades=[
@@ -174,19 +196,20 @@ function initVuelos() {
     new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
     new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
     new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
-    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","50"),
     new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","70"),
     new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
     new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
     new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
-    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","100"),
+
+    new Vuelo("SJO-MIA","San Jose","Miami","A320","05/08/17","Disponible","30"),
     new Vuelo("MIA-CAN","Miami","Cancun","A330","24/08/17","Disponible","70"),
     new Vuelo("MAD-ROM","Madrid","Roma","A340","12/06/17","Disponible","90"),
     new Vuelo("VIE-MAD","Viena","Madrid","A320","04/07/17","Disponible","200"),
     new Vuelo("CAN-MAD","Cancun","Madrid","A330","27/10/17","Disponible","100"),
     new Vuelo("MIA-SJO","Miami","San Jose","A340","12/08/17","Disponible","50"),
 
-    new Vuelo("SJO-ROM","San Jose","Roma","A320","05/08/17","Disponible","100"),
+    new Vuelo("SJO-ROM","San Jose","Roma","A320","05/08/17","Disponible","40"),
     new Vuelo("MIA-VIE","Miami","Viena","A330","24/08/17","Disponible","70"),
     new Vuelo("MAD-SJO","Madrid","San Jose","A340","12/06/17","Disponible","90"),
     new Vuelo("MAD-CAN","Madrid","Cancun","A320","04/07/17","Disponible","200"),
@@ -230,44 +253,29 @@ function showPromos() {
   lista.appendChild(div1);
  }
 }
-/*Paginacion----------------------------------------------------------------*/
-$(document).ready(function() {
-    $('#paginacion').DataTable( {
-        "scrollX": true
-    } );
-} );
-function showBuscado() {
-  var listaBuscados = document.getElementById("listaBuscados");
-  var tr; var li_image; var j=buscados.length;
-  for(i=0; i<buscados.length; i++) {
-    li_image = document.createElement("img");
-    li_image.setAttribute("src","../images/"+buscados[i].aeropuerto_destino+".jpg");
-    li_image.height = "80"; li_image.width = "100";
-    tr = document.createElement("tr");
-    td1= document.createElement("td");
-    td2= document.createElement("td");
-    td3= document.createElement("td");
-    td4= document.createElement("td");
-    td1.appendChild(li_image);
-    td2.appendChild(document.createTextNode(buscados[i].aeropuerto_origen));
-    td3.appendChild(document.createTextNode(buscados[i].aeropuerto_destino));
-    td4.appendChild(document.createTextNode(buscados[i].precio));
 
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
-    tr.appendChild(td4);
-    listaBuscados.appendChild(tr);
-  }
-}
+
 function buscar() {
   var origenVuelo = document.getElementById("aero_origen");
   var destinoVuelo = document.getElementById("aero_destino");
   buscados = arrayVuelos.filter(
-    function(v) { return true; }//return (v.aeropuerto_origen==origenVuelo.value && v.aeropuerto_destino==destinoVuelo.value);}
+    function(v) { return (v.aeropuerto_origen==origenVuelo.value && v.aeropuerto_destino==destinoVuelo.value);}
   );
   showBuscado();
 }
+
+  function showBuscado() {
+    var t = $('#paginacion').DataTable();
+    $('#paginacion').dataTable().fnClearTable();
+    for(i=0; i<buscados.length; i++) {
+      t.row.add( [
+        buscados[i].codigo,
+        buscados[i].aeropuerto_origen,
+        buscados[i].aeropuerto_destino,
+        buscados[i].precio
+      ] ).draw( false );
+    }
+  }
 
 
 /**----------------------------------------------------------------------------------------------- */
