@@ -10,19 +10,18 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../js/Ciudad.js"></script>
-	<script type="text/javascript" src="../js/Aeropuerto.js"></script>
 	<script type="text/javascript" src="../js/Avion.js"></script>
 	<script type="text/javascript" src="../js/Tiquete.js"></script>
 	<script type="text/javascript" src="../js/Usuario.js"></script>
 	<script type="text/javascript" src="../js/Direccion.js"></script>
 	<script type="text/javascript" src="../js/Vuelo.js"></script>
-	<script type="text/javascript" src="../js/ValidacionesIndex.js"></script>
+	<!--<script type="text/javascript" src="../js/ValidacionesIndex.js"></script>-->
 	<script type="text/javascript" src="../js/Storage.js"></script>
-  <!--<script type="text/javascript" src="../js/MVC.js"></script>-->
+        <script type="text/javascript" src="../js/IndexMVC.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 	<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
   </head>
     <body>
       <!-- Titulo de la pagina -->
@@ -108,19 +107,19 @@
           <p>Origen</p>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
-            <select id="aero_origen" name="aero_origen" class="form-control" ></select>
+            <select id="origen" name="origen" class="form-control" ></select>
           </div> <br>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4">
           <p>Destino</p>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
-            <select id="aero_destino" name="aero_destino" class="form-control" ></select>
+            <select id="destino" name="destino" class="form-control" ></select>
           </div> <br>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4">
           <p>Tipo</p>
-          <h4><input type="radio" id="ida" name="tipo" value="Ida"> Ida y vuelta &nbsp;&nbsp;<input type="radio" id="vuelta" name="tipo" value="Vuelta"> Ida</h4>
+          <h4><input type="radio" id="vuelta" name="tipo" value="vuelta"> Ida y vuelta &nbsp;&nbsp;<input type="radio" id="ida" name="tipo" value="ida"> Ida</h4>
         </div>
       </div>
       <div class="row">
@@ -129,7 +128,7 @@
           <form action="/action_page.php">
             <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-            <input id="fecha_ida" type="date" class="form-control" name="bday" placeholder="dd/mm/aa">
+            <input id="fecha_ida" type="date" min="2017-04-25" class="form-control" name="bday"  placeholder="dd/mm/aa">
           </div> <br>
           </form>
         </div>
@@ -138,7 +137,7 @@
           <form action="/action_page.php">
             <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-            <input id="fecha_regreso" type="date" class="form-control" name="bday" placeholder="dd/mm/aa">
+            <input id="fecha_regreso" type="date" min="2017-04-25" class="form-control" name="bday"  placeholder="dd/mm/aa">
           </div>  <br>
           </form>
         </div>
@@ -173,7 +172,7 @@
 
 
             <thead>
-            <tr><th>Foto</th><th>Salida</th><th>Destino</th><th>Precio</th></tr>
+            <tr><th>Codigo</th><th>Salida</th><th>Destino</th><th>Precio</th></tr>
             </thead>
             <tbody id="listaBuscados">
 

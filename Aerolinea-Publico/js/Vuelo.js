@@ -1,11 +1,11 @@
-function Vuelo(codigo,aeropuerto_origen,aeropuerto_destino,avion,fecha,estado, precio){
-	this.Vuelo(codigo,aeropuerto_origen,aeropuerto_destino,avion,fecha,estado, precio);
+function Vuelo(codigo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio){
+	this.Vuelo(codigo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio);
 }
 Vuelo.prototype={
-	Vuelo:function(codigo,aeropuerto_origen,aeropuerto_destino,avion,fecha,estado,precio){
+	Vuelo:function(codigo,ciudad_origen,ciudad_destino,avion,fecha,estado,precio){
 		this.codigo=codigo;
-		this.aeropuerto_origen=aeropuerto_origen;
-		this.aeropuerto_destino=aeropuerto_destino;
+		this.ciudad_origen=ciudad_origen;
+		this.ciudad_destino=ciudad_destino;
 		this.avion=avion;
 		this.fecha=fecha;
 		this.estado=estado;

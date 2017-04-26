@@ -281,7 +281,7 @@ function buscarDeRegreso(){
   var regreso = document.getElementById("fecha_regreso");
   var aux;
   aux = arrayVuelos.filter(
-    function(v) { return (v.aeropuerto_origen==destinoVuelo.value && v.aeropuerto_destino==origenVuelo.value && v.fecha==fecha_regreso.value);}
+    function(v) { return (v.ciudad_origen==destinoVuelo.value && v.ciudad_destino==origenVuelo.value && v.fecha==fecha_regreso.value);}
   );
   for(i=0; i<aux.length; i++) {
   buscados.push(aux[i]);
