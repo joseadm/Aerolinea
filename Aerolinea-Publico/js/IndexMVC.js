@@ -114,6 +114,7 @@ AirlineController.prototype={
             this.model.buscados[index].codigo,
             this.model.buscados[index].ciudad_origen,
             this.model.buscados[index].ciudad_destino,
+            this.model.buscados[index].fecha,
             "$ "+this.model.buscados[index].precio
             ] ).draw( false );
         }
