@@ -33,6 +33,6 @@ Proxy.vuelosSearch = function(origen, destino, callBack) {
     AJAX_req.onreadystatechange = function() {
       
     };
-    AJAX_req.send("origen="+origen_"&destino="+destino);
+    AJAX_req.send("origen="+origen+"&destino="+destino);
 };
 

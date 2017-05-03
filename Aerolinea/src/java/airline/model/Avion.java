@@ -9,6 +9,6 @@ package airline.model;
  *
  * @author Estudiante
  */
-public interface Jsonable {
+public class Avion implements Jsonable{
     
 }

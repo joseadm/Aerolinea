@@ -155,7 +155,7 @@ var controllerView;
     div1 = document.createElement("div");
     div1.setAttribute("class", "item");
     img1 = document.createElement("img");
-    img1.setAttribute("src","../images/"+this.modelView.promo[index].ciudad_destino+".jpg");
+    img1.setAttribute("src","images/"+this.modelView.promo[index].ciudad_destino+".jpg");
     div1.appendChild(img1);
     div2 = document.createElement("div");
     div2.setAttribute("class","carousel-caption");
@@ -219,8 +219,8 @@ function loadButtons(){
     }
 }
 function login(){
-    let correo= document.getElementById("correo");
-    let password = document.getElementById("password");
+    var correo= document.getElementById("correo");
+    var password = document.getElementById("password");
     //if(validateUser(correo,password)){
         window.alert("Bienvenido");
         user=1;
