@@ -70,7 +70,7 @@ public class AirlineModel {
             new Vuelo(15,new Ciudad("MAD","Madrid","Espana"),new Ciudad("ROM","Roma","Italia"),new Avion("NVCR0314","Airbus","380-800","2012",450,50,9),new Date("2017-08-05"),true,200),
             new Vuelo(16,new Ciudad("SJO","San Jose","Costa Rica"),new Ciudad("MAD","Madrid","Espana"),new Avion("TI-CR5698","Airbus","330-300","2005",297,33,9),new Date("2017-08-05"),true,100),
             new Vuelo(17,new Ciudad("MIA","Miami","USA"),new Ciudad("SJO","San Jose","Costa Rica"),new Avion("TI-BGV","Boeing","737-600","2001",132,22,6),new Date("2017-08-05"),true,40),
-            new Vuelo(18,new Ciudad("VIE","Viena","Austria"),new Ciudad("MAD","Madrid","Espana"),new Avion("NV123","Boeing","747-400","2010",315,35,9),new Date("2017-08-05"),true,60)
+            new Vuelo(18,new Ciudad("VIE","Viena","Austria"),new Ciudad("MAD","Madrid","Espana"),new Avion("NV123","Boeing","747-400","2010",315,35,9),new Date("2017-08-07"),true,60)
         };
         return new ArrayList(Arrays.asList(vuelos));
     }
