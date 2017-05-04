@@ -1,13 +1,12 @@
-function Tiquete(numero,usuario,vuelo,asiento,fecha,precio){
-	this.Tiquete(numero,usuario,vuelo,asiento,fecha,precio);
+function Tiquete(codigo,usuario,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero){
+	this.Tiquete(codigo,usuario,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero);
 }
 Tiquete.prototype={
-	Tiquete:function(numero,usuario,vuelo,asiento,fecha,precio){
-		this.numero=numero;
+	Tiquete:function(codigo,usuario,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero){
+		this.codigo=codigo;
 		this.usuario=usuario;
-		this.vuelo=vuelo;
-		this.asiento=asiento;
-		this.fecha=fecha;
-		this.precio=precio;
+		this.nombre_pasajero=nombre_pasajero;
+		this.apellidos_pasajero=apellidos_pasajero;
+		this.pasaporte_pasajero=pasaporte_pasajero;
 	}
 }

@@ -10,7 +10,7 @@ package airline.model;
  * @author josealonso
  */
 public class Ciudad implements Jsonable {
-    private String codigo;
+    public String codigo;
     private String nombre;
     private String pais;
 

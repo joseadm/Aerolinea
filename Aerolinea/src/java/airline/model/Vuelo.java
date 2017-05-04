@@ -13,14 +13,14 @@ import java.util.Date;
  */
 public class Vuelo implements Jsonable{
     private int codigo;
-    private Ciudad ciudad_origen;
-    private Ciudad ciudad_destino;
+    public Ciudad ciudad_origen;
+    public Ciudad ciudad_destino;
     private Avion avion;
     private Date fecha;
     private boolean estado;
-    private float precio;
+    private int precio;
 
-    public Vuelo(int codigo, Ciudad ciudad_origen, Ciudad ciudad_destino, Avion avion, Date fecha, boolean estado, float precio) {
+    public Vuelo(int codigo, Ciudad ciudad_origen, Ciudad ciudad_destino, Avion avion, Date fecha, boolean estado, int precio) {
         this.codigo = codigo;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;

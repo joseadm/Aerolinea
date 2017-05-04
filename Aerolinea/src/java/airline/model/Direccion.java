@@ -9,6 +9,13 @@ package airline.model;
  *
  * @author AndreyCh
  */
-public interface Jsonable {
-    
+public class Direccion implements Jsonable{
+    private double latitud;
+    private double longitud;
+
+    public Direccion(double latitud, double longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+   
 }

@@ -9,6 +9,13 @@ package airline.model;
  *
  * @author AndreyCh
  */
-public interface Jsonable {
+public class Rol implements Jsonable{
+    private String codigo;
+    private String descripcion;
+
+    public Rol(String codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+    }    
     
 }
