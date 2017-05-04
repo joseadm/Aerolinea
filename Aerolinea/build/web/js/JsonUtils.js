@@ -26,10 +26,10 @@ JsonUtils.revive = function (k,v) {
       return new Usuario(v.usuario,v.contrasena,v.nombre,v.apellidos,v.correo,v.fecha_nac,v.direccion,v.telf_trabajo,v.celular,v.rol);
   }
   if(v instanceof Object && v._class == 'Viaje') {
-      return new Viaje(v.numero,v.avion,v.vuelo)
+      return new Viaje(v.numero,v.avion,v.vuelo);
   }
   if(v instanceof Object && v._class == 'Reservacion') {
-      return new Reservacion(v.codigo,v.viaje,v.tiquete) 
+      return new Reservacion(v.codigo,v.viaje,v.tiquete);
   }
   return v;
 };
