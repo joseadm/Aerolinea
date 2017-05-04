@@ -12,62 +12,8 @@ function AirlineModel() {
 
 AirlineModel.prototype={
   AirlineModel: function() {
-    this.promo=this.initPromo();
-    this.ciudades=this.initCiudades();
-    this.vuelos=this.initVuelos();
-    this.buscados=[];
-  },
-  initCiudades: function() {
-    return ciudades=[
-      new Ciudad("SJO","San Jose","Costa Rica"),
-      new Ciudad("CAN","Cancun","Mexico"),
-      new Ciudad("MIA","Miami","USA"),
-      new Ciudad("MAD","Madrid","Espana"),
-      new Ciudad("ROM","Roma","Italia"),
-      new Ciudad("VIE","Viena","Austria")
-    ];
-  },
-  initPromo: function() {
-    return promo=[
-        new Vuelo("SJO-MIA","San Jose","Miami","A320","2017-08-05","Disponible","100"),
-        new Vuelo("MIA-CAN","Miami","Cancun","A330","2017-08-24","Disponible","200"),
-        new Vuelo("MAD-ROM","Madrid","Roma","A340","2017-04-26","Disponible","80"),
-        new Vuelo("VIE-MAD","Viena","Madrid","A320","2017-07-04","Disponible","60"),
-        new Vuelo("CAN-MAD","Cancun","Madrid","A330","2017-10-27","Disponible","200"),
-        new Vuelo("MIA-SJO","Miami","San Jose","A340","2017-06-12","Disponible","40")
-    ];
-  },
-  initVuelos: function() {
-    return vuelos=[
-        new Vuelo("SJO-MIA","San Jose","Miami","A320","2017-08-05","Disponible","100"),
-        new Vuelo("MIA-CAN","Miami","Cancun","A330","2017-08-24","Disponible","200"),
-        new Vuelo("MAD-ROM","Madrid","Roma","A340","2017-04-26","Disponible","80"),
-        new Vuelo("VIE-MAD","Viena","Madrid","A320","2017-07-04","Disponible","60"),
-        new Vuelo("CAN-MAD","Cancun","Madrid","A330","2017-10-27","Disponible","200"),
-        new Vuelo("MIA-SJO","Miami","San Jose","A340","2017-06-12","Disponible","40"),
-
-        new Vuelo("SJO-MIA","San Jose","Miami","A320","2017-07-03","Disponible","50"),
-        new Vuelo("MIA-CAN","Miami","Cancun","A330","2017-08-24","Disponible","70"),
-        new Vuelo("MAD-ROM","Madrid","Roma","A340","2017-04-26","Disponible","80"),
-        new Vuelo("VIE-MAD","Viena","Madrid","A320","2017-07-04","Disponible","60"),
-        new Vuelo("CAN-MAD","Cancun","Madrid","A330","2017-10-27","Disponible","200"),
-
-        new Vuelo("SJO-MIA","San Jose","Miami","A320","2017-05-05","Disponible","100"),
-        new Vuelo("MIA-CAN","Miami","Cancun","A330","2017-08-24","Disponible","200"),
-        new Vuelo("MAD-ROM","Madrid","Roma","A340","2017-04-26","Disponible","80"),
-        new Vuelo("VIE-MAD","Viena","Madrid","A320","2017-07-04","Disponible","60"),
-        new Vuelo("CAN-MAD","Cancun","Madrid","A330","2017-10-27","Disponible","200"),
-        new Vuelo("MIA-SJO","Miami","San Jose","A340","2017-06-12","Disponible","40"),
-
-        new Vuelo("SJO-ROM","San Jose","Roma","A320","2017-04-27","Disponible","40"),
-        new Vuelo("MIA-VIE","Miami","Viena","A330","2017-08-24","Disponible","70"),
-        new Vuelo("MAD-SJO","Madrid","San Jose","A340","2017-06-12","Disponible","90"),
-        new Vuelo("MAD-CAN","Madrid","Cancun","A320","2017-07-04","Disponible","200"),
-        new Vuelo("VIE-SJO","Viena","San Jose","A330","2017-11-14","Disponible","100"),
-        new Vuelo("CAN-VIE","Cancun","Viena","A340","2017-08-03","Disponible","50")
-    ];
   }
-}
+};
 
 // ---------------------CONTROLLER--------------------
 var model;
@@ -80,6 +26,16 @@ AirlineController.prototype={
   AirlineController: function(model, view) {
     this.model=model;
     this.view=view;
+    Proxy.getCiudades(function(result) {
+       model.ciudades = result;
+       view.showOrigenes();
+       view.showDestinos();
+    });
+    Proxy.getPromo(function(result) {
+       model.promo = result;
+       view.showPromos();
+    }); 
+    model.buscados = [];
   },
     search: function() {
         var origenVuelo = document.getElementById("origen");
@@ -88,8 +44,13 @@ AirlineController.prototype={
         var radio2 = document.getElementById("vuelta");
         var ida = document.getElementById("fecha_ida");
         var regreso = document.getElementById("fecha_regreso");
-
-        if(radio2.checked){
+        var model = this.model;
+        var view = this.view;
+        Proxy.vuelosSearch(origen, destino, function(result) {
+           model.buscados = result; 
+           this.showBuscado();
+        });
+        /*if(radio2.checked){
             this.model.buscados = this.model.vuelos.filter(
             function(v) { return (v.ciudad_origen==destinoVuelo.value && v.ciudad_destino==origenVuelo.value && v.fecha==fecha_regreso.value);});
 
@@ -103,8 +64,7 @@ AirlineController.prototype={
         if(radio1.checked){
             this.model.buscados = this.model.vuelos.filter(
             function(v) { return (v.ciudad_origen==origenVuelo.value && v.ciudad_destino==destinoVuelo.value && v.fecha==fecha_ida.value);});
-        }
-        this.showBuscado();
+        }*/
 },
     showBuscado: function() {
         var t = $('#paginacion').DataTable();

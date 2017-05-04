@@ -20,7 +20,10 @@ Proxy.getPromo = function(callBack) {
   AJAX_req.open("GET",url, true);
   AJAX_req.setRequestHeader("Contenct-type", "application/x-www-form-urlencoded");
   AJAX_req.onreadystatechange = function() {
-      
+      if(AJAX_req.readyState === 4 && AJAX_req.status === 200 ) {
+        var object = JSON.parse(AJAX_req.responseText, JsonUtils.revive);
+        callBack(object);
+    }
   };
   AJAX_req.send();
 };
@@ -31,7 +34,10 @@ Proxy.vuelosSearch = function(origen, destino, callBack) {
     AJAX_req.open("POST",url, true);
     AJAX_req.setRequestHeader("Contenct-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function() {
-      
+      if(AJAX_req.readyState === 4 && AJAX_req.status === 200 ) {
+        var object = JSON.parse(AJAX_req.responseText, JsonUtils.revive);
+        callBack(object);
+    }
     };
     AJAX_req.send("origen="+origen+"&destino="+destino);
 };
