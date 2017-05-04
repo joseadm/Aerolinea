@@ -28,8 +28,7 @@ AirlineController.prototype={
     this.view=view;
     Proxy.getCiudades(function(result) {
        model.ciudades = result;
-       view.showOrigenes();
-       view.showDestinos();
+       view.listCiudades();
     });
     Proxy.getPromo(function(result) {
        model.promo = result;

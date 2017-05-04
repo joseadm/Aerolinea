@@ -2,7 +2,7 @@ var Proxy = Proxy || {};
 
 Proxy.getCiudades = function(callBack) {
   var AJAX_req = new XMLHttpRequest();
-  url="/Airline/AirlineService?action=ciudadListAll";
+  url="/Aerolinea/AirlineService?action=ciudadListAll";
   AJAX_req.open("GET",url,true);
   AJAX_req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   AJAX_req.onreadystatechange = function() {
@@ -16,7 +16,7 @@ Proxy.getCiudades = function(callBack) {
 
 Proxy.getPromo = function(callBack) {
   var AJAX_req = new XMLHttpReques();
-  url="/Airline/AirlineService?action=vueloListPromo";
+  url="/Aerolinea/AirlineService?action=vueloListPromo";
   AJAX_req.open("GET",url, true);
   AJAX_req.setRequestHeader("Contenct-type", "application/x-www-form-urlencoded");
   AJAX_req.onreadystatechange = function() {
@@ -30,7 +30,7 @@ Proxy.getPromo = function(callBack) {
 
 Proxy.vuelosSearch = function(origen, destino, callBack) {
     var AJAX_req = new XMLHttpRequest();
-    url="/Airline/AirlineService?action=vueloListSearch";
+    url="/Aerolinea/AirlineService?action=vueloListSearch";
     AJAX_req.open("POST",url, true);
     AJAX_req.setRequestHeader("Contenct-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function() {
