@@ -1,3 +1,5 @@
+
+
 // ---------------------MODEL--------------------
 var promo;
 var buscados;
@@ -6,12 +8,18 @@ var ciudades;
 var arrayUsuarios;
 var user;
 
+
+
 function AirlineModel() {
   this.AirlineModel();
 }
 
 AirlineModel.prototype={
   AirlineModel: function() {
+      this.buscados=[];
+      this.promo=[];
+      this.ciudades=[];
+      this.vuelos=[];
   }
 };
 
@@ -19,22 +27,23 @@ AirlineModel.prototype={
 var model;
 var view;
 function AirlineController(model, view) {
-  this.AirlineController(model, view);
+  this.AirlineController(model, view);  
 }
 
 AirlineController.prototype={
   AirlineController: function(model, view) {
     this.model=model;
     this.view=view;
-    Proxy.getCiudades(function(result) {
-       model.ciudades = result;
-       view.listCiudades();
+    
+    Proxy.getCiudades(function (result) {
+       this.model.ciudades = result;
+       this.view.listCiudades();
+ 
     });
-    Proxy.getPromo(function(result) {
-       model.promo = result;
-       view.showPromos();
-    }); 
-    model.buscados = [];
+    Proxy.getPromo(function (result) {
+       this.model.promo = result;
+       this.view.showPromos();
+    });   
   },
     search: function() {
         var origenVuelo = document.getElementById("origen");
@@ -43,10 +52,8 @@ AirlineController.prototype={
         var radio2 = document.getElementById("vuelta");
         var ida = document.getElementById("fecha_ida");
         var regreso = document.getElementById("fecha_regreso");
-        var model = this.model;
-        var view = this.view;
-        Proxy.vuelosSearch(origen, destino, function(result) {
-           model.buscados = result; 
+        this.Proxy.vuelosSearch(origen, destino, function(result) {
+           this.model.buscados = result; 
            this.showBuscado();
         });
         /*if(radio2.checked){
@@ -102,7 +109,7 @@ var controllerView;
     var img1; var precio;
     var boton;
 
-    for(var index in this.modelView.promo) {
+    for(var index in modelView.promo) {
     // -----------Agregar nuevo circulo---------------
     circulos = document.getElementById("circulos");
     li =document.createElement("li");
@@ -114,14 +121,14 @@ var controllerView;
     div1 = document.createElement("div");
     div1.setAttribute("class", "item");
     img1 = document.createElement("img");
-    img1.setAttribute("src","images/"+this.modelView.promo[index].ciudad_destino+".jpg");
+    img1.setAttribute("src","images/"+modelView.promo[index].ciudad_destino+".jpg");
     div1.appendChild(img1);
     div2 = document.createElement("div");
-    div2.setAttribute("class","carousel-caption");
+    div2.setAttribute("class","carousel-caption"); 
     titulo = document.createElement("h2");
-    titulo.appendChild(document.createTextNode(this.modelView.promo[index].ciudad_origen+" "+this.modelView.promo[index].ciudad_destino));
+    titulo.appendChild(document.createTextNode(modelView.promo[index].ciudad_origen+" "+modelView.promo[index].ciudad_destino));
     precio = document.createElement("h5");
-    precio.appendChild(document.createTextNode("Obten tu viaje por tan solo "+this.modelView.promo[index].precio+"$"));
+    precio.appendChild(document.createTextNode("Obten tu viaje por tan solo "+modelView.promo[index].precio+"$"));
     boton = document.createElement("button");
     boton.setAttribute("class","btn btn-primary");
     boton.appendChild(document.createTextNode("Ordenar"));

@@ -78,6 +78,6 @@ public class AirlineService extends HttpServlet {
     @Override
     public void init() throws ServletException {
             super.init();
-            model = new AirlineModel();
+            this.model = new AirlineModel();
     }
 }
