@@ -11,7 +11,7 @@ package airline.model;
  */
 public class Ciudad implements Jsonable {
     public String codigo;
-    private String nombre;
+    public String nombre;
     private String pais;
 
     public Ciudad(String codigo, String nombre, String pais) {
@@ -19,5 +19,15 @@ public class Ciudad implements Jsonable {
         this.nombre = nombre;
         this.pais = pais;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return codigo + nombre + pais;
+    }
+    
     
 }

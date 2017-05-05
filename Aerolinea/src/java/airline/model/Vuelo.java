@@ -15,10 +15,10 @@ public class Vuelo implements Jsonable{
     private int codigo;
     public Ciudad ciudad_origen;
     public Ciudad ciudad_destino;
-    private Avion avion;
-    private Date fecha;
-    private boolean estado;
-    private int precio;
+    public Avion avion;
+    public Date fecha;
+    public boolean estado;
+    public int precio;
 
     public Vuelo(int codigo, Ciudad ciudad_origen, Ciudad ciudad_destino, Avion avion, Date fecha, boolean estado, int precio) {
         this.codigo = codigo;

@@ -36,13 +36,13 @@ AirlineController.prototype={
     this.view=view;
     
     Proxy.getCiudades(function (result) {
-       this.model.ciudades = result;
-       this.view.listCiudades();
+       model.ciudades = result;
+       view.listCiudades();
  
     });
     Proxy.getPromo(function (result) {
-       this.model.promo = result;
-       this.view.showPromos();
+       model.promo = result;
+       view.showPromos();
     });   
   },
     search: function() {
@@ -52,36 +52,40 @@ AirlineController.prototype={
         var radio2 = document.getElementById("vuelta");
         var ida = document.getElementById("fecha_ida");
         var regreso = document.getElementById("fecha_regreso");
-        this.Proxy.vuelosSearch(origen, destino, function(result) {
-           this.model.buscados = result; 
-           this.showBuscado();
+        console.log(origenVuelo.value);
+        console.log(destinoVuelo.value);
+        Proxy.vuelosSearch(origenVuelo.value, destinoVuelo.value, function(result) {
+            console.log(origenVuelo.value);
+        console.log(destinoVuelo.value);
+           model.buscados = result; 
+           showBuscado();
         });
-        /*if(radio2.checked){
-            this.model.buscados = this.model.vuelos.filter(
-            function(v) { return (v.ciudad_origen==destinoVuelo.value && v.ciudad_destino==origenVuelo.value && v.fecha==fecha_regreso.value);});
-
-            var aux = this.model.vuelos.filter(
-            function(v) { return (v.ciudad_origen==origenVuelo.value && v.ciudad_destino==destinoVuelo.value && v.fecha==fecha_ida.value);});
-            for(i=0; i<aux.length; i++) {
-                this.model.buscados.push(aux[i]);
-            }
-        }
-
-        if(radio1.checked){
-            this.model.buscados = this.model.vuelos.filter(
-            function(v) { return (v.ciudad_origen==origenVuelo.value && v.ciudad_destino==destinoVuelo.value && v.fecha==fecha_ida.value);});
-        }*/
+//        if(radio2.checked){
+//            this.model.buscados = this.model.vuelos.filter(
+//            function(v) { return (v.ciudad_origen==destinoVuelo.value && v.ciudad_destino==origenVuelo.value && v.fecha==fecha_regreso.value);});
+//
+//            var aux = this.model.vuelos.filter(
+//            function(v) { return (v.ciudad_origen==origenVuelo.value && v.ciudad_destino==destinoVuelo.value && v.fecha==fecha_ida.value);});
+//            for(i=0; i<aux.length; i++) {
+//                this.model.buscados.push(aux[i]);
+//            }
+//        }
+//
+//        if(radio1.checked){
+//            this.model.buscados = this.model.vuelos.filter(
+//            function(v) { return (v.ciudad_origen==origenVuelo.value && v.ciudad_destino==destinoVuelo.value && v.fecha==fecha_ida.value);});
+//        }
 },
     showBuscado: function() {
         var t = $('#paginacion').DataTable();
         $('#paginacion').dataTable().fnClearTable();
-        for(var index in this.model.buscados) {
+        for(var index in model.buscados) {
             t.row.add( [
-            this.model.buscados[index].codigo,
-            this.model.buscados[index].ciudad_origen,
-            this.model.buscados[index].ciudad_destino,
-            this.model.buscados[index].fecha,
-            "$ "+this.model.buscados[index].precio
+            model.buscados[index].codigo,
+            model.buscados[index].ciudad_origen,
+            model.buscados[index].ciudad_destino,
+            model.buscados[index].fecha,
+            "$ "+model.buscados[index].precio
             ] ).draw( false );
         }
   }
@@ -121,12 +125,12 @@ var controllerView;
     div1 = document.createElement("div");
     div1.setAttribute("class", "item");
     img1 = document.createElement("img");
-    img1.setAttribute("src","images/"+modelView.promo[index].ciudad_destino+".jpg");
+    img1.setAttribute("src","images/"+modelView.promo[index].ciudad_destino.info()+".jpg");
     div1.appendChild(img1);
     div2 = document.createElement("div");
     div2.setAttribute("class","carousel-caption"); 
     titulo = document.createElement("h2");
-    titulo.appendChild(document.createTextNode(modelView.promo[index].ciudad_origen+" "+modelView.promo[index].ciudad_destino));
+    titulo.appendChild(document.createTextNode(modelView.promo[index].ciudad_origen.info()+" "+modelView.promo[index].ciudad_destino.info()));
     precio = document.createElement("h5");
     precio.appendChild(document.createTextNode("Obten tu viaje por tan solo "+modelView.promo[index].precio+"$"));
     boton = document.createElement("button");
@@ -217,9 +221,9 @@ function listCiudades(){
         var select  = document.getElementById("origen");
         var select2 = document.getElementById("destino");
 
-        for(var index in this.modelView.ciudades) {
-            select.options[select.options.length] = new Option(this.modelView.ciudades[index].info());
-            select2.options[select2.options.length] = new Option(this.modelView.ciudades[index].info());
+        for(var index in modelView.ciudades) {
+            select.options[select.options.length] = new Option(modelView.ciudades[index].info());
+            select2.options[select2.options.length] = new Option(modelView.ciudades[index].info());
 
         }
 }
