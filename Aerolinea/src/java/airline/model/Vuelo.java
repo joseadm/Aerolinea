@@ -12,7 +12,7 @@ import java.util.Date;
  * @author josealonso
  */
 public class Vuelo implements Jsonable{
-    private int codigo;
+    public int codigo;
     public Ciudad ciudad_origen;
     public Ciudad ciudad_destino;
     public Avion avion;

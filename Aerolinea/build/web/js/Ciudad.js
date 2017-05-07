@@ -9,6 +9,5 @@ Ciudad.prototype={
 	},
         info: function () {
 		return this.nombre;
-	}
-        
+	}       
 }

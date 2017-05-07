@@ -47,7 +47,7 @@ public class AirlineService extends HttpServlet {
             .registerSubtype(Tiquete.class,"Tiquete")
             .registerSubtype(Usuario.class,"Usuario")
             .registerSubtype(Viaje.class,"Viaje");
-            Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/mm/yyy").create();
+            Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String accion = request.getParameter("action");
             System.out.println(accion);
@@ -81,7 +81,20 @@ public class AirlineService extends HttpServlet {
             this.model = new AirlineModel();
     }
     
-        @Override
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -96,10 +109,4 @@ public class AirlineService extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-       @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
 }

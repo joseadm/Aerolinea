@@ -46,20 +46,21 @@ AirlineController.prototype={
     });   
   },
     search: function() {
-        var origenVuelo = document.getElementById("origen");
-        var destinoVuelo = document.getElementById("destino");
+//        var origenVuelo = document.getElementById("origen");
+//        var destinoVuelo = document.getElementById("destino");
+        var origen = this.view.$("#origen").val();
+        var destino = this.view.$("#destino").val();
+        var model = this.model;
+        var view = this.view;
         var radio1 = document.getElementById("ida");
         var radio2 = document.getElementById("vuelta");
         var ida = document.getElementById("fecha_ida");
         var regreso = document.getElementById("fecha_regreso");
-        console.log(origenVuelo.value);
-        console.log(destinoVuelo.value);
-        Proxy.vuelosSearch(origenVuelo.value, destinoVuelo.value, function(result) {
-            console.log(origenVuelo.value);
-        console.log(destinoVuelo.value);
+
+        Proxy.vuelosSearch(origen, destino, function(result) {
            model.buscados = result; 
-           showBuscado();
         });
+        this.showBuscado();
 //        if(radio2.checked){
 //            this.model.buscados = this.model.vuelos.filter(
 //            function(v) { return (v.ciudad_origen==destinoVuelo.value && v.ciudad_destino==origenVuelo.value && v.fecha==fecha_regreso.value);});
@@ -77,13 +78,15 @@ AirlineController.prototype={
 //        }
 },
     showBuscado: function() {
+        var model = this.model;
+        var view = this.view;
         var t = $('#paginacion').DataTable();
         $('#paginacion').dataTable().fnClearTable();
         for(var index in model.buscados) {
             t.row.add( [
             model.buscados[index].codigo,
-            model.buscados[index].ciudad_origen,
-            model.buscados[index].ciudad_destino,
+            model.buscados[index].ciudad_origen.nombre,
+            model.buscados[index].ciudad_destino.nombre,
             model.buscados[index].fecha,
             "$ "+model.buscados[index].precio
             ] ).draw( false );
