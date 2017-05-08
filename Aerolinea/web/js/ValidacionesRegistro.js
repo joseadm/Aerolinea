@@ -3,7 +3,6 @@ function pageLoad(event) {
     document.getElementById("formulario").reset();
     addEventListeners();
     loadSpaces();
-    loadList();
 }
 function loadSpaces() {
     var  usuario= document.getElementById("usuario");
@@ -18,13 +17,7 @@ function loadSpaces() {
 
 
 }
-function loadList() {
-    arrayUsuarios = Storage.retrieve("Usuarios");
-    if (arrayUsuarios == null) {
-        arrayUsuarios = [];
-        Storage.store("Usuarios", arrayUsuarios);
-    }
-}
+
 function addEventListeners() {
     var usuario= document.getElementById("usuario");
     var password = document.getElementById("password");
