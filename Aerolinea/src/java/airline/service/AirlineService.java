@@ -12,7 +12,6 @@ import airline.model.Ciudad;
 import airline.model.Direccion;
 import airline.model.Jsonable;
 import airline.model.Reservacion;
-import airline.model.Rol;
 import airline.model.Tiquete;
 import airline.model.Usuario;
 import airline.model.Viaje;
@@ -43,7 +42,6 @@ public class AirlineService extends HttpServlet {
             .registerSubtype(Avion.class,"Avion")
             .registerSubtype(Direccion.class,"Direccion")
             .registerSubtype(Reservacion.class,"Reservacion")
-            .registerSubtype(Rol.class,"Rol")
             .registerSubtype(Tiquete.class,"Tiquete")
             .registerSubtype(Usuario.class,"Usuario")
             .registerSubtype(Viaje.class,"Viaje");

@@ -6,7 +6,6 @@ import airline.model.Ciudad;
 import airline.model.Direccion;
 import airline.model.Jsonable;
 import airline.model.Reservacion;
-import airline.model.Rol;
 import airline.model.Tiquete;
 import airline.model.Usuario;
 import airline.model.Viaje;

@@ -46,8 +46,6 @@ AirlineController.prototype={
     });   
   },
     search: function() {
-//        var origenVuelo = document.getElementById("origen");
-//        var destinoVuelo = document.getElementById("destino");
         var origen = this.view.$("#origen").val();
         var destino = this.view.$("#destino").val();
         var model = this.model;
@@ -59,8 +57,8 @@ AirlineController.prototype={
 
         Proxy.vuelosSearch(origen, destino, function(result) {
            model.buscados = result; 
+           view.showBuscado();
         });
-        this.showBuscado();
 //        if(radio2.checked){
 //            this.model.buscados = this.model.vuelos.filter(
 //            function(v) { return (v.ciudad_origen==destinoVuelo.value && v.ciudad_destino==origenVuelo.value && v.fecha==fecha_regreso.value);});
@@ -76,22 +74,7 @@ AirlineController.prototype={
 //            this.model.buscados = this.model.vuelos.filter(
 //            function(v) { return (v.ciudad_origen==origenVuelo.value && v.ciudad_destino==destinoVuelo.value && v.fecha==fecha_ida.value);});
 //        }
-},
-    showBuscado: function() {
-        var model = this.model;
-        var view = this.view;
-        var t = $('#paginacion').DataTable();
-        $('#paginacion').dataTable().fnClearTable();
-        for(var index in model.buscados) {
-            t.row.add( [
-            model.buscados[index].codigo,
-            model.buscados[index].ciudad_origen.nombre,
-            model.buscados[index].ciudad_destino.nombre,
-            model.buscados[index].fecha,
-            "$ "+model.buscados[index].precio
-            ] ).draw( false );
-        }
-  }
+}
 }
 
 // ---------------------VIEW--------------------
@@ -244,5 +227,17 @@ function listCiudades(){
      fecha.disabled = false;
     }
   }
-
+  function showBuscado(){
+        var t = $('#paginacion').DataTable();
+        $('#paginacion').dataTable().fnClearTable();
+        for(var index in modelView.buscados) {
+            t.row.add( [
+            modelView.buscados[index].codigo,
+            modelView.buscados[index].ciudad_origen.nombre,
+            modelView.buscados[index].ciudad_destino.nombre,
+            modelView.buscados[index].fecha,
+            "$ "+modelView.buscados[index].precio
+            ] ).draw( false );
+        }
+  }
   document.addEventListener("DOMContentLoaded",pageLoad)

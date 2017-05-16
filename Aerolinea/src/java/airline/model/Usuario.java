@@ -21,9 +21,9 @@ public class Usuario implements Jsonable{
     private Direccion direccion;
     private String telefono;
     private String celular;
-    private Rol rol;
+    private int tipo;
 
-    public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correo, Date fecha_nac, Direccion direccion, String telefono, String celular, Rol rol) {
+    public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correo, Date fecha_nac, Direccion direccion, String telefono, String celular, int tipo) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -33,6 +33,8 @@ public class Usuario implements Jsonable{
         this.direccion = direccion;
         this.telefono = telefono;
         this.celular = celular;
-        this.rol = rol;
-    }  
+        this.tipo = tipo;
+    }
+
+
 }

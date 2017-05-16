@@ -1,10 +1,10 @@
 
-function Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,rol){ 
-  this.Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,rol);
+function Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,tipo){ 
+  this.Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,tipo);
 }
 
 Usuario.prototype={ 
-  Usuario: function(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,rol){
+  Usuario: function(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,tipo){
         this.usuario=usuario;
 	this.contrasena=contrasena;
         this.nombre=nombre;
@@ -14,6 +14,6 @@ Usuario.prototype={
 	this.direccion=direccion;
 	this.telf_trabajo=telf_trabajo;
 	this.celular=celular;
-        this.rol=rol;
+        this.tipo=tipo;
   }
 }
