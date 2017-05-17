@@ -1,94 +1,199 @@
-drop table Tiquete;
-drop table Reservacion;
-drop table Asiento;
-drop table Viaje;
-drop table Avion;
-drop table Vuelo;
-drop table Ciudad;
-drop table Pasajero;
-drop table Usuario;
-Create table Usuario(
-    nombreUsuario varchar(20) NOT NULL,
-    contrasena varchar(20) NOT NULL,
-    correo varchar(20) NOT NULL,
-    nombre varchar(20),
-    apellido1 varchar(20),
-    apellido2 varchar(20),
-    longDireccion varchar(20),
-    latDireccion varchar(20),
-    telefono number,
-    celular number,
-    constraint pkUsuario primary key(nombreUsuario)
-);
+-- MySQL Workbench Forward Engineering
 
-Create table Pasajero(
-    cedula number NOT NULL,
-    nombre varchar(20),
-    nombre_usuario varchar(20),
-    pasaporte number,
-    constraint fkPasajero foreign key (nombre_usuario) references Usuario,
-    constraint pkPasajero primary key(cedula)
-);
-Create table Ciudad(
-    pais varchar(20) NOT NULL,
-    nombre varchar(20) NOT NULL,
-    constraint pkCiudad primary key(nombre)
-);
-create table Vuelo(
-    tiempoVuelo varchar(20),
-    numeroVuelo number,
-    nombre_ciudad1 varchar(20),
-    nombre_ciudad2 varchar(20),
-    constraint fkVuelo1 foreign key (nombre_ciudad1) references Ciudad,
-    constraint fkVuelo2 foreign key (nombre_ciudad2) references Ciudad,
-    constraint pkVuelo primary key(numeroVuelo)
-);
-Create table Avion(
-    placa varchar(20) NOT NULL,
-    modelo varchar(20) NOT NULL,
-    marca varchar(20) NOT NULL,
-    anno number,
-    numeroAsientos number,
-    asientosPorFila number,
-    numeroFilas number,
-    constraint pkAvion primary key(placa)
-);
-Create table Viaje(
-    numeroViaje number NOT NULL,
-    placa_avion varchar(20) NOT NULL,
-    numero_vuelo number,
-    constraint fkViaje1 foreign key (placa_avion) references Avion,
-    constraint fkViaje2 foreign key (numero_vuelo) references Viaje,
-    constraint pkViaje primary key(numeroViaje)
-);
-Create table Asiento(
-    codigo number NOT NULL,
-    numero number NOT NULL,
-    estado varchar(20),
-    numero_viaje number NOT NULL,
-    constraint fkAsiento foreign key (numero_viaje) references Viaje,
-    constraint pkAsiento primary key(codigo)
-);
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-Create table Reservacion(
-    codigo number NOT NULL,
-    fechaIda varchar(20) NOT NULL,
-    fechaRegreso varchar(20),
-    numero_viaje1 number NOT NULL,
-    numero_viaje2 number,
-    cedula_pasajero number,
-    codigo_asiento number NOT NULL,
-    constraint fkReservacion1 foreign key (cedula_pasajero) references Pasajero,
-    constraint fkReservacion2 foreign key (numero_viaje1) references Viaje,
-    constraint fkReservacion3 foreign key (numero_viaje2) references Viaje,
-    constraint fkReservacion4 foreign key (codigo_asiento) references Asiento,
-    constraint pkReservacion primary key(codigo)
-);
-Create table Tiquete(
-    codigo number NOT NULL,
-    numeroAsiento number NOT NULL,
-    codigo_reservacion number NOT NULL,
-    constraint fkTiquete foreign key (codigo_reservacion) references Reservacion,
-    constraint pkTiquete primary key(codigo)
-);
-commit;
+-- -----------------------------------------------------
+-- Schema Aerolinea
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Aerolinea
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Aerolinea` DEFAULT CHARACTER SET utf8 ;
+USE `Aerolinea` ;
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Usuario` (
+  `nombreUsuario` VARCHAR(45) NOT NULL,
+  `contrasena` VARCHAR(45) NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `apellido1` VARCHAR(45) NULL,
+  `apellido2` VARCHAR(45) NULL,
+  `direccion` VARCHAR(45) NULL,
+  `telefono` INT NULL,
+  `celular` INT NULL,
+  PRIMARY KEY (`nombreUsuario`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Pasajero`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Pasajero` (
+  `cedula` INT NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `nombre_usuario` VARCHAR(45) NULL,
+  `pasaporte` INT NULL,
+  PRIMARY KEY (`cedula`),
+  INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
+  CONSTRAINT `nombre_usuario`
+    FOREIGN KEY (`nombre_usuario`)
+    REFERENCES `Aerolinea`.`Usuario` (`nombreUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Ciudad`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Ciudad` (
+  `pais` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`nombre`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Vuelo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Vuelo` (
+  `tiempoVuelo` INT NOT NULL,
+  `numeroVuelo` INT NOT NULL,
+  `nombre_ciudad1` VARCHAR(45) NOT NULL,
+  `nombre_ciudad2` VARCHAR(45) NOT NULL,
+  INDEX `nombre_ciudad2_idx` (`nombre_ciudad2` ASC),
+  PRIMARY KEY (`numeroVuelo`),
+  CONSTRAINT `nombre_ciudad1`
+    FOREIGN KEY (`nombre_ciudad1`)
+    REFERENCES `Aerolinea`.`Ciudad` (`nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `nombre_ciudad2`
+    FOREIGN KEY (`nombre_ciudad2`)
+    REFERENCES `Aerolinea`.`Ciudad` (`nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Avion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Avion` (
+  `placa` VARCHAR(45) NOT NULL,
+  `modelo` VARCHAR(45) NULL,
+  `marca` VARCHAR(45) NULL,
+  `anno` INT NULL,
+  `numeroAsiento` INT NULL,
+  `asientosPorFilas` INT NULL,
+  `numeroFilas` INT NULL,
+  PRIMARY KEY (`placa`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Viaje`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Viaje` (
+  `numeroviaje` INT NOT NULL,
+  `placa_avion` VARCHAR(45) NULL,
+  `numero_vuelo` INT NULL,
+  PRIMARY KEY (`numeroviaje`),
+  INDEX `placa_avion_idx` (`placa_avion` ASC),
+  INDEX `numero_vuelo_idx` (`numero_vuelo` ASC),
+  CONSTRAINT `placa_avion`
+    FOREIGN KEY (`placa_avion`)
+    REFERENCES `Aerolinea`.`Avion` (`placa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `numero_vuelo`
+    FOREIGN KEY (`numero_vuelo`)
+    REFERENCES `Aerolinea`.`Vuelo` (`numeroVuelo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Asiento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Asiento` (
+  `codigo` INT NOT NULL,
+  `numero` INT NULL,
+  `estado` TINYINT(1) NULL,
+  `numero_viaje` INT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `numero_viaje_idx` (`numero_viaje` ASC),
+  CONSTRAINT `numero_viaje`
+    FOREIGN KEY (`numero_viaje`)
+    REFERENCES `Aerolinea`.`Viaje` (`numeroviaje`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Reservacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Reservacion` (
+  `codigo` INT NOT NULL,
+  `fechaIda` DATE NULL,
+  `fechaRegreso` DATE NULL,
+  `numero_viaje1` INT NULL,
+  `numero_viaje2` INT NULL,
+  `cedula_pasajero` INT NULL,
+  `codigo_asiento` INT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `numero_viaje1_idx` (`numero_viaje1` ASC),
+  INDEX `numero_viaje2_idx` (`numero_viaje2` ASC),
+  INDEX `cedula_pasajero_idx` (`cedula_pasajero` ASC),
+  INDEX `codigo_asiento_idx` (`codigo_asiento` ASC),
+  CONSTRAINT `numero_viaje1`
+    FOREIGN KEY (`numero_viaje1`)
+    REFERENCES `Aerolinea`.`Viaje` (`numeroviaje`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `numero_viaje2`
+    FOREIGN KEY (`numero_viaje2`)
+    REFERENCES `Aerolinea`.`Viaje` (`numeroviaje`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `cedula_pasajero`
+    FOREIGN KEY (`cedula_pasajero`)
+    REFERENCES `Aerolinea`.`Pasajero` (`cedula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `codigo_asiento`
+    FOREIGN KEY (`codigo_asiento`)
+    REFERENCES `Aerolinea`.`Asiento` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Aerolinea`.`Tiquete`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Aerolinea`.`Tiquete` (
+  `codigo` INT NOT NULL,
+  `numeroAsiento` INT NULL,
+  `codigo_reservacion` INT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `codigo_reservacion_idx` (`codigo_reservacion` ASC),
+  CONSTRAINT `codigo_reservacion`
+    FOREIGN KEY (`codigo_reservacion`)
+    REFERENCES `Aerolinea`.`Reservacion` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
