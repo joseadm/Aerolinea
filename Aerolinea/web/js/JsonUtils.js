@@ -1,63 +1,88 @@
 var JsonUtils = JsonUtils || {};
 
+//falta
+JsonUtils.store=function (id, vuelos){
+	sessionStorage.setItem(id, JSON.stringify(vuelos,replacer));
+};
+
+JsonUtils.retrieveVuelosFromUrl= function (url,callBack){
+    var AJAX_req = new XMLHttpRequest();
+    AJAX_req.open( "GET", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/json");
+ 
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonText=AJAX_req.responseText;
+            var object = JSON.parse( jsonText,revive );
+            callBack(object);
+        }
+    };
+    AJAX_req.send();
+};
+
+//falta
+JsonUtils.retrieve= function (id){
+  var jsonVuelos = sessionStorage.getItem(id);
+  if(jsonVuelos === null){
+	return new Vuelo();
+  }
+  else{
+	return JSON.parse(jsonVuelos,revive);
+  }
+};
+
 JsonUtils.revive = function (k,v) {
   if(v instanceof Object && v._class == 'Ciudad') {
-      return new Ciudad(v.codigo,v.nombre,v.pais);
+      return Ciudad.from(v);
   }
   if(v instanceof Object && v._class == 'Avion') {
-      return new Avion(v.codigo,v.annio,v.modelo,v.marca,v.cant_pasajeros,v.cant_filas,v.cant_asientos);
+      return Avion.from(v);
   }
   if(v instanceof Object && v._class == 'Vuelo') {
-      return new Vuelo(v.codigo,v.ciudad_origen,v.ciudad_destino,v.avion,v.fecha,v.estado,v.precio);
-  }
-  if(v instanceof Object && v._class == 'Direccion') {
-      return new Direccion(v.latitud,v.longitud);
+      return Vuelo.from(v);
   }
   if(v instanceof Object && v._class == 'Tiquete') {
-      return new Tiquete(v.codigo,v.usuario,v.nombre_pasajero,v.apellidos_pasajero,v.pasaporte_pasajero);
+      return Tiquete.from(v);
   }
   if(v instanceof Object && v._class == 'Asiento') {
-      return new Asiento(v.numero,v.estado,v.viaje);
+      return Asiento.from(v);
   }
   if(v instanceof Object && v._class == 'Usuario') {
-      return new Usuario(v.usuario,v.contrasena,v.nombre,v.apellidos,v.correo,v.fecha_nac,v.direccion,v.telf_trabajo,v.celular,v.tipo);
+      return Usuario.from(v);
   }
   if(v instanceof Object && v._class == 'Viaje') {
-      return new Viaje(v.numero,v.avion,v.vuelo);
+      return Viaje.from(v);
   }
   if(v instanceof Object && v._class == 'Reservacion') {
-      return new Reservacion(v.codigo,v.viaje,v.tiquete);
+      return Reservacion.from(v);
   }
   return v;
 };
 
 JsonUtils.replacer = function (k,v) {
   if(v instanceof Ciudad) {
-      v._class="Ciudad";
+      return Ciudad.to(v);
     }  
   if (v instanceof Avion) {
-       v._class="Avion";
+       return Avion.to(v);
     }
   if(v instanceof Vuelo) {
-      v._class="Vuelo";
+      return Vuelo.to(v);
     }  
-  if (v instanceof Direccion) {
-       v._class="Direccion";
-    }
   if (v instanceof Tiquete) {
-       v._class="Tiquete";
+       return Tiquete.to(v);
     }
   if (v instanceof Asiento) {
-       v._class="Asiento";
+       return Asiento.to(v);
     }
   if (v instanceof Usuario) {
-       v._class="Usuario";
+       return Usuario.to(v);
    }
   if (v instanceof Viaje) {
-       v._class="Viaje";
+       return Viaje.to(v);
    }
   if (v instanceof Reservacion) {
-       v._class="Reservacion";
+       return Reservacion.to(v);
    }
   return v;
 };
