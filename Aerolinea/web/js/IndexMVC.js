@@ -129,6 +129,7 @@ var controllerView;
     lista.appendChild(div1);
  }
 }
+
 function addEventListeners() {
     var correo= document.getElementById("correo");
     var password = document.getElementById("password");
@@ -240,4 +241,5 @@ function listCiudades(){
             ] ).draw( false );
         }
   }
+  
   document.addEventListener("DOMContentLoaded",pageLoad)
