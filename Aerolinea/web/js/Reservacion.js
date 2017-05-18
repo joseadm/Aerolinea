@@ -3,14 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function Reservacion(codigo,viaje,tiquete){
-	this.Reservacion(codigo,viaje,tiquete);
+function Reservacion(codigo,viaje,tiquete,asiento){
+	this.Reservacion(codigo,viaje,tiquete,asiento);
 }
 Reservacion.prototype={
-	Reservacion:function(codigo,viaje,tiquete){
+        codigo:0,
+        viaje: 0,
+        tiquete: 0,
+        asiento:0,
+	Reservacion:function(codigo,viaje,tiquete,asiento){
 		this.codigo=codigo;
 		this.viaje=viaje;
 		this.tiquete=tiquete;
+                this.asiento = asiento;
+	},
+        toString:function(){
+	  return this.codigo;
 	}
 }
-
+Reservacion.from = function(plain){
+    reservacion = new Reservacion(plain.codigo,plain.viaje,plain.tiquete,plain.asiento);
+    return reservacion;
+};
+Reservacion.to = function(reserva){
+    return{
+        _class : 'Reservacion',
+        codigo: reserva.codigo,
+        viaje: reserva.viaje,
+        tiquete: reserva.tiquete,
+        asiento: reserva.asiento
+    };
+};
