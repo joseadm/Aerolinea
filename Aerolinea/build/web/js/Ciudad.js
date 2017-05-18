@@ -22,6 +22,7 @@ Ciudad.from= function(plain){
 
 Ciudad.to= function(ciudad){
     return{
+        _class : 'Ciudad',
         codigo: ciudad.codigo,
         nombre: ciudad.nombre,
         pais: ciudad.pais
