@@ -90,9 +90,9 @@ CREATE TABLE IF NOT EXISTS `Aerolinea`.`Avion` (
   `modelo` VARCHAR(45) NULL,
   `marca` VARCHAR(45) NULL,
   `anno` INT NULL,
-  `numeroAsiento` INT NULL,
-  `asientosPorFilas` INT NULL,
+  `cantidadPasajeros` INT NULL,
   `numeroFilas` INT NULL,
+  `asientosPorFilas` INT NULL,
   PRIMARY KEY (`placa`))
 ENGINE = InnoDB;
 
