@@ -1,34 +1,18 @@
+<%-- 
+    Document   : index
+    Created on : May 18, 2017, 12:12:25 AM
+    Author     : AndreyCh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Baratísimo</title>
-  <link rel="shortcut icon" href="images/airplane.png"/>
-  <link rel="stylesheet" href="css/estilo.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-  
-  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-  
-  <!-- archivos js -->
-  <script type="text/javascript" src="js/Ciudad.js"></script>
-  <script type="text/javascript" src="js/Bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="js/Avion.js"></script>
-  <script type="text/javascript" src="js/Tiquete.js"></script>
-  <script type="text/javascript" src="js/Usuario.js"></script>
-  <script type="text/javascript" src="js/Direccion.js"></script>
-  <script type="text/javascript" src="js/Vuelo.js"></script>
-  <script type="text/javascript" src="js/IndexMVC.js"></script>
-  <script type="text/javascript" src="js/Proxy.js"></script>
-  <script type="text/javascript" src="js/JsonUtils.js"></script>
- 
-  </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Baratísimo</title>
+        <%@ include file="Imports.jspf" %>    
+        <script type="text/javascript" src="js/IndexMVC.js"></script>
+    </head>
     <body>
       <!-- Titulo de la pagina -->
       <header>
@@ -47,23 +31,23 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="index.html">Principal</a></li>
-              <li><a href="informacion.html">Información</a></li>
-              <li><a href="historia.html">Historia</a></li>
-              <li><a href="contacto.html">Contacto</a></li>
+              <li class="active"><a href="index.jsp">Principal</a></li>
+              <li><a href="informacion.jsp">Información</a></li>
+              <li><a href="historia.jsp">Historia</a></li>
+              <li><a href="contacto.jsp">Contacto</a></li>
             </ul>
             <form id ="formularioSesion"class="navbar-form navbar-right">
                   <input id= "correo" name="correo" placeholder="Correo Electronico" class="form-control" type="text"></input>
                   <input id= "password" name="password" placeholder="Contraseña" class="form-control" type="password"></input>
                   <button id="inicioSesion" type="button"  class="btn btn-success">Iniciar Sesion</button>
-                  <a href="registro.html" id="crearCuenta" type="button"  class="btn btn-primary">Crear Cuenta</a>
+                  <a href="registro.jsp" id="crearCuenta" type="button"  class="btn btn-primary">Crear Cuenta</a>
             </form>
              <ul id="ulPrincipal" class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                 <a id="aUsuario" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="usuario.html">Perfil</a></li>
-                  <li><a href="tablero.html">Administracion</a></li>
+                  <li><a href="usuario.jsp">Perfil</a></li>
+                  <li><a href="tablero.jsp">Administracion</a></li>
                   <li><a id="cerrarSesion" href="#">Cerrar Sesion</a></li>
                 </ul>
               </li>
@@ -74,13 +58,11 @@
       <!-- Bar slider -->
       <section class="section-white">
   <div class="container">
-
     <div id="carousel-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators" id="circulos">
         <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
       </ol>
-
       <!-- Wrapper for slides -->
       <div class="carousel-inner" id="listaCarousel">
          <div class="item active">
@@ -92,7 +74,6 @@
           </div>
         </div>
       </div>
-
       <!-- Controles -->
       <a class="left carousel-control" href="#carousel-generic" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -101,7 +82,6 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>
     </div>
-
   </div>
 </section>
       <hr>
@@ -176,20 +156,15 @@
     </div>
       <hr>
       <!-- Tabla de vuelos............................................................... -->
-      <div class="container">
-
+        <div class="container">
             <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
-
-
             <thead>
             <tr><th>Codigo</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Precio</th></tr>
             </thead>
             <tbody id="listaBuscados">
-
             </tbody>
            </table>
-
-		  </div>
+        </div>
       <!--....................................................................................-->
       <br><br><br>
       <!-- Footer -->
@@ -204,7 +179,7 @@
           .removeClass( 'display' )
           .addClass('table table-striped table-bordered');
       </script>
-  <script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
         var start = new Date();
         var end = new Date(new Date().setYear(start.getFullYear()+1));
@@ -221,6 +196,6 @@
             useCurrent: false
         });
         });
-</script> 
+    </script> 
     </body>
 </html>

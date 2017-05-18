@@ -1,15 +1,17 @@
+<%-- 
+    Document   : horas
+    Created on : May 18, 2017, 12:26:26 AM
+    Author     : AndreyCh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Baratisimo</title>
-    <link rel="shortcut icon" href="../images/airplane.png"/>
-    <link rel="stylesheet" href="../css/estilo.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Baratísimo</title>
+        <%@ include file="Imports.jspf" %> 
+    </head>
     <body>
       <!-- Titulo de la pagina -->
       <header>
@@ -28,17 +30,17 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="index.html">Principal</a></li>
-              <li><a href="informacion.html">Informacion</a></li>
-              <li><a href="historia.html">Historia</a></li>
-              <li><a href="contacto.html">Contacto</a></li>
+              <li><a href="index.jsp">Principal</a></li>
+              <li><a href="informacion.jsp">Informacion</a></li>
+              <li><a href="historia.jsp">Historia</a></li>
+              <li><a href="contacto.jsp">Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="usuario.html">Perfil</a></li>
-                <li><a href="tablero.html">Administracion</a></li>
+                <li><a href="usuario.jsp">Perfil</a></li>
+                <li><a href="tablero.jsp">Administracion</a></li>
                 <li><a href="#">Cerrar Sesion</a></li>
               </ul>
             </li>
@@ -51,11 +53,11 @@
         <div class="row">
           <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-              <li><a href="tablero.html">Tablero</a></li>
-              <li><a href="tiposAviones.html">Tipos de aviones</a></li>
-              <li><a href="rutas.html">Rutas</a></li>
-              <li class="active"><a href="horas.html">Horas</a></li>
-              <li><a href="aviones.html">Aviones</a></li>
+              <li><a href="tablero.jsp">Tablero</a></li>
+              <li><a href="tiposAviones.jsp">Tipos de aviones</a></li>
+              <li><a href="rutas.jsp">Rutas</a></li>
+              <li class="active"><a href="horas.jsp">Horas</a></li>
+              <li><a href="aviones.jsp">Aviones</a></li>
             </ul>
           </div>
           <div class="col-sm-8 col-md-10 main">

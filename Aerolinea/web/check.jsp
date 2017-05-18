@@ -1,15 +1,17 @@
+<%-- 
+    Document   : check
+    Created on : May 18, 2017, 12:25:49 AM
+    Author     : AndreyCh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Baratísimo</title>
-    <link rel="shortcut icon" href="../images/airplane.png"/>
-    <link rel="stylesheet" href="../css/estilo.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Baratísimo</title>
+        <%@ include file="Imports.jspf" %> 
+    </head>
     <body>
       <!-- Titulo de la pagina -->
       <header>
@@ -28,10 +30,10 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="index.html">Principal</a></li>
-              <li><a href="informacion.html">Información</a></li>
-              <li><a href="historia.html">Historia</a></li>
-              <li><a href="contacto.html">Contacto</a></li>
+              <li class="active"><a href="index.jsp">Principal</a></li>
+              <li><a href="informacion.jsp">Información</a></li>
+              <li><a href="historia.jsp">Historia</a></li>
+              <li><a href="contacto.jsp">Contacto</a></li>
             </ul>
             <form class="navbar-form navbar-right">
               <div class="form-group">
@@ -41,7 +43,7 @@
                 <input placeholder="Password" class="form-control" type="password">
               </div>
               <button type="submit" class="btn btn-success">Iniciar Sesion</button>
-              <a href="registro.html" type="button" class="btn btn-primary">Crear cuenta</a>
+              <a href="registro.jsp" type="button" class="btn btn-primary">Crear cuenta</a>
             </form>
           </div>
         </div>
@@ -69,38 +71,38 @@
                 <th scope="row">1</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="seat" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="seat" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="seat" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="seat" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="seat" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="seat" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -109,38 +111,38 @@
                 <th scope="row">2</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -149,38 +151,38 @@
                 <th scope="row">3</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -189,38 +191,38 @@
                 <th scope="row">4</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -229,38 +231,38 @@
                 <th scope="row">5</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -269,38 +271,38 @@
                 <th scope="row">6</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -309,38 +311,38 @@
                 <th scope="row">7</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -349,38 +351,38 @@
                 <th scope="row">8</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -389,38 +391,38 @@
                 <th scope="row">9</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -429,38 +431,38 @@
                 <th scope="row">10</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Libre.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Libre.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
@@ -469,38 +471,38 @@
                 <th scope="row">11</th>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Reservado.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Reservado.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Reservado.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Reservado.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Reservado.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Reservado.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td> </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Reservado.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Reservado.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Reservado.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Reservado.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
                 <td>
                     <label class="btn btn-default">
-                      <img src="../images/Reservado.png" alt="libre" class="img-thumbnail img-check">
+                      <img src="images/Reservado.png" alt="libre" class="img-thumbnail img-check">
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>

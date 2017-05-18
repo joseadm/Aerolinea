@@ -1,20 +1,18 @@
+<%-- 
+    Document   : registro
+    Created on : May 18, 2017, 12:27:07 AM
+    Author     : AndreyCh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Baratísimo</title>
-    <link rel="shortcut icon" href="images/airplane.png"/>
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script type="text/javascript" src="js/Usuario.js"></script>
-    <script type="text/javascript" src="js/Direccion.js"></script>
-    <script type="text/javascript" src="js/Storage.js"></script>
-    <script type="text/javascript" src="js/ValidacionesRegistro.js"></script>
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	  <script async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCrBPdUq4LdDfDmPsb2UP_sUwfocMGsJVc &callback=initMap"></script>
-  </head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Baratísimo</title>
+        <%@ include file="Imports.jspf" %> 
+        <script type="text/javascript" src="js/ValidacionesRegistro.js"></script>
+    </head>
     <body>
       <!-- Titulo de la pagina -->
       <header>
@@ -33,10 +31,10 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="index.html">Principal</a></li>
-              <li><a href="informacion.html">Información</a></li>
-              <li><a href="historia.html">Historia</a></li>
-              <li ><a href="contacto.html">Contacto</a></li>
+              <li><a href="index.jsp">Principal</a></li>
+              <li><a href="informacion.jsp">Información</a></li>
+              <li><a href="historia.jsp">Historia</a></li>
+              <li ><a href="contacto.jsp">Contacto</a></li>
             </ul>
           </div>
         </div>
