@@ -41,6 +41,7 @@ public class AirlineService extends HttpServlet {
             .registerSubtype(Avion.class,"Avion")
             .registerSubtype(Reservacion.class,"Reservacion")
             .registerSubtype(Tiquete.class,"Tiquete")
+            .registerSubtype(Asiento.class,"Asiento")
             .registerSubtype(Usuario.class,"Usuario")
             .registerSubtype(Viaje.class,"Viaje");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
