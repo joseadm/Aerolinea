@@ -219,13 +219,11 @@ function listCiudades(){
  function oneWay(){
    var ida = document.getElementById("ida");
    var vuelta = document.getElementById("vuelta");
-   var fecha = document.getElementById("fecha_regreso");
    ida.onclick = function(){
-     fecha.value = '';
-     fecha.disabled = true;
+     $("#fecha_regreso").hide();
    }
    vuelta.onclick = function(){
-     fecha.disabled = false;
+     $("#fecha_regreso").show();
     }
   }
   function showBuscado(){

@@ -110,7 +110,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label">Fecha de Nacimeinto</label>
     <div class="col-md-4 inputGroupContainer">
-      <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento" placeholder="DD/MM/AAAA">
+      <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
                 <input type='text' class="form-control" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
