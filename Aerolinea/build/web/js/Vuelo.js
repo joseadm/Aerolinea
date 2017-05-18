@@ -1,8 +1,8 @@
-function Vuelo(codigo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio,duracion){
-	this.Vuelo(codigo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio,duracion);
+function Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio,duracion){
+	this.Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio,duracion);
 }
 Vuelo.prototype={
-        codigo:"",
+        numero_vuelo:0,
         ciudad_origen:"",
         ciudad_destino:"",
         avion:"",
@@ -10,8 +10,8 @@ Vuelo.prototype={
         estado:"",
         precio:"",
         duracion:"",
-	Vuelo:function(codigo,ciudad_origen,ciudad_destino,avion,fecha,estado,precio,duracion){
-		this.codigo=codigo;
+	Vuelo:function(numero_vuelo,ciudad_origen,ciudad_destino,avion,fecha,estado,precio,duracion){
+		this.numero_vuelo=numero_vuelo;
 		this.ciudad_origen=ciudad_origen;
 		this.ciudad_destino=ciudad_destino;
 		this.avion=avion;
@@ -21,11 +21,11 @@ Vuelo.prototype={
                 this.duracion = duracion;
 	},
         toString:function(){
-	  return this.codigo;
+	  return this.numero_vuelo;
 	}
 }
 Vuelo.from= function(plain){
-    vuelo = new Vuelo(plain.codigo,plain.ciudad_origen,plain.ciudad_destino,plain.avion,
+    vuelo = new Vuelo(plain.numero_vuelo,plain.ciudad_origen,plain.ciudad_destino,plain.avion,
                       plain.fecha, plain.estado,plain.precio,plain.duracion);
     return vuelo;
 };
@@ -33,7 +33,7 @@ Vuelo.from= function(plain){
 Vuelo.to = function(vuelo){
     return{
         _class : 'Vuelo',
-        codigo: vuelo.codigo,
+        codigo: vuelo.numero_vuelo,
         ciudad_origen: vuelo.ciudad_origen,
         ciudad_destino: vuelo.ciudad_destino,
         avion: vuelo.avion,

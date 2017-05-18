@@ -6,31 +6,97 @@
 package airline.model;
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  *
  * @author josealonso
  */
-public class Vuelo implements Jsonable{
-    public int codigo;
-    public Ciudad ciudad_origen;
-    public Ciudad ciudad_destino;
-    public Avion avion;
-    public Date fecha;
-    public boolean estado;
-    public int precio;
+public class Vuelo implements Serializable, Jsonable{
+    int numero_vuelo;
+    Ciudad ciudad_origen;
+    Ciudad ciudad_destino;
+    Avion avion;
+    Date fecha;
+    boolean estado;
+    int precio;
+    String duracion;
 
-    public Vuelo(int codigo, Ciudad ciudad_origen, Ciudad ciudad_destino, Avion avion, Date fecha, boolean estado, int precio) {
-        this.codigo = codigo;
+    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, Avion avion, Date fecha, boolean estado, int precio, String duracion) {
+        this.numero_vuelo = numero_vuelo;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
         this.avion = avion;
         this.fecha = fecha;
         this.estado = estado;
         this.precio = precio;
+        this.duracion = duracion;
     }
-    
-    
-    
-    
+
+    public Vuelo() {
+    }
+
+    public int getCodigo() {
+        return numero_vuelo;
+    }
+
+    public Ciudad getCiudad_origen() {
+        return ciudad_origen;
+    }
+
+    public Ciudad getCiudad_destino() {
+        return ciudad_destino;
+    }
+
+    public Avion getAvion() {
+        return avion;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setCodigo(int numero_vuelo) {
+        this.numero_vuelo = numero_vuelo;
+    }
+
+    public void setCiudad_origen(Ciudad ciudad_origen) {
+        this.ciudad_origen = ciudad_origen;
+    }
+
+    public void setCiudad_destino(Ciudad ciudad_destino) {
+        this.ciudad_destino = ciudad_destino;
+    }
+
+    public void setAvion(Avion avion) {
+        this.avion = avion;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }  
 }
