@@ -233,7 +233,7 @@ function listCiudades(){
         $('#paginacion').dataTable().fnClearTable();
         for(var index in modelView.buscados) {
             t.row.add( [
-            modelView.buscados[index].codigo,
+            modelView.buscados[index].numero_vuelo,
             modelView.buscados[index].ciudad_origen.nombre,
             modelView.buscados[index].ciudad_destino.nombre,
             modelView.buscados[index].fecha,

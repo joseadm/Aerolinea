@@ -12,6 +12,7 @@
         <title>Baratísimo</title>
         <%@ include file="Imports.jspf" %> 
         <script type="text/javascript" src="js/ValidacionesRegistro.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCJPWUmBSUk3VbURUYaADFq2ois9Zcl--I &callback=initMap"></script>
     </head>
     <body>
       <!-- Titulo de la pagina -->
@@ -109,13 +110,14 @@
 <div class="form-group">
   <label class="col-md-4 control-label">Fecha de Nacimeinto</label>
     <div class="col-md-4 inputGroupContainer">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        <input id="fechaNacimiento" name="fechaNacimiento" placeholder="DD/MM/AAAA" class="form-control" type="date">
-    </div>
+      <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento" placeholder="DD/MM/AAAA">
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+      </div>
   </div>
 </div>
-
   <!-- Telefono-->
 
 <div class="form-group">
@@ -181,5 +183,12 @@
           <p>&copy; 2017 Baratísimo, Inc.</p>
         </footer>
       </div>
+          <script type="text/javascript">
+        $(function () {
+        $('#fechaNacimiento').datepicker({
+            format: 'dd/MM/yyyy'
+        });
+        });
+    </script> 
     </body>
 </html>
