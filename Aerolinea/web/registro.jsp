@@ -52,7 +52,7 @@
       <fieldset>
 
         <!-- Nombre Formulario -->
-        <legend>Registro</legend>
+        <legend align="center">Registro</legend>
 
         <!-- Usuario -->
 

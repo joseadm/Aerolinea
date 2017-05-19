@@ -37,48 +37,55 @@
               <li><a href="contacto.jsp">Contacto</a></li>
             </ul>
           </div>
-    <form action="/Aerolinea/AirlineService?action=userLogin" class="well form-horizontal"  method="POST"  id="formulario">
-      <fieldset>
-
+      </nav>
+      <div class="container">      
+        <form action="/Aerolinea/AirlineService?action=userLogin" class="well form-horizontal"  method="POST"  id="formulario">
+        <fieldset>
         <!-- Nombre Formulario -->
         <legend align="center">Ingresar</legend>
 
         <!-- Correo -->
 
-<div class="form-group">
-  <label class="col-md-4 control-label">Correo Electronico</label>
-  <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Correo Electronico</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Password-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" >Contraseña</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input id="password" name="password" placeholder="********" class="form-control" type="password">
+                </div>
+            </div>
+        </div>
 
-    <!-- Password-->
-<div class="form-group">
-  <label class="col-md-4 control-label" >Contraseña</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      <input id="password" name="password" placeholder="********" class="form-control" type="password">
-    </div>
-  </div>
-</div>
-
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4" align="center">
-    <button id="submit" type="submit" class="btn btn-success" value="IniciarSesion">Iniciar Sesión</button>
-  </div>
-</div>
-<br>
-<p align="center">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a><span class="fontawesome-arrow-right"></span></p>
-</fieldset>
-</form>
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4" align="center">
+            <button id="submit" type="submit" class="btn btn-success" value="IniciarSesion">Iniciar Sesión</button>
+            </div>
+        </div>
+        <br>
+        <p align="center">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a><span class="fontawesome-arrow-right"></span></p>
+        </fieldset>
+        </form>
 <!-- .......................................................................................................-->
-</div><!-- /.container -->
-</nav>
+      </div><!-- /.container -->
+      <br>
+      <!-- Footer -->
+      <div class="container">
+        <footer class="footer">
+          <p>&copy; 2017 Baratísimo, Inc.</p>
+        </footer>
+      </div>
     </body>
 </html>

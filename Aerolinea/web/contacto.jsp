@@ -23,7 +23,7 @@
       <fieldset>
 
         <!-- Nombre Formulario -->
-        <legend>Contactenos</legend>
+        <legend align="center">Contactenos</legend>
 
         <!-- Nombre -->
 
