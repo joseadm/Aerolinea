@@ -16,16 +16,16 @@ public class Avion implements Serializable, Jsonable{
     String annio;
     int cant_pasajeros;
     int cant_filas;
-    int cant_asientos;
+    int cant_asientos_por_fila;
 
-    public Avion(String placa, String modelo, String marca, String annio, int cant_pasajeros, int cant_filas, int cant_asientos) {
+    public Avion(String placa, String modelo, String marca, String annio, int cant_pasajeros, int cant_filas, int cant_asientos_por_fila) {
         this.placa = placa;
         this.modelo = modelo;
         this.marca = marca;
         this.annio = annio;
         this.cant_pasajeros = cant_pasajeros;
         this.cant_filas = cant_filas;
-        this.cant_asientos = cant_asientos;
+        this.cant_asientos_por_fila = cant_asientos_por_fila;
     }
 
     public Avion() {
@@ -55,8 +55,8 @@ public class Avion implements Serializable, Jsonable{
         return cant_filas;
     }
 
-    public int getCant_asientos() {
-        return cant_asientos;
+    public int getCant_cant_asientos_por_fila() {
+        return cant_asientos_por_fila;
     }
 
     public void setPlaca(String placa) {
@@ -83,8 +83,8 @@ public class Avion implements Serializable, Jsonable{
         this.cant_filas = cant_filas;
     }
 
-    public void setCant_asientos(int cant_asientos) {
-        this.cant_asientos = cant_asientos;
+    public void setcant_asientos_por_fila(int cant_asientos_por_fila) {
+        this.cant_asientos_por_fila = cant_asientos_por_fila;
     }
     
 }
