@@ -170,10 +170,11 @@
 <!-- Button -->
 <div class="form-group">
   <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">
+  <div class="col-md-4" align="center">
     <button id="submit" type="submit" class="btn btn-primary" value="Registrar">Registrar<span class="glyphicon glyphicon-save"></span></button>
   </div>
 </div>
+<p align="center">¿Ya tiene una cuenta? <a href="login.jsp">Inicia sesión</a><span class="fontawesome-arrow-right"></span></p>
 
 </fieldset>
 </form>

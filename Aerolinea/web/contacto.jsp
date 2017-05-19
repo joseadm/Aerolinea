@@ -139,7 +139,7 @@
 <!-- Button -->
 <div class="form-group">
   <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">
+  <div class="col-md-4" align="center">
     <button type="submit" class="btn btn-warning" >Enviar <span class="glyphicon glyphicon-send"></span></button>
   </div>
 </div>
