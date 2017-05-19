@@ -44,7 +44,7 @@ public class Viaje implements Serializable, Jsonable{
     public void setNumero_viaje(int numero_viaje) {
         this.numero_viaje = numero_viaje;
     }
-    public void SetFecha(Date fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
