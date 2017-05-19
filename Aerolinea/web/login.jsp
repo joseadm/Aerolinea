@@ -37,6 +37,7 @@
               <li><a href="contacto.jsp">Contacto</a></li>
             </ul>
           </div>
+          </div>
       </nav>
       <div class="container">      
         <form action="/Aerolinea/AirlineService?action=userLogin" class="well form-horizontal"  method="POST"  id="formulario">
