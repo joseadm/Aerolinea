@@ -16,16 +16,14 @@ public class Vuelo implements Serializable, Jsonable{
     int numero_vuelo;
     Ciudad ciudad_origen;
     Ciudad ciudad_destino;
-    Avion avion;
     boolean estado;
     int precio;
     String duracion;
 
-    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, Avion avion, boolean estado, int precio, String duracion) {
+    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, String duracion) {
         this.numero_vuelo = numero_vuelo;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
-        this.avion = avion;
         this.estado = estado;
         this.precio = precio;
         this.duracion = duracion;
@@ -45,11 +43,6 @@ public class Vuelo implements Serializable, Jsonable{
     public Ciudad getCiudad_destino() {
         return ciudad_destino;
     }
-
-    public Avion getAvion() {
-        return avion;
-    }
-
  
     public boolean isEstado() {
         return estado;
@@ -73,10 +66,6 @@ public class Vuelo implements Serializable, Jsonable{
 
     public void setCiudad_destino(Ciudad ciudad_destino) {
         this.ciudad_destino = ciudad_destino;
-    }
-
-    public void setAvion(Avion avion) {
-        this.avion = avion;
     }
 
     public void setEstado(boolean estado) {
