@@ -107,6 +107,7 @@ public class model {
     private static Viaje toTravels(ResultSet rs) throws Exception{
        Viaje obj= new Viaje();
        obj.setNumero_viaje(rs.getInt("numeroViaje"));
+       obj.setFecha(rs.getDate("fecha"));
        obj.setAvion(toPlanes(rs));
        obj.setVuelo(toFlights(rs));
        return obj;
