@@ -86,7 +86,7 @@ var controllerView;
     controllerView = new AirlineController(modelView, window);
     showPromos(); // Crea promociones en la pagina
     addEventListeners();
-    loadButtons();
+//    loadButtons();
     listCiudades();
     oneWay();
   }
@@ -131,8 +131,8 @@ var controllerView;
 }
 
 function addEventListeners() {
-    var correo= document.getElementById("correo");
-    var password = document.getElementById("password");
+//    var correo= document.getElementById("correo");
+//    var password = document.getElementById("password");
     var origen = document.getElementById("origen");
     var destino = document.getElementById("destino");
     var fecha_ida = document.getElementById("fecha_ida");
@@ -141,17 +141,17 @@ function addEventListeners() {
     var vuelta = document.getElementById("vuelta");
     var pasajeros = document.getElementById("listPassengers");
 
-	password.addEventListener("focus",doFocus);
-	password.addEventListener("blur",doBlur);
-	correo.addEventListener("focus",doFocus);
-	correo.addEventListener("blur",doBlur);
+//	password.addEventListener("focus",doFocus);
+//	password.addEventListener("blur",doBlur);
+//	correo.addEventListener("focus",doFocus);
+//	correo.addEventListener("blur",doBlur);
 
     /*let formularioSesion = document.getElementById("formularioSesion");
     formularioSesion.addEventListener("submit", iniciarSesion);*/
-    var incioSesionBoton= document.getElementById("inicioSesion");
-    incioSesionBoton.addEventListener("click",login);
-    var cerrarSesion= document.getElementById("cerrarSesion");
-    cerrarSesion.addEventListener("click",logout);
+//    var incioSesionBoton= document.getElementById("inicioSesion");
+//    incioSesionBoton.addEventListener("click",login);
+//    var cerrarSesion= document.getElementById("cerrarSesion");
+//    cerrarSesion.addEventListener("click",logout);
     var buscar = document.getElementById("btn-search");
     $('#btn_search').click( function(){
         controllerView.search();
@@ -164,39 +164,39 @@ function doFocus(event){
 function doBlur(event){
 	event.target.classList.remove("focus");
 }
-function loadButtons(){
-    if(user!=1){ /*Nadie a iniciado sesion */
-        document.getElementById("ulPrincipal").style.display = 'none';
-    }else{
-        document.getElementById("correo").style.display = 'none';
-        document.getElementById("password").style.display = 'none';
-        document.getElementById("crearCuenta").style.display = 'none';
-        document.getElementById("inicioSesion").style.display = 'none';
-        document.getElementById("ulPrincipal").style.display = 'initial';
-    }
-}
-function login(){
-    var correo= document.getElementById("correo");
-    var password = document.getElementById("password");
-    //if(validateUser(correo,password)){
-        window.alert("Bienvenido");
-        user=1;
-        loadButtons();
-    //}else{
-    //    window.alert("error inicio de sesion");
-    //}
-
-}
-function logout(){
-        document.getElementById("ulPrincipal").style.display = 'none';
-        document.getElementById("correo").style.display = 'initial';
-        document.getElementById("password").style.display = 'initial';
-        document.getElementById("crearCuenta").style.display = 'initial';
-        document.getElementById("inicioSesion").style.display = 'initial';
-
-        document.getElementById("password").value ="";
-        user=0;
-}
+//function loadButtons(){
+//    if(user!=1){ /*Nadie a iniciado sesion */
+//        document.getElementById("ulPrincipal").style.display = 'none';
+//    }else{
+//        document.getElementById("correo").style.display = 'none';
+//        document.getElementById("password").style.display = 'none';
+//        document.getElementById("crearCuenta").style.display = 'none';
+//        document.getElementById("inicioSesion").style.display = 'none';
+//        document.getElementById("ulPrincipal").style.display = 'initial';
+//    }
+//}
+//function login(){
+//    var correo= document.getElementById("correo");
+//    var password = document.getElementById("password");
+//    //if(validateUser(correo,password)){
+//        window.alert("Bienvenido");
+//        user=1;
+//        loadButtons();
+//    //}else{
+//    //    window.alert("error inicio de sesion");
+//    //}
+//
+//}
+//function logout(){
+//        document.getElementById("ulPrincipal").style.display = 'none';
+//        document.getElementById("correo").style.display = 'initial';
+//        document.getElementById("password").style.display = 'initial';
+//        document.getElementById("crearCuenta").style.display = 'initial';
+//        document.getElementById("inicioSesion").style.display = 'initial';
+//
+//        document.getElementById("password").value ="";
+//        user=0;
+//}
 /*function validateUser(correo, password) {
     var index = arrayUsuarios.findIndex( ((est) => est.correo === correo.value) && ((est) => est.contrasena === password.value) );
         if(index != -1){

@@ -11,50 +11,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Baratísimo</title>
         <%@ include file="Imports.jspf" %>    
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+ 
+        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="js/IndexMVC.js"></script>
+        <script type="text/javascript" src="js/Bootstrap-datepicker.js"></script>
+           
     </head>
     <body>
-      <!-- Titulo de la pagina -->
-      <header>
-        <div class="container"><h1>&nbsp;&nbsp;Baratísimo <span class="glyphicon glyphicon-plane avion"></span></h1></div>
-      </header>
-      <!-- Menu de Navegacion -->
-      <nav class="navbar navbar-inverse">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="index.jsp">Principal</a></li>
-              <li><a href="informacion.jsp">Información</a></li>
-              <li><a href="historia.jsp">Historia</a></li>
-              <li><a href="contacto.jsp">Contacto</a></li>
-            </ul>
-            <form id ="formularioSesion"class="navbar-form navbar-right">
-                  <input id= "correo" name="correo" placeholder="Correo Electronico" class="form-control" type="text"></input>
-                  <input id= "password" name="password" placeholder="Contraseña" class="form-control" type="password"></input>
-                  <button id="inicioSesion" type="button"  class="btn btn-success">Iniciar Sesion</button>
-                  <a href="registro.jsp" id="crearCuenta" type="button"  class="btn btn-primary">Crear Cuenta</a>
-            </form>
-             <ul id="ulPrincipal" class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                <a id="aUsuario" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Usuario <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="usuario.jsp">Perfil</a></li>
-                  <li><a href="tablero.jsp">Administracion</a></li>
-                  <li><a id="cerrarSesion" href="#">Cerrar Sesion</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <%@ include file="Header.jspf" %>
       <!-- Bar slider -->
       <section class="section-white">
   <div class="container">

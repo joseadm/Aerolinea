@@ -11,43 +11,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Baratísimo</title>
         <%@ include file="Imports.jspf" %> 
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
     <body>
-      <!-- Titulo de la pagina -->
-      <header>
-        <div class="container"><h1>&nbsp;&nbsp;Baratísimo <span class="glyphicon glyphicon-plane avion"></span></h1></div>
-      </header>
-      <!-- Menu de Navegacion -->
-      <nav class="navbar navbar-inverse">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="index.jsp">Principal</a></li>
-              <li><a href="informacion.jsp">Información</a></li>
-              <li><a href="historia.jsp">Historia</a></li>
-              <li><a href="contacto.jsp">Contacto</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-              <div class="form-group">
-                <input placeholder="Email" class="form-control" type="text">
-              </div>
-              <div class="form-group">
-                <input placeholder="Password" class="form-control" type="password">
-              </div>
-              <button type="submit" class="btn btn-success">Iniciar Sesion</button>
-              <a href="registro.jsp" type="button" class="btn btn-primary">Crear cuenta</a>
-            </form>
-          </div>
-        </div>
-      </nav>
+      <%@ include file="Header.jspf" %>
       <!-- Form -->
         <div class="container">
           <h1>Reservar asientos</h1>
