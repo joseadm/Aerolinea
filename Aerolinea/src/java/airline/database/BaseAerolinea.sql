@@ -21,12 +21,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
   `nombreUsuario` VARCHAR(45) NOT NULL,
   `contrasena` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
-  `nombre` VARCHAR(45) NULL,
-  `apellido1` VARCHAR(45) NULL,
-  `apellido2` VARCHAR(45) NULL,
-  `direccion` VARCHAR(45) NULL,
-  `telefono` INT NULL,
-  `celular` INT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `apellido1` VARCHAR(45) NOT NULL,
+  `apellido2` VARCHAR(45) NOT NULL,
+  `direccion` VARCHAR(45) NOT NULL,
+  `telefono` INT NOT NULL,
+  `celular` INT NOT NULL,
+  `tipo` INT NOT NULL,
   PRIMARY KEY (`nombreUsuario`))
 ENGINE = InnoDB;
 
@@ -47,12 +48,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Vuelo` (
   `numeroVuelo` INT NOT NULL AUTO_INCREMENT,
-  `tiempoVuelo` INT NOT NULL,
   `ciudadOrigen` VARCHAR(45) NOT NULL,
   `ciudadDestino` VARCHAR(45) NOT NULL,
   `estado` TINYINT(1) NOT NULL,
   `precio` INT NOT NULL,
   `duracion` VARCHAR(45) NOT NULL,
+  `hora` DATETIME(45) NOT NULL,
+  `oferta` TINYINT(1) NOT NULL,
+  `imagen` TEXT NULL,
   PRIMARY KEY (`numeroVuelo`),
   INDEX `ciudadOrigen_idx` (`ciudadOrigen` ASC),
   INDEX `ciudadDestino_idx` (`ciudadDestino` ASC),
@@ -89,7 +92,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Viaje` (
   `numeroviaje` INT NOT NULL AUTO_INCREMENT,
-  `fecha` DATE NOT NULL,
+  `fecha` DATETIME(45) NOT NULL,
   `placa_avion` VARCHAR(45) NOT NULL,
   `numero_vuelo` INT NOT NULL,
   PRIMARY KEY (`numeroviaje`),
@@ -113,9 +116,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Asiento` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `numero` INT NULL,
-  `estado` TINYINT(1) NULL,
-  `numero_viaje` INT NULL,
+  `numero` INT NOT NULL,
+  `estado` TINYINT(1) NOT NULL,
+  `numero_viaje` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `numero_viaje_idx` (`numero_viaje` ASC),
   CONSTRAINT `numero_viaje`
@@ -131,10 +134,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Tiquete` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nombre_usuario` VARCHAR(45) NULL,
-  `cedula_pasajero` INT NULL,
-  `nombre_pasajero` VARCHAR(45) NULL,
-  `pasaporte` INT NULL,
+  `nombre_usuario` VARCHAR(45) NOT NULL,
+  `cedula_pasajero` INT NOT NULL,
+  `nombre_pasajero` VARCHAR(45) NOT NULL,
+  `pasaporte` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
   CONSTRAINT `nombre_usuario`
@@ -150,18 +153,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Reservacion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `fechaIda` DATE NULL,
-  `fechaRegreso` DATE NULL,
-  `numero_viaje1` INT NULL,
+  `numero_viaje1` INT NOT NULL,
   `numero_viaje2` INT NULL,
-  `codigo_asiento` INT NULL,
-  `codigo_tiquete` INT NULL,
-  `numeroAsiento` INT NULL,
+  `codigo_asiento` INT NOT NULL,
+  `codigo_asiento2` INT NULL,
+  `codigo_tiquete` INT NOT NULL,
+  `numeroAsiento` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `numero_viaje1_idx` (`numero_viaje1` ASC),
   INDEX `numero_viaje2_idx` (`numero_viaje2` ASC),
   INDEX `codigo_asiento_idx` (`codigo_asiento` ASC),
   INDEX `codigo_tiquete_idx` (`codigo_tiquete` ASC),
+  INDEX `codigo_asiento2_idx` (`codigo_asiento2` ASC),
   CONSTRAINT `numero_viaje1`
     FOREIGN KEY (`numero_viaje1`)
     REFERENCES `mydb`.`Viaje` (`numeroviaje`)
@@ -180,6 +183,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Reservacion` (
   CONSTRAINT `codigo_tiquete`
     FOREIGN KEY (`codigo_tiquete`)
     REFERENCES `mydb`.`Tiquete` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `codigo_asiento2`
+    FOREIGN KEY (`codigo_asiento2`)
+    REFERENCES `mydb`.`Asiento` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
