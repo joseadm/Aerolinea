@@ -13,7 +13,14 @@
   color: white;
   border-radius: 5px;
 }
-
+.display-table{
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+.display-head{
+    background-color: #01579b;
+    color: white;
+}
 .carousel-caption {
   margin-bottom: 150px;
 }
@@ -115,4 +122,3 @@ aside {
 #listaBuscados {
   list-style: none;
 }
-
