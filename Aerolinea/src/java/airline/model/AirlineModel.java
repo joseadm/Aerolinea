@@ -10,6 +10,7 @@ import java.util.Date;
  *
  * @author Estudiante
  */
+/*
 public class AirlineModel {
     public List<Ciudad> getCiudades() {
         Ciudad[] ciudades={
@@ -91,3 +92,4 @@ public class AirlineModel {
         return result;
     }
 }
+*/

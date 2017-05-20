@@ -5,7 +5,7 @@
  */
 package airline.service;
 
-import airline.model.AirlineModel;
+
 import airline.model.Asiento;
 import airline.model.Avion;
 import airline.model.Ciudad;
@@ -65,9 +65,9 @@ public class AirlineService extends HttpServlet {
                 case "vueloListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    //vuelos = model.getVuelos(origen,destino);
-                    //json = gson.toJson(vuelos);
-                    //out.write(json);
+                    vuelos = model.selectAllFlights();
+                    json = gson.toJson(vuelos);
+                    out.write(json);
                     break;
             }
         }

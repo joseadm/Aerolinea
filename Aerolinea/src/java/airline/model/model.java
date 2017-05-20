@@ -32,13 +32,13 @@ public class model {
        ciudades= new Database(null, null, "root");        
     }
     private static void initVuelos(){
-       vuelos= new Database(null, null, "root");        
+       vuelos= new Database(null, null, null);        
     }
     private static void initViajes(){
-       viajes= new Database(null, null, "root");        
+       viajes= new Database(null, null, null);        
     }
     private static void initAviones(){
-       aviones= new Database(null, null, "root");        
+       aviones= new Database(null, null, null);        
     }
     /*--------------------------------Ciudades-----------------------------------------*/
      public static List<Ciudad> selectAllCities() throws Exception{
