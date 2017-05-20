@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema BaseAerolinea
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema BaseAerolinea
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `BaseAerolinea` DEFAULT CHARACTER SET utf8 ;
+USE `BaseAerolinea` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Usuario`
+-- Table `BaseAerolinea`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Usuario` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Usuario` (
   `nombreUsuario` VARCHAR(45) NOT NULL,
   `contrasena` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
@@ -33,9 +33,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Ciudad`
+-- Table `BaseAerolinea`.`Ciudad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Ciudad` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Ciudad` (
   `codigo` VARCHAR(45) NOT NULL,
   `pais` VARCHAR(45) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
@@ -44,9 +44,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vuelo`
+-- Table `BaseAerolinea`.`Vuelo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vuelo` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Vuelo` (
   `numeroVuelo` INT NOT NULL AUTO_INCREMENT,
   `ciudadOrigen` VARCHAR(45) NOT NULL,
   `ciudadDestino` VARCHAR(45) NOT NULL,
@@ -61,21 +61,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Vuelo` (
   INDEX `ciudadDestino_idx` (`ciudadDestino` ASC),
   CONSTRAINT `ciudadOrigen`
     FOREIGN KEY (`ciudadOrigen`)
-    REFERENCES `mydb`.`Ciudad` (`codigo`)
+    REFERENCES `BaseAerolinea`.`Ciudad` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `ciudadDestino`
     FOREIGN KEY (`ciudadDestino`)
-    REFERENCES `mydb`.`Ciudad` (`codigo`)
+    REFERENCES `BaseAerolinea`.`Ciudad` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Avion`
+-- Table `BaseAerolinea`.`Avion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Avion` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Avion` (
   `placa` VARCHAR(45) NOT NULL,
   `modelo` VARCHAR(45) NOT NULL,
   `marca` VARCHAR(45) NOT NULL,
@@ -88,9 +88,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Viaje`
+-- Table `BaseAerolinea`.`Viaje`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Viaje` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Viaje` (
   `numeroviaje` INT NOT NULL AUTO_INCREMENT,
   `fecha` DATETIME(45) NOT NULL,
   `placa_avion` VARCHAR(45) NOT NULL,
@@ -100,21 +100,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Viaje` (
   INDEX `numero_vuelo_idx` (`numero_vuelo` ASC),
   CONSTRAINT `placa_avion`
     FOREIGN KEY (`placa_avion`)
-    REFERENCES `mydb`.`Avion` (`placa`)
+    REFERENCES `BaseAerolinea`.`Avion` (`placa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `numero_vuelo`
     FOREIGN KEY (`numero_vuelo`)
-    REFERENCES `mydb`.`Vuelo` (`numeroVuelo`)
+    REFERENCES `BaseAerolinea`.`Vuelo` (`numeroVuelo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Asiento`
+-- Table `BaseAerolinea`.`Asiento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Asiento` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Asiento` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `numero` INT NOT NULL,
   `estado` TINYINT(1) NOT NULL,
@@ -123,16 +123,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Asiento` (
   INDEX `numero_viaje_idx` (`numero_viaje` ASC),
   CONSTRAINT `numero_viaje`
     FOREIGN KEY (`numero_viaje`)
-    REFERENCES `mydb`.`Viaje` (`numeroviaje`)
+    REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Tiquete`
+-- Table `BaseAerolinea`.`Tiquete`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Tiquete` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `nombre_usuario` VARCHAR(45) NOT NULL,
   `cedula_pasajero` INT NOT NULL,
@@ -142,16 +142,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Tiquete` (
   INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
   CONSTRAINT `nombre_usuario`
     FOREIGN KEY (`nombre_usuario`)
-    REFERENCES `mydb`.`Usuario` (`nombreUsuario`)
+    REFERENCES `BaseAerolinea`.`Usuario` (`nombreUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Reservacion`
+-- Table `BaseAerolinea`.`Reservacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Reservacion` (
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `numero_viaje1` INT NOT NULL,
   `numero_viaje2` INT NULL,
@@ -167,27 +167,27 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Reservacion` (
   INDEX `codigo_asiento2_idx` (`codigo_asiento2` ASC),
   CONSTRAINT `numero_viaje1`
     FOREIGN KEY (`numero_viaje1`)
-    REFERENCES `mydb`.`Viaje` (`numeroviaje`)
+    REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `numero_viaje2`
     FOREIGN KEY (`numero_viaje2`)
-    REFERENCES `mydb`.`Viaje` (`numeroviaje`)
+    REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `codigo_asiento`
     FOREIGN KEY (`codigo_asiento`)
-    REFERENCES `mydb`.`Asiento` (`codigo`)
+    REFERENCES `BaseAerolinea`.`Asiento` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `codigo_tiquete`
     FOREIGN KEY (`codigo_tiquete`)
-    REFERENCES `mydb`.`Tiquete` (`codigo`)
+    REFERENCES `BaseAerolinea`.`Tiquete` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `codigo_asiento2`
     FOREIGN KEY (`codigo_asiento2`)
-    REFERENCES `mydb`.`Asiento` (`codigo`)
+    REFERENCES `BaseAerolinea`.`Asiento` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
