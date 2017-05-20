@@ -197,3 +197,13 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+insert into ciudad values("SJO","Costa Rica","San Jose");
+insert into ciudad values("MIA","USA","Miami");
+insert into ciudad values("CAN","Mexico","Cancun");
+insert into ciudad values("MAD","Espana","Madrid");
+insert into ciudad values("VIE","Austria","Viena");
+insert into ciudad values("ROM","Italia","Roma");
+
+select * from ciudad;
+
