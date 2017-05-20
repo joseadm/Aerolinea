@@ -8,6 +8,7 @@ package airline.model;
 import airline.database.Database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +129,32 @@ public class model {
         }
        return planes;
    }
+    
+    
+    /*-------------------------------------------------------------------------*/
+    /*------------------------------INSERT AVION-----------------------------------------*/
+    public static int insertAvion(Avion avion) throws Exception{
+    //  return 1;
+
+            String sql="insert into Avion "+
+                    "(placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) "+
+                    "values ('%s','%s','%s','%s','%s','%s','%s')";
+            sql=String.format(sql,avion.getPlaca(),
+                    avion.getModelo(),
+                    avion.getMarca(),
+                    avion.getAnnio(),
+                    avion.getCant_pasajeros(),
+                    avion.getCant_filas(),
+                    avion.getCant_cant_asientos_por_fila());
+            ResultSet rs =  aviones.executeUpdateWithKeys(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
+
     private static Avion toPlanes(ResultSet rs) throws Exception{
        Avion obj= new Avion();
        obj.setPlaca(rs.getString("placa"));

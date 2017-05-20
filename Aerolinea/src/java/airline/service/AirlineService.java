@@ -18,9 +18,11 @@ import airline.model.Vuelo;
 import airline.model.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +53,7 @@ public class AirlineService extends HttpServlet {
             System.out.println(accion);
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
+            List<Avion> aviones;
             switch(accion) {
                 case "ciudadListAll":
                     ciudades = model.selectAllCities();
@@ -68,6 +71,27 @@ public class AirlineService extends HttpServlet {
                     vuelos = model.selectAllFlights();
                     json = gson.toJson(vuelos);
                     out.write(json);
+                    break;
+                case "avionesListAll":
+                    aviones = model.selectAllPlanes();
+                    json = gson.toJson(aviones);
+                    out.write(json);
+                    break;
+                case "addAvion":
+                  /*
+                    String jsonAvion = request.getParameter("aviones");
+                    Avion avion = gson.fromJson(jsonAvion, Avion.class);
+                    
+                            client = (Cliente)request.getSession().getAttribute("client");
+                    String jsonCompra = request.getParameter("compra");
+                    Compra compra = gson.fromJson(jsonCompra, Compra.class);
+                    compra.setCliente(client);
+                    compra.setFecha(new java.sql.Date(new java.util.Date().getTime()));
+                    String jsonItmes = request.getParameter("items");
+                    products= gson.fromJson(jsonItmes, new TypeToken<ArrayList<Producto>>(){}.getType());
+                    int purchaseNumber=Model.purchaseConfirm(compra,products);
+                    json = gson.toJson(purchaseNumber); 
+                    out.write(json);*/
                     break;
             }
         }
