@@ -94,7 +94,7 @@
 		this.view=view;
                 Proxy.getAviones(function (result) {
                 model.aviones = result;
-                 view.listCiudades();
+                 view.showAviones();
                 });
                 //this.initPurchase();
 	},
