@@ -20,10 +20,10 @@ USE `BaseAerolinea` ;
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Usuario` (
   `nombreUsuario` VARCHAR(45) NOT NULL,
   `contrasena` VARCHAR(45) NOT NULL,
-  `correo` VARCHAR(45) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
-  `apellido1` VARCHAR(45) NOT NULL,
-  `apellido2` VARCHAR(45) NOT NULL,
+  `apellidos` VARCHAR(45) NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `fechaNacimiento` DATETIME(6) NOT NULL,
   `direccion` VARCHAR(45) NOT NULL,
   `telefono` INT NOT NULL,
   `celular` INT NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Vuelo` (
   `estado` TINYINT(1) NOT NULL,
   `precio` INT NOT NULL,
   `duracion` VARCHAR(45) NOT NULL,
-  `hora` DATETIME(45) NOT NULL,
+  `hora` DATETIME(6) NOT NULL,
   `oferta` TINYINT(1) NOT NULL,
   `imagen` TEXT NULL,
   PRIMARY KEY (`numeroVuelo`),
@@ -92,7 +92,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Viaje` (
   `numeroviaje` INT NOT NULL AUTO_INCREMENT,
-  `fecha` DATETIME(45) NOT NULL,
+  `fecha` DATETIME(6) NOT NULL,
   `placa_avion` VARCHAR(45) NOT NULL,
   `numero_vuelo` INT NOT NULL,
   PRIMARY KEY (`numeroviaje`),
