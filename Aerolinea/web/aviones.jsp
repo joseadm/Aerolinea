@@ -23,35 +23,43 @@
           <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
               <li><a href="tablero.jsp">Tablero</a></li>
-              <li><a href="tiposAviones.jsp">Tipos de aviones</a></li>
-              <li><a href="rutas.jsp">Rutas</a></li>
-              <li><a href="horas.jsp">Horas</a></li>
-              <li class="active"><a href="aviones.jsp">Aviones</a></li>
+              <li><a href="tiposAviones.jsp">Aviones</a></li>
+              <li><a href="rutas.jsp">Viajes</a></li>
+              <li><a href="horas.jsp">Ciudades</a></li>
+              <li class="active"><a href="aviones.jsp">Vuelos</a></li>
             </ul>
           </div>
           <div class="col-sm-8 col-md-10 main">
             <h1 class="page-header">Aviones</h1>
-
-          <form class="" action="index.jsp" method="post">
             <div class="form-group">
-              <label for="ident">Id</label>
-              <input type="text" class="form-control" id="ident" placeholder="Identificador">
+                      <label class="control-label">Numero Vuelo</label><input type="text" class ="form-control" id="numero_vuelo" placeholder="Ingrese el numero de vuelo"><br>
+                  <label class="control-label">Tiempo</label><input type="text" class ="form-control" id="tiempo" placeholder="Ingrese el tiempo de vuelo"> <br>
+                  <label class="control-label">Ciudad Origen</label><input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese la ciudad de origen"> <br>
+                  <label class="control-label">Ciudad Destino</label><input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese la ciudad de destino"><br>
+                  <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
+                  <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
+                  <label class="control-label">Duracion</label><input type="text" class ="form-control" id="duracion" placeholder="Ingrese la duracion de vuelo"><br>
+                  <button class="btn btn-success" id="agregarRuta">Agregar</button>
+                  <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
+              </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Numero Vuelo</th>
+                    <th>Tiempo</th>
+                    <th>Ciudad Origen</th>
+                    <th>Ciudad Destino</th>
+                    <th>Estado</th>
+                    <th>Precio</th>
+                    <th>Duracion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Contenido de la tabla -->
+                </tbody>
+              </table>
             </div>
-            <div class="form-group">
-              <label for="ident">Ruta</label>
-              <input type="text" class="form-control" id="ident" placeholder="Ruta a seguir">
-            </div>
-            <div class="form-group">
-              <label for="ident">Horario</label>
-              <input type="text" class="form-control" id="ident" placeholder="Horario de vuelo">
-            </div>
-            <div class="form-group">
-              <label for="ident">Tipo</label>
-              <input type="text" class="form-control" id="ident" placeholder="Tipo de avion">
-            </div>
-            <button type="submit" class="btn btn-primary">Ingresar</button>
-          </form>
-
           </div>
         </div>
       </div>

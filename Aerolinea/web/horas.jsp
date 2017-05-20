@@ -23,24 +23,28 @@
           <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
               <li><a href="tablero.jsp">Tablero</a></li>
-              <li><a href="tiposAviones.jsp">Tipos de aviones</a></li>
-              <li><a href="rutas.jsp">Rutas</a></li>
-              <li class="active"><a href="horas.jsp">Horas</a></li>
-              <li><a href="aviones.jsp">Aviones</a></li>
+              <li><a href="tiposAviones.jsp">Aviones</a></li>
+              <li><a href="rutas.jsp">Viajes</a></li>
+              <li class="active"><a href="horas.jsp">Ciudades</a></li>
+              <li><a href="aviones.jsp">Vuelos</a></li>
             </ul>
           </div>
           <div class="col-sm-8 col-md-10 main">
-            <h1 class="page-header">Horarios</h1>
+            <h1 class="page-header">Ciudades</h1>
+            <div class="form-group">
+                  <label class="control-label">Codigo</label><input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad"><br>
+                  <label class="control-label">Pais</label><input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad"> <br>
+                  <label class="control-label">Nombre</label><input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
+                  <button class="btn btn-success" id="agregarRuta">Agregar</button>
+                  <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
+              </div>
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Id</th>
-                    <th>Dia</th>
-                    <th>Hora</th>
-                    <th>Minutos</th>
-                    <th>Hora Llegada</th>
-                    <th>Precio</th>
+                    <th>Codigo</th>
+                    <th>Pais</th>
+                    <th>Nombre</th>
                   </tr>
                 </thead>
                 <tbody>

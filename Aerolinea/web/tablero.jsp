@@ -28,10 +28,10 @@
           <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
               <li class="active"><a href="tablero.jsp">Tablero</a></li>
-              <li><a href="tiposAviones.jsp">Tipos de aviones</a></li>
-              <li><a href="rutas.jsp">Rutas</a></li>
-              <li><a href="horas.jsp">Horas</a></li>
-              <li><a href="aviones.jsp">Aviones</a></li>
+              <li><a href="tiposAviones.jsp">Aviones</a></li>
+              <li><a href="rutas.jsp">Viajes</a></li>
+              <li><a href="horas.jsp">Ciudades</a></li>
+              <li><a href="aviones.jsp">Vuelos</a></li>
             </ul>
           </div>
           <div class="col-sm-8 col-md-10 main">
