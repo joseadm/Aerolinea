@@ -1,6 +1,6 @@
 <%-- 
-    Document   : tiposAviones
-    Created on : May 18, 2017, 12:27:38 AM
+    Document   : horas
+    Created on : May 18, 2017, 12:26:26 AM
     Author     : AndreyCh
 --%>
 
@@ -23,22 +23,18 @@
           <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
               <li><a href="tablero.jsp">Tablero</a></li>
-              <li class="active"><a href="tiposAviones.jsp">Aviones</a></li>
-              <li><a href="rutas.jsp">Viajes</a></li>
-              <li><a href="horas.jsp">Ciudades</a></li>
-              <li><a href="aviones.jsp">Vuelos</a></li>
+              <li><a href="aviones.jsp">Aviones</a></li>
+              <li><a href="viajes.jsp">Viajes</a></li>
+              <li class="active"><a href="ciudades.jsp">Ciudades</a></li>
+              <li><a href="vuelos.jsp">Vuelos</a></li>
             </ul>
           </div>
           <div class="col-sm-8 col-md-10 main">
-            <h1 class="page-header">Aviones</h1>
+            <h1 class="page-header">Ciudades</h1>
             <div class="form-group">
-                  <label class="control-label">Placa</label><input type="text" class ="form-control" id="Placa" placeholder="Ingrese la placa"><br>
-                  <label class="control-label">Modelo</label><input type="text" class ="form-control" id="Modelo" placeholder="Ingrese la modelo"> <br>
-                  <label class="control-label">Marca</label><input type="text" class ="form-control" id="Marca" placeholder="Ingrese la marca"> <br>
-                  <label class="control-label">Año</label><input type="text" class ="form-control" id="Anno" placeholder="Ingrese la año"><br>
-                  <label class="control-label">Cantidad Pasajeros</label><input type="text" class ="form-control" id="cantidad_pasajeros" placeholder="Ingrese la cantidad de pasajeros"> <br>
-                  <label class="control-label">Cantidad Filas</label><input type="text" class ="form-control" id="cantidad_filas" placeholder="Ingrese la cantidad de filas"> <br>
-                  <label class="control-label">Cantidad Asientos Fila</label><input type="text" class ="form-control" id="cantidad_asientos" placeholder="Ingrese la cantidad de asientos por fila"><br>
+                  <label class="control-label">Codigo</label><input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad"><br>
+                  <label class="control-label">Pais</label><input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad"> <br>
+                  <label class="control-label">Nombre</label><input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
                   <button class="btn btn-success" id="agregarRuta">Agregar</button>
                   <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
               </div>
@@ -46,13 +42,9 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Placa</th>
-                    <th>Modelo</th>
-                    <th>Marca</th>
-                    <th>Año</th>
-                    <th>Pasajeros</th>
-                    <th>Filas</th>
-                    <th>Ascientos</th>
+                    <th>Codigo</th>
+                    <th>Pais</th>
+                    <th>Nombre</th>
                   </tr>
                 </thead>
                 <tbody>
