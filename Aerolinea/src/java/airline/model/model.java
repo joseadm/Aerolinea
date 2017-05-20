@@ -29,7 +29,7 @@ public class model {
     }
     
     private static void initCiudades(){
-       ciudades= new Database(null, null, "root");        
+       ciudades= new Database(null, null, null);        
     }
     private static void initVuelos(){
        vuelos= new Database(null, null, null);        
