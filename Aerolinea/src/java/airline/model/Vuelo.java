@@ -19,19 +19,41 @@ public class Vuelo implements Serializable, Jsonable{
     boolean estado;
     int precio;
     String duracion;
+    Date hora;
+    boolean oferta; // si el vuelo esta en oferta lo tira en el carrusel
+    String imagen; //Direccion de la imagen
 
-    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, String duracion) {
+    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, String duracion, Date hora, boolean oferta, String imagen) {
         this.numero_vuelo = numero_vuelo;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
         this.estado = estado;
         this.precio = precio;
         this.duracion = duracion;
+        this.hora = hora;
+        this.oferta = oferta;
+        this.imagen = imagen;
     }
 
     public Vuelo() {
     }
 
+    public int getNumero_vuelo() {
+        return numero_vuelo;
+    }
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public boolean isOferta() {
+        return oferta;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+    
     public int getCodigo() {
         return numero_vuelo;
     }
@@ -59,7 +81,7 @@ public class Vuelo implements Serializable, Jsonable{
     public void setCodigo(int numero_vuelo) {
         this.numero_vuelo = numero_vuelo;
     }
-
+    
     public void setCiudad_origen(Ciudad ciudad_origen) {
         this.ciudad_origen = ciudad_origen;
     }
@@ -79,4 +101,21 @@ public class Vuelo implements Serializable, Jsonable{
     public void setDuracion(String duracion) {
         this.duracion = duracion;
     }  
+
+    public void setNumero_vuelo(int numero_vuelo) {
+        this.numero_vuelo = numero_vuelo;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
+
+    public void setOferta(boolean oferta) {
+        this.oferta = oferta;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
 }
