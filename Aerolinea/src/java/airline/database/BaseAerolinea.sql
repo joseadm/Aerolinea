@@ -197,13 +197,29 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
+/*INSERT DE CIUDADES------------------------------*/
 insert into ciudad values("SJO","Costa Rica","San Jose");
 insert into ciudad values("MIA","USA","Miami");
 insert into ciudad values("CAN","Mexico","Cancun");
 insert into ciudad values("MAD","Espana","Madrid");
 insert into ciudad values("VIE","Austria","Viena");
 insert into ciudad values("ROM","Italia","Roma");
-
 select * from ciudad;
+/*INSERT DE VUELOS--------------------------------*/
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("SJO","MIA", true, 300,120,'1197-04-04',true,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("MIA","SJO", true, 300,120,'2017-10-10',true,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("SJO","CAN", true, 300,120,'2017-10-10',true,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("SJO","MAD", true, 300,120,'2017-10-10',true,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("SJO","VIE", true, 300,120,'2017-10-10',true,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("SJO","ROM", true, 300,120,'2017-10-10',true,"NADA YET");
+
+/*INSERTS DE AVIONES-------------------------*/
+
+
 
