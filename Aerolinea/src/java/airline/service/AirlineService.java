@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.console;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -78,12 +79,12 @@ public class AirlineService extends HttpServlet {
                     out.write(json);
                     break;
                 case "vuelosListAll":
+                    System.out.println("Insert into wey");
                     vuelos = model.selectAllFlights();
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
                 case "addAvion":
-                    System.out.println("Insert into wey");
                     String jsonAvion = request.getParameter("avion");
                     Avion avion = gson.fromJson(jsonAvion, Avion.class);
                     int avionNumber = model.insertAvion(avion);

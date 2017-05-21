@@ -76,7 +76,7 @@
         </footer>
       </div>
       
-            <script> // Model
+<script> // Model
   function Model() {
     this.Model();
   }
@@ -127,10 +127,10 @@
     td.appendChild(document.createTextNode(model.vuelos[index].numero_vuelo));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen));
+    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen.getNombre()));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino));
+    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino.getNombre()));
     tr.appendChild(td);
     td =document.createElement("td");
     td.appendChild(document.createTextNode(model.vuelos[index].estado));

@@ -44,8 +44,7 @@
                   <button class="btn btn-warning" id="limpiarRuta" onclick="controller.LimpiaPantalla();">Limpiar</button>
                 </form>
             </div>
-            <div class="table-responsive">
-              <table id ="tablaAviones" class="table table-striped">
+            <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Placa</th>
@@ -57,7 +56,7 @@
                     <th>Ascientos</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablaAviones">
                   <!-- Contenido de la tabla -->
                 </tbody>
               </table>

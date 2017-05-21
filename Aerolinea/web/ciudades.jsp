@@ -39,15 +39,15 @@
                   <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
               </div>
             <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
+              <table class="table table-bordered table-hover">
+                <thead class="thead-inverse">
                   <tr>
                     <th>Codigo</th>
                     <th>Pais</th>
                     <th>Nombre</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablaCiudades">
                   <!-- Contenido de la tabla -->
                 </tbody>
               </table>
@@ -63,5 +63,71 @@
           <p>&copy; 2017 Baratisimo, Inc.</p>
         </footer>
       </div>
+      
+           
+<script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+            this.ciudades=[];
+        }
+  };
+</script>
+<script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+                Proxy.getCiudades(function (result) {
+                model.ciudades = result;
+                 view.showCiudades();
+                });
+	}
+        
+  };
+</script>
+<script> // View
+  var model;
+  var controller;
+	function pageLoad(event){
+		model=new Model();  
+		controller = new Controller(model,window);
+                showCiudades();
+	}
+
+    function showCiudades() {
+
+    var tr; 
+    var tabla;
+    var td;
+    for(var index in model.ciudades) {
+    // ----------Agregar nueva fila----------------
+    tabla = document.getElementById("tablaCiudades");
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.appendChild(document.createTextNode(model.ciudades[index].codigo));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.ciudades[index].pais));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.ciudades[index].nombre));
+    tr.appendChild(td);
+    
+    tabla.appendChild(tr);
+    
+        }
+
+    }
+        
+	document.addEventListener("DOMContentLoaded",pageLoad);
+</script>
     </body>
 </html>
