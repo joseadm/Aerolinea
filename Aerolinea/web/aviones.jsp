@@ -31,17 +31,19 @@
           </div>
           <div class="col-sm-8 col-md-10 main">
             <h1 class="page-header">Aviones</h1>
-            <div id="aviones" class="form-group">
-                  <label class="control-label">Placa</label><input type="text" class ="form-control" id="Placa" placeholder="Ingrese la placa"><br>
-                  <label class="control-label">Modelo</label><input type="text" class ="form-control" id="Modelo" placeholder="Ingrese la modelo"> <br>
-                  <label class="control-label">Marca</label><input type="text" class ="form-control" id="Marca" placeholder="Ingrese la marca"> <br>
-                  <label class="control-label">Año</label><input type="text" class ="form-control" id="Anno" placeholder="Ingrese la año"><br>
-                  <label class="control-label">Cantidad Pasajeros</label><input type="text" class ="form-control" id="cantidad_pasajeros" placeholder="Ingrese la cantidad de pasajeros"> <br>
-                  <label class="control-label">Cantidad Filas</label><input type="text" class ="form-control" id="cantidad_filas" placeholder="Ingrese la cantidad de filas"> <br>
-                  <label class="control-label">Cantidad Asientos Fila</label><input type="text" class ="form-control" id="cantidad_asientos" placeholder="Ingrese la cantidad de asientos por fila"><br>
-                  <button class="btn btn-success" id="agregarRuta">Agregar</button>
-                  <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
-              </div>
+            <div id="avion" class="form-group">
+                <form>
+                  <label class="control-label">Placa</label><input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa"><br>
+                  <label class="control-label">Modelo</label><input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo"> <br>
+                  <label class="control-label">Marca</label><input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca"> <br>
+                  <label class="control-label">Año</label><input type="text" class ="form-control" id="annio" placeholder="Ingrese la año"><br>
+                  <label class="control-label">Cantidad Pasajeros</label><input type="text" class ="form-control" id="cant_pasajeros" placeholder="Ingrese la cantidad de pasajeros"> <br>
+                  <label class="control-label">Cantidad Filas</label><input type="text" class ="form-control" id="cant_filas" placeholder="Ingrese la cantidad de filas"> <br>
+                  <label class="control-label">Cantidad Asientos Fila</label><input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila"><br>
+                  <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
+                  <button class="btn btn-warning" id="limpiarRuta" onclick="controller.LimpiaPantalla();">Limpiar</button>
+                </form>
+            </div>
             <div class="table-responsive">
               <table id ="tablaAviones" class="table table-striped">
                 <thead>
@@ -96,30 +98,41 @@
                 model.aviones = result;
                  view.showAviones();
                 });
-                //this.initPurchase();
+                this.initAvion();
 	},
-        /*
-        PurchaseConfirm: function (){
+        initAvion: function (){
+            var model = this.model;       
+            model.avion = new Avion();          
+        },
+        
+        AvionAdd: function (){
+            console.log("asdasd");
             var model = this.model;
             var view = this.view;
-            this.model.purchase.direccion_envio=this.view.document.getElementById("direccion_envio").value;
-            this.model.purchase.tarjeta=this.view.document.getElementById("tarjeta").value;
-            this.model.purchase.vencimiento=this.view.document.getElementById("vencimiento").value;
-            Proxy.PurchaseConfirm(this.model.purchase,this.model.products,
-                function(compraNumero){
-                    model.purchase.numero=compraNumero;
-                    view.showPurchaseMessage();
-                     document.location = "/33-CarritoCompra/ListProducts.jsp";
-                });
-        }*/
+            this.model.avion.placa=this.view.document.getElementById("placa").value;
+            this.model.avion.modelo=this.view.document.getElementById("modelo").value;
+            this.model.avion.marca=this.view.document.getElementById("marca").value;
+            this.model.avion.annio=this.view.document.getElementById("annio").value;
+            this.model.avion.cant_pasajeros=this.view.document.getElementById("cant_pasajeros").value;
+            this.model.avion.cant_filas=this.view.document.getElementById("cant_filas").value;
+            this.model.avion.cant_asientos_por_fila=this.view.document.getElementById("cant_asientos_por_fila").value;
+            Proxy.AvionAdd(this.model.avion,function(result){
+                view.showMessage();
+            });
+
+        },
+        LimpiaPantalla: function() {
+            view.clean();
+        }
         
   };
 </script>
 <script> // View
   var model;
   var controller;
+  
 	function pageLoad(event){
-		model=new Model();  
+		model = new Model();  
 		controller = new Controller(model,window);
                 showAviones();
 	}
@@ -161,13 +174,14 @@
         }
 
     }
+    function clean() {
+        document.getElementById("placa").textContent = "";
+    }
+    function showMessage(){
+            window.alert("Registro exitoso");
+         }
         
 	document.addEventListener("DOMContentLoaded",pageLoad);
-</script>
-            
-      
-      
-      
-      
+</script> 
     </body>
 </html>

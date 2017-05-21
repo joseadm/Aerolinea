@@ -77,21 +77,18 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(aviones);
                     out.write(json);
                     break;
+                case "vuelosListAll":
+                    vuelos = model.selectAllFlights();
+                    json = gson.toJson(vuelos);
+                    out.write(json);
+                    break;
                 case "addAvion":
-                  /*
-                    String jsonAvion = request.getParameter("aviones");
+                    System.out.println("Insert into wey");
+                    String jsonAvion = request.getParameter("avion");
                     Avion avion = gson.fromJson(jsonAvion, Avion.class);
-                    
-                            client = (Cliente)request.getSession().getAttribute("client");
-                    String jsonCompra = request.getParameter("compra");
-                    Compra compra = gson.fromJson(jsonCompra, Compra.class);
-                    compra.setCliente(client);
-                    compra.setFecha(new java.sql.Date(new java.util.Date().getTime()));
-                    String jsonItmes = request.getParameter("items");
-                    products= gson.fromJson(jsonItmes, new TypeToken<ArrayList<Producto>>(){}.getType());
-                    int purchaseNumber=Model.purchaseConfirm(compra,products);
-                    json = gson.toJson(purchaseNumber); 
-                    out.write(json);*/
+                    int avionNumber = model.insertAvion(avion);
+                    json = gson.toJson(avionNumber);
+                    out.write(json);
                     break;
             }
         }

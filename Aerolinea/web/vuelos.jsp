@@ -39,11 +39,13 @@
                   <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
                   <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
                   <label class="control-label">Duracion</label><input type="text" class ="form-control" id="duracion" placeholder="Ingrese la duracion de vuelo"><br>
+                  <label class="control-label">Hora</label><input type="text" class ="form-control" id="hora" placeholder="Ingrese la hora"> <br>
+                  <label class="control-label">Oferta</label><input type="text" class ="form-control" id="oferta" placeholder="Ingrese la oferta"><br>
                   <button class="btn btn-success" id="agregarRuta">Agregar</button>
                   <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
               </div>
             <div class="table-responsive">
-              <table class="table table-striped">
+              <table id="tablaVuelos" class="table table-striped">
                 <thead>
                   <tr>
                     <th>Numero Vuelo</th>
@@ -53,6 +55,8 @@
                     <th>Estado</th>
                     <th>Precio</th>
                     <th>Duracion</th>
+                    <th>Hora</th>
+                    <th>Oferta</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -71,5 +75,86 @@
           <p>&copy; 2017 Baratisimo, Inc.</p>
         </footer>
       </div>
+      
+            <script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+            this.vuelos=[];
+        }
+  };
+</script>
+<script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+                Proxy.getVuelos(function (result) {
+                model.vuelos = result;
+                 view.showVuelos();
+                });
+	}
+        
+  };
+</script>
+<script> // View
+  var model;
+  var controller;
+	function pageLoad(event){
+		model=new Model();  
+		controller = new Controller(model,window);
+                showVuelos();
+	}
+
+    function showVuelos() {
+
+    var tr; 
+    var tabla;
+    var td;
+    for(var index in model.vuelos) {
+        console.log(model.vuelos[index].numero_vuelo);
+    // ----------Agregar nueva fila----------------
+    tabla = document.getElementById("tablaVuelos");
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].numero_vuelo));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].estado));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].precio));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].duracion));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].hora));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.vuelos[index].oferta));
+    tr.appendChild(td);
+    
+    tabla.appendChild(tr);
+    
+        }
+
+    }
+        
+	document.addEventListener("DOMContentLoaded",pageLoad);
+</script>
     </body>
 </html>
