@@ -42,6 +42,19 @@ public class model {
        aviones= new Database(null, null, null);        
     }
     /*--------------------------------Ciudades-----------------------------------------*/
+    //EL SIGUIENTE METODO agrega una ciudad
+        public static int CiudadAdd(Ciudad p) throws Exception{
+        String sql="insert into Ciudad (codigo, nombre, pais) "+
+                "values('%s','%s','%s')"; 
+        sql=String.format(sql,p.getCodigo(),p.getNombre(),p.getPais());
+        ResultSet rs = ciudades.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
      public static List<Ciudad> selectAllCities() throws Exception{
        List<Ciudad> cities;
        cities= new ArrayList();
@@ -65,6 +78,22 @@ public class model {
     }
     /*-----------------------------------------------------------------------------*/
     /*-------------------------------------------Vuelos-----------------------*/
+     //EL SIGUIENTE METODO agrega un vuelo
+        public static int VueloAdd(Vuelo p) throws Exception{
+        String sql="insert into Vuelo (ciudadOrigen, ciudadDestino, estado,precio,"
+                + "duracion,hora,oferta,imagen) "+
+                "values('%s','%s',%b,%s,'%s','%s',%b,'%s')"; 
+        sql=String.format(sql,p.getCiudad_origen().getCodigo(),p.getCiudad_destino().getCodigo(),
+                p.isEstado(),p.getPrecio(),p.getDuracion(), new SimpleDateFormat("yyyy-MM-dd").format(p.getHora()),
+                p.isOferta(),p.getImagen());
+        ResultSet rs = vuelos.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
       public static List<Vuelo> selectAllFlights() throws Exception{
        List<Vuelo> flights;
        flights= new ArrayList();
@@ -86,11 +115,28 @@ public class model {
        obj.setCiudad_destino(toCiudad(rs)); //REVISAR SI ES ASI
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));
-       obj.setDuracion(rs.getString("numeroVuelo"));
+       obj.setDuracion(rs.getString("duracion"));
+       obj.setHora(rs.getDate("hora"));
+       obj.setOferta(rs.getBoolean("oferta"));
+       obj.setImagen(rs.getString("imagen"));
        return obj;
     }
     /*-----------------------------------------------------------------------------*/
     /*----------------------------------------Viaje---------------------------------*/
+    //EL SIGUIENTE METODO agrega un vuelo
+        public static int ViajeAdd(Viaje p) throws Exception{
+        String sql="insert into Viaje (fecha, placa_avion, numero_vuelo) "+
+                "values('%s','%s',%s)"; 
+        sql=String.format(sql,new SimpleDateFormat("yyyy-MM-dd").format(p.getFecha()),p.getAvion().getPlaca(),
+                p.getVuelo().getNumero_vuelo());
+        ResultSet rs = viajes.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
    public static List<Viaje> selectAllTravels() throws Exception{
        List<Viaje> travels;
        travels = new ArrayList();
@@ -115,25 +161,8 @@ public class model {
     }
     /*-------------------------------------------------------------------------*/
     /*------------------------------Avion-----------------------------------------*/
-    public static List<Avion> selectAllPlanes() throws Exception{
-       List<Avion> planes;
-       planes = new ArrayList();
-        try {
-            String sql="select * "+
-                    "from Avion p ";
-            ResultSet rs =  aviones.executeQuery(sql);
-            while (rs.next()) {
-                planes.add(toPlanes(rs));
-            }
-        } catch (SQLException ex) {
-        }
-       return planes;
-   }
-    
-    
-    /*-------------------------------------------------------------------------*/
-    /*------------------------------INSERT AVION-----------------------------------------*/
-    public static int insertAvion(Avion avion) throws Exception{
+     //EL SIGUIENTE METODO agrega un avion
+     public static int insertAvion(Avion avion) throws Exception{
     //  return 1;
 
             String sql="insert into Avion "+
@@ -154,6 +183,24 @@ public class model {
                 return 0;
             }
     }
+     
+    public static List<Avion> selectAllPlanes() throws Exception{
+       List<Avion> planes;
+       planes = new ArrayList();
+        try {
+            String sql="select * "+
+                    "from Avion p ";
+            ResultSet rs =  aviones.executeQuery(sql);
+            while (rs.next()) {
+                planes.add(toPlanes(rs));
+            }
+        } catch (SQLException ex) {
+        }
+       return planes;
+   }
+    
+    
+   
 
     private static Avion toPlanes(ResultSet rs) throws Exception{
        Avion obj= new Avion();
