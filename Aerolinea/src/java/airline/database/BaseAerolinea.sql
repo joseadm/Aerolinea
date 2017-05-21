@@ -220,6 +220,23 @@ insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,ofe
 values ("SJO","ROM", true, 300,120,'2017-10-10',true,"NADA YET");
 
 /*INSERTS DE AVIONES-------------------------*/
+insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
+values ("TF120","Boeng","NISE",'2017-10-10',60,6,10);
+insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
+values ("TF130","APACHE","NISE",'2017-10-10',1,1,1);
+insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
+values ("AK10","POLAR","NISE",'2017-10-10',100,10,10);
+insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
+values ("AT200","Avioneta","NISE",'2017-10-10',10,5,2);
+/*INSERTS DE VIAJES-------------------------*/
 
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-10',"TF120",1);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-10',"TF130",2);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-10',"AT200",3);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-10',"AK10",3);
 
 
