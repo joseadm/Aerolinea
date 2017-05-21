@@ -35,7 +35,7 @@
                   <label class="control-label">Codigo</label><input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad"><br>
                   <label class="control-label">Pais</label><input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad"> <br>
                   <label class="control-label">Nombre</label><input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
-                  <button class="btn btn-success" id="agregarRuta">Agregar</button>
+                  <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
                   <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
               </div>
             <div class="table-responsive">
@@ -89,7 +89,25 @@
                 model.ciudades = result;
                  view.showCiudades();
                 });
-	}
+                this.initCiudades();
+	},
+        initCiudades: function (){
+            var model = this.model;       
+            model.ciudad = new Ciudad();          
+        },
+        CiudadesAdd: function (){
+            var model = this.model;
+            var view = this.view;
+            this.model.ciudad.codigo=this.view.document.getElementById("codigo").value;
+            this.model.ciudad.pais=this.view.document.getElementById("pais").value;
+            this.model.ciudad.nombre=this.view.document.getElementById("nombre").value;
+            Proxy.CiudadAdd(this.model.ciudad,function(result){
+                model.ciudad.codigo=result;
+                document.location = "/Aerolinea/ciudades.jsp"
+                view.showMessage();
+            });
+
+        }
         
   };
 </script>
@@ -101,7 +119,8 @@
 		controller = new Controller(model,window);
                 showCiudades();
 	}
-
+         
+       
     function showCiudades() {
 
     var tr; 
@@ -126,6 +145,9 @@
         }
 
     }
+    function showMessage(){
+            window.alert("Registro exitoso");
+         }
         
 	document.addEventListener("DOMContentLoaded",pageLoad);
 </script>

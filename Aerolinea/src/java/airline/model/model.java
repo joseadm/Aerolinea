@@ -184,6 +184,24 @@ public class model {
             }
     }
      
+     public static int insertCiudad(Ciudad ciudad) throws Exception{
+    //  return 1;
+
+            String sql="insert into Ciudad "+
+                    "(codigo, pais, nombre) "+
+                    "values ('%s','%s','%s')";
+            sql=String.format(sql,ciudad.getCodigo(),
+                    ciudad.getPais(),
+                    ciudad.getNombre());
+            ResultSet rs =  ciudades.executeUpdateWithKeys(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
+     
     public static List<Avion> selectAllPlanes() throws Exception{
        List<Avion> planes;
        planes = new ArrayList();
