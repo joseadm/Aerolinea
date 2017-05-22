@@ -270,6 +270,35 @@ public class model {
        return obj;
     }
     //--------------USUARIO------------------------------------
+    public static List<Usuario> selectAllUsers() throws Exception{
+       List<Usuario> users;
+       users = new ArrayList();
+        try {
+            String sql="select * "+
+                    "from Usuario p ";
+            ResultSet rs =  usuarios.executeQuery(sql);
+            while (rs.next()) {
+                users.add(toUsers(rs));
+            }
+        } catch (SQLException ex) {
+        }
+       return users;
+   }
+     private static Usuario toUsers(ResultSet rs) throws Exception{
+       Usuario obj= new Usuario();
+       obj.setUsuario(rs.getString("nombreUsuario"));
+       obj.setContrasena(rs.getString("contrasena"));
+       obj.setNombre(rs.getString("nombre"));
+       obj.setApellidos(rs.getString("apellidos"));
+       obj.setCorreo(rs.getString("correo"));
+       obj.setFecha_nac(rs.getDate("fechaNacimiento"));
+       obj.setDireccion(rs.getString("direccion"));
+       obj.setTelefono(rs.getInt("telefono"));
+       obj.setCelular(rs.getInt("celular"));
+       obj.setTipo(rs.getInt("tipo"));
+      
+       return obj;
+    }
      public static int insertUsuario(Usuario usuario) throws Exception{
     //  return 1;
 
