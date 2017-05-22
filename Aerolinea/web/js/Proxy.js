@@ -33,7 +33,6 @@ Proxy.AvionAdd = function(avion, callBack){
     AJAX_req.send("avion="+jsonAvion);   
 };
 
-
 Proxy.ViajeAdd = function(viaje, callBack){
     jsonViaje = JSON.stringify(viaje,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
@@ -155,4 +154,34 @@ Proxy.vuelosSearch = function(origen, destino, callBack) {
          callBack(object);
       }
    });
+};
+
+Proxy.UsuarioAdd = function(usuario, callBack){
+    jsonUsuario = JSON.stringify(usuario,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    url="/Aerolinea/AirlineService?action=usuarioAdd";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonAvion=AJAX_req.responseText;
+            var object = JSON.parse( jsonUsuario,JsonUtils.revive );
+            callBack(object);
+            
+        }
+    };
+    AJAX_req.send("usuario="+jsonUsuario);   
+};
+Proxy.getUsuarios = function(callBack) {
+  var AJAX_req = new XMLHttpRequest();
+  url="/Aerolinea/AirlineService?action=usuariosListAll";
+  AJAX_req.open("GET",url,true);
+  AJAX_req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  AJAX_req.onreadystatechange = function() {
+    if(AJAX_req.readyState === 4 && AJAX_req.status === 200 ) {
+        var object = JSON.parse(AJAX_req.responseText,JsonUtils.revive);
+        callBack(object);
+        }  
+    };
+  AJAX_req.send();
 };
