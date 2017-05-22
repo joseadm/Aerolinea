@@ -21,12 +21,14 @@ public class model {
     static Database vuelos;
     static Database viajes;
     static Database aviones;
+    static Database usuarios;
     
     static {
         initCiudades();
         initVuelos();
         initViajes();
         initAviones();
+        initUsuarios();
     }
     
     private static void initCiudades(){
@@ -41,20 +43,10 @@ public class model {
     private static void initAviones(){
        aviones= new Database(null, null, null);        
     }
-    /*--------------------------------Ciudades-----------------------------------------*/
-    //EL SIGUIENTE METODO agrega una ciudad
-        public static int CiudadAdd(Ciudad p) throws Exception{
-        String sql="insert into Ciudad (codigo, nombre, pais) "+
-                "values('%s','%s','%s')"; 
-        sql=String.format(sql,p.getCodigo(),p.getNombre(),p.getPais());
-        ResultSet rs = ciudades.executeUpdateWithKeys(sql);
-        if (rs.next()) {
-                return rs.getInt(1);
-            }
-            else{
-                return 0;
-            }
+    private static void initUsuarios(){
+       usuarios= new Database(null, null, null);        
     }
+    /*--------------------------------Ciudades-----------------------------------------*/
      public static List<Ciudad> selectAllCities() throws Exception{
        List<Ciudad> cities;
        cities= new ArrayList();
@@ -277,5 +269,30 @@ public class model {
        obj.setcant_asientos_por_fila(rs.getInt("cant_asientos_por_fila"));
        return obj;
     }
-    
+    //--------------USUARIO------------------------------------
+     public static int insertUsuario(Usuario usuario) throws Exception{
+    //  return 1;
+
+            String sql="insert into Usuario "+
+                    "(nombreUsuario, contrasena, nombre, apellidos, correo, fechaNacimiento,"
+                    + " direccion, telefono, cedula, tipo) "+
+                    "values ('%s','%s','%s','%s','%s','%s','%s',%s,%s,%s)";
+            sql=String.format(sql,usuario.getUsuario(),
+                    usuario.getContrasena(), 
+                    usuario.getNombre(),
+                    usuario.getApellidos(),
+                    usuario.getCorreo(),
+                    usuario.getFecha_nac(),
+                    usuario.getDireccion(),
+                    usuario.getTelefono(),
+                    usuario.getCelular(),
+                    usuario.getTipo());
+            ResultSet rs =  usuarios.executeUpdateWithKeys(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
 }
