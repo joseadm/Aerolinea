@@ -1,15 +1,16 @@
-function Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio,duracion){
+function Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,fecha,estado, precio,duracion){
 	this.Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,avion,fecha,estado, precio,duracion);
 }
 Vuelo.prototype={
         numero_vuelo:0,
         ciudad_origen:"",
         ciudad_destino:"",
-        avion:"",
-        fecha:"",
         estado:"",
         precio:"",
         duracion:"",
+        hora:"",
+        oferta:"",
+        imagen:"",
 	Vuelo:function(numero_vuelo,ciudad_origen,ciudad_destino,avion,fecha,estado,precio,duracion){
 		this.numero_vuelo=numero_vuelo;
 		this.ciudad_origen=ciudad_origen;
