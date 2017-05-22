@@ -20,11 +20,14 @@ public class Usuario implements Serializable, Jsonable{
     String correo;
     Date fecha_nac;
     String direccion;
-    String telefono;
-    String celular;
+    int telefono;
+    int celular;
     int tipo;
 
-    public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correo, Date fecha_nac, String direccion, String telefono, String celular, int tipo) {
+    public Usuario() {
+    }
+
+    public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correo, Date fecha_nac, String direccion, int telefono, int celular, int tipo) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -35,88 +38,87 @@ public class Usuario implements Serializable, Jsonable{
         this.telefono = telefono;
         this.celular = celular;
         this.tipo = tipo;
-    }
-
-    public Usuario() {
     }
 
     public String getUsuario() {
         return usuario;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public Date getFecha_nac() {
-        return fecha_nac;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public int getTipo() {
-        return tipo;
-    }
-
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
     }
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public Date getFecha_nac() {
+        return fecha_nac;
     }
 
     public void setFecha_nac(Date fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public void setTelefono(String telefono) {
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
-    public void setCelular(String celular) {
+    public int getCelular() {
+        return celular;
+    }
+
+    public void setCelular(int celular) {
         this.celular = celular;
+    }
+
+    public int getTipo() {
+        return tipo;
     }
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
+
+    
 }
