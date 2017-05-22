@@ -33,8 +33,7 @@
             <h1 class="page-header">Vuelos</h1>
             <div class="form-group">
                       <label class="control-label">Numero Vuelo</label><input type="text" class ="form-control" id="numero_vuelo" placeholder="Ingrese el numero de vuelo"><br>
-                  <label class="control-label">Tiempo</label><input type="text" class ="form-control" id="tiempo" placeholder="Ingrese el tiempo de vuelo"> <br>
-                  <label class="control-label">Ciudad Origen</label><input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese la ciudad de origen"> <br>
+                    <label class="control-label">Ciudad Origen</label><input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese la ciudad de origen"> <br>
                   <label class="control-label">Ciudad Destino</label><input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese la ciudad de destino"><br>
                   <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
                   <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
@@ -45,11 +44,10 @@
                   <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
               </div>
             <div class="table-responsive">
-              <table id="tablaVuelos" class="table table-striped">
+              <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Numero Vuelo</th>
-                    <th>Tiempo</th>
                     <th>Ciudad Origen</th>
                     <th>Ciudad Destino</th>
                     <th>Estado</th>
@@ -59,7 +57,7 @@
                     <th>Oferta</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablaVuelos">
                   <!-- Contenido de la tabla -->
                 </tbody>
               </table>
@@ -100,7 +98,30 @@
                 model.vuelos = result;
                  view.showVuelos();
                 });
-	}
+	},
+        initVuelo: function (){
+            var model = this.model;
+            model.vuelo = new Vuelo();   
+        },
+        VueloAdd: function (){
+            var model = this.model;
+            var view = this.view;
+            this.model.vuelo.numero_vuelo=this.view.document.getElementById("numero_vuelo").value;
+            this.model.vuelo.ciudad_origen=this.view.document.getElementById("ciudad_origen").value;
+            this.model.vuelo.ciudad_destino=this.view.document.getElementById("ciudad_destino").value;
+            this.model.vuelo.estado=this.view.document.getElementById("estado").value;
+            this.model.vuelo.precio=this.view.document.getElementById("precio").value;
+            this.model.vuelo.duracion=this.view.document.getElementById("duracion").value;
+            this.model.vuelo.hora=this.view.document.getElementById("hora").value;
+            this.model.vuelo.oferta=this.view.document.getElementById("oferta").value;
+            this.model.vuelo.imagen="NOT YET";
+            Proxy.VueloAdd(this.model.vuelo,function(result){
+                document.location = "/Aerolinea/vuelos.jsp";
+                view.showMessage();
+            });
+
+        }
+        
         
   };
 </script>
@@ -119,7 +140,6 @@
     var tabla;
     var td;
     for(var index in model.vuelos) {
-        console.log(model.vuelos[index].numero_vuelo);
     // ----------Agregar nueva fila----------------
     tabla = document.getElementById("tablaVuelos");
     tr = document.createElement("tr");
@@ -127,10 +147,10 @@
     td.appendChild(document.createTextNode(model.vuelos[index].numero_vuelo));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen.getNombre()));
+    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino.getNombre()));
+    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino));
     tr.appendChild(td);
     td =document.createElement("td");
     td.appendChild(document.createTextNode(model.vuelos[index].estado));

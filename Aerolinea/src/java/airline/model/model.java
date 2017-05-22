@@ -111,8 +111,12 @@ public class model {
     private static Vuelo toFlights(ResultSet rs) throws Exception{
        Vuelo obj= new Vuelo();
        obj.setCodigo(rs.getInt("numeroVuelo"));
+       try {
        obj.setCiudad_origen(toCiudad(rs));
        obj.setCiudad_destino(toCiudad(rs)); //REVISAR SI ES ASI
+       } catch(Exception e) {
+            System.out.println("Its not working");
+       }
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));
        obj.setDuracion(rs.getString("duracion"));
@@ -194,6 +198,48 @@ public class model {
                     ciudad.getPais(),
                     ciudad.getNombre());
             ResultSet rs =  ciudades.executeUpdateWithKeys(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
+     
+      public static int insertViaje(Viaje viaje) throws Exception{
+    //  return 1;
+
+            String sql="insert into Viaje "+
+                    "(fecha, placa_avion, numero_vuelo) "+
+                    "values ('%s','%s','%s')";
+            sql=String.format(sql,viaje.getFecha(),
+                    viaje.getAvion(),
+                    viaje.getVuelo());
+            ResultSet rs =  viajes.executeUpdateWithKeys(sql);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            else{
+                return 0;
+            }
+    }
+      
+      public static int insertVuelo(Vuelo vuelo) throws Exception{
+    //  return 1;
+
+            String sql="insert into Vuelo "+
+                    "(ciudad_origen, ciudad_destino, estado, precio, duracion, hora, oferta, imagen) "+
+                    "values ('%s','%s','%s')";
+            sql=String.format(sql,vuelo.getCiudad_origen(),
+                    vuelo.getCiudad_origen(),
+                    vuelo.getCiudad_destino(),
+                    vuelo.isEstado(),
+                    vuelo.getPrecio(),
+                    vuelo.getDuracion(),
+                    vuelo.getHora(),
+                    vuelo.isOferta(),
+                    vuelo.getImagen());
+            ResultSet rs =  vuelos.executeUpdateWithKeys(sql);
             if (rs.next()) {
                 return rs.getInt(1);
             }

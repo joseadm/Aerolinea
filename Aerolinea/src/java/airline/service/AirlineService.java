@@ -55,6 +55,7 @@ public class AirlineService extends HttpServlet {
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
             List<Avion> aviones;
+            List<Viaje> viajes;
             switch(accion) {
                 case "ciudadListAll":
                     ciudades = model.selectAllCities();
@@ -73,13 +74,17 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
+                case "viajesListAll":
+                    viajes = model.selectAllTravels();
+                    json = gson.toJson(viajes);
+                    out.write(json);
+                    break;
                 case "avionesListAll":
                     aviones = model.selectAllPlanes();
                     json = gson.toJson(aviones);
                     out.write(json);
                     break;
                 case "vuelosListAll":
-                    System.out.println("Insert into wey");
                     vuelos = model.selectAllFlights();
                     json = gson.toJson(vuelos);
                     out.write(json);
@@ -96,6 +101,20 @@ public class AirlineService extends HttpServlet {
                     Ciudad ciudad = gson.fromJson(jsonCiudad, Ciudad.class);
                     int ciudadNumber = model.insertCiudad(ciudad);
                     json = gson.toJson(ciudadNumber);
+                    out.write(json);
+                    break;
+                case "viajeAdd":
+                    String jsonViaje = request.getParameter("viaje");
+                    Viaje viaje = gson.fromJson(jsonViaje, Viaje.class);
+                    int viajeNumber = model.insertViaje(viaje);
+                    json = gson.toJson(viajeNumber);
+                    out.write(json);
+                    break;
+                case "vueloAdd":
+                    String jsonVuelo = request.getParameter("viaje");
+                    Vuelo vuelo = gson.fromJson(jsonVuelo, Vuelo.class);
+                    int vueloNumber = model.insertVuelo(vuelo);
+                    json = gson.toJson(vueloNumber);
                     out.write(json);
                     break;
             }

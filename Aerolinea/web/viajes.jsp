@@ -36,11 +36,11 @@
                   <label class="control-label">Fecha</label><input type="text" class ="form-control" id="fecha" placeholder="Ingrese la fecha"> <br>
                   <label class="control-label">Avion</label><input type="text" class ="form-control" id="avion" placeholder="Ingrese el avion"> <br>
                   <label class="control-label">Vuelo</label><input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el vuelo"><br>
-                  <button class="btn btn-success" id="agregarRuta">Agregar</button>
+                  <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
                   <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
               </div>
             <div class="table-responsive">
-              <table class="table table-striped">
+              <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Numero</th>
@@ -49,7 +49,7 @@
                     <th>Ciudad Destino</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablaViajes">
                   <!-- Contenido de la tabla -->
                 </tbody>
               </table>
@@ -65,5 +65,98 @@
           <p>&copy; 2017 Baratisimo, Inc.</p>
         </footer>
       </div>
+      
+      
+      <script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+            this.viajes=[];
+        }
+  };
+</script>
+<script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+                Proxy.getViajes(function (result) {
+                model.viajes = result;
+                 view.showViajes();
+                });
+                this.initViaje();
+	},
+        initViaje: function (){
+            var model = this.model;
+            model.viaje = new Viaje();   
+        },
+        
+        ViajeAdd: function (){
+            var model = this.model;
+            var view = this.view;
+            this.model.viaje.numero_viaje=this.view.document.getElementById("numero_viaje").value;
+            this.model.viaje.fecha=this.view.document.getElementById("fecha").value;
+            this.model.viaje.avion=this.view.document.getElementById("avion").value;
+            this.model.viaje.vuelo=this.view.document.getElementById("vuelo").value;
+            Proxy.ViajeAdd(this.model.viaje,function(result){
+                document.location = "/Aerolinea/viajes.jsp";
+                view.showMessage();
+            });
+
+        },
+        LimpiaPantalla: function() {
+            view.clean();
+        }
+        
+  };
+</script>
+<script> // View
+  var model;
+  var controller;
+  
+	function pageLoad(event){
+		model = new Model();  
+		controller = new Controller(model,window);
+                showViajes();
+	}
+
+    function showViajes() {
+
+    var tr; 
+    var tabla;
+    var td;
+
+    for(var index in model.viajes) {
+    // ----------Agregar nueva fila----------------
+    tabla = document.getElementById("tablaViajes");
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.appendChild(document.createTextNode(model.viajes[index].fecha));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.viajes[index].avion.placa));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
+    tr.appendChild(td);
+    
+    tabla.appendChild(tr);
+    
+        }
+
+    }
+    function showMessage(){
+            window.alert("Registro exitoso");
+         }
+        
+	document.addEventListener("DOMContentLoaded",pageLoad);
+</script> 
     </body>
 </html>

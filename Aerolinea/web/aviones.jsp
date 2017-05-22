@@ -45,7 +45,7 @@
                 </form>
             </div>
             <table class="table table-bordered table-hover">
-                <thead class="thead-inverse">
+                <thead>
                   <tr>
                     <th>Placa</th>
                     <th>Modelo</th>
@@ -115,6 +115,7 @@
             this.model.avion.cant_filas=this.view.document.getElementById("cant_filas").value;
             this.model.avion.cant_asientos_por_fila=this.view.document.getElementById("cant_asientos_por_fila").value;
             Proxy.AvionAdd(this.model.avion,function(result){
+                document.location = "/Aerolinea/aviones.jsp"
                 view.showMessage();
             });
 
