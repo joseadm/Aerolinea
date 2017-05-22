@@ -305,28 +305,6 @@ function doBlur(event){
 	event.target.classList.remove("focus");
 }
 
-//function login(){
-//    var correo= document.getElementById("correo");
-//    var password = document.getElementById("password");
-//    //if(validateUser(correo,password)){
-//        window.alert("Bienvenido");
-//        user=1;
-//        loadButtons();
-//    //}else{
-//    //    window.alert("error inicio de sesion");
-//    //}
-//
-//}
-//function logout(){
-//        document.getElementById("ulPrincipal").style.display = 'none';
-//        document.getElementById("correo").style.display = 'initial';
-//        document.getElementById("password").style.display = 'initial';
-//        document.getElementById("crearCuenta").style.display = 'initial';
-//        document.getElementById("inicioSesion").style.display = 'initial';
-//
-//        document.getElementById("password").value ="";
-//        user=0;
-//}
 /*function validateUser(correo, password) {
     var index = arrayUsuarios.findIndex( ((est) => est.correo === correo.value) && ((est) => est.contrasena === password.value) );
         if(index != -1){
