@@ -194,6 +194,73 @@
             format: 'dd/MM/yyyy'
         });
         });
+    </script>
+    <script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+            this.usuarios=[];
+        }
+  };
+    </script>
+    <script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+                Proxy.getAviones(function (result) {
+                model.usuarios = result;
+                 //view.showAviones();
+                });
+                this.initUsuario();
+	},
+        initAvion: function (){
+            var model = this.model;       
+            model.usuario = new Usuario();          
+        },
+        
+        AvionAdd: function (){
+            var model = this.model;
+            var view = this.view;
+            this.model.usuario.usuario=this.view.document.getElementById("usuario").value;
+            this.model.usuario.contrasena=this.view.document.getElementById("password").value;
+            this.model.usuario.nombre=this.view.document.getElementById("nombre").value;
+            this.model.usuario.apellidos=this.view.document.getElementById("apellidos").value;
+            this.model.usuario.correo=this.view.document.getElementById("correo").value;
+            this.model.usuario.fecha_nac=this.view.document.getElementById("fechaNacimiento").value;
+            this.model.usuario.direccion= "Heredia";
+            this.model.usuario.telefono=this.view.document.getElementById("telefono").value;
+            this.model.usuario.celular=this.view.document.getElementById("celular").value;
+             this.model.usuario.tipo=1;
+            Proxy.AvionAdd(this.model.usuario,function(result){
+                document.location = "/Aerolinea/registro.jsp"
+                view.showMessage();
+            });
+
+        },
+        
+  };
+</script>
+    <script> // View
+      var model;
+      var controller;
+
+            function pageLoad(event){
+                    model = new Model();  
+                    controller = new Controller(model,window);
+            }
+        function showMessage(){
+                window.alert("Registro exitoso");
+             }
+
+            document.addEventListener("DOMContentLoaded",pageLoad);
     </script> 
     </body>
 </html>
