@@ -209,15 +209,15 @@ select * from ciudad;
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
 values ("SJO","MIA", true, 300,120,'1197-04-04',true,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("MIA","SJO", true, 300,120,'2017-10-10',true,"NADA YET");
+values ("MIA","CAN", true, 300,120,'2017-10-10',true,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("SJO","CAN", true, 300,120,'2017-10-10',true,"NADA YET");
+values ("MAD","ROM", true, 300,120,'2017-10-10',true,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
 values ("SJO","MAD", true, 300,120,'2017-10-10',true,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("SJO","VIE", true, 300,120,'2017-10-10',true,"NADA YET");
+values ("MIA","SJO", true, 300,120,'2017-10-10',true,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("SJO","ROM", true, 300,120,'2017-10-10',true,"NADA YET");
+values ("VIE","MAD", true, 300,120,'2017-10-10',true,"NADA YET");
 
 /*INSERTS DE AVIONES-------------------------*/
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 

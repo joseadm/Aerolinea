@@ -51,8 +51,7 @@ public class model {
        List<Ciudad> cities;
        cities= new ArrayList();
         try {
-            String sql="select * "+
-                    "from Ciudad p  ";
+            String sql="select * from Ciudad ";
             ResultSet rs =  ciudades.executeQuery(sql);
             while (rs.next()) {
                 cities.add(toCiudad(rs));
@@ -62,11 +61,33 @@ public class model {
        return cities;
    }
     private static Ciudad toCiudad(ResultSet rs) throws Exception{
+       try{
        Ciudad obj= new Ciudad();
        obj.setCodigo(rs.getString("codigo"));
        obj.setNombre(rs.getString("nombre"));
        obj.setPais(rs.getString("pais"));
        return obj;
+       }catch(SQLException ex){
+            return null;
+        }
+    }
+    private static Ciudad toCiudad2(ResultSet rs) throws Exception{
+       try{
+       Ciudad obj= new Ciudad();
+       obj.setCodigo(rs.getString("ciudadOrigen"));
+       return obj;
+       }catch(SQLException ex){
+            return null;
+        }
+    }
+    private static Ciudad toCiudad3(ResultSet rs) throws Exception{
+       try{
+       Ciudad obj= new Ciudad();
+       obj.setCodigo(rs.getString("ciudadDestino"));
+       return obj;
+       }catch(SQLException ex){
+            return null;
+        }
     }
     /*-----------------------------------------------------------------------------*/
     /*-------------------------------------------Vuelos-----------------------*/
@@ -90,25 +111,23 @@ public class model {
        List<Vuelo> flights;
        flights= new ArrayList();
         try {
-            String sql="select * "+
-                    "from Vuelo p ";
+            String sql="select * from Vuelo v inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
+                    + "inner join Ciudad c2 on v.ciudadDestino = c2.codigo";
             ResultSet rs =  vuelos.executeQuery(sql);
             while (rs.next()) {
                 flights.add(toFlights(rs));
             }
         } catch (SQLException ex) {
+            System.out.println("error");
         }
        return flights;
    }
     private static Vuelo toFlights(ResultSet rs) throws Exception{
-       Vuelo obj= new Vuelo();
-       obj.setCodigo(rs.getInt("numeroVuelo"));
        try {
-       obj.setCiudad_origen(toCiudad(rs));
-       obj.setCiudad_destino(toCiudad(rs)); //REVISAR SI ES ASI
-       } catch(Exception e) {
-            System.out.println("Its not working");
-       }
+        Vuelo obj= new Vuelo();
+       obj.setCodigo(rs.getInt("numeroVuelo"));
+       obj.setCiudad_origen(toCiudad2(rs));
+       obj.setCiudad_destino(toCiudad3(rs));
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));
        obj.setDuracion(rs.getString("duracion"));
@@ -116,6 +135,9 @@ public class model {
        obj.setOferta(rs.getBoolean("oferta"));
        obj.setImagen(rs.getString("imagen"));
        return obj;
+       } catch(SQLException ex) {
+            return null;
+       }
     }
     /*-----------------------------------------------------------------------------*/
     /*----------------------------------------Viaje---------------------------------*/
@@ -137,8 +159,7 @@ public class model {
        List<Viaje> travels;
        travels = new ArrayList();
         try {
-            String sql="select * "+
-                    "from Viaje p ";
+            String sql="select * from Viaje";
             ResultSet rs =  viajes.executeQuery(sql);
             while (rs.next()) {
                 travels.add(toTravels(rs));
@@ -244,8 +265,7 @@ public class model {
        List<Avion> planes;
        planes = new ArrayList();
         try {
-            String sql="select * "+
-                    "from Avion p ";
+            String sql="select * from Avion";
             ResultSet rs =  aviones.executeQuery(sql);
             while (rs.next()) {
                 planes.add(toPlanes(rs));
@@ -274,8 +294,7 @@ public class model {
        List<Usuario> users;
        users = new ArrayList();
         try {
-            String sql="select * "+
-                    "from Usuario p ";
+            String sql="select * from Usuario";
             ResultSet rs =  usuarios.executeQuery(sql);
             while (rs.next()) {
                 users.add(toUsers(rs));
