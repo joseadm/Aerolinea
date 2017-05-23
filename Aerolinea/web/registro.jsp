@@ -19,31 +19,7 @@
         <script type="text/javascript" src="js/Bootstrap-datepicker.js"></script>
     </head>
     <body>
-      <!-- Titulo de la pagina -->
-      <header>
-        <div class="container"><h1>&nbsp;&nbsp;Baratísimo <span class="glyphicon glyphicon-plane avion"></span></h1></div>
-      </header>
-      <!-- Menu de Navegacion -->
-      <nav class="navbar navbar-inverse">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="index.jsp">Principal</a></li>
-              <li><a href="informacion.jsp">Información</a></li>
-              <li><a href="historia.jsp">Historia</a></li>
-              <li ><a href="contacto.jsp">Contacto</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+       <%@ include file="Header.jspf" %>
       <!-- ....................................Formulario Contacto............................................... -->
         <div class="container-fluid">
         <div class="row">
@@ -162,7 +138,7 @@
                 });
                 this.initUsuario();
 	},
-        initUsuario function (){
+        initUsuario:function (){
             var model = this.model;       
             model.usuario = new Usuario();          
         },

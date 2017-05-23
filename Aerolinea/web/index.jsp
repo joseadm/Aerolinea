@@ -259,12 +259,12 @@
     div1 = document.createElement("div");
     div1.setAttribute("class", "item");
     img1 = document.createElement("img");
-    img1.setAttribute("src","images/"+city(modelView.promo[index].ciudad_destino.codigo)+".jpg");
+    img1.setAttribute("src","images/"+modelView.promo[index].ciudad_destino.nombre+".jpg");
     div1.appendChild(img1);
     div2 = document.createElement("div");
     div2.setAttribute("class","carousel-caption"); 
     titulo = document.createElement("h2");
-    titulo.appendChild(document.createTextNode(city(modelView.promo[index].ciudad_origen.codigo)+" "+city(modelView.promo[index].ciudad_destino.codigo)));
+    titulo.appendChild(document.createTextNode(modelView.promo[index].ciudad_origen.nombre+" "+modelView.promo[index].ciudad_destino.nombre));
     precio = document.createElement("h5");
     precio.appendChild(document.createTextNode("Obten tu viaje por tan solo "+modelView.promo[index].precio+"$"));
     boton = document.createElement("button");
@@ -354,28 +354,6 @@ function listCiudades(){
             "$ "+modelView.buscados[index].precio
             ] ).draw( false );
         }
-  }
-  function city(codigo){
-      switch(codigo) {
-          case "SJO":
-              return "San Jose";
-              break;
-          case "MIA":
-              return "Miami";
-              break;
-          case "MAD":
-              return "Madrid";
-              break;
-          case "CAN":
-              return "Cancun";
-              break;
-          case "ROM":
-              return "Roma";
-              break;
-          case "VIE":
-              return "Viena";
-              break;
-      }
   }
   
   document.addEventListener("DOMContentLoaded",pageLoad)

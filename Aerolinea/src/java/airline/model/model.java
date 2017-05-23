@@ -61,6 +61,19 @@ public class model {
         }
        return cities;
    }
+     public static Ciudad selectCity(String codigo) throws Exception{
+       Ciudad c1 = new Ciudad();
+        try {
+            String sql="select * from Ciudad c where c.codigo='"+codigo+"'";
+            ResultSet rs =  ciudades.executeQuery(sql);
+            while (rs.next()) {
+                c1= toCiudad(rs);
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de ciudades");
+        }
+       return c1;
+   }
     private static Ciudad toCiudad(ResultSet rs) throws Exception{
        try{
        Ciudad obj= new Ciudad();
@@ -143,9 +156,11 @@ public class model {
        obj.setCodigo(rs.getInt("numeroVuelo"));
        Ciudad ciudad1= new Ciudad();
        ciudad1.setCodigo(rs.getString("ciudadOrigen"));
+       ciudad1 = selectCity(ciudad1.getCodigo());
        obj.setCiudad_origen(ciudad1);
        Ciudad ciudad2= new Ciudad();
        ciudad2.setCodigo(rs.getString("ciudadDestino"));
+       ciudad2 = selectCity(ciudad2.getCodigo());
        obj.setCiudad_destino(ciudad2);
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));

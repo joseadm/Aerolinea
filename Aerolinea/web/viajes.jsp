@@ -144,10 +144,10 @@
     td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(city(model.viajes[index].vuelo.ciudad_origen.codigo)));
+    td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_origen.nombre));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(city(model.viajes[index].vuelo.ciudad_destino.codigo)));
+    td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_destino.nombre));
     tr.appendChild(td);
     td =document.createElement("td");
     td.appendChild(document.createTextNode(model.viajes[index].avion.placa));
@@ -164,28 +164,7 @@
     function showMessage(){
             window.alert("Registro exitoso");
          }
-    function city(codigo){
-      switch(codigo) {
-          case "SJO":
-              return "San Jose";
-              break;
-          case "MIA":
-              return "Miami";
-              break;
-          case "MAD":
-              return "Madrid";
-              break;
-          case "CAN":
-              return "Cancun";
-              break;
-          case "ROM":
-              return "Roma";
-              break;
-          case "VIE":
-              return "Viena";
-              break;
-      }
-  }
+   
         
 	document.addEventListener("DOMContentLoaded",pageLoad);
 </script> 
