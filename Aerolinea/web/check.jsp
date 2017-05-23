@@ -17,14 +17,14 @@
     </head>
     <body>
       <%@ include file="Header.jspf" %>
-      <!-- Form -->
-        <div class="container">
+
+      <div class="container"> <%--<div class="jumbotron">--%>
           <h1>Reservar asientos</h1>
           <hr>
-          <form method="post">
+
           <table id="check" class="table">
-              <thead class="thead-default">
-                <tr>
+              <thead id="listaAsientosCabecera" class="thead-default">
+                <%--<tr>
                   <th>#</th>
                   <th>A</th>
                   <th>B</th>
@@ -33,10 +33,10 @@
                   <th>E</th>
                   <th>F</th>
                   <th>G</th>
-                </tr>
+                </tr> --%>
               </thead>
-            <tbody>
-              <tr>
+            <tbody id="listaAsientos">
+              <%--<tr>
                 <th scope="row">1</th>
                 <td>
                     <label class="btn btn-default">
@@ -475,12 +475,93 @@
                       <input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off">
                     </label>
                 </td>
-              </tr>
+              </tr> --%>
             </tbody>
           </table>
-          <input type="button" class="btn btn-sucess" value="Continuar>>">
-        </form>
+          <a href="pago.jsp" class="btn btn-sucess">Continuar</a>
         </div>
+            
+            <script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+        }
+  };
+</script>
+<script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+	}
+        
+  };
+</script>
+<script> // View
+  var model;
+  var controller;
+	function pageLoad(event){
+		model=new Model();
+		controller = new Controller(model,window);
+                crearAsientos();
+	}
+        function crearAsientos(){         
+            var filas = document.getElementById("cant_filas").value;
+            var lista = document.getElementById("listaAsientos");
+            for(int i=0; i<filas; i++){
+                if(i % 3 == 0)
+                    crearPasillo(lista);
+                else
+                    crearFilas(lista);
+        }
+        }
+        
+        function crearFilas(lista){
+            var tr, td, tmp, tmp2, txt;
+            var filas = document.getElementById("cant_asientos_por_fila").value;
+            
+            for(int i=0; i<filas; i++){
+            tr = document.createElement("tr");
+            td= document.createElement("td");
+            tmp = document.createElement("label");
+            tmp.setAttribute("class", "btn btn-primary btn-xs");
+            tmp2 = document.createElement("input");
+            tmp2.setAttribute("type", "checkbox");
+            tmp2.setAttribute("id", ""); //ingresar a  la clase asiento y tomar su codigo/numero=id 
+            txt = document.createTextNode(""); //ingresar a  la clase asiento y tomar su codigo/numero
+            tmp.appendChild(tm2);
+            td.appendChild(tmp);
+            tr.appendChild(td);
+        }
+            tr.appendChild(document.createElement("br"));
+            lista.appendChild(tr);
+
+	}
+        
+        function crearPasillo(lista){
+            var tr, td, tmp;
+            tr = document.createElement("tr");
+            td = document.createElement("td");
+            tmp = document.createElement("br");
+            td.appendChild(tmp);
+            tr.appendChild(td);
+            lista.appendChild(tr);
+        }
+        
+        function crearEtiquetas(lista){
+            
+        }
+        
+	document.addEventListener("DOMContentLoaded",pageLoad);
+</script>
+            
       <hr>
       <br><br><br>
       <!-- Footer -->
