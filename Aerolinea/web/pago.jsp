@@ -81,6 +81,42 @@
           </form>
           </div>
         </div>
+      
+            <script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+        }
+  };
+</script>
+<script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+	}
+        
+  };
+</script>
+<script> // View
+  var model;
+  var controller;
+	function pageLoad(event){
+		model=new Model();
+		controller = new Controller(model,window);
+	}
+        
+        
+	document.addEventListener("DOMContentLoaded",pageLoad);
+</script>
+      
       <hr>
       <br><br><br>
       <!-- Footer -->
