@@ -71,24 +71,6 @@ public class model {
             return null;
         }
     }
-    private static Ciudad toCiudad2(ResultSet rs) throws Exception{
-       try{
-       Ciudad obj= new Ciudad();
-       obj.setCodigo(rs.getString("ciudadOrigen"));
-       return obj;
-       }catch(SQLException ex){
-            return null;
-        }
-    }
-    private static Ciudad toCiudad3(ResultSet rs) throws Exception{
-       try{
-       Ciudad obj= new Ciudad();
-       obj.setCodigo(rs.getString("ciudadDestino"));
-       return obj;
-       }catch(SQLException ex){
-            return null;
-        }
-    }
     /*-----------------------------------------------------------------------------*/
     /*-------------------------------------------Vuelos-----------------------*/
      //EL SIGUIENTE METODO agrega un vuelo
@@ -126,8 +108,12 @@ public class model {
        try {
         Vuelo obj= new Vuelo();
        obj.setCodigo(rs.getInt("numeroVuelo"));
-       obj.setCiudad_origen(toCiudad2(rs));
-       obj.setCiudad_destino(toCiudad3(rs));
+       Ciudad ciudad1= new Ciudad();
+       ciudad1.setCodigo(rs.getString("ciudadOrigen"));
+       obj.setCiudad_origen(ciudad1);
+       Ciudad ciudad2= new Ciudad();
+       ciudad2.setCodigo(rs.getString("ciudadDestino"));
+       obj.setCiudad_destino(ciudad2);
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));
        obj.setDuracion(rs.getString("duracion"));
