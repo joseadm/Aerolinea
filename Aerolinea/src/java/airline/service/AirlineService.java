@@ -80,7 +80,7 @@ public class AirlineService extends HttpServlet {
                     String origen_vuelo = request.getParameter("origen");
                     String destino_vuelo = request.getParameter("destino");
                     vuelos2 = model.selectAllFlightsByOrigin(origen_vuelo,destino_vuelo);
-                    vuelos = model.selectAllFlightsByDestiny(origen_vuelo,destino_vuelo);
+                    vuelos = model.selectAllFlightsByOrigin(destino_vuelo,origen_vuelo);
                     vuelos2.forEach((v) -> {
                         vuelos.add(v);
                     });

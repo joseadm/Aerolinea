@@ -136,22 +136,7 @@ public class model {
         }
        return flights;
    }
-    public static List<Vuelo> selectAllFlightsByDestiny(String origen,String destino) throws Exception{
-       List<Vuelo> flights;
-       flights= new ArrayList();
-        try {
-            String sql="select * from Vuelo v inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
-                    + "inner join Ciudad c2 on v.ciudadDestino = c2.codigo where c1.nombre='"
-                    + destino+"' and c2.nombre='"+origen+"'";
-            ResultSet rs =  vuelos.executeQuery(sql);
-            while (rs.next()) {
-                flights.add(toFlights(rs));
-            }
-        } catch (SQLException ex) {
-            throw new Exception("No existen registros de Vuelos");
-        }
-       return flights;
-   }
+   
     private static Vuelo toFlights(ResultSet rs) throws Exception{
        try {
         Vuelo obj= new Vuelo();
