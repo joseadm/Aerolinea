@@ -32,7 +32,6 @@
           <div class="col-sm-8 col-md-10 main">
             <h1 class="page-header">Vuelos</h1>
             <div class="form-group">
-                      <label class="control-label">Numero Vuelo</label><input type="text" class ="form-control" id="numero_vuelo" placeholder="Ingrese el numero de vuelo"><br>
                     <label class="control-label">Ciudad Origen</label><input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese la ciudad de origen"> <br>
                   <label class="control-label">Ciudad Destino</label><input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese la ciudad de destino"><br>
                   <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
@@ -106,7 +105,6 @@
         VueloAdd: function (){
             var model = this.model;
             var view = this.view;
-            this.model.vuelo.numero_vuelo=this.view.document.getElementById("numero_vuelo").value;
             this.model.vuelo.ciudad_origen=this.view.document.getElementById("ciudad_origen").value;
             this.model.vuelo.ciudad_destino=this.view.document.getElementById("ciudad_destino").value;
             this.model.vuelo.estado=this.view.document.getElementById("estado").value;

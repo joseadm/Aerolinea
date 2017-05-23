@@ -1,22 +1,22 @@
-function Avion(placa,modelo,marca,annio,cant_pasajeros,cant_filas,cant_asientos){
-	this.Avion(placa,modelo,marca,annio,cant_pasajeros,cant_filas,cant_asientos);
+function Avion(placa,modelo,marca,annio,cant_pasajeros,cant_filas,cant_asientos_por_fila){
+	this.Avion(placa,modelo,marca,annio,cant_pasajeros,cant_filas,cant_asientos_por_fila);
 }
 Avion.prototype={
         placa:"",
         modelo:"",
         marca:"",
-        annio:0,
+        annio:"",
         cant_pasajeros:0,
         cant_filas:0,
-        cant_asientos:0,
-	Avion:function(placa,modelo,marca,annio,cant_pasajeros,cant_filas,cant_asientos){
+        cant_asientos_por_fila:0,
+	Avion:function(placa,modelo,marca,annio,cant_pasajeros,cant_filas,cant_asientos_por_fila){
 		this.placa=placa;
 		this.modelo=modelo;
 		this.marca=marca;
                 this.annio=annio;
 		this.cant_pasajeros=cant_pasajeros;
 		this.cant_filas=cant_filas;
-		this.cant_asientos=cant_asientos;
+		this.cant_asientos_por_fila=cant_asientos_por_fila;
 	},
         toString:function(){
 	  return this.placa;
@@ -25,7 +25,7 @@ Avion.prototype={
 
 Avion.from= function(plain){
     avion = new Avion(plain.placa,plain.modelo,plain.marca,plain.annio,plain.cant_pasajeros,
-            plain.cant_filas,plain.cant_asientos);
+            plain.cant_filas,plain.cant_asientos_por_fila);
     return avion;
 };
 
@@ -38,6 +38,6 @@ Avion.to= function(avion){
         annio: avion.annio,
         cant_pasajeros: avion.cant_pasajeros,
         cant_filas: avion.cant_filas,
-        cant_asientos: avion.cant_asientos
+        cant_asientos_por_fila: avion.cant_asientos_por_fila
     };
 };

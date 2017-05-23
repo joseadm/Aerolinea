@@ -57,6 +57,7 @@ public class model {
                 cities.add(toCiudad(rs));
             }
         } catch (SQLException ex) {
+            throw new Exception("No existen registros de ciudades");
         }
        return cities;
    }
@@ -89,7 +90,7 @@ public class model {
                 return 0;
             }
     }
-      public static List<Vuelo> selectAllFlights() throws Exception{
+    public static List<Vuelo> selectAllFlights() throws Exception{
        List<Vuelo> flights;
        flights= new ArrayList();
         try {
@@ -100,7 +101,54 @@ public class model {
                 flights.add(toFlights(rs));
             }
         } catch (SQLException ex) {
-            System.out.println("error");
+            throw new Exception("No exiten registros de Vuelos");
+        }
+       return flights;
+   }
+   public static List<Vuelo> selectAllFlightsPromo() throws Exception{
+       List<Vuelo> flights;
+       flights= new ArrayList();
+        try {
+            String sql="select * from Vuelo v inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
+                    + "inner join Ciudad c2 on v.ciudadDestino = c2.codigo where v.oferta = true";
+            ResultSet rs =  vuelos.executeQuery(sql);
+            while (rs.next()) {
+                flights.add(toFlights(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen Vuelos en promocion");
+        }
+       return flights;
+   }
+   public static List<Vuelo> selectAllFlightsByOrigin(String origen,String destino) throws Exception{
+       List<Vuelo> flights;
+       flights= new ArrayList();
+        try {
+            String sql="select * from Vuelo v inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
+                    + "inner join Ciudad c2 on v.ciudadDestino = c2.codigo where c1.nombre='"
+                    + origen+"' and c2.nombre='"+destino+"'";
+            ResultSet rs =  vuelos.executeQuery(sql);
+            while (rs.next()) {
+                flights.add(toFlights(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de Vuelos");
+        }
+       return flights;
+   }
+    public static List<Vuelo> selectAllFlightsByDestiny(String origen,String destino) throws Exception{
+       List<Vuelo> flights;
+       flights= new ArrayList();
+        try {
+            String sql="select * from Vuelo v inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
+                    + "inner join Ciudad c2 on v.ciudadDestino = c2.codigo where c1.nombre='"
+                    + destino+"' and c2.nombre='"+origen+"'";
+            ResultSet rs =  vuelos.executeQuery(sql);
+            while (rs.next()) {
+                flights.add(toFlights(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de Vuelos");
         }
        return flights;
    }
@@ -145,22 +193,29 @@ public class model {
        List<Viaje> travels;
        travels = new ArrayList();
         try {
-            String sql="select * from Viaje";
+            String sql="select * from Viaje vi inner join Avion a on vi.placa_avion = a.placa inner join"
+                    + " Vuelo vu on vi.numero_vuelo = vu.numeroVuelo inner join  Ciudad c1 on "
+                    + "vu.ciudadOrigen = c1.codigo inner join Ciudad c2 on vu.ciudadDestino = c2.codigo";
             ResultSet rs =  viajes.executeQuery(sql);
             while (rs.next()) {
                 travels.add(toTravels(rs));
             }
         } catch (SQLException ex) {
+            throw new Exception("No existen registros de Viajes");
         }
        return travels;
    }
     private static Viaje toTravels(ResultSet rs) throws Exception{
-       Viaje obj= new Viaje();
-       obj.setNumero_viaje(rs.getInt("numeroViaje"));
+       try{
+        Viaje obj= new Viaje();
+       obj.setNumero_viaje(rs.getInt("numeroviaje"));
        obj.setFecha(rs.getDate("fecha"));
        obj.setAvion(toPlanes(rs));
        obj.setVuelo(toFlights(rs));
        return obj;
+       } catch(SQLException ex) {
+            return null;
+       }
     }
     /*-------------------------------------------------------------------------*/
     /*------------------------------Avion-----------------------------------------*/
@@ -257,6 +312,7 @@ public class model {
                 planes.add(toPlanes(rs));
             }
         } catch (SQLException ex) {
+            throw new Exception("No existen registros de Aviones");
         }
        return planes;
    }
@@ -265,15 +321,19 @@ public class model {
    
 
     private static Avion toPlanes(ResultSet rs) throws Exception{
-       Avion obj= new Avion();
+       try{
+        Avion obj= new Avion();
        obj.setPlaca(rs.getString("placa"));
        obj.setModelo(rs.getString("modelo"));
        obj.setMarca(rs.getString("marca"));
-       obj.setAnnio(rs.getString("placa"));
+       obj.setAnnio(rs.getString("annio"));
        obj.setCant_pasajeros(rs.getInt("cant_pasajeros"));
        obj.setCant_filas(rs.getInt("cant_filas"));
        obj.setcant_asientos_por_fila(rs.getInt("cant_asientos_por_fila"));
        return obj;
+       } catch(SQLException ex) {
+            return null;
+       }
     }
     //--------------USUARIO------------------------------------
     public static List<Usuario> selectAllUsers() throws Exception{
@@ -286,10 +346,12 @@ public class model {
                 users.add(toUsers(rs));
             }
         } catch (SQLException ex) {
+            throw new Exception("No existen registros de usuarios");
         }
        return users;
    }
      private static Usuario toUsers(ResultSet rs) throws Exception{
+      try{
        Usuario obj= new Usuario();
        obj.setUsuario(rs.getString("nombreUsuario"));
        obj.setContrasena(rs.getString("contrasena"));
@@ -301,8 +363,10 @@ public class model {
        obj.setTelefono(rs.getInt("telefono"));
        obj.setCelular(rs.getInt("celular"));
        obj.setTipo(rs.getInt("tipo"));
-      
        return obj;
+       } catch(SQLException ex) {
+            return null;
+       }
     }
      public static int insertUsuario(Usuario usuario) throws Exception{
     //  return 1;

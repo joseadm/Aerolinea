@@ -54,6 +54,7 @@ public class AirlineService extends HttpServlet {
             System.out.println(accion);
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
+            List<Vuelo> vuelos2;
             List<Avion> aviones;
             List<Viaje> viajes;
             List<Usuario> usuarios;
@@ -64,14 +65,25 @@ public class AirlineService extends HttpServlet {
                     out.write(json);
                     break;
                 case "vueloListPromo":
-                    vuelos = model.selectAllFlights();
+                    vuelos = model.selectAllFlightsPromo();
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
                 case "vueloListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    vuelos = model.selectAllFlights();
+                    vuelos = model.selectAllFlightsByOrigin(origen,destino);
+                    json = gson.toJson(vuelos);
+                    out.write(json);
+                    break;
+                case "vueloListSearchByDestiny":
+                    String origen_vuelo = request.getParameter("origen");
+                    String destino_vuelo = request.getParameter("destino");
+                    vuelos2 = model.selectAllFlightsByOrigin(origen_vuelo,destino_vuelo);
+                    vuelos = model.selectAllFlightsByDestiny(origen_vuelo,destino_vuelo);
+                    vuelos2.forEach((v) -> {
+                        vuelos.add(v);
+                    });
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
@@ -91,10 +103,10 @@ public class AirlineService extends HttpServlet {
                     out.write(json);
                     break;
                 case "usuariosListAll":
-                usuarios = model.selectAllUsers();
-                json = gson.toJson(usuarios);
-                out.write(json);
-                break;
+                    usuarios = model.selectAllUsers();
+                    json = gson.toJson(usuarios);
+                    out.write(json);
+                    break;
                 case "avionAdd":
                     String jsonAvion = request.getParameter("avion");
                     Avion avion = gson.fromJson(jsonAvion, Avion.class);
@@ -123,7 +135,7 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(vueloNumber);
                     out.write(json);
                     break;
-                    case "usuarioAdd":
+                case "usuarioAdd":
                     String jsonUsuario = request.getParameter("usuario");
                     Usuario usuario = gson.fromJson(jsonUsuario, Usuario.class);
                     int UsuarioNumber = model.insertUsuario(usuario);

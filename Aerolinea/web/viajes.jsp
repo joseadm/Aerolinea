@@ -32,7 +32,6 @@
           <div class="col-sm-8 col-md-10 main">
             <h1 class="page-header">Viajes</h1>
             <div class="form-group">
-                  <label class="control-label">Numero Viaje</label><input type="text" class ="form-control" id="numero_viaje" placeholder="Ingrese numero de viaje"><br>
                   <label class="control-label">Fecha</label><input type="text" class ="form-control" id="fecha" placeholder="Ingrese la fecha"> <br>
                   <label class="control-label">Avion</label><input type="text" class ="form-control" id="avion" placeholder="Ingrese el avion"> <br>
                   <label class="control-label">Vuelo</label><input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el vuelo"><br>
@@ -43,10 +42,12 @@
               <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>Numero</th>
-                    <th>Tiempo</th>
-                    <th>Ciudad Origen</th>
-                    <th>Ciudad Destino</th>
+                    <th>Numero Viaje</th>
+                    <th>Numero Vuelo</th>
+                    <th>Ciudad Origen</th> <!--OPCIONAL -->
+                    <th>Ciudad Destino</th> 
+                    <th>Avion</th>
+                    <th>Fecha</th>
                   </tr>
                 </thead>
                 <tbody id="tablaViajes">
@@ -101,7 +102,6 @@
         ViajeAdd: function (){
             var model = this.model;
             var view = this.view;
-            this.model.viaje.numero_viaje=this.view.document.getElementById("numero_viaje").value;
             this.model.viaje.fecha=this.view.document.getElementById("fecha").value;
             this.model.viaje.avion=this.view.document.getElementById("avion").value;
             this.model.viaje.vuelo=this.view.document.getElementById("vuelo").value;
@@ -138,13 +138,22 @@
     tabla = document.getElementById("tablaViajes");
     tr = document.createElement("tr");
     td = document.createElement("td");
-    td.appendChild(document.createTextNode(model.viajes[index].fecha));
+    td.appendChild(document.createTextNode(model.viajes[index].numero_viaje));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(city(model.viajes[index].vuelo.ciudad_origen.codigo)));
+    tr.appendChild(td);
+    td =document.createElement("td");
+    td.appendChild(document.createTextNode(city(model.viajes[index].vuelo.ciudad_destino.codigo)));
     tr.appendChild(td);
     td =document.createElement("td");
     td.appendChild(document.createTextNode(model.viajes[index].avion.placa));
     tr.appendChild(td);
     td =document.createElement("td");
-    td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
+    td.appendChild(document.createTextNode(model.viajes[index].fecha));
     tr.appendChild(td);
     
     tabla.appendChild(tr);
@@ -155,6 +164,28 @@
     function showMessage(){
             window.alert("Registro exitoso");
          }
+    function city(codigo){
+      switch(codigo) {
+          case "SJO":
+              return "San Jose";
+              break;
+          case "MIA":
+              return "Miami";
+              break;
+          case "MAD":
+              return "Madrid";
+              break;
+          case "CAN":
+              return "Cancun";
+              break;
+          case "ROM":
+              return "Roma";
+              break;
+          case "VIE":
+              return "Viena";
+              break;
+      }
+  }
         
 	document.addEventListener("DOMContentLoaded",pageLoad);
 </script> 

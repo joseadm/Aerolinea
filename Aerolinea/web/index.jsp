@@ -210,11 +210,19 @@
         var radio2 = document.getElementById("vuelta");
         var ida = document.getElementById("fecha_ida");
         var regreso = document.getElementById("fecha_regreso");
-
+        
+        if(radio1.checked){
         Proxy.vuelosSearch(origen, destino, function(result) {
            model.buscados = result; 
            view.showBuscado();
         });
+        }
+        if(radio2.checked){
+        Proxy.vuelosSearchByDestiny(origen, destino, function(result) {
+           model.buscados = result; 
+           view.showBuscado();
+        });
+        }
     }
   };
 </script>
@@ -340,9 +348,9 @@ function listCiudades(){
         for(var index in modelView.buscados) {
             t.row.add( [
             modelView.buscados[index].numero_vuelo,
-            modelView.buscados[index].ciudad_origen.nombre,
-            modelView.buscados[index].ciudad_destino.nombre,
-            modelView.buscados[index].fecha,
+            city(modelView.buscados[index].ciudad_origen.codigo),
+            city(modelView.buscados[index].ciudad_destino.codigo),
+            modelView.buscados[index].duracion,
             "$ "+modelView.buscados[index].precio
             ] ).draw( false );
         }
