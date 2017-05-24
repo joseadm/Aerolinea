@@ -130,7 +130,7 @@
         <div class="container">
             <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
             <thead>
-            <tr><th>Codigo</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Precio</th></tr>
+            <tr><th>Numero Vuelo</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Duración</th><th>Precio</th></tr>
             </thead>
             <tbody id="listaBuscados">
             </tbody>
@@ -212,13 +212,13 @@
         var regreso = document.getElementById("fecha_regreso");
         
         if(radio1.checked){
-        Proxy.vuelosSearch(origen, destino, function(result) {
+        Proxy.viajesSearch(origen, destino, function(result) {
            model.buscados = result; 
            view.showBuscado();
         });
         }
         if(radio2.checked){
-        Proxy.vuelosSearchByDestiny(origen, destino, function(result) {
+        Proxy.viajesSearchByDestiny(origen, destino, function(result) {
            model.buscados = result; 
            view.showBuscado();
         });
@@ -347,11 +347,12 @@ function listCiudades(){
         $('#paginacion').dataTable().fnClearTable();
         for(var index in modelView.buscados) {
             t.row.add( [
-            modelView.buscados[index].numero_vuelo,
-            city(modelView.buscados[index].ciudad_origen.codigo),
-            city(modelView.buscados[index].ciudad_destino.codigo),
-            modelView.buscados[index].duracion,
-            "$ "+modelView.buscados[index].precio
+            modelView.buscados[index].vuelo.numero_vuelo,
+            modelView.buscados[index].vuelo.ciudad_origen.nombre,
+            modelView.buscados[index].vuelo.ciudad_destino.nombre,
+            modelView.buscados[index].fecha,
+            modelView.buscados[index].vuelo.duracion,
+            "$ "+modelView.buscados[index].vuelo.precio
             ] ).draw( false );
         }
   }

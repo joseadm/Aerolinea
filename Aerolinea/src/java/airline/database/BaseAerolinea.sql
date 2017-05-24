@@ -219,17 +219,24 @@ insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,ofe
 values ("VIE","MAD", true, 100,"6:00",'2017-10-10',true,"NADA YET");
 
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("SJO","MIA", true, 300,"2:30",'1197-04-04',false,"NADA YET");
+values ("CAN","MIA", true, 300,"2:30",'1197-04-04',false,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("MIA","CAN", true, 200,"1:20",'2017-10-10',false,"NADA YET");
+values ("SJO","CAN", true, 200,"1:20",'2017-10-10',false,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("MAD","ROM", true, 500,"8:00",'2017-10-10',false,"NADA YET");
+values ("SJO","ROM", true, 500,"8:00",'2017-10-10',false,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("SJO","MAD", true, 450,"10:00",'2017-10-10',false,"NADA YET");
+values ("SJO","VIE", true, 450,"10:00",'2017-10-10',false,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("MIA","SJO", true, 200,"2:20",'2017-10-10',false,"NADA YET");
+values ("MIA","MAD", true, 200,"2:20",'2017-10-10',false,"NADA YET");
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
-values ("VIE","MAD", true, 100,"6:00",'2017-10-10',false,"NADA YET");
+values ("MIA","ROM", true, 100,"6:00",'2017-10-10',false,"NADA YET");
+
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("MAD","SJO", true, 500,"8:00",'2017-10-10',false,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("ROM","SJO", true, 450,"10:00",'2017-10-10',false,"NADA YET");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen)
+values ("VIE","SJO", true, 200,"2:20",'2017-10-10',false,"NADA YET");
 
 /*INSERTS DE AVIONES-------------------------*/
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
@@ -266,4 +273,21 @@ insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-10-12',"NV654",5);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-10-12',"TI-CRLA",2);
+
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-11-14',"TI-BGV",7);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-06-10',"NV123",8);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-08-20',"TI-BGV98",9);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-12',"NV888",10);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-12',"NV654",10);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-12',"NV888",13);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-12',"TI-CRLA",14);
+insert into Viaje (fecha, placa_avion, numero_vuelo)
+values('2017-10-12',"TI-CRLA",15);
 

@@ -125,9 +125,9 @@ Proxy.getVuelos = function(callBack) {
   AJAX_req.send();
 };
 
-Proxy.vuelosSearch = function(origen, destino,callBack) {
+Proxy.viajesSearch = function(origen, destino,callBack) {
    $.ajax({
-      url: '/Aerolinea/AirlineService?action=vueloListSearch',
+      url: '/Aerolinea/AirlineService?action=viajeListSearch',
       data: {
          format: 'json',
          origen: origen,
@@ -142,9 +142,9 @@ Proxy.vuelosSearch = function(origen, destino,callBack) {
    });
 };
 
-Proxy.vuelosSearchByDestiny = function(origen, destino, callBack) {
+Proxy.viajesSearchByDestiny = function(origen, destino, callBack) {
    $.ajax({
-      url: '/Aerolinea/AirlineService?action=vueloListSearchByDestiny',
+      url: '/Aerolinea/AirlineService?action=viajeListSearchByDestiny',
       data: {
          format: 'json',
          origen: origen,

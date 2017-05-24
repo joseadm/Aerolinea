@@ -137,7 +137,8 @@ public class model {
        List<Vuelo> flights;
        flights= new ArrayList();
         try {
-            String sql="select * from Vuelo v inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
+            String sql="select * from Viaje vi inner join Vuelo v on vi.numeroviaje = v.numeroVuelo "
+                    + "inner join Ciudad c1 on v.ciudadOrigen = c1.codigo "
                     + "inner join Ciudad c2 on v.ciudadDestino = c2.codigo where c1.nombre='"
                     + origen+"' and c2.nombre='"+destino+"'";
             ResultSet rs =  vuelos.executeQuery(sql);
@@ -196,6 +197,24 @@ public class model {
             String sql="select * from Viaje vi inner join Avion a on vi.placa_avion = a.placa inner join"
                     + " Vuelo vu on vi.numero_vuelo = vu.numeroVuelo inner join  Ciudad c1 on "
                     + "vu.ciudadOrigen = c1.codigo inner join Ciudad c2 on vu.ciudadDestino = c2.codigo";
+            ResultSet rs =  viajes.executeQuery(sql);
+            while (rs.next()) {
+                travels.add(toTravels(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de Viajes");
+        }
+       return travels;
+   }
+   public static List<Viaje> searchTravels(String origen,String destino) throws Exception{
+       List<Viaje> travels;
+       travels = new ArrayList();
+        try {
+            String sql="select * from Viaje vi inner join Avion a on vi.placa_avion = a.placa inner join"
+                    + " Vuelo vu on vi.numero_vuelo = vu.numeroVuelo "
+                    + "inner join Ciudad c1 on vu.ciudadOrigen = c1.codigo "
+                    + "inner join Ciudad c2 on vu.ciudadDestino = c2.codigo where c1.nombre='"
+                    + origen+"' and c2.nombre='"+destino+"'";
             ResultSet rs =  viajes.executeQuery(sql);
             while (rs.next()) {
                 travels.add(toTravels(rs));

@@ -54,9 +54,9 @@ public class AirlineService extends HttpServlet {
             System.out.println(accion);
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
-            List<Vuelo> vuelos2;
             List<Avion> aviones;
             List<Viaje> viajes;
+            List<Viaje> viajes2;
             List<Usuario> usuarios;
             switch(accion) {
                 case "ciudadListAll":
@@ -69,22 +69,22 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
-                case "vueloListSearch":
+                case "viajeListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    vuelos = model.selectAllFlightsByOrigin(origen,destino);
-                    json = gson.toJson(vuelos);
+                    viajes = model.searchTravels(origen,destino);
+                    json = gson.toJson(viajes);
                     out.write(json);
                     break;
-                case "vueloListSearchByDestiny":
+                case "viajeListSearchByDestiny":
                     String origen_vuelo = request.getParameter("origen");
                     String destino_vuelo = request.getParameter("destino");
-                    vuelos2 = model.selectAllFlightsByOrigin(origen_vuelo,destino_vuelo);
-                    vuelos = model.selectAllFlightsByOrigin(destino_vuelo,origen_vuelo);
-                    vuelos2.forEach((v) -> {
-                        vuelos.add(v);
+                    viajes2 = model.searchTravels(origen_vuelo,destino_vuelo);
+                    viajes = model.searchTravels(destino_vuelo,origen_vuelo);
+                    viajes2.forEach((v) -> {
+                        viajes.add(v);
                     });
-                    json = gson.toJson(vuelos);
+                    json = gson.toJson(viajes);
                     out.write(json);
                     break;
                 case "viajesListAll":
