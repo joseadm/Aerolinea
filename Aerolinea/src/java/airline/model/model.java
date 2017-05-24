@@ -373,7 +373,7 @@ public class model {
 
             String sql="insert into Usuario "+
                     "(nombreUsuario, contrasena, nombre, apellidos, correo, fechaNacimiento,"
-                    + " direccion, telefono, cedula, tipo) "+
+                    + " direccion, telefono, celular, tipo) "+
                     "values ('%s','%s','%s','%s','%s','%s','%s',%s,%s,%s)";
             sql=String.format(sql,usuario.getUsuario(),
                     usuario.getContrasena(), 
