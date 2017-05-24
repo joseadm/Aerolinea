@@ -17,143 +17,143 @@
     </head>
     <body>
         <%@ include file="Header.jspf" %>
-      <!-- Formulario Contacto -->
-      <div class="container">
-    <form class="well form-horizontal" action=" " method="post"  id="contact_form">
-      <fieldset>
+        <!-- Formulario Contacto -->
+        <div class="container">
+            <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+                <fieldset>
 
-        <!-- Nombre Formulario -->
-        <legend align="center">Contactenos</legend>
+                    <!-- Nombre Formulario -->
+                    <legend align="center">Contactenos</legend>
 
-        <!-- Nombre -->
+                    <!-- Nombre -->
 
-<div class="form-group">
-  <label class="col-md-4 control-label">Nombre</label>
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="nombre" placeholder="Nombre" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Nombre</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input  name="nombre" placeholder="Nombre" class="form-control"  type="text">
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Apellido-->
+                    <!-- Apellido-->
 
-<div class="form-group">
-  <label class="col-md-4 control-label" >Apellidos</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="apellidos" placeholder="Apellidos" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" >Apellidos</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="apellidos" placeholder="Apellidos" class="form-control"  type="text">
+                            </div>
+                        </div>
+                    </div>
 
-<!-- Text input-->
-       <div class="form-group">
-  <label class="col-md-4 control-label">Correo Electrónico</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
-
-
-  <!-- Telefono-->
-
-<div class="form-group">
-  <label class="col-md-4 control-label">Teléfono</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="telefono" placeholder="(562)8990-3452" class="form-control" type="text">
-    </div>
-  </div>
-</div>
-
-<!-- Direccion -->
-
-<div class="form-group">
-  <label class="col-md-4 control-label">Dirección</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="address" placeholder="Address" class="form-control" type="text">
-    </div>
-  </div>
-</div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Correo Electrónico</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
+                            </div>
+                        </div>
+                    </div>
 
 
-<!-- Provincia -->
+                    <!-- Telefono-->
 
-<div class="form-group">
-  <label class="col-md-4 control-label">Provincia</label>
-    <div class="col-md-4 selectContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="provincia" class="form-control selectpicker" >
-      <option value=" " >Selecciona la provincia</option>
-      <option>San Jose</option>
-      <option>Heredia</option>
-      <option>Alajuela</option>
-      <option>Cartago</option>
-      <option>Limon</option>
-      <option>Puntarenas</option>
-      <option>Guanacaste</option>
-    </select>
-  </div>
-</div>
-</div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Teléfono</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input name="telefono" placeholder="(562)8990-3452" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
 
-<!--Canton-->
+                    <!-- Direccion -->
 
-<div class="form-group">
-  <label class="col-md-4 control-label">Canton</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="canton" placeholder="Canton" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Dirección</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <input name="address" placeholder="Address" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
 
 
-<!-- Mensaje -->
+                    <!-- Provincia -->
 
-<div class="form-group">
-  <label class="col-md-4 control-label">Mensaje</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-        	<textarea class="form-control" name="comment" placeholder="Escriba el mensaje"></textarea>
-  </div>
-  </div>
-</div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Provincia</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="provincia" class="form-control selectpicker" >
+                                    <option value=" " >Selecciona la provincia</option>
+                                    <option>San Jose</option>
+                                    <option>Heredia</option>
+                                    <option>Alajuela</option>
+                                    <option>Cartago</option>
+                                    <option>Limon</option>
+                                    <option>Puntarenas</option>
+                                    <option>Guanacaste</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-<!-- Success message -->
-<div class="alert alert-success" role="alert" id="exito">Exito al enviar 
-<i class="glyphicon glyphicon-thumbs-up"></i> Gracias por contactarnos, nos comunicaremos pronto</div>
+                    <!--Canton-->
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4" align="center">
-    <button type="submit" class="btn btn-warning" >Enviar <span class="glyphicon glyphicon-send"></span></button>
-  </div>
-</div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Canton</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <input name="canton" placeholder="Canton" class="form-control"  type="text">
+                            </div>
+                        </div>
+                    </div>
 
-</fieldset>
-</form>
-</div>
+
+                    <!-- Mensaje -->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Mensaje</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" name="comment" placeholder="Escriba el mensaje"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success message -->
+                    <div class="alert alert-success" role="alert" id="exito">Exito al enviar 
+                        <i class="glyphicon glyphicon-thumbs-up"></i> Gracias por contactarnos, nos comunicaremos pronto</div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4" align="center">
+                            <button type="submit" class="btn btn-warning" >Enviar <span class="glyphicon glyphicon-send"></span></button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
     </div><!-- /.container -->
-      <br>
-      <!-- Footer -->
-      <div class="container">
+    <br>
+    <!-- Footer -->
+    <div class="container">
         <footer class="footer">
-          <p>&copy; 2017 Baratísimo, Inc.</p>
+            <p>&copy; 2017 Baratísimo, Inc.</p>
         </footer>
-      </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -15,78 +15,78 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
     <body>
-      <header>
-        <div class="container"><h1>&nbsp;&nbsp;Baratísimo <span class="glyphicon glyphicon-plane avion"></span></h1></div>
-      </header>
-      <!-- Menu de Navegacion -->
-      <nav class="navbar navbar-inverse">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="index.jsp">Principal</a></li>
-              <li><a href="informacion.jsp">Información</a></li>
-              <li><a href="historia.jsp">Historia</a></li>
-              <li><a href="contacto.jsp">Contacto</a></li>
-            </ul>
-          </div>
-          </div>
-      </nav>
-      <div class="container">      
-        <form action="/Aerolinea/AirlineService?action=userLogin" class="well form-horizontal"  method="POST"  id="formulario">
-        <fieldset>
-        <!-- Nombre Formulario -->
-        <legend align="center">Ingresar</legend>
-
-        <!-- Correo -->
-
-        <div class="form-group">
-            <label class="col-md-4 control-label">Correo Electronico</label>
-            <div class="col-md-4 inputGroupContainer">
-                <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
+        <header>
+            <div class="container"><h1>&nbsp;&nbsp;Baratísimo <span class="glyphicon glyphicon-plane avion"></span></h1></div>
+        </header>
+        <!-- Menu de Navegacion -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.jsp">Principal</a></li>
+                        <li><a href="informacion.jsp">Información</a></li>
+                        <li><a href="historia.jsp">Historia</a></li>
+                        <li><a href="contacto.jsp">Contacto</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        
-        <!-- Password-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" >Contraseña</label>
-            <div class="col-md-4 inputGroupContainer">
-                <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input id="password" name="password" placeholder="********" class="form-control" type="password">
-                </div>
-            </div>
-        </div>
+        </nav>
+        <div class="container">      
+            <form action="/Aerolinea/AirlineService?action=userLogin" class="well form-horizontal"  method="POST"  id="formulario">
+                <fieldset>
+                    <!-- Nombre Formulario -->
+                    <legend align="center">Ingresar</legend>
 
-        <!-- Button -->
-        <div class="form-group">
-            <label class="col-md-4 control-label"></label>
-            <div class="col-md-4" align="center">
-            <button id="submit" type="submit" class="btn btn-success" value="IniciarSesion">Iniciar Sesión</button>
-            </div>
-        </div>
+                    <!-- Correo -->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Correo Electronico</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" >Contraseña</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="password" name="password" placeholder="********" class="form-control" type="password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4" align="center">
+                            <button id="submit" type="submit" class="btn btn-success" value="IniciarSesion">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                    <br>
+                    <p align="center">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a><span class="fontawesome-arrow-right"></span></p>
+                </fieldset>
+            </form>
+            <!-- .......................................................................................................-->
+        </div><!-- /.container -->
         <br>
-        <p align="center">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a><span class="fontawesome-arrow-right"></span></p>
-        </fieldset>
-        </form>
-<!-- .......................................................................................................-->
-      </div><!-- /.container -->
-      <br>
-      <!-- Footer -->
-      <div class="container">
-        <footer class="footer">
-          <p>&copy; 2017 Baratísimo, Inc.</p>
-        </footer>
-      </div>
+        <!-- Footer -->
+        <div class="container">
+            <footer class="footer">
+                <p>&copy; 2017 Baratísimo, Inc.</p>
+            </footer>
+        </div>
     </body>
 </html>
