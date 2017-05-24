@@ -13,7 +13,7 @@
         <%@ include file="Imports.jspf" %> 
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCJPWUmBSUk3VbURUYaADFq2ois9Zcl--I &callback=initMap"></script>
         <script type="text/javascript" src="js/Bootstrap-datepicker.js"></script>
