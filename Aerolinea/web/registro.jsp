@@ -20,40 +20,141 @@
     </head>
     <body>
        <%@ include file="Header.jspf" %>
-      <!-- ....................................Formulario Contacto............................................... -->
-        <div class="container-fluid">
-        <div class="row">
-        <div class="col-sm-8 col-md-10 main">
-        <h1 class="page-header">Registro</h1>
-                   <div id="avion" class="form-group">
-                       <form>
-                        <label class="control-label">Usuario</label><input type="text" class ="form-control" id="usuario" placeholder="Ingrese nombre de usuario"><br>
-                        <label class="control-label">Contraseña</label><input type="password" class ="form-control" id="password" placeholder="Ingrese la contraseña"> <br>
-                        <label class="control-label">Nombre</label><input type="text" class ="form-control" id="nombre" placeholder="Ingrese su nombre"> <br>
-                        <label class="control-label">Apellidos</label><input type="text" class ="form-control" id="apellidos" placeholder="Ingrese sus apellidos"><br>
-                        <label class="control-label">Correo</label><input type="text" class ="form-control" id="correo" placeholder="Ingrese su correo electronico"> <br>
-                        <label class="control-label">Fecha de Nacimiento</label>
-                        <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span></div><br>
-                        <label class="control-label">Telefono  </label><input type="text" class ="form-control" id="telefono" placeholder="Ingrese su número de telefono"><br>
-                        <label class="control-label">Celular  </label><input type="text" class ="form-control" id="celular" placeholder="Ingrese su número de celular"><br>
-                        <center>
-                        <h3>Direccion</h3>
-                        <div id="map"action="javascript:initMap();"></div>
-                        </center>
-                        <br>
-                        <button class="btn btn-success" id="Registrar" onclick="controller.UsuarioAdd();">Registrar</button>
-                       </form>
-                   </div>
-       <!-- .......................................................................................................-->
-        <p align="center">¿Ya tiene una cuenta? <a href="login.jsp">Inicia sesión</a><span class="fontawesome-arrow-right"></span></p>
-        </div><!-- /.container -->
-        </div>
-        </div>
-      <br>
+        <!-- ....................................Formulario Contacto............................................... -->
+      <div class="container">
+
+    <form class="well form-horizontal"  method="POST"  id="formulario">
+      <fieldset>
+
+        <!-- Nombre Formulario -->
+        <legend align="center">Registro</legend>
+
+        <!-- Usuario -->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Usuario</label>
+  <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input id="usuario" name="usuario" placeholder="Usuario" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+
+    <!-- Password-->
+<div class="form-group">
+  <label class="col-md-4 control-label" >Contraseña</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input id="password" name="password" placeholder="********" class="form-control" type="password">
+    </div>
+  </div>
+</div>
+   <!-- Nombre -->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Nombre</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input id="nombre"  name="nombre" placeholder="Nombre" class="form-control"  type="text">
+      </div>
+    </div>
+</div>
+
+    <!-- Apellido-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Apellidos</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+
+<!-- Correo-->
+  <div class="form-group">
+  <label class="col-md-4 control-label">Correo Electrónico</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+<!-- Fecha de nacimiento-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Fecha de Nacimiento</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
+                <input id="nacimiento "type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+      </div>
+  </div>
+</div>
+  <!-- Telefono-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Teléfono</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <input id="telefono" name="telefono" placeholder="(562)8990-3452" class="form-control" type="text">
+    </div>
+  </div>
+</div>
+<!-- Celular-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Celular</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+        <input id="celular" name="celular" placeholder="(562)8990-3452" class="form-control" type="text">
+    </div>
+  </div>
+</div>
+
+    <!-- Direccion-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Direccion</label>
+    <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+        <input id="direccion" name="direccion" placeholder="Direccion" class="form-control"  type="text" disabled>
+    </div>
+  </div>
+</div>
+
+<!--Mapa....................................................................... -->
+<center>
+<h3>Direccion</h3>
+    <div id="map"action="javascript:initMap();"></div>
+    </center>
+    <br>
+<!--............................................. -->
+<!-- Success message -->
+<div class="alert alert-success" role="alert" id="exito">Exito al enviar <i class="glyphicon glyphicon-thumbs-up"></i> Gracias por contactarnos, nos comunicaremos pronto</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4" align="center">
+    <button id="Registrar" class="btn btn-primary" onclick="controller.UsuarioAdd();">Registrar<span class="glyphicon glyphicon-save"></span></button>
+  </div>
+</div>
+<p align="center">¿Ya tiene una cuenta? <a href="login.jsp">Inicia sesión</a><span class="fontawesome-arrow-right"></span></p>
+
+</fieldset>
+</form>
+<!-- .......................................................................................................-->
+
       <!-- Footer -->
       <div class="container">
         <footer class="footer">
@@ -89,7 +190,10 @@
         }
         function placeMarker(position, map,marker) {
             var geocoder = new google.maps.Geocoder;
-            var infowindow = new google.maps.InfoWindow;
+            var infowindow = new google.maps.InfoWindow({
+            content: 'An InfoWindow'
+            });
+            infowindow.close();
             marker.setPosition(position);
             geocodeLatLng(geocoder,map,infowindow,position,marker);
             map.panTo(position);
@@ -132,10 +236,9 @@
 	Controller: function(model,view){
 		this.model=model;
 		this.view=view;
-                Proxy.getUsuarios(function (result) {
+                /*Proxy.getUsuarios(function (result) {
                 model.usuarios = result;
-                 //view.showAviones();
-                });
+                });*/
                 this.initUsuario();
 	},
         initUsuario:function (){
@@ -152,9 +255,9 @@
             this.model.usuario.apellidos=this.view.document.getElementById("apellidos").value;
             this.model.usuario.correo=this.view.document.getElementById("correo").value;
             this.model.usuario.fecha_nac=this.view.document.getElementById("fechaNacimiento").value;
-            this.model.usuario.direccion= "Heredia";
             this.model.usuario.telefono=this.view.document.getElementById("telefono").value;
             this.model.usuario.celular=this.view.document.getElementById("celular").value;
+            this.model.usuario.direccion= this.view.document.getElementById("direccion").value;
             this.model.usuario.tipo=1;
             Proxy.UsuarioAdd(this.model.usuario,function(result){
                 document.location = "/Aerolinea/registro.jsp"
