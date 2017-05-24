@@ -158,8 +158,6 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
   `codigo_asiento` INT NOT NULL,
   `codigo_asiento2` INT NULL,
   `codigo_tiquete` INT NOT NULL,
-  `numeroAsiento1` INT NOT NULL,
-  `numeroAsiento2` INT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `numero_viaje1_idx` (`numero_viaje1` ASC),
   INDEX `numero_viaje2_idx` (`numero_viaje2` ASC),
@@ -197,6 +195,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 /*INSERT DE CIUDADES------------------------------*/
 insert into ciudad values("SJO","Costa Rica","San Jose");
 insert into ciudad values("MIA","USA","Miami");
