@@ -11,17 +11,23 @@ import java.io.Serializable;
  */
 public class Asiento implements Serializable, Jsonable{
     int codigo;
-    String numero;
+    int numero;
     boolean estado;
     Viaje viaje;
 
-    public Asiento(int codigo, String numero, boolean estado, Viaje viaje) {
+    public Asiento(int codigo, int numero, boolean estado, Viaje viaje) {
         this.codigo = codigo;
         this.numero = numero;
         this.estado = estado;
         this.viaje = viaje;
     }
 
+    public Asiento(int numero, boolean estado, Viaje viaje) {
+        this.numero = numero;
+        this.estado = estado;
+        this.viaje = viaje;
+    }
+    
     public Asiento() {
     }
 
@@ -29,7 +35,7 @@ public class Asiento implements Serializable, Jsonable{
         return codigo;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
@@ -45,7 +51,7 @@ public class Asiento implements Serializable, Jsonable{
         this.codigo = codigo;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
