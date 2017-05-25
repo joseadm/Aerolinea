@@ -10,8 +10,8 @@
 
 .jumbo {
   background-color: #006699;
-  color: white;
   border-radius: 5px;
+  color: black;
 }
 .display-table{
     border-collapse: separate;

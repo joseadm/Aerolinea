@@ -12,16 +12,16 @@
         <title>Baratísimo</title>
         <%@ include file="Imports.jspf" %>    
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+        <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <!--<script type="text/javascript" src="js/IndexMVC.js"></script>-->
-        <script type="text/javascript" src="js/Bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
     </head>
     <body>
@@ -58,52 +58,52 @@
         <hr>
         <!-- Search Option -->
         <div class="container jumbo">
-            <h3>Vuelo</h3>
+            <h2>Vuelo</h2>
             <div class="row">
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <p>Origen</p>
+                    <h4>Origen</h4>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
                         <select id="origen" name="origen" class="form-control" ></select>
                     </div> <br>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <p>Destino</p>
+                    <h4>Destino</h4>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
                         <select id="destino" name="destino" class="form-control" ></select>
                     </div> <br>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <p>Tipo</p>
-                    <h4><input type="radio" id="vuelta" name="tipo" value="vuelta"> Ida y vuelta &nbsp;&nbsp;<input type="radio" id="ida" name="tipo" value="ida"> Ida</h4>
+                    <h4>Tipo</h4>
+                    <h4><input type="radio" id="vuelta" name="tipo" value="vuelta"> Ida y vuelta &nbsp;&nbsp;<input type="radio" id="ida" name="tipo" value="ida"> Solo Ida</h4>
                 </div>
             </div>
             <div class="row">     
                 <div class='col-xs-12 col-sm-4 col-md-4'>
-                    <p>Fecha ida</p>
+                    <h4>Fecha ida</h4>
                     <div class="form-group">
                         <div class='input-group date' id='fecha_ida'>
                             <input type='text' class="form-control" />
                             <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="glyphicon-calendar glyphicon"></span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class='col-xs-12 col-sm-4 col-md-4'>
-                    <p>Fecha regreso</p>
+                    <h4>Fecha regreso</h4>
                     <div class="form-group">
                         <div class='input-group date' id='fecha_regreso'>
                             <input type='text' class="form-control" />
                             <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="glyphicon-calendar glyphicon"></span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <p>Número de Pasajeros</p>
+                    <h4>Número de Pasajeros</h4>
                     <div class="form-group">
                         <select class="form-control" id="listPassengers" name="passengers">
                             <option>1</option>
@@ -144,6 +144,7 @@
                 <p>&copy; 2017 Baratísimo, Inc.</p>
             </footer>
         </div>
+        
         <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
@@ -152,19 +153,22 @@
         </script>
         <script type="text/javascript">
             $(function () {
-                var start = new Date();
-                var end = new Date(new Date().setYear(start.getFullYear() + 1));
-                $('#fecha_ida').datepicker({
-                    startDate: start,
-                    endDate: end,
-                    format: 'dd/MM/yyyy'
+                $('#fecha_ida').datetimepicker({
+                    minDate: moment(),
+                    format: 'DD/MM/YYYY',
+                    useCurrent: false
                 });
 
-                $('#fecha_regreso').datepicker({
-                    startDate: start,
-                    endDate: end,
-                    format: 'dd/MM/yyyy',
+                $('#fecha_regreso').datetimepicker({
+                    format: 'DD/MM/YYYY',
                     useCurrent: false
+                });
+                
+                $("#fecha_ida").on("dp.change", function (e) {
+                    $('#fecha_regreso').data("DateTimePicker").minDate(e.date);
+                });
+                $("#fecha_regreso").on("dp.change", function (e) {
+                    $('#fecha_ida').data("DateTimePicker").maxDate(e.date);
                 });
             });
         </script> 
