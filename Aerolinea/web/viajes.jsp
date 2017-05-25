@@ -12,8 +12,11 @@
         <title>Baratísimo</title>
         <%@ include file="Imports.jspf" %> 
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
     </head>
     <body>
         <%@ include file="Header.jspf" %>
@@ -32,141 +35,156 @@
                 <div class="col-sm-8 col-md-10 main">
                     <h1 class="page-header">Viajes</h1>
                     <div class="form-group">
-                        <label class="control-label">Fecha</label><input type="text" class ="form-control" id="fecha" placeholder="Ingrese la fecha"> <br>
-                        <label class="control-label">Avion</label><input type="text" class ="form-control" id="avion" placeholder="Ingrese el avion"> <br>
-                        <label class="control-label">Vuelo</label><input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el vuelo"><br>
-                        <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
-                        <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Numero Viaje</th>
-                                    <th>Numero Vuelo</th>
-                                    <th>Ciudad Origen</th> <!--OPCIONAL -->
-                                    <th>Ciudad Destino</th> 
-                                    <th>Avion</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaViajes">
-                                <!-- Contenido de la tabla -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <label class="control-label">Avion</label><input type="text" class ="form-control" id="avion" placeholder="Ingrese el avion"> <br>
+                    <label class="control-label">Vuelo</label><input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el vuelo"><br>
+                    <label class="col-md-4 control-label">Fecha</label><br><br>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class='input-group date' id='fechaVuelo' name="fechaVuelo">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div><br><br>
+                    <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
+                    <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Numero Viaje</th>
+                                <th>Numero Vuelo</th>
+                                <th>Ciudad Origen</th> <!--OPCIONAL -->
+                                <th>Ciudad Destino</th> 
+                                <th>Avion</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaViajes">
+                            <!-- Contenido de la tabla -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <hr>
-        <br>
-        <!-- Footer -->
-        <div class="container">
-            <footer class="footer">
-                <p>&copy; 2017 Baratisimo, Inc.</p>
-            </footer>
-        </div>
+    </div>
+    <hr>
+    <br>
+    <!-- Footer -->
+    <div class="container">
+        <footer class="footer">
+            <p>&copy; 2017 Baratisimo, Inc.</p>
+        </footer>
+    </div>
 
 
-        <script> // Model
-            function Model() {
-                this.Model();
+    <script> // Model
+        function Model() {
+            this.Model();
+        }
+
+        Model.prototype = {
+            Model: function () {
+                this.viajes = [];
+            }
+        };
+    </script>
+    <script> // Controller
+        function Controller(model, view) {
+            this.Controller(model, view);
+        }
+
+        Controller.prototype = {
+            Controller: function (model, view) {
+                this.model = model;
+                this.view = view;
+                Proxy.getViajes(function (result) {
+                    model.viajes = result;
+                    view.showViajes();
+                });
+                this.initViaje();
+            },
+            initViaje: function () {
+                var model = this.model;
+                model.viaje = new Viaje();
+            },
+
+            ViajeAdd: function () {
+                var model = this.model;
+                var view = this.view;
+                this.model.viaje.fecha = this.view.document.getElementById("fecha").value;
+                this.model.viaje.avion = this.view.document.getElementById("avion").value;
+                this.model.viaje.vuelo = this.view.document.getElementById("vuelo").value;
+                Proxy.ViajeAdd(this.model.viaje, function (result) {
+                    document.location = "/Aerolinea/viajes.jsp";
+                    view.showMessage();
+                });
+
+            },
+            LimpiaPantalla: function () {
+                view.clean();
             }
 
-            Model.prototype = {
-                Model: function () {
-                    this.viajes = [];
-                }
-            };
-        </script>
-        <script> // Controller
-            function Controller(model, view) {
-                this.Controller(model, view);
-            }
+        };
+    </script>
+    <script> // View
+        var model;
+        var controller;
 
-            Controller.prototype = {
-                Controller: function (model, view) {
-                    this.model = model;
-                    this.view = view;
-                    Proxy.getViajes(function (result) {
-                        model.viajes = result;
-                        view.showViajes();
-                    });
-                    this.initViaje();
-                },
-                initViaje: function () {
-                    var model = this.model;
-                    model.viaje = new Viaje();
-                },
+        function pageLoad(event) {
+            model = new Model();
+            controller = new Controller(model, window);
+            showViajes();
+        }
 
-                ViajeAdd: function () {
-                    var model = this.model;
-                    var view = this.view;
-                    this.model.viaje.fecha = this.view.document.getElementById("fecha").value;
-                    this.model.viaje.avion = this.view.document.getElementById("avion").value;
-                    this.model.viaje.vuelo = this.view.document.getElementById("vuelo").value;
-                    Proxy.ViajeAdd(this.model.viaje, function (result) {
-                        document.location = "/Aerolinea/viajes.jsp";
-                        view.showMessage();
-                    });
+        function showViajes() {
 
-                },
-                LimpiaPantalla: function () {
-                    view.clean();
-                }
+            var tr;
+            var tabla;
+            var td;
 
-            };
-        </script>
-        <script> // View
-            var model;
-            var controller;
+            for (var index in model.viajes) {
+                // ----------Agregar nueva fila----------------
+                tabla = document.getElementById("tablaViajes");
+                tr = document.createElement("tr");
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(model.viajes[index].numero_viaje));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_origen.nombre));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_destino.nombre));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(model.viajes[index].avion.placa));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(model.viajes[index].fecha));
+                tr.appendChild(td);
 
-            function pageLoad(event) {
-                model = new Model();
-                controller = new Controller(model, window);
-                showViajes();
-            }
-
-            function showViajes() {
-
-                var tr;
-                var tabla;
-                var td;
-
-                for (var index in model.viajes) {
-                    // ----------Agregar nueva fila----------------
-                    tabla = document.getElementById("tablaViajes");
-                    tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].numero_viaje));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_origen.nombre));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_destino.nombre));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].avion.placa));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].fecha));
-                    tr.appendChild(td);
-
-                    tabla.appendChild(tr);
-
-                }
+                tabla.appendChild(tr);
 
             }
-            function showMessage() {
-                window.alert("Registro exitoso");
-            }
+
+        }
+        function showMessage() {
+            window.alert("Registro exitoso");
+        }
 
 
-            document.addEventListener("DOMContentLoaded", pageLoad);
-        </script> 
-    </body>
+        document.addEventListener("DOMContentLoaded", pageLoad);
+    </script> 
+    <script type="text/javascript">
+        $('#fechaVuelo').datetimepicker({
+            minDate: moment(),
+            format: 'DD/MM/YYYY',
+            useCurrent: false
+        });
+    </script> 
+</body>
 </html>

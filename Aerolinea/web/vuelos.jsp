@@ -12,8 +12,11 @@
         <title>Baratísimo</title>
         <%@ include file="Imports.jspf" %> 
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
     </head>
     <body>
         <%@ include file="Header.jspf" %>
@@ -36,8 +39,28 @@
                         <label class="control-label">Ciudad Destino</label><input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese la ciudad de destino"><br>
                         <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
                         <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
-                        <label class="control-label">Duracion</label><input type="text" class ="form-control" id="duracion" placeholder="Ingrese la duracion de vuelo"><br>
-                        <label class="control-label">Hora</label><input type="text" class ="form-control" id="hora" placeholder="Ingrese la hora"> <br>
+                        <div class="form-group">
+                        <label class="col-md-4 control-label">Dia y Hora</label><br><br>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class='input-group date' id='hora' name="hora">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div> <br><br>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-md-4 control-label">Duracion</label><br><br>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class='input-group date' id='duracion' name="duracion">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div> <br>
+                        </div>
                         <label class="control-label">Oferta</label><input type="text" class ="form-control" id="oferta" placeholder="Ingrese la oferta"><br>
                         <button class="btn btn-success" id="agregarRuta">Agregar</button>
                         <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
@@ -72,7 +95,15 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
-
+        <script type="text/javascript">
+                $('#hora').datetimepicker({
+                    minDate: moment(),
+                    useCurrent: false
+                });
+                $('#duracion').datetimepicker({
+                    format: 'LT'
+                });
+        </script> 
         <script> // Model
             function Model() {
                 this.Model();
