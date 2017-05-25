@@ -35,26 +35,37 @@
                                 <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
                                 <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Dia y Hora</label><br><br>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class='input-group date' id='hora' name="hora">
-                                            <input type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
+                                    <div class="row">
+                                        <label class="col-md-4 control-label">Dia</label>
+                                        <label class="col-md-4 control-label">Hora</label>
+                                        <label class="col-md-4 control-label">Duracion</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class='input-group date' id='dia' name="dia">
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div> <br><br>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Duracion</label><br><br>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class='input-group date' id='duracion' name="duracion">
-                                            <input type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-time"></span>
-                                            </span>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class='input-group date' id='hora' name="hora">
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div> <br>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class='input-group date' id='duracion' name="duracion">
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div> <br>
+                                    </div>
                                 </div>
                                 <label class="control-label">Oferta</label><input type="text" class ="form-control" id="oferta" placeholder="Ingrese la oferta"><br>
                                 <button class="btn btn-success" id="agregarRuta">Agregar</button>
@@ -71,6 +82,7 @@
                                             <th>Precio</th>
                                             <th>Duracion</th>
                                             <th>Hora</th>
+                                            <th>Dia</th>
                                             <th>Oferta</th>
                                         </tr>
                                     </thead>
@@ -93,12 +105,16 @@
             </footer>
         </div>
         <script type="text/javascript">
-            $('#hora').datetimepicker({
+            $('#dia').datetimepicker({
                 minDate: moment(),
+                format: 'dddd',
                 useCurrent: false
             });
+            $('#hora').datetimepicker({
+                format: 'hhss'
+            });
             $('#duracion').datetimepicker({
-                format: 'LT'
+                format: 'hhss'
             });
         </script> 
         <script> // Model
@@ -137,10 +153,11 @@
                     this.model.vuelo.ciudad_destino = this.view.document.getElementById("ciudad_destino").value;
                     this.model.vuelo.estado = this.view.document.getElementById("estado").value;
                     this.model.vuelo.precio = this.view.document.getElementById("precio").value;
-                    this.model.vuelo.duracion = this.view.document.getElementById("duracion").value;
-                    this.model.vuelo.hora = this.view.document.getElementById("hora").value;
+                    this.model.vuelo.duracion = $("#duracion").find("input").val();
+                    this.model.vuelo.hora = $("#hora").find("input").val();
                     this.model.vuelo.oferta = this.view.document.getElementById("oferta").value;
                     this.model.vuelo.imagen = "NOT YET";
+                     this.model.vuelo.dia = $("#dia").find("input").val();
                     Proxy.VueloAdd(this.model.vuelo, function (result) {
                         document.location = "/Aerolinea/vuelos.jsp";
                         view.showMessage();
@@ -189,6 +206,9 @@
                     tr.appendChild(td);
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.vuelos[index].hora));
+                    tr.appendChild(td);
+                    td = document.createElement("td");
+                    td.appendChild(document.createTextNode(model.vuelos[index].dia));
                     tr.appendChild(td);
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.vuelos[index].oferta));

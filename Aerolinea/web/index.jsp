@@ -143,7 +143,7 @@
                 <p>&copy; 2017 Baratísimo, Inc.</p>
             </footer>
         </div>
-        
+
         <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
@@ -154,15 +154,15 @@
             $(function () {
                 $('#fecha_ida').datetimepicker({
                     minDate: moment(),
-                    format: 'DD/MM/YYYY',
+                    format: 'YYYY-MM-DD dddd',
                     useCurrent: false
                 });
 
                 $('#fecha_regreso').datetimepicker({
-                    format: 'DD/MM/YYYY',
+                    format: 'DD/MM/YYYY dddd',
                     useCurrent: false
                 });
-                
+
                 $("#fecha_ida").on("dp.change", function (e) {
                     $('#fecha_regreso').data("DateTimePicker").minDate(e.date);
                 });
@@ -211,11 +211,15 @@
                     var view = this.view;
                     var radio1 = document.getElementById("ida");
                     var radio2 = document.getElementById("vuelta");
-                    var ida = document.getElementById("fecha_ida");
-                    var regreso = document.getElementById("fecha_regreso");
+                    var ida = $("#fecha_ida").find("input").val().split(" ");
+                    var regreso = $("#fecha_regreso").find("input").val().split(" ");
+                    var diaIda = ida[1];
+                    var fechaIDa = ida[0];
+                    var diaVuelta = regreso[1];
+                    var fechaVuela = regreso[0];
 
                     if (radio1.checked) {
-                        Proxy.viajesSearch(origen, destino, function (result) {
+                        Proxy.viajesSearch(origen, destino,diaIda,fechaIDa, function (result) {
                             model.buscados = result;
                             view.showBuscado();
                         });

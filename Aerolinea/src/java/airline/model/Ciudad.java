@@ -50,9 +50,6 @@ public class Ciudad implements Serializable, Jsonable {
     @Override
     public String toString() {
         return  codigo + nombre + pais;
-    }
-
-    
-    
+    } 
     
 }

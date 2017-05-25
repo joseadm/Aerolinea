@@ -125,13 +125,15 @@ Proxy.getVuelos = function(callBack) {
   AJAX_req.send();
 };
 
-Proxy.viajesSearch = function(origen, destino,callBack) {
+Proxy.viajesSearch = function(origen, destino,diaIda,fechaIda,callBack) {
    $.ajax({
       url: '/Aerolinea/AirlineService?action=viajeListSearch',
       data: {
          format: 'json',
          origen: origen,
-         destino: destino
+         destino: destino,
+         diaIda: diaIda,
+         fechaIda : fechaIda
       },
       dataType: 'text',
       type: 'POST',

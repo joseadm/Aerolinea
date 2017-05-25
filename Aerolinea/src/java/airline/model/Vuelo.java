@@ -18,12 +18,13 @@ public class Vuelo implements Serializable, Jsonable{
     Ciudad ciudad_destino;
     boolean estado;
     int precio;
-    String duracion;
-    Date hora;
+    int duracion;
+    int hora;
     boolean oferta; // si el vuelo esta en oferta lo tira en el carrusel
     String imagen; //Direccion de la imagen
+    String dia;
 
-    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, String duracion, Date hora, boolean oferta, String imagen) {
+    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, int duracion, int hora, boolean oferta, String imagen, String dia) {
         this.numero_vuelo = numero_vuelo;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
@@ -33,28 +34,13 @@ public class Vuelo implements Serializable, Jsonable{
         this.hora = hora;
         this.oferta = oferta;
         this.imagen = imagen;
+        this.dia = dia;
     }
-
+    
     public Vuelo() {
     }
 
     public int getNumero_vuelo() {
-        return numero_vuelo;
-    }
-
-    public Date getHora() {
-        return hora;
-    }
-
-    public boolean isOferta() {
-        return oferta;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-    
-    public int getCodigo() {
         return numero_vuelo;
     }
 
@@ -65,7 +51,7 @@ public class Vuelo implements Serializable, Jsonable{
     public Ciudad getCiudad_destino() {
         return ciudad_destino;
     }
- 
+
     public boolean isEstado() {
         return estado;
     }
@@ -74,14 +60,30 @@ public class Vuelo implements Serializable, Jsonable{
         return precio;
     }
 
-    public String getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setCodigo(int numero_vuelo) {
+    public int getHora() {
+        return hora;
+    }
+
+    public boolean isOferta() {
+        return oferta;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setNumero_vuelo(int numero_vuelo) {
         this.numero_vuelo = numero_vuelo;
     }
-    
+
     public void setCiudad_origen(Ciudad ciudad_origen) {
         this.ciudad_origen = ciudad_origen;
     }
@@ -98,15 +100,11 @@ public class Vuelo implements Serializable, Jsonable{
         this.precio = precio;
     }
 
-    public void setDuracion(String duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
-    }  
-
-    public void setNumero_vuelo(int numero_vuelo) {
-        this.numero_vuelo = numero_vuelo;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(int hora) {
         this.hora = hora;
     }
 
@@ -117,5 +115,9 @@ public class Vuelo implements Serializable, Jsonable{
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+  
 }

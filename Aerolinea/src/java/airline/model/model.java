@@ -137,7 +137,7 @@ public class model {
     private static Vuelo toFlights(ResultSet rs) throws Exception{
        try {
         Vuelo obj= new Vuelo();
-       obj.setCodigo(rs.getInt("numeroVuelo"));
+       obj.setNumero_vuelo(rs.getInt("numeroVuelo"));
        Ciudad ciudad1= new Ciudad();
        ciudad1.setCodigo(rs.getString("ciudadOrigen"));
        ciudad1 = selectCity(ciudad1.getCodigo());
@@ -148,10 +148,11 @@ public class model {
        obj.setCiudad_destino(ciudad2);
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));
-       obj.setDuracion(rs.getString("duracion"));
-       obj.setHora(rs.getDate("hora"));
+       obj.setDuracion(rs.getInt("duracion"));
+       obj.setHora(rs.getInt("hora"));
        obj.setOferta(rs.getBoolean("oferta"));
        obj.setImagen(rs.getString("imagen"));
+       obj.setDia(rs.getString("dia"));
        return obj;
        } catch(SQLException ex) {
             return null;
@@ -189,7 +190,7 @@ public class model {
         }
        return travels;
    }
-   public static List<Viaje> searchTravels(String origen,String destino) throws Exception{
+   public static List<Viaje> searchTravels(String origen,String destino,String diaIda,String fechaIda) throws Exception{
        List<Viaje> travels;
        travels = new ArrayList();
         try {
@@ -197,7 +198,7 @@ public class model {
                     + " Vuelo vu on vi.numero_vuelo = vu.numeroVuelo "
                     + "inner join Ciudad c1 on vu.ciudadOrigen = c1.codigo "
                     + "inner join Ciudad c2 on vu.ciudadDestino = c2.codigo where c1.nombre='"
-                    + origen+"' and c2.nombre='"+destino+"'";
+                    + origen+"' and c2.nombre='"+destino+"' and vu.dia='"+diaIda+"' and vi.fecha='"+fechaIda+"'";
             ResultSet rs =  viajes.executeQuery(sql);
             while (rs.next()) {
                 travels.add(toTravels(rs));

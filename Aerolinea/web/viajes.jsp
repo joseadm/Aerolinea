@@ -110,7 +110,7 @@
                 ViajeAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    this.model.viaje.fecha = this.view.document.getElementById("fecha").value;
+                    this.model.viaje.fecha = $("#fechaVuelo").find("input").val();
                     this.model.viaje.avion = this.view.document.getElementById("avion").value;
                     this.model.viaje.vuelo = this.view.document.getElementById("vuelo").value;
                     Proxy.ViajeAdd(this.model.viaje, function (result) {
