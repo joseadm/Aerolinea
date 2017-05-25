@@ -1,6 +1,6 @@
 
-function Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,tipo){ 
-  this.Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,tipo);
+function Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telefono,celular,tipo){ 
+  this.Usuario(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telefono,celular,tipo);
 }
 
 Usuario.prototype={ 
@@ -11,10 +11,10 @@ Usuario.prototype={
 	correo:"",
 	fecha_nac:"",
 	direccion:"",
-	telf_trabajo:"",
-	celular:"",
+	telefono:"",
+	celular:0,
         tipo:0,
-  Usuario: function(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telf_trabajo,celular,tipo){
+  Usuario: function(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telefono,celular,tipo){
         this.usuario=usuario;
 	this.contrasena=contrasena;
         this.nombre=nombre;
@@ -22,7 +22,7 @@ Usuario.prototype={
 	this.correo=correo;
 	this.fecha_nac=fecha_nac;
 	this.direccion=direccion;
-	this.telf_trabajo=telf_trabajo;
+	this.telefono=telefono;
 	this.celular=celular;
         this.tipo=tipo;
   },
@@ -32,7 +32,7 @@ Usuario.prototype={
 }
 Usuario.from = function(plain){
     user = new Usuario(plain.usuario,plain.contrasena,plain.nombre,plain.apellidos,plain.correo,
-                          plain.fecha_nac,plain.direccion,plain.telf_trabajo,plain.celular,plain.tipo);
+                          plain.fecha_nac,plain.direccion,plain.telefono,plain.celular,plain.tipo);
     return user;
 };
 
@@ -46,7 +46,7 @@ Usuario.to=function(user){
 	correo: user.correo,
 	fecha_nac: user.fecha_nac,
 	direccion: user.direccion,
-	telf_trabajo: user.telf_trabajo,
+	telefono: user.telefono,
 	celular: user.celular,
         tipo: user.tipo
     };

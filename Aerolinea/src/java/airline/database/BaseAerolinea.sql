@@ -291,3 +291,6 @@ values('2017-10-12',"TI-CRLA",14);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-10-12',"TI-CRLA",15);
 
+
+
+

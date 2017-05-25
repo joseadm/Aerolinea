@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
         <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCJPWUmBSUk3VbURUYaADFq2ois9Zcl--I &callback=initMap"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDomGs0dCkbZbNVwNybUTcmtwAtDcNlm-A&callback=initMap" async defer></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
     </head>
     <body>
@@ -253,14 +253,16 @@
                         this.model.usuario.nombre = this.view.document.getElementById("nombre").value;
                         this.model.usuario.apellidos = this.view.document.getElementById("apellidos").value;
                         this.model.usuario.correo = this.view.document.getElementById("correo").value;
-                        this.model.usuario.fecha_nac = this.view.document.getElementById("fechaNacimiento").value;
+                        this.model.usuario.fecha_nac = $("#fechaNacimiento").find("input").val();
                         this.model.usuario.telefono = this.view.document.getElementById("telefono").value;
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
-                        this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
+                        //this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
+                        this.model.usuario.direccion ="Alajuela";
                         this.model.usuario.tipo = 1;
-                        Proxy.UsuarioAdd(this.model.usuario, function (result) {
-                            document.location = "/Aerolinea/registro.jsp"
+                        Proxy.UsuarioAdd(this.model.usuario,function (UsuarioNumber) {
+                            var usuario = UsuarioNumber;
                             view.showMessage();
+                            document.location = "/Aerolinea/registro.jsp";
                         });
 
                     }
