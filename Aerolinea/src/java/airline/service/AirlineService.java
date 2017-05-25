@@ -5,7 +5,6 @@
  */
 package airline.service;
 
-
 import airline.model.Asiento;
 import airline.model.Avion;
 import airline.model.Ciudad;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.console;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,21 +33,23 @@ import javax.servlet.http.*;
 @WebServlet(name = "AirlineService", urlPatterns = {"/AirlineService"})
 
 public class AirlineService extends HttpServlet {
+
     model model;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/html;charset-UTF-8");
-            try (PrintWriter out = response.getWriter()) {
+        response.setContentType("text/html;charset-UTF-8");
+        try (PrintWriter out = response.getWriter()) {
             response.setContentType("text/xml");
-            RuntimeTypeAdapterFactory<Jsonable> rta = RuntimeTypeAdapterFactory.of(Jsonable.class,"_class")
-            .registerSubtype(Ciudad.class,"Ciudad")
-            .registerSubtype(Vuelo.class,"Vuelo")
-            .registerSubtype(Avion.class,"Avion")
-            .registerSubtype(Reservacion.class,"Reservacion")
-            .registerSubtype(Tiquete.class,"Tiquete")
-            .registerSubtype(Asiento.class,"Asiento")
-            .registerSubtype(Usuario.class,"Usuario")
-            .registerSubtype(Viaje.class,"Viaje");
+            RuntimeTypeAdapterFactory<Jsonable> rta = RuntimeTypeAdapterFactory.of(Jsonable.class, "_class")
+                    .registerSubtype(Ciudad.class, "Ciudad")
+                    .registerSubtype(Vuelo.class, "Vuelo")
+                    .registerSubtype(Avion.class, "Avion")
+                    .registerSubtype(Reservacion.class, "Reservacion")
+                    .registerSubtype(Tiquete.class, "Tiquete")
+                    .registerSubtype(Asiento.class, "Asiento")
+                    .registerSubtype(Usuario.class, "Usuario")
+                    .registerSubtype(Viaje.class, "Viaje");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String accion = request.getParameter("action");
@@ -58,7 +60,8 @@ public class AirlineService extends HttpServlet {
             List<Viaje> viajes;
             List<Viaje> viajes2;
             List<Usuario> usuarios;
-            switch(accion) {
+            Usuario usuario;
+            switch (accion) {
                 case "ciudadListAll":
                     ciudades = model.selectAllCities();
                     json = gson.toJson(ciudades);
@@ -72,15 +75,15 @@ public class AirlineService extends HttpServlet {
                 case "viajeListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    viajes = model.searchTravels(origen,destino);
+                    viajes = model.searchTravels(origen, destino);
                     json = gson.toJson(viajes);
                     out.write(json);
                     break;
                 case "viajeListSearchByDestiny":
                     String origen_vuelo = request.getParameter("origen");
                     String destino_vuelo = request.getParameter("destino");
-                    viajes2 = model.searchTravels(origen_vuelo,destino_vuelo);
-                    viajes = model.searchTravels(destino_vuelo,origen_vuelo);
+                    viajes2 = model.searchTravels(origen_vuelo, destino_vuelo);
+                    viajes = model.searchTravels(destino_vuelo, origen_vuelo);
                     viajes2.forEach((v) -> {
                         viajes.add(v);
                     });
@@ -137,26 +140,55 @@ public class AirlineService extends HttpServlet {
                     break;
                 case "usuarioAdd":
                     String jsonUsuario = request.getParameter("usuario");
-                    Usuario usuario = gson.fromJson(jsonUsuario, Usuario.class);
-                    int UsuarioNumber = model.insertUsuario(usuario);
+                    Usuario user = gson.fromJson(jsonUsuario, Usuario.class);
+                    int UsuarioNumber = model.insertUsuario(user);
                     json = gson.toJson(UsuarioNumber);
                     out.write(json);
                     break;
+                case "userLogin":
+                    Usuario user1;
+                    user1 = new Usuario(request.getParameter("usuario"), request.getParameter("contrasena"), "", "", "", new Date(), "", 0, 0, 0);
+                    user1 = model.userLogin(user1);
+                    if (user1.getTipo() != 0) {
+                        request.getSession().setAttribute("usuario", user1);
+                        switch (user1.getTipo()) {
+                            case 1: // user
+                                usuario = model.userLogin(user1);
+                                request.getSession().setAttribute("usuario", usuario);
+                                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                                break;
+                            case 2: // manager
+                                request.getRequestDispatcher("/vuelos.jsp").forward(request, response);
+                                break;
+                        }
+                    } else {
+                        request.setAttribute("error", "Usuario/Clave incorrecto");
+                        request.getRequestDispatcher("/login.jsp").forward(request, response);
+                    }
+                    break;
+                case "userLogout":
+                        request.getSession().removeAttribute("usuario");
+                        request.getSession().invalidate();
+                        request.getRequestDispatcher("/index.jsp").forward(request, response);
+                    break;
             }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        catch(Exception e){System.out.println(e);}
     }
+
     @Override
     public void init() throws ServletException {
-            super.init();
-            this.model = new model();
+        super.init();
+        this.model = new model();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

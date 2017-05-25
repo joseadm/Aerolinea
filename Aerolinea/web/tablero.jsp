@@ -4,6 +4,7 @@
     Author     : AndreyCh
 --%>
 
+<%@page import="airline.model.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,56 +22,52 @@
 
     </head>
     <body>
-        <%@ include file="Header.jspf" %>
+        <%@ include file="HeaderAdmi.jspf" %>
         <!--Side Bar and content -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
-                        <li class="active"><a href="tablero.jsp">Tablero</a></li>
-                        <li><a href="aviones.jsp">Aviones</a></li>
-                        <li><a href="vuelos.jsp">Vuelos</a></li>
-                        <li><a href="ciudades.jsp">Ciudades</a></li>
-                        <li><a href="viajes.jsp">Viajes</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-8 col-md-10 main">
-                    <h1 class="page-header">Tablero</h1>
-                    <div class="panel-heading">Cinco rutas mas vendidas o reservadas</div>
-
+        <div class="container">
+            <fieldset>
+                <legend align="center">Menu Administrativo</legend>
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Cantidad facturado por mes</div>
-                                <div class="panel-body">
-                                    <div id="ventaMensual" class="canvas-wrapper">
-                                        <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                        <div class="col-sm-8 col-md-10 main">
+                            <h1 class="page-header">Tablero</h1>
+                            <div class="panel-heading">Cinco rutas mas vendidas o reservadas</div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Cantidad facturado por mes</div>
+                                        <div class="panel-body">
+                                            <div id="ventaMensual" class="canvas-wrapper">
+                                                <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Cantidad ingresos por año</div>
-                                <div class="panel-body">
-                                    <div id="ventaAnual" class="canvas-wrapper">
-                                        <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Cantidad ingresos por año</div>
+                                        <div class="panel-body">
+                                            <div id="ventaAnual" class="canvas-wrapper">
+                                                <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="panel-heading">Listado de clientes</div>
+
                         </div>
                     </div>
-
-                    <div class="panel-heading">Listado de clientes</div>
-
                 </div>
-            </div>
+                <hr>
+                <br>
+            </fieldset>
         </div>
-        <hr>
-        <br>
         <!-- Footer -->
         <div class="container">
             <footer class="footer">

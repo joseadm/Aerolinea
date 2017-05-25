@@ -46,13 +46,15 @@
                     <legend align="center">Ingresar</legend>
 
                     <!-- Correo -->
-
+                    <%if (request.getAttribute("error") != null) {%>
+                    <h4 style="color: red;text-align: center;"><%=request.getAttribute("error")%></h4>
+                    <%}%>
                     <div class="form-group">
                         <label class="col-md-4 control-label">Usuario</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="correo" name="correo" placeholder="Nombre de Usuario" class="form-control"  type="text">
+                                <input id="usuario" name="usuario" placeholder="Nombre de Usuario" class="form-control"  type="text">
                             </div>
                         </div>
                     </div>
@@ -63,7 +65,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" name="password" placeholder="********" class="form-control" type="password">
+                                <input id="contrasena" name="contrasena" placeholder="********" class="form-control" type="password">
                             </div>
                         </div>
                     </div>
@@ -88,5 +90,40 @@
                 <p>&copy; 2017 Baratísimo, Inc.</p>
             </footer>
         </div>
+        <script> // Model
+            function Model() {
+                this.Model();
+            }
+
+            Model.prototype = {
+                Model: function () {
+                }
+            };
+        </script>
+        <script> // Controller
+            function Controller(model, view) {
+                this.Controller(model, view);
+            }
+
+            Controller.prototype = {
+                Controller: function (model, view) {
+                    this.model = model;
+                    this.view = view;
+                }
+            };
+        </script>
+        <script> // View
+            var model;
+            var controller;
+            function pageLoad(event) {
+                model = new Model();
+                controller = new Controller(model, window);
+            }
+            function showErrorMessage() {
+                window.alert("Usuario incorrecto...");
+            }
+
+            document.addEventListener("DOMContentLoaded", pageLoad);
+        </script>
     </body>
 </html>

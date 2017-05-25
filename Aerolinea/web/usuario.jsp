@@ -3,7 +3,7 @@
     Created on : May 18, 2017, 12:28:13 AM
     Author     : AndreyCh
 --%>
-
+<%@ page import="airline.model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,7 @@
     </head>
     <body>
         <%@ include file="Header.jspf" %>
+        <% Usuario user1 = (Usuario) request.getSession().getAttribute("usuario");%>
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
@@ -27,15 +28,15 @@
                     <h1 class="page-header">Informacion Personal</h1>
                     <div class="table-responsive">
                         <table class="table table-striped">
-                            <tr><td><strong>Usuario</strong></td></tr>
-                            <tr><td><strong>Contraseña</strong></td></tr>
-                            <tr><td><strong>Nombre</strong></td></tr>
-                            <tr><td><strong>Apellidos</strong></td></tr>
-                            <tr><td><strong>Correo Electronico</strong></td></tr>
-                            <tr><td><strong>Fecha Nacimiento</strong></td></tr>
-                            <tr><td><strong>Direccion</strong></td></tr>
-                            <tr><td><strong>Telefono trabajo</strong></td></tr>
-                            <tr><td><strong>Celular</strong></td></tr>
+                            <tr><td><strong>Usuario</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getUsuario()%></td></tr>
+                            <tr><td><strong>Contraseña</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getContrasena()%></td></tr>
+                            <tr><td><strong>Nombre</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getNombre()%></td></tr>
+                            <tr><td><strong>Apellidos</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getApellidos()%></td></tr>
+                            <tr><td><strong>Correo Electronico</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getCorreo()%></td></tr>
+                            <tr><td><strong>Fecha Nacimiento</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getFecha_nac()%></td></tr>
+                            <tr><td><strong>Direccion</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getDireccion()%></td></tr>
+                            <tr><td><strong>Telefono trabajo</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getTelefono()%></td></tr>
+                            <tr><td><strong>Celular</strong>&nbsp;&nbsp;&nbsp;&nbsp;<%=user1.getCelular()%></td></tr>
                         </table>
                     </div>
                 </div>

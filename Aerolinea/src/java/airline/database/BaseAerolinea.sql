@@ -291,6 +291,14 @@ values('2017-10-12',"TI-CRLA",14);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-10-12',"TI-CRLA",15);
 
+insert into Usuario(nombreUsuario,contrasena,nombre,apellidos,correo,fechaNacimiento,
+direccion,telefono,celular,tipo) values ("p001","123","andrey","chaverri","andrey5757@hotmail.com",'1996-11-14',
+"alajuela",8888888,88888888,1);
+insert into Usuario(nombreUsuario,contrasena,nombre,apellidos,correo,fechaNacimiento,
+direccion,telefono,celular,tipo) values ("p002","000","andrey","chaverri","andrey5757@hotmail.com",'1996-11-14',
+"alajuela",8888888,88888888,2);
+
+
 
 
 

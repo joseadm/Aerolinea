@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -350,6 +351,24 @@ public class model {
             throw new Exception("No existen registros de usuarios");
         }
        return users;
+   }
+    public static Usuario userLogin(Usuario usuario) throws Exception{
+        try {
+            String sql="select * from "+
+                    "Usuario  u  "+
+                    "where u.nombreUsuario = '%s' and u.contrasena='%s'";
+            sql=String.format(sql,usuario.usuario,usuario.contrasena);
+            
+            ResultSet rs =  usuarios.executeQuery(sql);
+            if (rs.next()) {
+                return toUsers(rs);
+            }
+            else{
+                return new Usuario(usuario.usuario,usuario.contrasena,"","","",new Date(),"",0,0,0);
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de usuarios");
+        }
    }
      private static Usuario toUsers(ResultSet rs) throws Exception{
       try{

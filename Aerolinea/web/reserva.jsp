@@ -37,18 +37,7 @@
                         <thead class="display-head">
                             <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Hora Llegada</th><th>Duración</th></tr>
                         </thead>
-                        <!-- Datos Quemados de prueba-->
                         <tbody id="vuelosReserva">
-                            <tr>
-                                <th>1</th>
-                                <th>Boeing-737</th>
-                                <th>San Jose</th>
-                                <th>Miami</th>
-                                <th>20/05/2017</th>
-                                <th>2:00 PM</th>
-                                <th>5:00 PM</th>
-                                <th>3 horas</th>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

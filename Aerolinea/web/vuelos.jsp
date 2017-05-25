@@ -4,6 +4,7 @@
     Author     : AndreyCh
 --%>
 
+<%@page import="airline.model.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,76 +20,72 @@
         <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
     </head>
     <body>
-        <%@ include file="Header.jspf" %>
+        <%@ include file="HeaderAdmi.jspf" %>
         <!--Side Bar and content -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
-                        <li><a href="tablero.jsp">Tablero</a></li>
-                        <li ><a href="aviones.jsp">Aviones</a></li>
-                        <li class="active"><a href="vuelos.jsp">Vuelos</a></li>
-                        <li><a href="ciudades.jsp">Ciudades</a></li>
-                        <li><a href="viajes.jsp">Viajes</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-8 col-md-10 main">
-                    <h1 class="page-header">Vuelos</h1>
-                    <div class="form-group">
-                        <label class="control-label">Ciudad Origen</label><input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese la ciudad de origen"> <br>
-                        <label class="control-label">Ciudad Destino</label><input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese la ciudad de destino"><br>
-                        <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
-                        <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
-                        <div class="form-group">
-                        <label class="col-md-4 control-label">Dia y Hora</label><br><br>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class='input-group date' id='hora' name="hora">
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+        <div class="container">
+            <fieldset>
+                <legend align="center">Menu Administrativo</legend>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 col-md-10 main">
+                            <h1 class="page-header">Vuelos</h1>
+                            <div class="form-group">
+                                <label class="control-label">Ciudad Origen</label><input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese la ciudad de origen"> <br>
+                                <label class="control-label">Ciudad Destino</label><input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese la ciudad de destino"><br>
+                                <label class="control-label">Estado</label><input type="text" class ="form-control" id="estado" placeholder="Ingrese el estado"> <br>
+                                <label class="control-label">Precio</label><input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio"> <br>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Dia y Hora</label><br><br>
+                                    <div class="col-md-4 inputGroupContainer">
+                                        <div class='input-group date' id='hora' name="hora">
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div> <br><br>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Duracion</label><br><br>
+                                    <div class="col-md-4 inputGroupContainer">
+                                        <div class='input-group date' id='duracion' name="duracion">
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                            </span>
+                                        </div>
+                                    </div> <br>
+                                </div>
+                                <label class="control-label">Oferta</label><input type="text" class ="form-control" id="oferta" placeholder="Ingrese la oferta"><br>
+                                <button class="btn btn-success" id="agregarRuta">Agregar</button>
+                                <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
-                        </div> <br><br>
-                        </div>
-                        <div class="form-group">
-                        <label class="col-md-4 control-label">Duracion</label><br><br>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class='input-group date' id='duracion' name="duracion">
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Numero Vuelo</th>
+                                            <th>Ciudad Origen</th>
+                                            <th>Ciudad Destino</th>
+                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                            <th>Duracion</th>
+                                            <th>Hora</th>
+                                            <th>Oferta</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaVuelos">
+                                        <!-- Contenido de la tabla -->
+                                    </tbody>
+                                </table>
                             </div>
-                        </div> <br>
                         </div>
-                        <label class="control-label">Oferta</label><input type="text" class ="form-control" id="oferta" placeholder="Ingrese la oferta"><br>
-                        <button class="btn btn-success" id="agregarRuta">Agregar</button>
-                        <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Numero Vuelo</th>
-                                    <th>Ciudad Origen</th>
-                                    <th>Ciudad Destino</th>
-                                    <th>Estado</th>
-                                    <th>Precio</th>
-                                    <th>Duracion</th>
-                                    <th>Hora</th>
-                                    <th>Oferta</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaVuelos">
-                                <!-- Contenido de la tabla -->
-                            </tbody>
-                        </table>
                     </div>
                 </div>
-            </div>
+                <hr>
+                <br>
+            </fieldset>
         </div>
-        <hr>
-        <br>
         <!-- Footer -->
         <div class="container">
             <footer class="footer">
@@ -96,13 +93,13 @@
             </footer>
         </div>
         <script type="text/javascript">
-                $('#hora').datetimepicker({
-                    minDate: moment(),
-                    useCurrent: false
-                });
-                $('#duracion').datetimepicker({
-                    format: 'LT'
-                });
+            $('#hora').datetimepicker({
+                minDate: moment(),
+                useCurrent: false
+            });
+            $('#duracion').datetimepicker({
+                format: 'LT'
+            });
         </script> 
         <script> // Model
             function Model() {
