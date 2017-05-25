@@ -23,6 +23,7 @@ public class model {
     static Database viajes;
     static Database aviones;
     static Database usuarios;
+    static Database asientos;
     
     static {
         initCiudades();
@@ -30,6 +31,7 @@ public class model {
         initViajes();
         initAviones();
         initUsuarios();
+        initAsientos();
     }
     
     private static void initCiudades(){
@@ -46,6 +48,9 @@ public class model {
     }
     private static void initUsuarios(){
        usuarios= new Database(null, null, null);        
+    }
+     private static void initAsientos(){
+       asientos= new Database(null, null, null);        
     }
     /*--------------------------------Ciudades-----------------------------------------*/
      public static List<Ciudad> selectAllCities() throws Exception{
@@ -167,6 +172,15 @@ public class model {
         sql=String.format(sql,new SimpleDateFormat("yyyy-MM-dd").format(p.getFecha()),p.getAvion().getPlaca(),
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
+        int numeroAsiento =1;
+        Asiento spot;
+        for(int i=0 ; i < p.getAvion().getCant_filas(); i++){
+            for(int j=0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++){
+                spot = new Asiento(numeroAsiento,true,p);
+                numeroAsiento++;
+                AsientoAdd(spot);
+            }
+        }
         if (rs.next()) {
                 return rs.getInt(1);
             }
@@ -414,4 +428,28 @@ public class model {
                 return 0;
             }
     }
+     //ASientos----------------------------------------------------------------------
+      private static Asiento toSits(ResultSet rs) throws Exception{
+      try{
+       Asiento obj= new Asiento();
+       obj.setNumero(rs.getInt("numero"));
+       obj.setEstado(rs.getBoolean("estado"));
+       obj.setViaje(toTravels(rs));
+       return obj;
+       } catch(SQLException ex) {
+            return null;
+       }
+    }
+    public static int AsientoAdd(Asiento p) throws Exception{
+    String sql="insert into Asiento (numero, estado, numero_viaje) "+
+            "values('%s','%s','%s')"; 
+    sql=String.format(sql,p.getNumero(),p.isEstado(),p.getViaje().getNumero_viaje());
+    ResultSet rs = asientos.executeUpdateWithKeys(sql);
+    if (rs.next()) {
+            return rs.getInt(1);
+        }
+        else{
+            return 0;
+        }
+}
 }
