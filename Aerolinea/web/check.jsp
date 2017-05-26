@@ -66,6 +66,7 @@
                     var model = this.model;
                     model.asiento = new Asiento();
                 },
+    //}
             };
         </script>
         <script> // View
@@ -80,9 +81,9 @@
             function crearAsientos() {
                 //obtener las columnas de asientos del viaje
                 var filas = parseInt(document.getElementById("cant_filas"));
-                console.log(filas);
+                //console.log(filas);
                 var lista = document.getElementById("listaAsientos");
-                for (var i = 1; i <= filas + 2; i++) { //9 o 6
+                for (var i = 1; i <= 6 + 2; i++) { //9 o 6
                     if (i % 4 === 0)
                         crearPasillo(lista);
                     else
