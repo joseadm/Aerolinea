@@ -36,11 +36,9 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" id="listaCarousel">
                         <div class="item active">
-                            <img src="images/img1.jpg" alt="...">
+                            <img src="images/Avion.jpg" alt="...">
                             <div class="carousel-caption">
-                                <h2>Madrid Roma</h2>
-                                <p>Obten tu viaje por tan solo 200$</p>
-                                <button type="button" class="btn btn-primary">Ordenar</button>
+                            <h1>Vuelos en Promoción</h1>
                             </div>
                         </div>
                     </div>
@@ -159,7 +157,7 @@
                 });
 
                 $('#fecha_regreso').datetimepicker({
-                    format: 'DD/MM/YYYY dddd',
+                    format: 'YYYY-MM-DD dddd',
                     useCurrent: false
                 });
 
@@ -216,7 +214,7 @@
                     var diaIda = ida[1];
                     var fechaIDa = ida[0];
                     var diaVuelta = regreso[1];
-                    var fechaVuela = regreso[0];
+                    var fechaVuelta = regreso[0];
 
                     if (radio1.checked) {
                         Proxy.viajesSearch(origen, destino,diaIda,fechaIDa, function (result) {
@@ -225,7 +223,7 @@
                         });
                     }
                     if (radio2.checked) {
-                        Proxy.viajesSearchByDestiny(origen, destino, function (result) {
+                        Proxy.viajesSearchByDestiny(origen, destino,diaIda,fechaIDa,diaVuelta,fechaVuelta, function (result) {
                             model.buscados = result;
                             view.showBuscado();
                         });
@@ -241,7 +239,6 @@
                 controllerView = new AirlineController(modelView, window);
                 showPromos(); // Crea promociones en la pagina
                 addEventListeners();
-                //    loadButtons();
                 listCiudades();
                 oneWay();
             }
@@ -290,8 +287,6 @@
             }
 
             function addEventListeners() {
-                //    var correo= document.getElementById("correo");
-                //    var password = document.getElementById("password");
                 var origen = document.getElementById("origen");
                 var destino = document.getElementById("destino");
                 var fecha_ida = document.getElementById("fecha_ida");
@@ -299,18 +294,6 @@
                 var ida = document.getElementById("ida");
                 var vuelta = document.getElementById("vuelta");
                 var pasajeros = document.getElementById("listPassengers");
-
-                //	password.addEventListener("focus",doFocus);
-                //	password.addEventListener("blur",doBlur);
-                //	correo.addEventListener("focus",doFocus);
-                //	correo.addEventListener("blur",doBlur);
-
-                /*let formularioSesion = document.getElementById("formularioSesion");
-                 formularioSesion.addEventListener("submit", iniciarSesion);*/
-                //    var incioSesionBoton= document.getElementById("inicioSesion");
-                //    incioSesionBoton.addEventListener("click",login);
-                //    var cerrarSesion= document.getElementById("cerrarSesion");
-                //    cerrarSesion.addEventListener("click",logout);
                 var buscar = document.getElementById("btn-search");
                 $('#btn_search').click(function () {
                     controllerView.search();

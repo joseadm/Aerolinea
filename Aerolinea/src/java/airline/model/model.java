@@ -204,7 +204,7 @@ public class model {
         }
        return travels;
    }
-   public static List<Viaje> searchTravels(String origen,String destino,String diaIda,String fechaIda) throws Exception{
+   public static List<Viaje> searchTravels(String origen,String destino,String dia,String fecha) throws Exception{
        List<Viaje> travels;
        travels = new ArrayList();
         try {
@@ -212,7 +212,7 @@ public class model {
                     + " Vuelo vu on vi.numero_vuelo = vu.numeroVuelo "
                     + "inner join Ciudad c1 on vu.ciudadOrigen = c1.codigo "
                     + "inner join Ciudad c2 on vu.ciudadDestino = c2.codigo where c1.nombre='"
-                    + origen+"' and c2.nombre='"+destino+"' and vu.dia='"+diaIda+"' and vi.fecha='"+fechaIda+"'";
+                    + origen+"' and c2.nombre='"+destino+"' and vu.dia='"+dia+"' and vi.fecha='"+fecha+"'";
             ResultSet rs =  viajes.executeQuery(sql);
             while (rs.next()) {
                 travels.add(toTravels(rs));
