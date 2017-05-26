@@ -172,6 +172,7 @@ public class model {
        obj.setOferta(rs.getBoolean("oferta"));
        obj.setImagen(rs.getString("imagen"));
        obj.setDia(rs.getString("dia"));
+       obj.setDescuento(rs.getInt("descuento"));
        return obj;
        } catch(SQLException ex) {
             return null;
