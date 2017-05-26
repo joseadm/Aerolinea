@@ -8,7 +8,7 @@ function Asiento(codigo,numero,estado,numero_viaje){
 }
 Asiento.prototype={
         codigo:0,
-        numero:"",
+        numero:0,
         estado:false,
         numero_viaje:0,
 	Asiento:function(codigo,numero,estado,numero_viaje){
