@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Vuelo` (
   `oferta` TINYINT(1) NOT NULL,
   `imagen` TEXT NULL,
   `dia` VARCHAR(20) NOT NULL,
+  `descuento` integer NOT NULL, 
   PRIMARY KEY (`numeroVuelo`),
   INDEX `ciudadOrigen_idx` (`ciudadOrigen` ASC),
   INDEX `ciudadDestino_idx` (`ciudadDestino` ASC),
@@ -96,7 +97,6 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Viaje` (
   `fecha` DATE NOT NULL,
   `placa_avion` VARCHAR(45) NOT NULL,
   `numero_vuelo` INT NOT NULL,
-  `horaLlegada` INT NOT NULL,
   PRIMARY KEY (`numeroviaje`),
   INDEX `placa_avion_idx` (`placa_avion` ASC),
   INDEX `numero_vuelo_idx` (`numero_vuelo` ASC),
@@ -207,23 +207,25 @@ insert into ciudad values("VIE","Austria","Viena");
 insert into ciudad values("ROM","Italia","Roma");
 
 /*INSERT DE VUELOS--------------------------------*/
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("SJO","MIA", true, 300,230,0800,true,"NADA YET","Monday");
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("MIA","CAN", true, 200,120,0930,true,"NADA YET","Tuesday");
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("MAD","ROM", true, 500,800,1200,true,"NADA YET","Wednesday");
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("SJO","MAD", true, 450,1000,0420,true,"NADA YET","Saturday");
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("MIA","SJO", true, 200,220,1450,true,"NADA YET","Friday");
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("VIE","MAD", true, 100,600,1200,true,"NADA YET","Thurday");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("SJO","MIA", true, 300,230,0800,true,"NADA YET","Monday",0);
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("MIA","CAN", true, 200,120,0930,true,"NADA YET","Tuesday",0);
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("MAD","ROM", true, 500,800,1200,true,"NADA YET","Wednesday",0);
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("SJO","MAD", true, 450,1000,0420,true,"NADA YET","Saturday",20);
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("MIA","SJO", true, 200,220,1450,true,"NADA YET","Friday",10);
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("VIE","MAD", true, 100,600,1200,true,"NADA YET","Thurday",0);
 
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("SJO","MIA", true, 200,120,820,false,"NADA YET","Wednesday");
-insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia)
-values ("MIA","SJO", true, 500,300,1500,false,"NADA YET","Saturday");
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("SJO","MIA", true, 200,120,820,false,"NADA YET","Wednesday",0);
+insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
+values ("MIA","SJO", true, 500,300,1500,false,"NADA YET","Saturday",0);
+
+
 
 
 
@@ -257,17 +259,17 @@ insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-07-07',"TI-CRLA",5);
 
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-14',"TI-BGV",7,16);
+values('2017-06-14',"TI-BGV",7);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-10',"NV123",8,13);
+values('2017-06-10',"NV123",8);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-12',"TI-BGV98",1,14);
+values('2017-06-12',"TI-BGV98",1);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-07-14',"NV888",5,21);
+values('2017-07-14',"NV888",5);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-21',"NV654",7,18);
+values('2017-06-21',"NV654",7);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-17',"NV888",8,12);
+values('2017-06-17',"NV888",8);
 
 
 insert into Usuario(nombreUsuario,contrasena,nombre,apellidos,correo,fechaNacimiento,
