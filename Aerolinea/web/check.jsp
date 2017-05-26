@@ -31,7 +31,7 @@
                 </tbody>
             </table> --%>
             <div id="listaAsientos" class="btn-group" data-toggle="buttons">
-                
+
             </div>
             <br>
             <a href="pago.jsp" class="btn btn-sucess">Continuar</a>
@@ -39,40 +39,50 @@
 
         <script> // Model
             function Model() {
-            this.Model();
+                this.Model();
             }
 
             Model.prototype = {
-            Model: function(){
-            }
+                Model: function () {
+                    this.asientos = [];
+                }
             };
         </script>
         <script> // Controller
             function Controller(model, view) {
-            this.Controller(model, view);
+                this.Controller(model, view);
             }
 
             Controller.prototype = {
-            Controller: function(model, view){
-            this.model = model;
-            this.view = view;
-            }
-
+                Controller: function (model, view) {
+                    this.model = model;
+                    this.view = view;
+                    Proxy.getAsientos(function (result) {
+                        model.asientos = result;
+                    });
+                    this.initAsiento();
+                },
+                initAsiento: function () {
+                    var model = this.model;
+                    model.asiento = new Asiento();
+                },
             };
         </script>
         <script> // View
             var model;
             var controller;
-            function pageLoad(event){
-            model = new Model();
-            controller = new Controller(model, window);
-            crearAsientos();
+            function pageLoad(event) {
+                model = new Model();
+                controller = new Controller(model, window);
+                crearAsientos();
             }
-            
+//si el numero de viaje del asiento coincide con el numero de viaje de 'viaje' cargar los asientos de ese viaje
             function crearAsientos() {
+                //obtener las columnas de asientos del viaje
                 var filas = parseInt(document.getElementById("cant_filas"));
+                console.log(filas);
                 var lista = document.getElementById("listaAsientos");
-                for (var i = 1; i <= 6 + 2; i++) { //9 o 6
+                for (var i = 1; i <= filas + 2; i++) { //9 o 6
                     if (i % 4 === 0)
                         crearPasillo(lista);
                     else
@@ -82,6 +92,7 @@
 
             function crearFilas(lista) {
                 var tmp, tmp2, txt;
+                //obtener las filas de asientos del viaje
                 var filas = parseInt(document.getElementById("cant_asientos_por_fila"));
                 for (var i = 0; i < 12; i++) {
                     tmp = document.createElement("label");
