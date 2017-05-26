@@ -61,6 +61,7 @@ public class AirlineService extends HttpServlet {
             List<Viaje> viajes2;
             List<Usuario> usuarios;
             Usuario usuario;
+            Viaje v;
             switch (accion) {
                 case "ciudadListAll":
                     ciudades = model.selectAllCities();
@@ -90,8 +91,8 @@ public class AirlineService extends HttpServlet {
                     String fechaVuelta = request.getParameter("fechaVuelta");
                     viajes2 = model.searchTravels(origen_vuelo, destino_vuelo,diaIda1,fechaIda1);
                     viajes = model.searchTravels(destino_vuelo, origen_vuelo,diaVuelta,fechaVuelta);
-                    viajes2.forEach((v) -> {
-                        viajes.add(v);
+                    viajes2.forEach((v1) -> {
+                        viajes.add(v1);
                     });
                     json = gson.toJson(viajes);
                     out.write(json);
@@ -177,6 +178,13 @@ public class AirlineService extends HttpServlet {
                         request.getSession().invalidate();
                         request.getRequestDispatcher("/index.jsp").forward(request, response);
                     break;
+                case "getViaje":
+                    int numero = Integer.parseInt(request.getParameter("numeroV"));
+                    v = model.selectTravel(numero);
+                    json = gson.toJson(v);
+                    out.write(json);
+                    break;
+                    
             }
         } catch (Exception e) {
             System.out.println(e);

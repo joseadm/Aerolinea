@@ -80,6 +80,7 @@ public class model {
         }
        return c1;
    }
+     
     private static Ciudad toCiudad(ResultSet rs) throws Exception{
        try{
        Ciudad obj= new Ciudad();
@@ -109,6 +110,19 @@ public class model {
                 return 0;
             }
     }
+    public static Viaje selectTravel(int numero) throws Exception{
+       Viaje v1 = new Viaje();
+        try {
+            String sql="select * from Viaje v where v.numeroviaje="+numero+"";
+            ResultSet rs =  viajes.executeQuery(sql);
+            while (rs.next()) {
+                v1= toTravels(rs);
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de Viajes");
+        }
+       return v1;
+   }
     public static List<Vuelo> selectAllFlights() throws Exception{
        List<Vuelo> flights;
        flights= new ArrayList();

@@ -3,7 +3,7 @@
     Created on : May 18, 2017, 12:12:25 AM
     Author     : AndreyCh
 --%>
-
+<%@ page import="airline.model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,11 +14,13 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
         <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
@@ -38,7 +40,7 @@
                         <div class="item active">
                             <img src="images/Avion.jpg" alt="...">
                             <div class="carousel-caption">
-                            <h1>Vuelos en Promoción</h1>
+                                <h1>Vuelos en Promoción</h1>
                             </div>
                         </div>
                     </div>
@@ -127,7 +129,7 @@
         <div class="container">
             <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
-                    <tr><th>Numero Vuelo</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Duración</th><th>Precio</th></tr>
+                    <tr><th>Numero Viaje</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Duración</th><th>Precio</th><th>Reservar</th></tr>
                 </thead>
                 <tbody id="listaBuscados">
                 </tbody>
@@ -141,7 +143,6 @@
                 <p>&copy; 2017 Baratísimo, Inc.</p>
             </footer>
         </div>
-
         <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
@@ -155,12 +156,10 @@
                     format: 'YYYY-MM-DD dddd',
                     useCurrent: false
                 });
-
                 $('#fecha_regreso').datetimepicker({
                     format: 'YYYY-MM-DD dddd',
                     useCurrent: false
                 });
-
                 $("#fecha_ida").on("dp.change", function (e) {
                     $('#fecha_regreso').data("DateTimePicker").minDate(e.date);
                 });
@@ -215,15 +214,14 @@
                     var fechaIDa = ida[0];
                     var diaVuelta = regreso[1];
                     var fechaVuelta = regreso[0];
-
                     if (radio1.checked) {
-                        Proxy.viajesSearch(origen, destino,diaIda,fechaIDa, function (result) {
+                        Proxy.viajesSearch(origen, destino, diaIda, fechaIDa, function (result) {
                             model.buscados = result;
                             view.showBuscado();
                         });
                     }
                     if (radio2.checked) {
-                        Proxy.viajesSearchByDestiny(origen, destino,diaIda,fechaIDa,diaVuelta,fechaVuelta, function (result) {
+                        Proxy.viajesSearchByDestiny(origen, destino, diaIda, fechaIDa, diaVuelta, fechaVuelta, function (result) {
                             model.buscados = result;
                             view.showBuscado();
                         });
@@ -254,7 +252,6 @@
                 var img1;
                 var precio;
                 var boton;
-
                 for (var index in modelView.promo) {
                     // -----------Agregar nuevo circulo---------------
                     circulos = document.getElementById("circulos");
@@ -298,7 +295,6 @@
                 $('#btn_search').click(function () {
                     controllerView.search();
                 });
-
             }
             function doFocus(event) {
                 event.target.classList.add("focus");
@@ -317,11 +313,9 @@
             function listCiudades() {
                 var select = document.getElementById("origen");
                 var select2 = document.getElementById("destino");
-
                 for (var index in modelView.ciudades) {
                     select.options[select.options.length] = new Option(modelView.ciudades[index].info());
                     select2.options[select2.options.length] = new Option(modelView.ciudades[index].info());
-
                 }
             }
 
@@ -341,7 +335,7 @@
                 $('#paginacion').dataTable().fnClearTable();
                 for (var index in modelView.buscados) {
                     t.row.add([
-                        modelView.buscados[index].vuelo.numero_vuelo,
+                        modelView.buscados[index].numero_viaje,
                         modelView.buscados[index].vuelo.ciudad_origen.nombre,
                         modelView.buscados[index].vuelo.ciudad_destino.nombre,
                         modelView.buscados[index].fecha,
@@ -350,6 +344,32 @@
                     ]).draw(false);
                 }
             }
+
+            $(document).ready(function () {
+                var table = $('#paginacion').DataTable({
+                    "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent":
+                                    '<button class="btn-view" type="button">Reservar</button>'
+                        }]
+                });
+
+                $('#paginacion tbody').on('click', '.btn-view', function (e) {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr).data();
+                    console.log(row);
+                    Proxy.getViaje(row[0], function (result) {
+                            var viaje = result;
+                             document.location = "reserva.jsp";
+                        });  
+                });
+            
+            });
+
+
+
+
 
             document.addEventListener("DOMContentLoaded", pageLoad)
         </script>
