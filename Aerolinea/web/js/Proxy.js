@@ -227,4 +227,16 @@ Proxy.userLogin = function(user,callBack){
     };
     AJAX_req.send("usuario="+jsonText);   
 };
-
+Proxy.getAsientos = function(callBack) {
+  var AJAX_req = new XMLHttpRequest();
+  url="/Aerolinea/AirlineService?action=asientosListAll";
+  AJAX_req.open("GET",url,true);
+  AJAX_req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  AJAX_req.onreadystatechange = function() {
+    if(AJAX_req.readyState === 4 && AJAX_req.status === 200 ) {
+        var object = JSON.parse(AJAX_req.responseText,JsonUtils.revive);
+        callBack(object);
+        }  
+    };
+  AJAX_req.send();
+};
