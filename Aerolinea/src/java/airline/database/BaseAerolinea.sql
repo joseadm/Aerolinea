@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Usuario` (
   `nombre` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
-  `fechaNacimiento` DATETIME(6) NOT NULL,
-  `direccion` VARCHAR(45) NOT NULL,
+  `fechaNacimiento` DATE NOT NULL,
+  `direccion` TinyText NOT NULL,
   `telefono` INT NOT NULL,
   `celular` INT NOT NULL,
   `tipo` INT NOT NULL,
@@ -93,9 +93,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Viaje` (
   `numeroviaje` INT NOT NULL AUTO_INCREMENT,
-  `fecha` DATETIME(6) NOT NULL,
+  `fecha` DATE NOT NULL,
   `placa_avion` VARCHAR(45) NOT NULL,
   `numero_vuelo` INT NOT NULL,
+  `horaLlegada` INT NOT NULL,
   PRIMARY KEY (`numeroviaje`),
   INDEX `placa_avion_idx` (`placa_avion` ASC),
   INDEX `numero_vuelo_idx` (`numero_vuelo` ASC),
@@ -256,17 +257,17 @@ insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-07-07',"TI-CRLA",5);
 
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-14',"TI-BGV",7);
+values('2017-06-14',"TI-BGV",7,16);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-10',"NV123",8);
+values('2017-06-10',"NV123",8,13);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-12',"TI-BGV98",1);
+values('2017-06-12',"TI-BGV98",1,14);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-07-14',"NV888",5);
+values('2017-07-14',"NV888",5,21);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-21',"NV654",7);
+values('2017-06-21',"NV654",7,18);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-17',"NV888",8);
+values('2017-06-17',"NV888",8,12);
 
 
 insert into Usuario(nombreUsuario,contrasena,nombre,apellidos,correo,fechaNacimiento,
