@@ -137,9 +137,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `nombre_usuario` VARCHAR(45) NOT NULL,
-  `cedula_pasajero` INT NOT NULL,
   `nombre_pasajero` VARCHAR(45) NOT NULL,
-  `pasaporte` INT NOT NULL,
+  `apellidos_pasajero` VARCHAR(45) NOT NULL,
+  `pasaporte_pasajero` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
   CONSTRAINT `nombre_usuario`

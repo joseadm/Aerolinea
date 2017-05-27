@@ -358,11 +358,7 @@
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
-                    console.log(row);
-                    Proxy.getViaje(row[0], function (result) {
-                            var viaje = result;
-                             document.location = "reserva.jsp";
-                        });  
+                    document.location = "reserva.jsp";
                 });
             
             });
