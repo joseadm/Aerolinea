@@ -106,7 +106,26 @@
                         view.showMessage();
                     });
 
-                }
+                },
+                doDelete: function (codigo) {
+                    Proxy.CiudadDelete(codigo, function (result) {
+                        model.ciudad.codigo = result;
+                        document.location = "/Aerolinea/ciudades.jsp"
+                        view.showMessageDelete();
+                    });
+                },
+                /*doUpdate: function () {
+                    var model = this.model;
+                    var view = this.view;
+                    this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
+                    this.model.ciudad.pais = this.view.document.getElementById("pais").value;
+                    this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
+                    Proxy.CiudadAdd(this.model.ciudad, function (result) {
+                        model.ciudad.codigo = result;
+                        document.location = "/Aerolinea/ciudades.jsp"
+                        view.showMessageUpdate();
+                    });
+                }*/
 
             };
         </script>
@@ -144,7 +163,7 @@
                     img= document.createElement("img");
                     img.src="images/edit.png";
                     img.title="Editar"
-                    //img.addEventListener("click", function(e){doQuery(per);});
+                    //img.addEventListener("click", function(e){doUpdate();});
                     td.appendChild(img);
                     tr.appendChild(td);
 
@@ -152,7 +171,7 @@
                     img= document.createElement("img");
                     img.src="images/delete.png";
                     img.title="Eliminar"
-                    //img.addEventListener("click", function(e){doDelete(per);});
+                    img.addEventListener("click", function(e){controller.doDelete(model.ciudades[index].codigo);});
                     td.appendChild(img);
                     tr.appendChild(td);
                     
@@ -163,6 +182,9 @@
             }
             function showMessage() {
                 window.alert("Registro exitoso");
+            }
+            function showMessageDelete() {
+                window.alert("Eliminacion exitosa");
             }
 
             document.addEventListener("DOMContentLoaded", pageLoad);

@@ -50,6 +50,20 @@ Proxy.CiudadAdd = function(ciudad, callBack){
     AJAX_req.send("ciudad="+jsonCiudad);   
 };
 
+Proxy.CiudadDelete = function(callBack) {
+  var AJAX_req = new XMLHttpRequest();
+  url="/Aerolinea/AirlineService?action=ciudadDelete";
+  AJAX_req.open("GET",url,true);
+  AJAX_req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  AJAX_req.onreadystatechange = function() {
+    if(AJAX_req.readyState === 4 && AJAX_req.status === 200 ) {
+        var object = JSON.parse(AJAX_req.responseText,JsonUtils.revive);
+        callBack(object);
+        }  
+    };
+  AJAX_req.send();
+};
+
 Proxy.ViajeAdd = function(viaje, callBack){
     jsonViaje = JSON.stringify(viaje,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();

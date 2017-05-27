@@ -8,10 +8,17 @@
   max-height: 400px;
 }
 
+.jumbo h2{
+  color: white;
+}
+
+.jumbo h4{
+  color: white;
+}
+
 .jumbo {
   background-color: #006699;
   border-radius: 5px;
-  color: white;
 }
 .display-table{
     border-collapse: separate;
