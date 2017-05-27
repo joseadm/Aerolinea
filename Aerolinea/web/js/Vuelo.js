@@ -1,5 +1,5 @@
-function Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,estado,precio,duracion,hora,oferta,imagen,dia){
-	this.Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,estado,precio,duracion,hora,oferta,imagen,dia);
+function Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,estado,precio,duracion,hora,oferta,imagen,dia,descuento){
+	this.Vuelo(numero_vuelo,ciudad_origen,ciudad_destino,estado,precio,duracion,hora,oferta,imagen,dia,descuento);
 }
 Vuelo.prototype={
         numero_vuelo:0,

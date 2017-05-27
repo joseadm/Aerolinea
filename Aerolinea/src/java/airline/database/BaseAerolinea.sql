@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Vuelo` (
   `oferta` TINYINT(1) NOT NULL,
   `imagen` TEXT NULL,
   `dia` VARCHAR(20) NOT NULL,
-  `descuento` integer NOT NULL, 
+  `descuento` INT NOT NULL, 
   PRIMARY KEY (`numeroVuelo`),
   INDEX `ciudadOrigen_idx` (`ciudadOrigen` ASC),
   INDEX `ciudadDestino_idx` (`ciudadDestino` ASC),

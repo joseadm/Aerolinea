@@ -14,13 +14,11 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
         <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
@@ -83,10 +81,10 @@
                     <h4>Fecha ida</h4>
                     <div class="form-group">
                         <div class='input-group date' id='fecha_ida'>
-                            <input type='text' class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon-calendar glyphicon"></span>
                             </span>
+                            <input type='text' class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -94,10 +92,10 @@
                     <h4>Fecha regreso</h4>
                     <div class="form-group">
                         <div class='input-group date' id='fecha_regreso'>
-                            <input type='text' class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon-calendar glyphicon"></span>
                             </span>
+                            <input type='text' class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -350,7 +348,6 @@
                     ]).draw(false);
                 }
             }
-
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
@@ -364,12 +361,13 @@
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
-                    Proxy.getViaje(row[0], function (result) {
-                        model.viaje_reserva = result;
-                    });
-                    var v1 = new Viaje(model.viaje_reserva.numero_viaje, model.viaje_reserva.fecha, model.viaje_reserva.avion, model.viaje_reserva.vuelo);
-                    viajes.push(v1);
-                    Storage.store("viajes", viajes);
+                    for (var index in modelView.buscados) {
+                        if (modelView.buscados[index].numero_viaje === row[0]) {
+                            var v1 = new Viaje(modelView.buscados[index].numero_viaje, modelView.buscados[index].fecha, modelView.buscados[index].avion, modelView.buscados[index].vuelo);
+                            viajes.push(v1);
+                            Storage.store("viajes", viajes);
+                        }
+                    }
                     document.location = "reserva.jsp";
                 });
 

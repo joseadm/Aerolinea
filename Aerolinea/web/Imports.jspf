@@ -18,3 +18,4 @@
   <script type="text/javascript" src="js/JsonUtils.js"></script>
   <script type="text/javascript" src="js/Proxy.js"></script>
   <script type="text/javascript" src="js/Utils.js"></script>
+  <script type="text/javascript" src="js/Storage.js"></script>

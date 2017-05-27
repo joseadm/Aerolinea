@@ -90,10 +90,10 @@
                         <label class="col-md-4 control-label">Fecha de Nacimiento</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
-                                <input type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
+                                <input type='text' class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -257,9 +257,9 @@
                         this.model.usuario.telefono = this.view.document.getElementById("telefono").value;
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
                         //this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
-                        this.model.usuario.direccion ="Alajuela";
+                        this.model.usuario.direccion = "Alajuela";
                         this.model.usuario.tipo = 1;
-                        Proxy.UsuarioAdd(this.model.usuario,function (UsuarioNumber) {
+                        Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
                             var usuario = UsuarioNumber;
                             view.showMessage();
                             document.location = "/Aerolinea/registro.jsp";

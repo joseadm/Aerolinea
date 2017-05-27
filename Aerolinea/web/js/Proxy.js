@@ -81,7 +81,7 @@ Proxy.VueloAdd = function(vuelo, callBack){
             
         }
     };
-    AJAX_req.send("viaje="+jsonViaje);   
+    AJAX_req.send("vuelo="+jsonVuelo);   
 };
 
 

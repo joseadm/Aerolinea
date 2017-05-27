@@ -35,10 +35,10 @@
                                 <label class="col-md-4 control-label">Fecha</label><br><br>
                                 <div class="col-md-4 inputGroupContainer">
                                     <div class='input-group date' id='fechaVuelo' name="fechaVuelo">
-                                        <input type='text' class="form-control" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
+                                        <input type='text' class="form-control" />
                                     </div>
                                 </div><br><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
