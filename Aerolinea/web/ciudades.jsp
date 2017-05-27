@@ -40,6 +40,8 @@
                                             <th>Codigo</th>
                                             <th>Pais</th>
                                             <th>Nombre</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tablaCiudades">
@@ -123,6 +125,7 @@
                 var tr;
                 var tabla;
                 var td;
+                var img;
                 for (var index in model.ciudades) {
                     // ----------Agregar nueva fila----------------
                     tabla = document.getElementById("tablaCiudades");
@@ -136,7 +139,23 @@
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.ciudades[index].nombre));
                     tr.appendChild(td);
+                    
+                    td= document.createElement("td");
+                    img= document.createElement("img");
+                    img.src="images/edit.png";
+                    img.title="Editar"
+                    //img.addEventListener("click", function(e){doQuery(per);});
+                    td.appendChild(img);
+                    tr.appendChild(td);
 
+                    td= document.createElement("td");
+                    img= document.createElement("img");
+                    img.src="images/delete.png";
+                    img.title="Eliminar"
+                    //img.addEventListener("click", function(e){doDelete(per);});
+                    td.appendChild(img);
+                    tr.appendChild(td);
+                    
                     tabla.appendChild(tr);
 
                 }

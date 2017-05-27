@@ -54,6 +54,8 @@
                                             <th>Ciudad Destino</th> 
                                             <th>Avion</th>
                                             <th>Fecha</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tablaViajes">
@@ -162,6 +164,22 @@
                     tr.appendChild(td);
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.viajes[index].fecha));
+                    tr.appendChild(td);
+                    
+                    td= document.createElement("td");
+                    img= document.createElement("img");
+                    img.src="images/edit.png";
+                    img.title="Editar"
+                    //img.addEventListener("click", function(e){doQuery(per);});
+                    td.appendChild(img);
+                    tr.appendChild(td);
+
+                    td= document.createElement("td");
+                    img= document.createElement("img");
+                    img.src="images/delete.png";
+                    img.title="Eliminar"
+                    //img.addEventListener("click", function(e){doDelete(per);});
+                    td.appendChild(img);
                     tr.appendChild(td);
 
                     tabla.appendChild(tr);
