@@ -141,6 +141,21 @@ Proxy.getVuelos = function(callBack) {
     };
   AJAX_req.send();
 };
+Proxy.getViaje = function(numero,callBack) {
+   $.ajax({
+      url: '/Aerolinea/AirlineService?action=getViaje',
+      data: {
+         format: 'json',
+         numeroV: numero
+      },
+      dataType: 'text',
+      type: 'GET',
+      success: function(data) {
+         var object = $.parseJSON(data,JsonUtils.revive);
+         callBack(object);
+      }
+   });
+};
 
 Proxy.viajesSearch = function(origen, destino,diaIda,fechaIda,callBack) {
    $.ajax({

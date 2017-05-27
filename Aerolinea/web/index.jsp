@@ -232,6 +232,7 @@
         <script> // View
             var model;
             var controller;
+            var viajes;
             function pageLoad(event) {
                 modelView = new AirlineModel();
                 controllerView = new AirlineController(modelView, window);
@@ -239,6 +240,11 @@
                 addEventListeners();
                 listCiudades();
                 oneWay();
+                viajes = Storage.retrieve("viajes");
+                if (viajes === null) {
+                    viajes = [];
+                    Storage.store("viajes", viajes);
+                }
             }
 
             function showPromos() {
@@ -325,10 +331,10 @@
                 var vuelta = document.getElementById("vuelta");
                 ida.onclick = function () {
                     $("#fecha_regreso").hide();
-                }
+                };
                 vuelta.onclick = function () {
                     $("#fecha_regreso").show();
-                }
+                };
             }
             function showBuscado() {
                 var t = $('#paginacion').DataTable();
@@ -358,9 +364,15 @@
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
+                    Proxy.getViaje(row[0], function (result) {
+                        model.viaje_reserva = result;
+                    });
+                    var v1 = new Viaje(model.viaje_reserva.numero_viaje, model.viaje_reserva.fecha, model.viaje_reserva.avion, model.viaje_reserva.vuelo);
+                    viajes.push(v1);
+                    Storage.store("viajes", viajes);
                     document.location = "reserva.jsp";
                 });
-            
+
             });
 
 
