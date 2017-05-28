@@ -127,11 +127,11 @@
                 ViajeAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    var fechaViaje = $("#fechaViaje").find("input").val();
+                    this.model.viaje.fecha = fechaViaje = $("#fechaViaje").find("input").val();
                     this.model.viaje.avion = this.view.document.getElementById("avion").value;
                     this.model.viaje.vuelo = parseInt(this.view.document.getElementById("vuelo").value);
-                    this.model.viaje.numero_viaje = 0;
-                    Proxy.ViajeAdd(this.model.viaje,fechaViaje, function (result) {
+                    Proxy.ViajeAdd(this.model.viaje, function (result) {
+                        this.model.viaje.numero_viaje = result;
                         document.location = "/Aerolinea/viajes.jsp";
                         view.showMessage();
                     });

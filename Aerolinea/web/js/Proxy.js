@@ -64,7 +64,7 @@ Proxy.CiudadDelete = function(callBack) {
   AJAX_req.send();
 };
 
-Proxy.ViajeAdd = function(viaje,fechaviaje, callBack){
+Proxy.ViajeAdd = function(viaje, callBack){
     jsonViaje = JSON.stringify(viaje,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
     url="/Aerolinea/AirlineService?action=viajeAdd";
@@ -78,7 +78,7 @@ Proxy.ViajeAdd = function(viaje,fechaviaje, callBack){
             
         }
     };
-    AJAX_req.send("viaje="+jsonViaje+"&fechaviaje="+fechaviaje);   
+    AJAX_req.send("viaje="+jsonViaje);   
 };
 
 Proxy.VueloAdd = function(vuelo,fechaviaje, callBack){

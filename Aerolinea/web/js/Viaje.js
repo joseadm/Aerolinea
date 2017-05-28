@@ -10,7 +10,7 @@ Viaje.prototype={
         numero_viaje: 0,
         fecha:"",
         avion:"",
-        vuelo: 0,
+        vuelo:0,
 	Viaje:function(numero_viaje,fecha,avion,vuelo){
 		this.numero_viaje=numero_viaje;
                 this.fecha=fecha;
