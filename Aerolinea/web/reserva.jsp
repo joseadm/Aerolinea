@@ -36,42 +36,30 @@
             <br><br><br><br>
             <div class="container"> 
                 <fieldset>
-                    <!-- Nombre Formulario -->
                     <legend align="center">Pasajeros</legend>
                     <div class="row">
-                        <label class="col-xs-6 col-md-4 control-label">Nombre</label>
-                        <label class="col-xs-6 col-md-4 control-label">Apellidos</label>
-                        <label class="col-xs-6 col-md-4 control-label">Numero Pasaporte</label>
-                    </div> 
-                    <div class="row">
                         <!-- Nombre -->
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-4  inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input  name="nombre" placeholder="Nombre" class="form-control"  type="text">
-                                </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <label class="control-label">Nombre</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input  name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
-
                         <!-- Apellido-->
-
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-4  inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input name="apellidos" placeholder="Apellidos" class="form-control"  type="text">
-                                </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <label class="control-label">Apellidos</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="apellidos" placeholder="Apellidos" class="form-control" type="text" maxlength="45">
                             </div>
                         </div>
-
                         <!-- Pasaporte-->
-                        <div class="form-group">
-                            <div class="col-xs-6 col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text">
-                                </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <label class="control-label">Numero Pasaporte</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
