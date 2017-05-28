@@ -184,7 +184,7 @@ public class model {
         public static int ViajeAdd(Viaje p) throws Exception{
         String sql="insert into Viaje (fecha, placa_avion, numero_vuelo) "+
                 "values('%s','%s',%s)"; 
-        sql=String.format(sql,new SimpleDateFormat("YYYY-MM-DD").format(p.getFecha()),p.getAvion().getPlaca(),
+        sql=String.format(sql,new SimpleDateFormat("yyyy-MM-dd").format(p.getFecha()),p.getAvion().getPlaca(),
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
         int numeroAsiento =1;
@@ -419,7 +419,7 @@ public class model {
             return null;
        }
     }
-     public static int insertUsuario(Usuario usuario) throws Exception{
+     public static void insertUsuario(Usuario usuario) throws Exception{
     //  return 1;
 
             String sql="insert into Usuario "+
@@ -431,18 +431,15 @@ public class model {
                     usuario.getNombre(),
                     usuario.getApellidos(),
                     usuario.getCorreo(),
-                    usuario.getFecha_nac(),
+                    new SimpleDateFormat("yyyy-MM-dd").format(usuario.getFecha_nac()),
                     usuario.getDireccion(),
                     usuario.getTelefono(),
                     usuario.getCelular(),
                     usuario.getTipo());
-            ResultSet rs =  usuarios.executeUpdateWithKeys(sql);
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-            else{
-                return 0;
-            }
+                    int count=usuarios.executeUpdate(sql);
+                    if (count==0){
+                     throw new Exception("Usuario ya existente");
+                    } 
     }
      //ASientos----------------------------------------------------------------------
       private static Asiento toSits(ResultSet rs) throws Exception{

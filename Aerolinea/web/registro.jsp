@@ -104,7 +104,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                <input id="telefono" name="telefono" placeholder="(562)8990-3452" class="form-control" type="text">
+                                <input id="telefono" name="telefono" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                                <input id="celular" name="celular" placeholder="(562)8990-3452" class="form-control" type="text">
+                                <input id="celular" name="celular" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
             <script type="text/javascript">
                 $(function () {
                     $('#fechaNacimiento').datepicker({
-                        format: 'dd/MM/yyyy'
+                        format: 'dd/mm/yyyy'
                     });
                 });
                 function initMap() {
@@ -260,11 +260,14 @@
                         this.model.usuario.direccion = "Alajuela";
                         this.model.usuario.tipo = 1;
                         Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
-                            var usuario = UsuarioNumber;
-                            view.showMessage();
+                            this.view.showMessage();
                             document.location = "/Aerolinea/registro.jsp";
                         });
 
+                    },
+                    justNumbers: function (e) {
+                        var key = window.Event ? e.which : e.keyCode;
+                        return (key >= 48 && key <= 57);
                     }
 
                 };

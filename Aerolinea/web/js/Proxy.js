@@ -80,22 +80,7 @@ Proxy.ViajeAdd = function(viaje,fechaviaje, callBack){
     };
     AJAX_req.send("viaje="+jsonViaje+"&fechaviaje="+fechaviaje);   
 };
-//Proxy.ViajeAdd = function(viaje,fechaviaje, callBack) {
-//   $.ajax({
-//      url: '/Aerolinea/AirlineService?action=viajeAdd',
-//      data: {
-//         format: 'json',
-//         viaje: viaje,
-//         fechaviaje: fechaviaje
-//      },
-//      dataType: 'text',
-//      type: 'POST',
-//      success: function(data) {
-//         var object = $.parseJSON(data,JsonUtils.revive);
-//         callBack(object);
-//      }
-//   });
-//};
+
 Proxy.VueloAdd = function(vuelo,fechaviaje, callBack){
     jsonVuelo = JSON.stringify(vuelo,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
