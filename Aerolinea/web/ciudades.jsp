@@ -28,24 +28,24 @@
                             <h1 class="page-header">Ciudades</h1>
                             <div class="form-group">
                                 <div class="row">
-                                     <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Codigo</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
                                             <input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad">
                                         </div>
                                     </div>
-                                     <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Pais</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
                                             <input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad">
                                         </div>
                                     </div>
-                                     <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Nombre</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
                                             <input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
                                         </div>
                                     </div>
@@ -135,17 +135,17 @@
                     });
                 },
                 /*doUpdate: function () {
-                    var model = this.model;
-                    var view = this.view;
-                    this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
-                    this.model.ciudad.pais = this.view.document.getElementById("pais").value;
-                    this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
-                    Proxy.CiudadAdd(this.model.ciudad, function (result) {
-                        model.ciudad.codigo = result;
-                        document.location = "/Aerolinea/ciudades.jsp"
-                        view.showMessageUpdate();
-                    });
-                }*/
+                 var model = this.model;
+                 var view = this.view;
+                 this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
+                 this.model.ciudad.pais = this.view.document.getElementById("pais").value;
+                 this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
+                 Proxy.CiudadAdd(this.model.ciudad, function (result) {
+                 model.ciudad.codigo = result;
+                 document.location = "/Aerolinea/ciudades.jsp"
+                 view.showMessageUpdate();
+                 });
+                 }*/
 
             };
         </script>
@@ -178,23 +178,25 @@
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.ciudades[index].nombre));
                     tr.appendChild(td);
-                    
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/edit.png";
-                    img.title="Editar"
+
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/edit.png";
+                    img.title = "Editar"
                     //img.addEventListener("click", function(e){doUpdate();});
                     td.appendChild(img);
                     tr.appendChild(td);
 
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/delete.png";
-                    img.title="Eliminar"
-                    img.addEventListener("click", function(e){controller.doDelete(model.ciudades[index].codigo);});
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/delete.png";
+                    img.title = "Eliminar"
+                    img.addEventListener("click", function (e) {
+                        controller.doDelete(model.ciudades[index].codigo);
+                    });
                     td.appendChild(img);
                     tr.appendChild(td);
-                    
+
                     tabla.appendChild(tr);
 
                 }

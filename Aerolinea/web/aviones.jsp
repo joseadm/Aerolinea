@@ -15,6 +15,9 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
     </head>
     <body>
         <%@ include file="HeaderAdmi.jspf" %>
@@ -24,19 +27,68 @@
                 <legend align="center">Menu Administrativo</legend>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-8 col-md-10 main">
+                        <div class="col-sm-8 col-md-12 main">
                             <h1 class="page-header">Aviones</h1>
                             <div id="avion" class="form-group">
-                                <form>
-                                    <label class="control-label">Placa</label><input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa"><br>
-                                    <label class="control-label">Modelo</label><input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo"> <br>
-                                    <label class="control-label">Marca</label><input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca"> <br>
-                                    <label class="control-label">Año</label><input type="text" class ="form-control" id="annio" placeholder="Ingrese la año"><br>
-                                    <label class="control-label">Cantidad Pasajeros</label><input type="text" class ="form-control" id="cant_pasajeros" placeholder="Ingrese la cantidad de pasajeros"> <br>
-                                    <label class="control-label">Cantidad Filas</label><input type="text" class ="form-control" id="cant_filas" placeholder="Ingrese la cantidad de filas"> <br>
-                                    <label class="control-label">Cantidad Asientos Fila</label><input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila"><br>
-                                    <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
-                                    <button class="btn btn-warning" id="limpiarRuta" onclick="controller.LimpiaPantalla();">Limpiar</button>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Placa</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Modelo</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Marca</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca">
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Cantidad Pasajeros</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="cant_pasajeros" placeholder="Ingrese la cantidad de pasajeros" onKeyPress="return controller.justNumbers(event)">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Cantidad Filas</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="cant_filas" placeholder="Ingrese la cantidad de filas" onKeyPress="return controller.justNumbers(event)">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Cantidad Asientos Fila</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila" onKeyPress="return controller.justNumbers(event)">
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Año</label>
+                                        <div class='input-group date' id='annio' name="annio">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                            <input type='text' class="form-control" />
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
+                                <button class="btn btn-warning" id="limpiarRuta" onclick="controller.LimpiaPantalla();">Limpiar</button>
                                 </form>
                             </div>
                             <table class="table table-bordered table-hover">
@@ -120,6 +172,10 @@
                 },
                 LimpiaPantalla: function () {
                     view.clean();
+                },
+                justNumbers: function (e) {
+                    var key = window.Event ? e.which : e.keyCode
+                    return (key >= 48 && key <= 57)
                 }
 
             };
@@ -165,19 +221,19 @@
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.aviones[index].cant_asientos_por_fila));
                     tr.appendChild(td);
-                    
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/edit.png";
-                    img.title="Editar"
+
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/edit.png";
+                    img.title = "Editar"
                     //img.addEventListener("click", function(e){doQuery(per);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/delete.png";
-                    img.title="Eliminar"
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/delete.png";
+                    img.title = "Eliminar"
                     //img.addEventListener("click", function(e){doDelete(per);});
                     td.appendChild(img);
                     tr.appendChild(td);
@@ -195,6 +251,12 @@
             }
 
             document.addEventListener("DOMContentLoaded", pageLoad);
+        </script> 
+        <script type="text/javascript">
+            $('#annio').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY'
+            });
         </script> 
     </body>
 </html>
