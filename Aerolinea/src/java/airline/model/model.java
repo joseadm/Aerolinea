@@ -465,4 +465,45 @@ public class model {
             return 0;
         }
 }
+    //----------------Delete ----------------------------------
+    public static int deleteCiudad(String codigo) throws Exception{
+            String sql="delete from Ciudad where codigo="+codigo+"";
+            ResultSet rs =  viajes.executeQuery(sql);
+            if (rs.next()) {
+            return rs.getInt(1);
+        }
+        else{
+            return 0;
+        }
+   }
+    public static int deleteAvion(String placa) throws Exception{
+            String sql="delete from Avion where placa="+placa+"";
+            ResultSet rs =  viajes.executeQuery(sql);
+            if (rs.next()) {
+            return rs.getInt(1);
+        }
+        else{
+            return 0;
+        }
+   }
+    public static int deleteViaje(String numero_viaje) throws Exception{
+            String sql="delete from Viaje where numero_viaje="+numero_viaje+"";
+            ResultSet rs =  viajes.executeQuery(sql);
+            if (rs.next()) {
+            return rs.getInt(1);
+        }
+        else{
+            return 0;
+        }
+   }
+    public static int deleteVuelo(String numero_vuelo) throws Exception{
+            String sql="delete from Vuelo where numero_vuelo="+numero_vuelo+"";
+            ResultSet rs =  viajes.executeQuery(sql);
+            if (rs.next()) {
+            return rs.getInt(1);
+        }
+        else{
+            return 0;
+        }
+   }
 }

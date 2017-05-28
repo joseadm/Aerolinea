@@ -79,7 +79,6 @@
                                     </div>
                                 </div><br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
-                                <button class="btn btn-warning" id="limpiarRuta" onclick="controller.LimpiaPantalla();">Limpiar</button>
                                 </form>
                             </div>
                             <table class="table table-bordered table-hover">
@@ -162,6 +161,15 @@
                     });
 
                 },
+                doDelete: function (placa) {
+                    Proxy.ViajeDelete(placa, function (result) {
+                        model.avion.placa = result;
+                        document.location = "/Aerolinea/aviones.jsp"
+                        view.showMessageDelete();
+                    });
+                },
+                doUpdate: function (placa) {
+                },
                 LimpiaPantalla: function () {
                     view.clean();
                 },
@@ -218,7 +226,8 @@
                     img = document.createElement("img");
                     img.src = "images/edit.png";
                     img.title = "Editar"
-                    //img.addEventListener("click", function(e){doQuery(per);});
+                    img.addEventListener("click", function(e){
+                        doUpdate(model.aviones[index].placa);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
@@ -226,7 +235,8 @@
                     img = document.createElement("img");
                     img.src = "images/delete.png";
                     img.title = "Eliminar"
-                    //img.addEventListener("click", function(e){doDelete(per);});
+                    img.addEventListener("click", function(e){
+                        doDelete(model.aviones[index].placa);});
                     td.appendChild(img);
                     tr.appendChild(td);
 

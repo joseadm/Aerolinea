@@ -118,7 +118,6 @@
                                 </div>
                                 <br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
-                                <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
                             <!-- Tabla de vuelos............................................................... -->
                             <div class="table-responsive">
@@ -218,6 +217,15 @@
                     });
 
                 },
+                doDelete: function (numero_vuelo) {
+                    Proxy.VueloDelete(numero_vuelo, function (result) {
+                        model.viaje.numero_viaje = result;
+                        document.location = "/Aerolinea/vuelos.jsp"
+                        view.showMessageDelete();
+                    });
+                },
+                doUpdate: function (numero_vuelo) {
+                },
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
                     return (key >= 48 && key <= 57);
@@ -279,7 +287,8 @@
                     img = document.createElement("img");
                     img.src = "images/edit.png";
                     img.title = "Editar"
-                    //img.addEventListener("click", function(e){doQuery(per);});
+                    img.addEventListener("click", function(e){
+                        doUpdate(model.vuelos[index].numero_vuelo);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
@@ -287,7 +296,8 @@
                     img = document.createElement("img");
                     img.src = "images/delete.png";
                     img.title = "Eliminar"
-                    //img.addEventListener("click", function(e){doDelete(per);});
+                    img.addEventListener("click", function(e){
+                        doDelete(model.vuelos[index].numero_vuelo);});
                     td.appendChild(img);
                     tr.appendChild(td);
 

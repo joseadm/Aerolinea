@@ -56,7 +56,6 @@
                                     </div>
                                 </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
-                                <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
@@ -136,6 +135,15 @@
                         view.showMessage();
                     });
 
+                },
+                doDelete: function (numero_viaje) {
+                    Proxy.ViajeDelete(numero_viaje, function (result) {
+                        model.viaje.numero_viaje = result;
+                        document.location = "/Aerolinea/viajes.jsp"
+                        view.showMessageDelete();
+                    });
+                },
+                doUpdate: function (numero_viaje) {
                 },
                 LimpiaPantalla: function () {
                     view.clean();
@@ -247,7 +255,8 @@
                     img = document.createElement("img");
                     img.src = "images/edit.png";
                     img.title = "Editar"
-                    //img.addEventListener("click", function(e){doQuery(per);});
+                    img.addEventListener("click", function(e){
+                        doUpdate(model.viajes[index].numero_viaje);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
@@ -255,7 +264,8 @@
                     img = document.createElement("img");
                     img.src = "images/delete.png";
                     img.title = "Eliminar"
-                    //img.addEventListener("click", function(e){doDelete(per);});
+                    img.addEventListener("click", function(e){
+                        doDelete(model.viajes[index].numero_viaje);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
@@ -266,6 +276,9 @@
             }
             function showMessage() {
                 window.alert("Registro exitoso");
+            }
+            function showMessageDelete() {
+                window.alert("Eliminacion exitosa");
             }
 
 

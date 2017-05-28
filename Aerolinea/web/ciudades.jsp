@@ -51,7 +51,6 @@
                                     </div>
                                 </div><br>                       
                                 <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
-                                <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
@@ -134,18 +133,12 @@
                         view.showMessageDelete();
                     });
                 },
-                /*doUpdate: function () {
-                 var model = this.model;
-                 var view = this.view;
-                 this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
-                 this.model.ciudad.pais = this.view.document.getElementById("pais").value;
-                 this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
-                 Proxy.CiudadAdd(this.model.ciudad, function (result) {
-                 model.ciudad.codigo = result;
-                 document.location = "/Aerolinea/ciudades.jsp"
-                 view.showMessageUpdate();
-                 });
-                 }*/
+                doUpdate: function (codigo) {
+                    Proxy.ciudadSearch(codigo, function (result) {
+                            model.ciudad = result;
+                            view.showCiudad(model.ciudad);
+                        });
+                }
 
             };
         </script>
@@ -183,7 +176,8 @@
                     img = document.createElement("img");
                     img.src = "images/edit.png";
                     img.title = "Editar"
-                    //img.addEventListener("click", function(e){doUpdate();});
+                    img.addEventListener("click", function(e){
+                        controller.doUpdate(model.ciudades[index].codigo);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
@@ -202,6 +196,15 @@
                 }
 
             }
+            function showCiudad(ciu) {
+                var codigo = document.getElementById("codigo");
+                var pais = document.getElementById("pais");
+                var nombre = document.getElementById("nombre");
+                codigo = ciu.codigo;
+                pais = ciu.pais;
+                nombre = ciu.nombre;
+            }
+            
             function showMessage() {
                 window.alert("Registro exitoso");
             }

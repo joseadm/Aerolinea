@@ -188,6 +188,30 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(v);
                     out.write(json);
                     break;
+                case "ciudadDelete":
+                    String codigo = request.getParameter("codigo");
+                    int n1 = model.deleteCiudad(codigo);
+                    json = gson.toJson(n1);
+                    out.write(json);
+                    break;
+                case "viajeDelete":
+                    String numero_viaje = request.getParameter("numero_viaje");
+                    int n2 = model.deleteViaje(numero_viaje);
+                    json = gson.toJson(n2);
+                    out.write(json);
+                    break;
+                case "vueloDelete":
+                    String numero_vuelo = request.getParameter("numero_vuelo");
+                    int n3 = model.deleteVuelo(numero_vuelo);
+                    json = gson.toJson(n3);
+                    out.write(json);
+                    break;
+                case "avionDelete":
+                    String placa = request.getParameter("placa");
+                    int n4 = model.deleteAvion(placa);
+                    json = gson.toJson(n4);
+                    out.write(json);
+                    break;
             }
         } catch (Exception e) {
             System.out.println(e);
