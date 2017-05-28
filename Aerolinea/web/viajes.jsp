@@ -35,14 +35,14 @@
                                         <label class="control-label">Vuelo</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el numero de vuelo " onKeyPress="return controller.justNumbers(event)">
+                                            <input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el numero de vuelo " onKeyPress="return controller.justNumbers(event)" >
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Avion</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
-                                            <input type="text" class ="form-control" id="avion" placeholder="Ingrese la placa del avion " >
+                                            <input type="text" class ="form-control" id="avion" placeholder="Ingrese la placa del avion " maxlength="45" >
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">

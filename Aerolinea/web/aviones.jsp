@@ -35,21 +35,21 @@
                                         <label class="control-label">Placa</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa">
+                                            <input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Modelo</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo">
+                                            <input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Marca</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca">
+                                            <input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca" maxlength="45">
                                         </div>
                                     </div>
                                 </div><br>

@@ -32,21 +32,21 @@
                                         <label class="control-label">Codigo</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad">
+                                            <input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Pais</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad">
+                                            <input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Nombre</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
+                                            <input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad" maxlength="45"> <br>
                                         </div>
                                     </div>
                                 </div><br>                       
