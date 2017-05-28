@@ -37,15 +37,15 @@
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Ciudad Origen</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
-                                            <select id="origen" name="ciudad_origen" class="form-control" ></select>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="origen" placeholder="Ingrese codigo de la ciudad" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Ciudad Destino</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-list"></span></span>
-                                            <select id="destino" name="ciudad_destino" class="form-control" ></select>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                                            <input type="text" class ="form-control" id="destino" placeholder="Ingrese codigo de la ciudad" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -193,10 +193,6 @@
                         model.vuelos = result;
                         view.showVuelos();
                     });
-                    Proxy.getCiudades(function (result) {
-                        model.ciudades = result;
-                        view.listCiudades();
-                    });
                 },
                 initVuelo: function () {
                     var model = this.model;
@@ -205,10 +201,8 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    var v = this.view.document.getElementById("origen").value;
-                    var v2 = this.view.document.getElementById("destino").value;
-                    this.model.vuelo.ciudad_origen = this.searchCity(v);
-                    this.model.vuelo.ciudad_destino = this.searchCity(v2);
+                    this.model.vuelo.ciudad_origen = this.view.document.getElementById("origen").value;
+                    this.model.vuelo.ciudad_destino = this.view.document.getElementById("destino").value;
                     this.model.vuelo.estado = this.view.estado(this.view.document.getElementById("estado").value);
                     this.model.vuelo.precio = parseInt(this.view.document.getElementById("precio").value);
                     this.model.vuelo.duracion = $("#duracion").find("input").val();
@@ -222,13 +216,6 @@
                         view.showMessage();
                     });
 
-                },
-                searchCity: function (nombreC) {
-                    for (var index in model.ciudades) {
-                        if (model.ciudades[index].nombre === nombreC) {
-                            return model.ciudades[index].codigo;
-                        }
-                    }
                 },
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
@@ -307,14 +294,6 @@
 
                 }
 
-            }
-            function listCiudades() {
-                var select = document.getElementById("ciudad_origen");
-                var select2 = document.getElementById("ciudad_destino");
-                for (var index in model.ciudades) {
-                    select.options[select.options.length] = new Option(model.ciudades[index].nombre);
-                    select2.options[select2.options.length] = new Option(model.ciudades[index].nombre);
-                }
             }
             function estado(estado) {
                 switch (estado) {
