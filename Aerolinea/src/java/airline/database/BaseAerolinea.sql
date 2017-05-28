@@ -232,25 +232,25 @@ values ("MIA","SJO", true, 500,"03:00","15:00",false,"NADA YET","Saturday",0);
 
 /*INSERTS DE AVIONES-------------------------*/
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("TI-BGV","Boeing","737-300","2002",144,24,6);
+values ("TI-BGV","737-300","Boeing","2002",144,24,6);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("NV506","Boeing","737-400","2001",168,28,6);
+values ("NV506","737-400","Boeing","2001",168,28,6);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("N527VL","Boeing","737-500","2000",132,22,6);
+values ("N527VL","737-500","Boeing","2000",132,22,6);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("TI-CRLA","Boeing","737-900","2008",186,31,6);
+values ("TI-CRLA","737-900","Boeing","2008",186,31,6);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("NV123","Boeing","747-400","2010",315,35,9);
+values ("NV123","747-400","Boeing","2010",315,35,9);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("TI-BGV57","Boeing","767-300","2006",270,30,9);
+values ("TI-BGV57","767-300","Boeing","2006",270,30,9);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("TI-BGV98","Airbus","318-100","2002",120,20,6);
+values ("TI-BGV98","318-100","Airbus","2002",120,20,6);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("NV654","Airbus","319-200","2001",144,24,6);
+values ("NV654","319-200","Airbus","2001",144,24,6);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("NV888","Airbus","330-200","2004",270,30,9);
+values ("NV888","330-200","Airbus","2004",270,30,9);
 insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant_asientos_por_fila) 
-values ("NVCR0314","Airbus","380-800","2012",450,50,9);
+values ("NVCR0314","380-800","Airbus","2012",450,50,9);
 /*INSERTS DE VIAJES-------------------------*/
 
 insert into Viaje (fecha, placa_avion, numero_vuelo)

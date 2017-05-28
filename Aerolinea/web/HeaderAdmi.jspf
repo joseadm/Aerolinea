@@ -16,8 +16,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="vuelos.jsp">Vuelos</a></li>
                 <li><a href="viajes.jsp">Viajes</a></li>
+                <li><a href="vuelos.jsp">Vuelos</a></li>
                 <li><a href="aviones.jsp">Aviones</a></li>
                 <li><a href="ciudades.jsp">Ciudades</a></li>
                 <li><a href="tablero.jsp">Ventas</a></li>

@@ -184,7 +184,7 @@ public class model {
         public static int ViajeAdd(Viaje p) throws Exception{
         String sql="insert into Viaje (fecha, placa_avion, numero_vuelo) "+
                 "values('%s','%s',%s)"; 
-        sql=String.format(sql,new SimpleDateFormat("yyyy-MM-dd").format(p.getFecha()),p.getAvion().getPlaca(),
+        sql=String.format(sql,new SimpleDateFormat("YYYY-MM-DD").format(p.getFecha()),p.getAvion().getPlaca(),
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
         int numeroAsiento =1;
@@ -292,23 +292,23 @@ public class model {
             }
     }
      
-      public static int insertViaje(Viaje viaje) throws Exception{
-    //  return 1;
-
-            String sql="insert into Viaje "+
-                    "(fecha, placa_avion, numero_vuelo) "+
-                    "values ('%s','%s','%s')";
-            sql=String.format(sql,viaje.getFecha(),
-                    viaje.getAvion(),
-                    viaje.getVuelo());
-            ResultSet rs =  viajes.executeUpdateWithKeys(sql);
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-            else{
-                return 0;
-            }
-    }
+//      public static int insertViaje(Viaje viaje) throws Exception{ // hay un metodo viajeAdd
+//    //  return 1;
+//
+//            String sql="insert into Viaje "+
+//                    "(fecha, placa_avion, numero_vuelo) "+
+//                    "values ('%s','%s',%s)";
+//            sql=String.format(sql,viaje.getFecha(),
+//                    viaje.getAvion(),
+//                    viaje.getVuelo());
+//            ResultSet rs =  viajes.executeUpdateWithKeys(sql);
+//            if (rs.next()) {
+//                return rs.getInt(1);
+//            }
+//            else{
+//                return 0;
+//            }
+//    }
       
 //      public static int insertVuelo(Vuelo vuelo) throws Exception{ //hay un metodo vueloAdd
 //    //  return 1;

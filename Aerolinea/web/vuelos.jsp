@@ -205,18 +205,18 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    var v = view.document.getElementById("origen").value;
-                    var v2 = view.document.getElementById("destino").value;
-                    model.vuelo.ciudad_origen = this.searchCity(v);
-                    model.vuelo.ciudad_destino = this.searchCity(v2);
-                    model.vuelo.estado = view.estado(view.document.getElementById("estado").value);
-                    model.vuelo.precio = parseInt(view.document.getElementById("precio").value);
-                    model.vuelo.duracion = $("#duracion").find("input").val();
-                    model.vuelo.hora = $("#hora").find("input").val();
-                    model.vuelo.oferta = view.oferta(view.document.getElementById("oferta").value);
-                    model.vuelo.imagen = "NOT YET";
-                    model.vuelo.dia = $("#dia").find("input").val();
-                    model.vuelo.descuento = parseInt(view.document.getElementById("descuento").value);
+                    var v = this.view.document.getElementById("origen").value;
+                    var v2 = this.view.document.getElementById("destino").value;
+                    this.model.vuelo.ciudad_origen = this.searchCity(v);
+                    this.model.vuelo.ciudad_destino = this.searchCity(v2);
+                    this.model.vuelo.estado = this.view.estado(this.view.document.getElementById("estado").value);
+                    this.model.vuelo.precio = parseInt(this.view.document.getElementById("precio").value);
+                    this.model.vuelo.duracion = $("#duracion").find("input").val();
+                    this.model.vuelo.hora = $("#hora").find("input").val();
+                    this.model.vuelo.oferta = this.view.oferta(this.view.document.getElementById("oferta").value);
+                    this.model.vuelo.imagen = "NOT YET";
+                    this.model.vuelo.dia = $("#dia").find("input").val();
+                    this.model.vuelo.descuento = parseInt(this.view.document.getElementById("descuento").value);
                     Proxy.VueloAdd(this.model.vuelo, function (result) {
                         document.location = "/Aerolinea/vuelos.jsp";
                         view.showMessage();
@@ -231,8 +231,8 @@
                     }
                 },
                 justNumbers: function (e) {
-                    var key = window.Event ? e.which : e.keyCode
-                    return (key >= 48 && key <= 57)
+                    var key = window.Event ? e.which : e.keyCode;
+                    return (key >= 48 && key <= 57);
                 }
 
 

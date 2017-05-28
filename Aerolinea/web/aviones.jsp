@@ -55,13 +55,6 @@
                                 </div><br>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Cantidad Pasajeros</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="cant_pasajeros" placeholder="Ingrese la cantidad de pasajeros" onKeyPress="return controller.justNumbers(event)">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Cantidad Filas</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
@@ -75,8 +68,6 @@
                                             <input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila" onKeyPress="return controller.justNumbers(event)">
                                         </div>
                                     </div>
-                                </div><br>
-                                <div class="row">
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Año</label>
                                         <div class='input-group date' id='annio' name="annio">
@@ -153,17 +144,18 @@
                     var model = this.model;
                     model.avion = new Avion();
                 },
-
                 AvionAdd: function () {
                     var model = this.model;
                     var view = this.view;
+                    var cantidadPasajeros;
                     this.model.avion.placa = this.view.document.getElementById("placa").value;
                     this.model.avion.modelo = this.view.document.getElementById("modelo").value;
                     this.model.avion.marca = this.view.document.getElementById("marca").value;
-                    this.model.avion.annio = this.view.document.getElementById("annio").value;
-                    this.model.avion.cant_pasajeros = this.view.document.getElementById("cant_pasajeros").value;
+                    this.model.avion.annio = $("#annio").find("input").val();
                     this.model.avion.cant_filas = this.view.document.getElementById("cant_filas").value;
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
+                    cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value)*parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
+                    this.model.avion.cant_pasajeros = cantidadPasajeros;
                     Proxy.AvionAdd(this.model.avion, function (result) {
                         document.location = "/Aerolinea/aviones.jsp"
                         view.showMessage();
@@ -174,8 +166,8 @@
                     view.clean();
                 },
                 justNumbers: function (e) {
-                    var key = window.Event ? e.which : e.keyCode
-                    return (key >= 48 && key <= 57)
+                    var key = window.Event ? e.which : e.keyCode;
+                    return (key >= 48 && key <= 57);
                 }
 
             };

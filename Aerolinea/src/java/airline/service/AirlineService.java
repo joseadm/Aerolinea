@@ -135,7 +135,7 @@ public class AirlineService extends HttpServlet {
                 case "viajeAdd":
                     String jsonViaje = request.getParameter("viaje");
                     Viaje viaje = gson.fromJson(jsonViaje, Viaje.class);
-                    int viajeNumber = model.insertViaje(viaje);
+                    int viajeNumber = model.ViajeAdd(viaje);
                     json = gson.toJson(viajeNumber);
                     out.write(json);
                     break;
@@ -166,7 +166,7 @@ public class AirlineService extends HttpServlet {
                                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                                 break;
                             case 2: // manager
-                                request.getRequestDispatcher("/vuelos.jsp").forward(request, response);
+                                request.getRequestDispatcher("/viajes.jsp").forward(request, response);
                                 break;
                         }
                     } else {
