@@ -68,6 +68,7 @@
                                             <th>Ciudad Destino</th> 
                                             <th>Avion</th>
                                             <th>Fecha</th>
+                                            <th>Hora de llegada</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -141,6 +142,61 @@
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode
                     return (key >= 48 && key <= 57)
+                },
+                sumaTiempos: function(val1,tiempo){
+ 
+                    t1=val1;
+                    t2=tiempo;
+ 
+                    var dot1 = t1.indexOf(":");
+                    var dot2 = t2.indexOf(":");
+                    var m1 = t1.substr(0, dot1);
+                    var m2 = t2.substr(0, dot2);
+                    var s1 = t1.substr(dot1 + 1);
+                    var s2 = t2.substr(dot2 + 1);
+                    var sRes = (Number(s1) + Number(s2));
+                    var mRes;
+                    var addMinute = false;
+                    var horaFinal;
+                    if (sRes >= 60){
+                        addMinute = true;
+                        sRes -= 60;
+                    }
+                    mRes = (Number(m1) + Number(m2) + (addMinute? 1: 0));
+                    return horaFinal = this.formatString2(String(mRes),2) + ":" + this.formatString(String(sRes),2);
+                },
+ 
+                formatString2: function(string, len){           
+ 
+                    if (string.length < len){
+                        addchar=(len - string.length) ;
+                        for (i = 0; i < addchar; i++){
+                            string="0"+string ;
+                        }
+                    }
+ 
+                    if (string.length > len){
+                        string=substr(string,0,len);
+                    }
+ 
+                    return string;
+                },
+ 
+                formatString: function(string, len){
+ 
+                    if (string.length < len){
+                        addchar=(len - string.length) ;
+                        for (i = 0; i < addchar; i++){
+                            string=string +"0";
+                        }
+                    }
+ 
+                    if (string.length > len) {
+                        string=substr(string,0,len);
+                    }
+ 
+                    return string;
+                    
                 }
 
             };
@@ -183,7 +239,9 @@
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.viajes[index].fecha));
                     tr.appendChild(td);
-
+                    td = document.createElement("td");
+                    td.appendChild(document.createTextNode(controller.sumaTiempos(model.viajes[index].vuelo.hora,model.viajes[index].vuelo.duracion)));
+                    tr.appendChild(td);
                     td = document.createElement("td");
                     img = document.createElement("img");
                     img.src = "images/edit.png";

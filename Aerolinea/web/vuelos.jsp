@@ -163,10 +163,10 @@
                 useCurrent: false
             });
             $('#hora').datetimepicker({
-                format: 'hhss'
+                format: 'hh:ss'
             });
             $('#duracion').datetimepicker({
-                format: 'hhss'
+                format: 'hh:ss'
             });
         </script> 
         <script> // Model

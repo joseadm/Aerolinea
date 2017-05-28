@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Vuelo` (
   `ciudadDestino` VARCHAR(45) NOT NULL,
   `estado` TINYINT(1) NOT NULL,
   `precio` INT NOT NULL,
-  `duracion` INT NOT NULL,
-  `hora` INT NOT NULL,
+  `duracion` VARCHAR(20) NOT NULL,
+  `hora` VARCHAR(20) NULL,
   `oferta` TINYINT(1) NOT NULL,
   `imagen` TEXT NULL,
   `dia` VARCHAR(20) NOT NULL,
@@ -208,22 +208,22 @@ insert into ciudad values("ROM","Italia","Roma");
 
 /*INSERT DE VUELOS--------------------------------*/
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("SJO","MIA", true, 300,230,0800,true,"NADA YET","Monday",0);
+values ("SJO","MIA", true, 300,"02:30","08:00",true,"NADA YET","Monday",0);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("MIA","CAN", true, 200,120,0930,true,"NADA YET","Tuesday",0);
+values ("MIA","CAN", true, 200,"01:20","09:30",true,"NADA YET","Tuesday",0);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("MAD","ROM", true, 500,800,1200,true,"NADA YET","Wednesday",0);
+values ("MAD","ROM", true, 500,"08:00","12:00",true,"NADA YET","Wednesday",0);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("SJO","MAD", true, 450,1000,0420,true,"NADA YET","Saturday",20);
+values ("SJO","MAD", true, 450,"10:00","04:20",true,"NADA YET","Saturday",20);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("MIA","SJO", true, 200,220,1450,true,"NADA YET","Friday",10);
+values ("MIA","SJO", true, 200,"02:20","14:50",true,"NADA YET","Friday",10);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("VIE","MAD", true, 100,600,1200,true,"NADA YET","Thurday",0);
+values ("VIE","MAD", true, 100,"06:00","12:00",true,"NADA YET","Thurday",0);
 
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("SJO","MIA", true, 200,120,820,false,"NADA YET","Wednesday",0);
+values ("SJO","MIA", true, 200,"01:20","08:20",false,"NADA YET","Wednesday",0);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("MIA","SJO", true, 500,300,1500,false,"NADA YET","Saturday",0);
+values ("MIA","SJO", true, 500,"03:00","15:00",false,"NADA YET","Saturday",0);
 
 
 

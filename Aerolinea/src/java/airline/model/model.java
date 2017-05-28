@@ -167,8 +167,8 @@ public class model {
        obj.setCiudad_destino(ciudad2);
        obj.setEstado(rs.getBoolean("estado"));
        obj.setPrecio(rs.getInt("precio"));
-       obj.setDuracion(rs.getInt("duracion"));
-       obj.setHora(rs.getInt("hora"));
+       obj.setDuracion(rs.getString("duracion"));
+       obj.setHora(rs.getString("hora"));
        obj.setOferta(rs.getBoolean("oferta"));
        obj.setImagen(rs.getString("imagen"));
        obj.setDia(rs.getString("dia"));
@@ -310,30 +310,30 @@ public class model {
             }
     }
       
-      public static int insertVuelo(Vuelo vuelo) throws Exception{
-    //  return 1;
-
-            String sql="insert into Vuelo "+
-                    "(ciudad_origen, ciudad_destino, estado, precio, duracion, hora, oferta, imagen,descuento) "+
-                    "values ('%s','%s','%s')";
-            sql=String.format(sql,vuelo.getCiudad_origen().getCodigo(),
-                    vuelo.getCiudad_destino().getCodigo(),
-                    vuelo.isEstado(),
-                    vuelo.getPrecio(),
-                    vuelo.getDuracion(),
-                    vuelo.getHora(),
-                    vuelo.isOferta(),
-                    vuelo.getImagen(),
-                    vuelo.getDescuento()
-            );
-            ResultSet rs =  vuelos.executeUpdateWithKeys(sql);
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-            else{
-                return 0;
-            }
-    }
+//      public static int insertVuelo(Vuelo vuelo) throws Exception{ //hay un metodo vueloAdd
+//    //  return 1;
+//
+//            String sql="insert into Vuelo "+
+//                    "(ciudad_origen, ciudad_destino, estado, precio, duracion, hora, oferta, imagen,descuento) "+
+//                    "values ('%s','%s','%s')";
+//            sql=String.format(sql,vuelo.getCiudad_origen().getCodigo(),
+//                    vuelo.getCiudad_destino().getCodigo(),
+//                    vuelo.isEstado(),
+//                    vuelo.getPrecio(),
+//                    vuelo.getDuracion(),
+//                    vuelo.getHora(),
+//                    vuelo.isOferta(),
+//                    vuelo.getImagen(),
+//                    vuelo.getDescuento()
+//            );
+//            ResultSet rs =  vuelos.executeUpdateWithKeys(sql);
+//            if (rs.next()) {
+//                return rs.getInt(1);
+//            }
+//            else{
+//                return 0;
+//            }
+//    }
      
     public static List<Avion> selectAllPlanes() throws Exception{
        List<Avion> planes;

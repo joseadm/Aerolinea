@@ -18,14 +18,14 @@ public class Vuelo implements Serializable, Jsonable{
     Ciudad ciudad_destino;
     boolean estado;
     int precio;
-    int duracion;
-    int hora;
+    String duracion;
+    String hora;
     boolean oferta; // si el vuelo esta en oferta lo tira en el carrusel
     String imagen; //Direccion de la imagen
     String dia;
     int descuento;
 
-    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, int duracion, int hora, boolean oferta, String imagen, String dia, int descuento) {
+    public Vuelo(int numero_vuelo, Ciudad ciudad_origen, Ciudad ciudad_destino, boolean estado, int precio, String duracion, String hora, boolean oferta, String imagen, String dia, int descuento) {
         this.numero_vuelo = numero_vuelo;
         this.ciudad_origen = ciudad_origen;
         this.ciudad_destino = ciudad_destino;
@@ -82,19 +82,19 @@ public class Vuelo implements Serializable, Jsonable{
         this.precio = precio;
     }
 
-    public int getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
 
-    public int getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(int hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
