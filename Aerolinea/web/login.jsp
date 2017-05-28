@@ -54,7 +54,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="usuario" name="usuario" placeholder="Nombre de Usuario" class="form-control"  type="text">
+                                <input id="usuario" name="usuario" placeholder="Nombre de Usuario" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="contrasena" name="contrasena" placeholder="********" class="form-control" type="password">
+                                <input id="contrasena" name="contrasena" placeholder="********" class="form-control" type="password" maxlength="45">
                             </div>
                         </div>
                     </div>

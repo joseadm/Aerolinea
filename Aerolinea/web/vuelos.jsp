@@ -38,14 +38,14 @@
                                         <label class="control-label">Ciudad Origen</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="origen" placeholder="Ingrese codigo de la ciudad" maxlength="45">
+                                            <input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese codigo de la ciudad" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Ciudad Destino</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="destino" placeholder="Ingrese codigo de la ciudad" maxlength="45">
+                                            <input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese codigo de la ciudad" maxlength="45">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -193,6 +193,7 @@
                         model.vuelos = result;
                         view.showVuelos();
                     });
+                    this.initVuelo();
                 },
                 initVuelo: function () {
                     var model = this.model;
@@ -201,8 +202,8 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    this.model.vuelo.ciudad_origen = this.view.document.getElementById("origen").value;
-                    this.model.vuelo.ciudad_destino = this.view.document.getElementById("destino").value;
+                    this.model.vuelo.ciudad_origen = this.view.document.getElementById("ciudad_origen").value;
+                    this.model.vuelo.ciudad_destino = this.view.document.getElementById("ciudad_destino").value;
                     this.model.vuelo.estado = this.view.estado(this.view.document.getElementById("estado").value);
                     this.model.vuelo.precio = parseInt(this.view.document.getElementById("precio").value);
                     this.model.vuelo.duracion = $("#duracion").find("input").val();
@@ -298,20 +299,20 @@
             function estado(estado) {
                 switch (estado) {
                     case"Disponible":
-                        return true;
+                        return "true";
                         break;
                     case"Inhabilitado":
-                        return false;
+                        return "false";
                         break;
                 }
             }
             function oferta(oferta) {
                 switch (estado) {
                     case"Aplicar Oferta":
-                        return true;
+                        return "true";
                         break;
                     case"No Aplicar":
-                        return false;
+                        return "false";
                         break;
                 }
             }

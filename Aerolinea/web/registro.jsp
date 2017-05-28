@@ -36,7 +36,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="usuario" name="usuario" placeholder="Usuario" class="form-control"  type="text">
+                                <input id="usuario" name="usuario" placeholder="Usuario" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" name="password" placeholder="********" class="form-control" type="password">
+                                <input id="password" name="password" placeholder="********" class="form-control" type="password" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="nombre"  name="nombre" placeholder="Nombre" class="form-control"  type="text">
+                                <input id="nombre"  name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text">
+                                <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text">
+                                <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
