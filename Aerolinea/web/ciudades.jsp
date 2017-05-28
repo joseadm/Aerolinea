@@ -24,12 +24,32 @@
                 <legend align="center">Menu Administrativo</legend>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-8 col-md-10 main">
+                        <div class="col-sm-8 col-md-12 main">
                             <h1 class="page-header">Ciudades</h1>
                             <div class="form-group">
-                                <label class="control-label">Codigo</label><input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad"><br>
-                                <label class="control-label">Pais</label><input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad"> <br>
-                                <label class="control-label">Nombre</label><input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
+                                <div class="row">
+                                     <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Codigo</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <input type="text" class ="form-control" id="codigo" placeholder="Ingrese codigo de la ciudad">
+                                        </div>
+                                    </div>
+                                     <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Pais</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <input type="text" class ="form-control" id="pais" placeholder="Ingrese pais de la ciudad">
+                                        </div>
+                                    </div>
+                                     <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Nombre</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad"> <br>
+                                        </div>
+                                    </div>
+                                </div><br>                       
                                 <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
                                 <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
