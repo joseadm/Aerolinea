@@ -27,20 +27,34 @@
                 <legend align="center">Menu Administrativo</legend>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-8 col-md-10 main">
+                        <div class="col-sm-8 col-md-12 main">
                             <h1 class="page-header">Viajes</h1>
                             <div class="form-group">
-                                <label class="control-label">Avion</label><input type="text" class ="form-control" id="avion" placeholder="Ingrese el avion"> <br>
-                                <label class="control-label">Vuelo</label><input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el vuelo"><br>
-                                <label class="col-md-4 control-label">Fecha</label><br><br>
-                                <div class="col-md-4 inputGroupContainer">
-                                    <div class='input-group date' id='fechaVuelo' name="fechaVuelo">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                        <input type='text' class="form-control" />
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Vuelo</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                                            <input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el numero de vuelo " onKeyPress="return controller.justNumbers(event)">
+                                        </div>
                                     </div>
-                                </div><br><br>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Avion</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
+                                            <input type="text" class ="form-control" id="avion" placeholder="Ingrese la placa del avion " >
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <label class="control-label">Fecha</label>
+                                        <div class='input-group date' id='fechaVuelo' name="fechaVuelo">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                            <input type='text' class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
                                 <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
@@ -123,6 +137,10 @@
                 },
                 LimpiaPantalla: function () {
                     view.clean();
+                },
+                justNumbers: function (e) {
+                    var key = window.Event ? e.which : e.keyCode
+                    return (key >= 48 && key <= 57)
                 }
 
             };
@@ -165,19 +183,19 @@
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.viajes[index].fecha));
                     tr.appendChild(td);
-                    
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/edit.png";
-                    img.title="Editar"
+
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/edit.png";
+                    img.title = "Editar"
                     //img.addEventListener("click", function(e){doQuery(per);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/delete.png";
-                    img.title="Eliminar"
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/delete.png";
+                    img.title = "Eliminar"
                     //img.addEventListener("click", function(e){doDelete(per);});
                     td.appendChild(img);
                     tr.appendChild(td);

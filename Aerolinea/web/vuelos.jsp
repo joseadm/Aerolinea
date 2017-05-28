@@ -117,14 +117,8 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-2 col-md-2">
-                                        <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-2 col-md-2">
-                                        <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
-                                    </div>
-                                </div>
+                                <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
+                                <button class="btn btn-warning" id="limpiarRuta">Limpiar</button>
                             </div>
                             <!-- Tabla de vuelos............................................................... -->
                             <div class="table-responsive">
@@ -237,8 +231,8 @@
                     }
                 },
                 justNumbers: function (e) {
-                        var key = window.Event ? e.which : e.keyCode
-                        return (key >= 48 && key <= 57)
+                    var key = window.Event ? e.which : e.keyCode
+                    return (key >= 48 && key <= 57)
                 }
 
 
@@ -292,23 +286,23 @@
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.vuelos[index].descuento));
                     tr.appendChild(td);
-                    
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/edit.png";
-                    img.title="Editar"
+
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/edit.png";
+                    img.title = "Editar"
                     //img.addEventListener("click", function(e){doQuery(per);});
                     td.appendChild(img);
                     tr.appendChild(td);
 
-                    td= document.createElement("td");
-                    img= document.createElement("img");
-                    img.src="images/delete.png";
-                    img.title="Eliminar"
+                    td = document.createElement("td");
+                    img = document.createElement("img");
+                    img.src = "images/delete.png";
+                    img.title = "Eliminar"
                     //img.addEventListener("click", function(e){doDelete(per);});
                     td.appendChild(img);
                     tr.appendChild(td);
-                    
+
                     tabla.appendChild(tr);
 
                 }
