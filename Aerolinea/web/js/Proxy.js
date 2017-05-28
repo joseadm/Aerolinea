@@ -64,7 +64,7 @@ Proxy.CiudadDelete = function(callBack) {
   AJAX_req.send();
 };
 
-Proxy.ViajeAdd = function(viaje, callBack){
+Proxy.ViajeAdd = function(viaje,fechaviaje, callBack){
     jsonViaje = JSON.stringify(viaje,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
     url="/Aerolinea/AirlineService?action=viajeAdd";
@@ -78,10 +78,25 @@ Proxy.ViajeAdd = function(viaje, callBack){
             
         }
     };
-    AJAX_req.send("viaje="+jsonViaje);   
+    AJAX_req.send("viaje="+jsonViaje+"&fechaviaje="+fechaviaje);   
 };
-
-Proxy.VueloAdd = function(vuelo, callBack){
+//Proxy.ViajeAdd = function(viaje,fechaviaje, callBack) {
+//   $.ajax({
+//      url: '/Aerolinea/AirlineService?action=viajeAdd',
+//      data: {
+//         format: 'json',
+//         viaje: viaje,
+//         fechaviaje: fechaviaje
+//      },
+//      dataType: 'text',
+//      type: 'POST',
+//      success: function(data) {
+//         var object = $.parseJSON(data,JsonUtils.revive);
+//         callBack(object);
+//      }
+//   });
+//};
+Proxy.VueloAdd = function(vuelo,fechaviaje, callBack){
     jsonVuelo = JSON.stringify(vuelo,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
     url="/Aerolinea/AirlineService?action=vueloAdd";

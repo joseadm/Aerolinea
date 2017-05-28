@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Fecha</label>
-                                        <div class='input-group date' id='fechaVuelo' name="fechaVuelo">
+                                        <div class='input-group date' id='fechaViaje' name="fechaViaje">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -127,10 +127,11 @@
                 ViajeAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    this.model.viaje.fecha = $("#fechaVuelo").find("input").val();
+                    var fechaViaje = $("#fechaViaje").find("input").val();
                     this.model.viaje.avion = this.view.document.getElementById("avion").value;
-                    this.model.viaje.vuelo = this.view.document.getElementById("vuelo").value;
-                    Proxy.ViajeAdd(this.model.viaje, function (result) {
+                    this.model.viaje.vuelo = parseInt(this.view.document.getElementById("vuelo").value);
+                    this.model.viaje.numero_viaje = 0;
+                    Proxy.ViajeAdd(this.model.viaje,fechaViaje, function (result) {
                         document.location = "/Aerolinea/viajes.jsp";
                         view.showMessage();
                     });
@@ -271,9 +272,9 @@
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script> 
         <script type="text/javascript">
-            $('#fechaVuelo').datetimepicker({
+            $('#fechaViaje').datetimepicker({
                 minDate: moment(),
-                format: 'DD/MM/YYYY',
+                format: 'YYYY-MM-DD',
                 useCurrent: false
             });
         </script> 

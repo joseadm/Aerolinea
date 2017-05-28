@@ -22,6 +22,8 @@ import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.console;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -135,6 +137,11 @@ public class AirlineService extends HttpServlet {
                 case "viajeAdd":
                     String jsonViaje = request.getParameter("viaje");
                     Viaje viaje = gson.fromJson(jsonViaje, Viaje.class);
+                    String fechaViaje = request.getParameter("fechaviaje");
+                    DateFormat formatter1;
+                    formatter1 = new SimpleDateFormat("mm/DD/yyyy");
+                    Date d1 = formatter1.parse(fechaViaje);     
+                    viaje.setFecha(new java.sql.Date(d1.getTime()));
                     int viajeNumber = model.ViajeAdd(viaje);
                     json = gson.toJson(viajeNumber);
                     out.write(json);

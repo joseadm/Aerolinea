@@ -15,14 +15,12 @@ public class Viaje implements Serializable, Jsonable{
     Date fecha;
     Avion avion;
     Vuelo vuelo;
-    int horaLlegada;
 
-    public Viaje(int numero_viaje, Date fecha, Avion avion, Vuelo vuelo, int horaLlegada) {
+    public Viaje(int numero_viaje, Date fecha, Avion avion, Vuelo vuelo) {
         this.numero_viaje = numero_viaje;
         this.fecha = fecha;
         this.avion = avion;
         this.vuelo = vuelo;
-        this.horaLlegada = horaLlegada;
     }
 
     public Viaje() {
@@ -58,14 +56,6 @@ public class Viaje implements Serializable, Jsonable{
 
     public void setVuelo(Vuelo vuelo) {
         this.vuelo = vuelo;
-    }
-
-    public int getHoraLlegada() {
-        return horaLlegada;
-    }
-
-    public void setHoraLlegada(int horaLlegada) {
-        this.horaLlegada = horaLlegada;
     }
 
    
