@@ -60,13 +60,13 @@
                                 </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
                             </div>
-                            <div class="table-responsive">
+                            <!--<div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>Numero Viaje</th>
                                             <th>Numero Vuelo</th>
-                                            <th>Ciudad Origen</th> <!--OPCIONAL -->
+                                            <th>Ciudad Origen</th> <!--OPCIONAL 
                                             <th>Ciudad Destino</th> 
                                             <th>Avion</th>
                                             <th>Fecha</th>
@@ -75,12 +75,37 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tablaViajes">
-                                        <!-- Contenido de la tabla -->
+                                        <!-- Contenido de la tabla 
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
+                            </div> -->
+                        
+                        
+                         <!-- Tabla de viajes............................................................... -->
+        <div class="container">
+            <div class="table-responsive">
+            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Numero Viaje</th>
+                        <th>Numero Vuelo</th>
+                        <th>Ciudad Origen</th>  
+                        <th>Ciudad Destino</th> 
+                        <th>Avion</th>
+                        <th>Fecha</th>
+                        <th>Hora de llegada</th>
+                         <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="listaViajes">
+                </tbody>
+            </table>
+                </div>
+        </div>
+                        
+        <!--....................................................................................-->
                     </div>
+                        </div>
                 </div>
                 <hr>
                 <br>
@@ -92,7 +117,12 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
-
+                <script type="text/javascript">
+            // For demo to fit into DataTables site builder...
+            $('#paginacion')
+                    .removeClass('display')
+                    .addClass('table table-bordered table-hover');
+        </script>
 
         <script> // Model
             function Model() {
@@ -221,7 +251,35 @@
                 controller = new Controller(model, window);
                 showViajes();
             }
-
+            
+            function showViajes() {
+                var t = $('#paginacion').DataTable();
+                $('#paginacion').dataTable().fnClearTable();
+                for (var index in model.viajes) {
+                    t.row.add([
+                        model.viajes[index].numero_viaje,
+                        model.viajes[index].vuelo.numero_vuelo,
+                        model.viajes[index].vuelo.ciudad_origen.nombre,
+                        model.viajes[index].vuelo.ciudad_destino.nombre,
+                        model.viajes[index].avion.placa,
+                        model.viajes[index].fecha,
+                        controller.sumaTiempos(model.viajes[index].vuelo.hora,model.viajes[index].vuelo.duracion)
+                    ]).draw(false);
+                }
+            }
+            
+            $(document).ready(function () {
+                var table = $('#paginacion').DataTable({
+                    "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent":
+                                    '<img src="images/delete.png">'
+                        }]
+                });
+               
+            });
+            /*
             function showViajes() {
 
                 var tr;
@@ -267,7 +325,7 @@
 
                 }
 
-            }
+            }*/
             function showMessage() {
                 window.alert("Registro exitoso");
             }

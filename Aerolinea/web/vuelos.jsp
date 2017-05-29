@@ -119,7 +119,7 @@
                                 <br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
                             </div>
-                            <!-- Tabla de vuelos............................................................... -->
+                            <!-- Tabla de vuelos............................................................... 
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead>
@@ -140,10 +140,36 @@
                                     <tbody id="tablaVuelos">
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
+                            </div>-->
+                        <!-- Tabla de viajes............................................................... -->
+            <div class="container">
+            <div class="table-responsive">
+            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                <thead>
+                                   <tr>
+                                            <th>Numero Vuelo</th>
+                                            <th>Ciudad Origen</th>
+                                            <th>Ciudad Destino</th>
+                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                            <th>Duracion</th>
+                                            <th>Hora</th>
+                                            <th>Dia</th>
+                                            <th>Oferta</th>
+                                            <th>Descuento</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                </thead>
+                <tbody id="listaViajes">
+                </tbody>
+            </table>
+        </div>
+                </div>
+                        <!--............................................................... -->
+                        
                     </div>
                 </div>
+                    </div>
                 <hr>
                 <br>
             </fieldset>
@@ -154,6 +180,12 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
+        <script type="text/javascript">
+            // For demo to fit into DataTables site builder...
+            $('#paginacion')
+                    .removeClass('display')
+                    .addClass('table table-bordered table-hover');
+        </script>
         <script type="text/javascript">
             $('#dia').datetimepicker({
                 minDate: moment(),
@@ -241,7 +273,38 @@
                 controller = new Controller(model, window);
                 showVuelos();
             }
-
+            
+            function showVuelos() {
+                var t = $('#paginacion').DataTable();
+                $('#paginacion').dataTable().fnClearTable();
+                for (var index in model.vuelos) {
+                    t.row.add([
+                        model.vuelos[index].numero_vuelo,
+                        model.vuelos[index].ciudad_origen.nombre,
+                        model.vuelos[index].ciudad_destino.nombre,
+                        model.vuelos[index].estado,
+                        model.vuelos[index].precio,
+                        model.vuelos[index].duracion,
+                        model.vuelos[index].hora,
+                        model.vuelos[index].dia,
+                        model.vuelos[index].oferta,
+                        model.vuelos[index].descuento
+                    ]).draw(false);
+                }
+            }
+            
+            $(document).ready(function () {
+                var table = $('#paginacion').DataTable({
+                    "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent":
+                                    '<img src="images/delete.png">'
+                        }]
+                });
+               
+            });
+            /*
             function showVuelos() {
 
                 var tr;
@@ -296,7 +359,7 @@
 
                 }
 
-            }
+            }*/
             function estado(estado) {
                 switch (estado) {
                     case"Disponible":

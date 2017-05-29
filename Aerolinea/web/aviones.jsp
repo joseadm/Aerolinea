@@ -101,9 +101,10 @@
                                     <!-- Contenido de la tabla 
                                 </tbody>
                             </table>-->
-                        </div>
+                        
          <!-- Tabla de aviones............................................................... -->
         <div class="container">
+            <div class="table-responsive">
             <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
                                     <tr>
@@ -121,8 +122,10 @@
                 </tbody>
             </table>
         </div>
+            </div>
         <!--....................................................................................-->
                     </div>
+                        </div>
                 </div>
                 <hr>
                 <br>

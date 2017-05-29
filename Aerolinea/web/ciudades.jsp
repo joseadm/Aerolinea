@@ -70,9 +70,10 @@
                                     </tbody>
                                 </table>
                             </div>-->
-                        </div>
+                        
          <!-- Tabla de ciudad............................................................... -->
         <div class="container">
+            <div class="table-responsive">
             <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr><th>Codigo</th><th>Pais</th><th>Nombre</th><th>Eliminar</th></tr>
@@ -80,7 +81,9 @@
                 <tbody id="listaCiudades">
                 </tbody>
             </table>
+            </div>
         </div>
+         </div>
         <!--....................................................................................-->
                     </div>
                 </div>
