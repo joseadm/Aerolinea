@@ -315,3 +315,21 @@ Proxy.VueloDelete = function(numero_vuelo,callBack) {
 };
 
 
+Proxy.usuarioExiste = function(nombreUsuario ,callBack) {
+   $.ajax({
+      url: '/Aerolinea/AirlineService?action=usuarioExiste',
+      data: {
+         format: 'json',
+         nombreUsuario: nombreUsuario
+      },
+      dataType: 'text',
+      type: 'POST',
+      success: function(data) {
+         var object = $.parseJSON(data,JsonUtils.revive);
+         callBack(object);
+      }
+   });
+};
+
+
+
