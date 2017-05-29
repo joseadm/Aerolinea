@@ -15,9 +15,12 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-                <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     </head>
     <body>
         <%@ include file="HeaderAdmi.jspf" %>
@@ -81,7 +84,7 @@
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
                                 </form>
                             </div>
-                            <table class="table table-bordered table-hover">
+                            <!--<table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Placa</th>
@@ -95,10 +98,30 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tablaAviones">
-                                    <!-- Contenido de la tabla -->
+                                    <!-- Contenido de la tabla 
                                 </tbody>
-                            </table>
+                            </table>-->
                         </div>
+         <!-- Tabla de aviones............................................................... -->
+        <div class="container">
+            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                <thead>
+                                    <tr>
+                                        <th>Placa</th>
+                                        <th>Modelo</th>
+                                        <th>Marca</th>
+                                        <th>Año</th>
+                                        <th>Pasajeros</th>
+                                        <th>Filas</th>
+                                        <th>Ascientos</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                </thead>
+                <tbody id="listaViajes">
+                </tbody>
+            </table>
+        </div>
+        <!--....................................................................................-->
                     </div>
                 </div>
                 <hr>
@@ -111,6 +134,13 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
+        
+        <script type="text/javascript">
+            // For demo to fit into DataTables site builder...
+            $('#paginacion')
+                    .removeClass('display')
+                    .addClass('table table-bordered table-hover');
+        </script>
 
         <script> // Model
             function Model() {
@@ -188,7 +218,34 @@
                 controller = new Controller(model, window);
                 showAviones();
             }
-
+             function showAviones() {
+                var t = $('#paginacion').DataTable();
+                $('#paginacion').dataTable().fnClearTable();
+                for (var index in model.aviones) {
+                    t.row.add([
+                        model.aviones[index].placa,
+                        model.aviones[index].modelo,
+                        model.aviones[index].marca,
+                        model.aviones[index].annio,
+                        model.aviones[index].cant_pasajeros,
+                        model.aviones[index].cant_filas,
+                        model.aviones[index].cant_asientos_por_fila
+                    ]).draw(false);
+                }
+            }
+            
+            $(document).ready(function () {
+                var table = $('#paginacion').DataTable({
+                    "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent":
+                                    '<img src="images/delete.png">'
+                        }]
+                });
+               
+            });
+            /*
             function showAviones() {
 
                 var tr;
@@ -234,7 +291,7 @@
 
                 }
 
-            }
+            }*/
             function clean() {
                 document.getElementById("placa").textContent = "";
             }
