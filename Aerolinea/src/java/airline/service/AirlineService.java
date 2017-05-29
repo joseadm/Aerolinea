@@ -156,6 +156,12 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(UsuarioNumber);
                     out.write(json);
                     break;
+                case "usuarioExiste":
+                    String nombreUsuario = request.getParameter("nombreUsuario");
+                    boolean exist = model.usuarioExiste(nombreUsuario);
+                    json = gson.toJson(exist);
+                    out.write(json);
+                break;
                 case "userLogin":
                     Usuario user1;
                     user1 = new Usuario(request.getParameter("usuario"), request.getParameter("contrasena"), "", "", "", new Date(), "", 0, 0, 0);
