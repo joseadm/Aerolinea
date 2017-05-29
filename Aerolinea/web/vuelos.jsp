@@ -118,6 +118,7 @@
                                 </div>
                                 <br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
+                              <hr> 
                             </div>
                             <!-- Tabla de vuelos............................................................... 
                             <div class="table-responsive">

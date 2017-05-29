@@ -52,9 +52,11 @@
                                             <input type="text" class ="form-control" id="nombre" placeholder="Ingrese nombre de la ciudad" maxlength="45"> <br>
                                         </div>
                                     </div>
-                                </div><br>                       
+                                </div><br>
                                 <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
-                            </div>
+                                <br> 
+                                <hr>
+                                    </div>
                             <!--<div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead class="thead-inverse">

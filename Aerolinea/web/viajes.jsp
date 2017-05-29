@@ -59,6 +59,7 @@
                                     </div>
                                 </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
+                               <hr> 
                             </div>
                             <!--<div class="table-responsive">
                                 <table class="table table-bordered table-hover">

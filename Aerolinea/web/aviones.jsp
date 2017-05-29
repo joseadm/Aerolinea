@@ -82,7 +82,7 @@
                                     </div>
                                 </div><br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
-                                </form>
+                               <hr> 
                             </div>
                             <!--<table class="table table-bordered table-hover">
                                 <thead>
