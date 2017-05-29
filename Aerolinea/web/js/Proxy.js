@@ -257,6 +257,23 @@ Proxy.getAsientos = function(callBack) {
     };
   AJAX_req.send();
 };
+Proxy.AsientoAdd = function(asiento, callBack){
+    jsonAsiento = JSON.stringify(asiento,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    url="/Aerolinea/AirlineService?action=asientoAdd";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonAsiento=AJAX_req.responseText;
+            var object = JSON.parse( jsonAsiento,JsonUtils.revive );
+            callBack(object);
+            
+        }
+    };
+    AJAX_req.send("asiento="+jsonAsiento);   
+};
+
 
 Proxy.CiudadDelete = function(codigo, callBack) {
   var AJAX_req = new XMLHttpRequest();
