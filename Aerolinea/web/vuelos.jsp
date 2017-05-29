@@ -134,7 +134,6 @@
                                             <th>Dia</th>
                                             <th>Oferta</th>
                                             <th>Descuento</th>
-                                            <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
                                     </thead>
@@ -283,14 +282,6 @@
                     td.appendChild(document.createTextNode(model.vuelos[index].descuento));
                     tr.appendChild(td);
 
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/edit.png";
-                    img.title = "Editar"
-                    img.addEventListener("click", function(e){
-                        doUpdate(model.vuelos[index].numero_vuelo);});
-                    td.appendChild(img);
-                    tr.appendChild(td);
 
                     td = document.createElement("td");
                     img = document.createElement("img");

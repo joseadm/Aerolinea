@@ -68,7 +68,6 @@
                                             <th>Avion</th>
                                             <th>Fecha</th>
                                             <th>Hora de llegada</th>
-                                            <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
                                     </thead>
@@ -250,14 +249,6 @@
                     tr.appendChild(td);
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(controller.sumaTiempos(model.viajes[index].vuelo.hora,model.viajes[index].vuelo.duracion)));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/edit.png";
-                    img.title = "Editar"
-                    img.addEventListener("click", function(e){
-                        doUpdate(model.viajes[index].numero_viaje);});
-                    td.appendChild(img);
                     tr.appendChild(td);
 
                     td = document.createElement("td");

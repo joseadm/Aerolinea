@@ -91,7 +91,6 @@
                                         <th>Pasajeros</th>
                                         <th>Filas</th>
                                         <th>Ascientos</th>
-                                        <th>Editar</th>
                                         <th>Eliminar</th>
                                     </tr>
                                 </thead>
@@ -220,15 +219,6 @@
                     tr.appendChild(td);
                     td = document.createElement("td");
                     td.appendChild(document.createTextNode(model.aviones[index].cant_asientos_por_fila));
-                    tr.appendChild(td);
-
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/edit.png";
-                    img.title = "Editar"
-                    img.addEventListener("click", function(e){
-                        doUpdate(model.aviones[index].placa);});
-                    td.appendChild(img);
                     tr.appendChild(td);
 
                     td = document.createElement("td");

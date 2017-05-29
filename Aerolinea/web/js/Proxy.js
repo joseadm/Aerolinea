@@ -311,7 +311,7 @@ Proxy.VueloDelete = function(numero_vuelo,callBack) {
         callBack(object);
         }  
     };
-  AJAX_req.send("vuelo="+vuelo);
+  AJAX_req.send("numero_vuelo="+numero_vuelo);
 };
 
 

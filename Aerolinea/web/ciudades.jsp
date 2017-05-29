@@ -15,6 +15,9 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     </head>
     <body>
         <%@ include file="HeaderAdmi.jspf" %>
@@ -52,23 +55,33 @@
                                 </div><br>                       
                                 <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
                             </div>
-                            <div class="table-responsive">
+                            <!--<div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead class="thead-inverse">
                                         <tr>
                                             <th>Codigo</th>
                                             <th>Pais</th>
                                             <th>Nombre</th>
-                                            <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tablaCiudades">
-                                        <!-- Contenido de la tabla -->
+                                        <!-- Contenido de la tabla
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>-->
                         </div>
+         <!-- Tabla de ciudad............................................................... -->
+        <div class="container">
+            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr><th>Codigo</th><th>Pais</th><th>Nombre</th><th>Eliminar</th></tr>
+                </thead>
+                <tbody id="listaCiudades">
+                </tbody>
+            </table>
+        </div>
+        <!--....................................................................................-->
                     </div>
                 </div>
                 <hr>
@@ -81,6 +94,12 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
+        <script type="text/javascript">
+            // For demo to fit into DataTables site builder...
+            $('#paginacion')
+                    .removeClass('display')
+                    .addClass('table table-bordered table-hover');
+        </script>
 
 
         <script> // Model
@@ -150,8 +169,32 @@
                 controller = new Controller(model, window);
                 showCiudades();
             }
+            
+            function showCiudades() {
+                var t = $('#paginacion').DataTable();
+                $('#paginacion').dataTable().fnClearTable();
+                for (var index in model.ciudades) {
+                    t.row.add([
+                        model.ciudades[index].codigo,
+                        model.ciudades[index].pais,
+                        model.ciudades[index].nombre
+                    ]).draw(false);
+                }
+            }
+            
+            $(document).ready(function () {
+                var table = $('#paginacion').DataTable({
+                    "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent":
+                                    '<img src="images/delete.png">'
+                        }]
+                });
+               
+            });
 
-
+                /*
             function showCiudades() {
 
                 var tr;
@@ -174,15 +217,6 @@
 
                     td = document.createElement("td");
                     img = document.createElement("img");
-                    img.src = "images/edit.png";
-                    img.title = "Editar"
-                    img.addEventListener("click", function(e){
-                        controller.doUpdate(model.ciudades[index].codigo);});
-                    td.appendChild(img);
-                    tr.appendChild(td);
-
-                    td = document.createElement("td");
-                    img = document.createElement("img");
                     img.src = "images/delete.png";
                     img.title = "Eliminar"
                     img.addEventListener("click", function (e) {
@@ -195,16 +229,7 @@
 
                 }
 
-            }
-            function showCiudad(ciu) {
-                var codigo = document.getElementById("codigo");
-                var pais = document.getElementById("pais");
-                var nombre = document.getElementById("nombre");
-                codigo = ciu.codigo;
-                pais = ciu.pais;
-                nombre = ciu.nombre;
-            }
-            
+            }*/
             function showMessage() {
                 window.alert("Registro exitoso");
             }
