@@ -214,7 +214,7 @@
                     });
                 }
             </script>
-            <!-- ................................................................................... -->
+           <!-- ................................................................................... -->
             <script> // Model
                 function Model() {
                     this.Model();
@@ -256,19 +256,32 @@
                         this.model.usuario.fecha_nac = $("#fechaNacimiento").find("input").val();
                         this.model.usuario.telefono = this.view.document.getElementById("telefono").value;
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
-                        //this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
-                        this.model.usuario.direccion = "Alajuela";
+                        this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
                         this.model.usuario.tipo = 1;
-                        Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
-                            this.view.showMessage();
-                            document.location = "/Aerolinea/registro.jsp";
-                        });
+                        if(view.validacionForm() &&!(usuarioExiste(this.model.usuario.usuario))){
+                            Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
+                                this.view.showMessage();
+                                document.location = "/Aerolinea/registro.jsp";
+                            });
+                        }
 
                     },
                     justNumbers: function (e) {
                         var key = window.Event ? e.which : e.keyCode;
                         return (key >= 48 && key <= 57);
+                    },
+                    usuarioExiste: function(val){
+                        var resultado;
+                        Proxy.usuarioExiste(val ,function (result){
+                        resultado = result;
+                        });
+                        if(resultado === true){
+                            return true; //usuario ya existe
+                            
+                        }
+                        return false;
                     }
+                    
 
                 };
             </script>
@@ -282,6 +295,29 @@
                 }
                 function showMessage() {
                     window.alert("Registro exitoso");
+                }
+                function validacionForm(){
+                    var usuarioE= document.getElementById("usuario").value;
+                    var contrasenaE= document.getElementById("password").value;
+                    var nombreE= document.getElementById("nombre").value;
+                    var apellidosE= document.getElementById("apellidos").value;
+                    var correoE= document.getElementById("correo").value;
+                    var fechaE= $("#fechaNacimiento").find("input").val();
+                    var telefonoE= document.getElementById("telefono").value;
+                    var celularE= document.getElementById("celular").value;
+                    var direccionE= document.getElementById("direccion").value;
+                     if(!(validarVacio(usuarioE)) || !(validarVacio(contrasenaE)) || !(validarVacio(nombreE)) ||
+                     !(validarVacio(apellidosE)) || !(validarVacio(correoE))|| !(validarVacio(fechaE)) ||
+                     !(validarVacio(telefonoE)) || !(validarVacio(celularE)) || !(validarVacio(direccionE))){
+                         alert('ERRROR, llene todos los campos.');
+                         return false;
+                     }
+                     return true;
+                }
+                function validarVacio(valor){
+                    if( valor === null || valor.length === 0 || /^\s+$/.test(valor) ) {
+                    return false;
+                    }return true;
                 }
 
                 document.addEventListener("DOMContentLoaded", pageLoad);
