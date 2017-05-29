@@ -441,6 +441,22 @@ public class model {
                      throw new Exception("Usuario ya existente");
                     } 
     }
+    public static boolean usuarioExiste(String nombreUsuario) throws Exception{
+       List<Usuario> users;
+       users = new ArrayList();
+        try {
+            String sql="select * from Usuario where nombreUsuario =" +nombreUsuario;
+            ResultSet rs =  usuarios.executeQuery(sql);
+            while (rs.next()) {
+                users.add(toUsers(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen registros de Viajes");
+        }
+       if(users != null)
+           return true; //usuario ya existe
+       return false;
+   }
      //ASientos----------------------------------------------------------------------
       private static Asiento toSits(ResultSet rs) throws Exception{
       try{
