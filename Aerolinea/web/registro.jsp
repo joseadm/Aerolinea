@@ -258,7 +258,7 @@
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
                         this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
                         this.model.usuario.tipo = 1;
-                        if(view.validacionForm() &&!(usuarioExiste(this.model.usuario.usuario))){
+                        if(view.validacionForm() /*&&!(usuarioExiste(this.model.usuario.usuario))*/){
                             Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
                                 this.view.showMessage();
                                 document.location = "/Aerolinea/registro.jsp";
