@@ -125,6 +125,19 @@
         <hr>
         <!-- Tabla de vuelos............................................................... -->
         <div class="container">
+            <h2>Vuelo de Ida</h2>
+            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr><th>Numero Viaje</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Duración</th><th>Precio</th><th>Reservar</th></tr>
+                </thead>
+                <tbody id="listaBuscados">
+                </tbody>
+            </table>
+        </div>
+        <!--....................................................................................-->
+        <!-- Tabla de vuelos............................................................... -->
+        <div class="container">
+            <h2>Vuelo de Vuelta</h2>
             <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr><th>Numero Viaje</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Duración</th><th>Precio</th><th>Reservar</th></tr>
@@ -354,10 +367,10 @@
                             "targets": -1,
                             "data": null,
                             "defaultContent":
-                                    '<button class="btn-view" type="button">Reservar</button>'
+                                    '<input class="btn-view" name="option" type="radio">'
                         }]
                 });
-
+                        
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
