@@ -27,13 +27,13 @@
                 <!-- Itenerario.................. -->
                 <div class="container">
                     <div class="table-responsive">
-                    <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
-                        <thead>
-                            <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Hora Llegada</th><th>Duración</th><th>Asiento</th></tr>
-                        </thead>
-                        <tbody id="vuelosReserva">
-                        </tbody>
-                    </table>
+                        <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Hora Llegada</th><th>Duración</th><th>Asiento</th></tr>
+                            </thead>
+                            <tbody id="vuelosReserva">
+                            </tbody>
+                        </table>
                     </div> </div>
             </fieldset>
             <br>
@@ -68,93 +68,93 @@
                     </div>
                     <br>
                     <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
-                <div class="container">
-                    <div class="table-responsive">
-                    <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
-                        <thead>
-                            <tr><th>Nombre</th><th>Apellidos</th><th>Numero Pasaporte</th></tr>
-                        </thead>
-                        <tbody id="vuelosReserva">
-                        </tbody>
-                    </table>
+                    <div class="container">
+                        <div class="table-responsive">
+                            <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr><th>Nombre</th><th>Apellidos</th><th>Numero Pasaporte</th></tr>
+                                </thead>
+                                <tbody id="vuelosReserva">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            <br><br><br>
+                    <br><br><br>
                 </fieldset>
             </div>
-            
+
             <center><div class="container">
-                <legend align="center">Pago</legend>
-            <div id="pago" class="jumbotron">
-                <div class="row">
-                    <div id="imagenTarjeta" class="container">
-                        <img src="images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
+                    <legend align="center">Pago</legend>
+                    <div id="pago" class="jumbotron">
+                        <div class="row">
+                            <div id="imagenTarjeta" class="container">
+                                <img src="images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
+                            </div>
+                        </div>
+                        <hr>
+                        <form id="formPago" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="inputType" class="col-md-5 control-label">Numero de Tarjeta: </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="numTarjeta" placeholder="1234567890">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputType" class="col-md-5 control-label">Fecha de vencimiento: </label>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="expirationMonth" name="expirationMonth" placeholder="Mes">
+                                        <option selected="selected">Enero</option><option>Febrero</option><option>Marzo</option>
+                                        <option>Abril</option><option>Mayo</option><option>Junio</option>
+                                        <option>Julio</option><option>Agosto</option><option>Setiembre</option>
+                                        <option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="expirationYear" name="expirationYear" placeholder="Anio">
+                                        <option selected="selected">2017</option><option>2018</option><option>2019</option>
+                                        <option>2020</option><option>2021</option><option>2022</option>
+                                        <option>2023</option><option>2024</option><option>2025</option>
+                                        <option>2026</option><option>2027</option><option>2028</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <div class="row">
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-8 text-center">
+                                    <input type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
+                                    <input type="button" class="btn btn-default btn-lg" value="Cancelar" id="cancelar">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <hr>
-                <form id="formPago" class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="inputType" class="col-md-5 control-label">Numero de Tarjeta: </label>
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" id="numTarjeta" placeholder="1234567890">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputType" class="col-md-5 control-label">Fecha de vencimiento: </label>
-                        <div class="col-md-3">
-                            <select class="form-control" id="expirationMonth" name="expirationMonth" placeholder="Mes">
-                                <option selected="selected">Enero</option><option>Febrero</option><option>Marzo</option>
-                                <option>Abril</option><option>Mayo</option><option>Junio</option>
-                                <option>Julio</option><option>Agosto</option><option>Setiembre</option>
-                                <option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control" id="expirationYear" name="expirationYear" placeholder="Anio">
-                                <option selected="selected">2017</option><option>2018</option><option>2019</option>
-                                <option>2020</option><option>2021</option><option>2022</option>
-                                <option>2023</option><option>2024</option><option>2025</option>
-                                <option>2026</option><option>2027</option><option>2028</option>
-                            </select>
-                        </div>
-                    </div>
-                    <hr class="my-4">
-                    <div class="row">
-                        <div class="col-xs-2"></div>
-                        <div class="col-xs-8 text-center">
-                            <input type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
-                            <input type="button" class="btn btn-default btn-lg" value="Cancelar" id="cancelar">
-                        </div>
-                    </div>
-                </form>
-            </div>
                 </div></center>
-            
-                              
+
+
         </div>
-        
+
         <!-- Footer -->
         <div class="container">
             <footer class="footer">
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
-        
+
         <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
-            
+
             $('#paginacion2')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
         </script>
-        
-         <script> // Model
+
+        <script> // Model
             function Model() {
                 this.Model();
             }
@@ -181,15 +181,15 @@
                     view.initTravels;
                     view.showPasajeros();
                 },
-                initTravels: function(){
-                this.model.viajes=JSON.parse(sessionStorage.getItem("viajes")!=null?sessionStorage.getItem("viajes"):"[]",JsonUtils.revive);
-                this.view.showViajes();
+                initTravels: function () {
+                    this.model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", JsonUtils.revive);
+                    this.view.showViajes();
                 },
-                sumaTiempos: function(val1,tiempo){
- 
-                    t1=val1;
-                    t2=tiempo;
- 
+                sumaTiempos: function (val1, tiempo) {
+
+                    t1 = val1;
+                    t2 = tiempo;
+
                     var dot1 = t1.indexOf(":");
                     var dot2 = t2.indexOf(":");
                     var m1 = t1.substr(0, dot1);
@@ -200,55 +200,55 @@
                     var mRes;
                     var addMinute = false;
                     var horaFinal;
-                    if (sRes >= 60){
+                    if (sRes >= 60) {
                         addMinute = true;
                         sRes -= 60;
                     }
-                    mRes = (Number(m1) + Number(m2) + (addMinute? 1: 0));
-                    return horaFinal = this.formatString2(String(mRes),2) + ":" + this.formatString(String(sRes),2);
+                    mRes = (Number(m1) + Number(m2) + (addMinute ? 1 : 0));
+                    return horaFinal = this.formatString2(String(mRes), 2) + ":" + this.formatString(String(sRes), 2);
                 },
-                formatString2: function(string, len){           
- 
-                    if (string.length < len){
-                        addchar=(len - string.length) ;
-                        for (i = 0; i < addchar; i++){
-                            string="0"+string ;
+                formatString2: function (string, len) {
+
+                    if (string.length < len) {
+                        addchar = (len - string.length);
+                        for (i = 0; i < addchar; i++) {
+                            string = "0" + string;
                         }
                     }
- 
-                    if (string.length > len){
-                        string=substr(string,0,len);
-                    }
- 
-                    return string;
-                },
- 
-                formatString: function(string, len){
- 
-                    if (string.length < len){
-                        addchar=(len - string.length) ;
-                        for (i = 0; i < addchar; i++){
-                            string=string +"0";
-                        }
-                    }
- 
+
                     if (string.length > len) {
-                        string=substr(string,0,len);
+                        string = substr(string, 0, len);
                     }
- 
+
                     return string;
-                    
                 },
-                PasajerosAdd: function() {
+
+                formatString: function (string, len) {
+
+                    if (string.length < len) {
+                        addchar = (len - string.length);
+                        for (i = 0; i < addchar; i++) {
+                            string = string + "0";
+                        }
+                    }
+
+                    if (string.length > len) {
+                        string = substr(string, 0, len);
+                    }
+
+                    return string;
+
+                },
+                PasajerosAdd: function () {
                     var nombre = this.view.document.getElementById("nombre").value;
                     var apellidos = this.view.document.getElementById("apellidos").value;
                     var numero_pasajero = this.view.document.getElementById("numero_pasajero").value;
                     var table = $('#paginacion2').DataTable();
-                    table.row.add( {
-                        nombre, 
-                        apellidos, 
+                    table.row.add({
+                        nombre,
+                        apellidos,
                         numero_pasajero
-                     } ).draw();
+                    }).draw();
                 }
 
             };
@@ -261,11 +261,11 @@
                 controller = new Controller(model, window);
                 showViajes();
             }
-            
+
             function showViajes() {
-            var t = $('#paginacion').DataTable();
+                var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
-                for (var index=0; index<2; index++) {
+                for (var index = 0; index < 2; index++) {
                     t.row.add([
                         model.viajes[index].vuelo.numero_vuelo,
                         model.viajes[index].avion.placa,
@@ -273,19 +273,19 @@
                         model.viajes[index].vuelo.ciudad_destino.nombre,
                         model.viajes[index].fecha,
                         model.viajes[index].vuelo.hora,
-                        controller.sumaTiempos(model.viajes[index].vuelo.hora,model.viajes[index].vuelo.duracion),
+                        controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion),
                         model.viajes[index].vuelo.duracion,
                         "A1"
                     ]).draw(false);
                 }
             }
             function showPasajeros() {
-            var t = $('#paginacion2').DataTable();
+                var t = $('#paginacion2').DataTable();
                 $('#paginacion2').dataTable().fnClearTable();
 
             }
-            
-            
+
+
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable();
                 var table2 = $('#paginacion2').DataTable();
