@@ -145,6 +145,10 @@
             $('#paginacion')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
+            
+            $('#paginacion2')
+                    .removeClass('display')
+                    .addClass('table table-striped table-bordered');
         </script>
         
          <script> // Model
@@ -171,6 +175,7 @@
                         model.viajes = result;
                         view.showViajes();
                     });
+                    view.showPasajeros();
                 },
                 sumaTiempos: function(val1,tiempo){
  
@@ -255,11 +260,20 @@
                     ]).draw(false);
                 }
             }
+            function showPasajeros() {
+            var t = $('#paginacion2').DataTable();
+                $('#paginacion2').dataTable().fnClearTable();
+                for (var index=0; index<2; index++) {
+                    t.row.add([
+                        "Jose","Delgado","123"
+                    ]).draw(false);
+                }
+            }
             
             
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable();
-               
+                var table2 = $('#paginacion2').DataTable();
             });
 
 
