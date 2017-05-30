@@ -22,128 +22,113 @@
         <%@ include file="Header.jspf" %>
         <!-- ....................................Formulario Contacto............................................... -->
         <div class="container">
-
-            <form class="well form-horizontal"    id="formulario">
+        <div  id="myform" class="form-group well form-horizontal">
                 <fieldset>
-
-                    <!-- Nombre Formulario -->
                     <legend align="center">Registro</legend>
 
-                    <!-- Usuario -->
-
-                    <div class="form-group">
                         <label class="col-md-4 control-label">Usuario</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="usuario" name="usuario" placeholder="Usuario" class="form-control"  type="text" maxlength="45">
-                                <div id ="errorUsuario"class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
+                 
 
                     <!-- Password-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" >Contraseña</label>
-                        <div class="col-md-4 inputGroupContainer">
+               
+                        <label class="col-md-4  control-label" >Contraseña</label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="password" name="password" placeholder="********" class="form-control" type="password" maxlength="45">
-                                <div id ="errorPassword"class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
+              
                     <!-- Nombre -->
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Nombre</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <label class="col-md-4  control-label">Nombre</label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="nombre"  name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
-                                <div id ="errorNombre"class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
+                 
 
                     <!-- Apellido-->
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" >Apellidos</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <label class="col-md-4  control-label" >Apellidos</label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text" maxlength="45">
-                                <div id ="errorApellidos"class="alert alert-danger" role="alert">Campo obligatorio</div>
+                                 <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
-                    </div>
+  
 
                     <!-- Correo-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Correo Electrónico</label>
-                        <div class="col-md-4 inputGroupContainer">
+               
+                        <label class="col-md-4  control-label">Correo Electrónico</label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text" maxlength="45">
-                                <div id ="errorCorreo"class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
+            
                     <!-- Fecha de nacimiento-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Fecha de Nacimiento</label>
-                        <div class="col-md-4 inputGroupContainer">
+               
+                        <label class="col-md-4  control-label">Fecha de Nacimiento</label>
+                        <div class="col-md-6 col-md-offset-3  inputGroupContainer">
                             <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                <input type='text' class="form-control" />
-                                <div id ="errorFecha"class="alert alert-danger" role="alert">Campo obligatorio</div>
+                                <input type='text' id="fecha" class="form-control" />
                             </div>
                         </div>
-                    </div>
+              
                     <!-- Telefono-->
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Teléfono</label>
-                        <div class="col-md-4 inputGroupContainer">
+                  
+                        <label class="col-md-4  control-label">Teléfono</label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
                                 <input id="telefono" name="telefono" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
-                                <div id ="errorTelefono"class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
+               
                     <!-- Celular-->
-                    <div class="form-group">
+                
                         <label class="col-md-4 control-label">Celular</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                                 <input id="celular" name="celular" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
-                                <div id ="errorCelular"class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
+                
 
                     <!-- Direccion-->
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" >Direccion</label>
-                        <div class="col-md-4 inputGroupContainer">
+               
+                        <label class="col-md-4  control-label" >Direccion</label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                 <input id="direccion" name="direccion" placeholder="Direccion" class="form-control"  type="text" disabled>
-                                <div id ="errorDireccion" class="alert alert-danger" role="alert">Campo obligatorio</div>
                             </div>
                         </div>
-                    </div>
-
+                        
+                        <br>
                     <!--Mapa....................................................................... -->
                     <center>
-                        <h3>Direccion</h3>
+                        <div class="col-md-6 col-md-offset-3">
+                        <h3>Direccion</h3></div>
                         <div id="map"action="javascript:initMap();"></div>
+                        
                     </center>
                     <br>
                     <!--............................................. -->
@@ -151,16 +136,15 @@
                     <div class="alert alert-success" role="alert" id="exito">Exito al enviar <i class="glyphicon glyphicon-thumbs-up"></i> Gracias por contactarnos, nos comunicaremos pronto</div>
 
                     <!-- Button -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>
-                        <div class="col-md-4" align="center">
+                        <label class="col-md-6 col-md-offset-3 control-label"></label>
+                        <div class="col-md-6 col-md-offset-3 inputGroupContainer" align="center">
                             <button id="Registrar" class="btn btn-primary" onclick="controller.UsuarioAdd();">Registrar<span class="glyphicon glyphicon-save"></span></button>
                         </div>
-                    </div>
+                         <div class="col-md-6 col-md-offset-3 inputGroupContainer" align="center">
                     <p align="center">¿Ya tiene una cuenta? <a href="login.jsp">Inicia sesión</a><span class="fontawesome-arrow-right"></span></p>
-
+                         </div>
                 </fieldset>
-            </form>
+             </div>
             <!-- .......................................................................................................-->
 
             <!-- Footer -->
@@ -267,11 +251,14 @@
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
                         this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
                         this.model.usuario.tipo = 1;
+                        if(view.validacionForm())
+                            this.view.showMessage();
                         if(view.validacionForm() /*&&!(usuarioExiste(this.model.usuario.usuario))*/){
                             Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
-                                this.view.showMessage();
                                 document.location = "/Aerolinea/registro.jsp";
                             });
+                            
+                            
                         }
 
                     },
@@ -300,107 +287,76 @@
                 function pageLoad(event) {
                     model = new Model();
                     controller = new Controller(model, window);
-                    hideErrors();
                      
                 }
                 function showMessage() {
                     window.alert("Registro exitoso");
                 }
-                function hideErrors(){
-                    var errorUsuario = document.getElementById("errorUsuario");
-                    errorUsuario.style.display = 'none';
-                    var errorPassword = document.getElementById("errorPassword");
-                    errorPassword.style.display = 'none';
-                    var errorNombre = document.getElementById("errorNombre");
-                    errorNombre.style.display = 'none';
-                    var errorApellidos = document.getElementById("errorApellidos");
-                    errorApellidos.style.display = 'none';
-                    var errorCorreo = document.getElementById("errorCorreo");
-                    errorCorreo.style.display = 'none';
-                    var errorFecha = document.getElementById("errorFecha");
-                    errorFecha.style.display = 'none';
-                    var errorTelefono = document.getElementById("errorTelefono");
-                    errorTelefono.style.display = 'none';
-                    var errorCelular = document.getElementById("errorCelular");
-                    errorCelular.style.display = 'none';
-                    var errorDireccion = document.getElementById("errorDireccion");
-                    errorDireccion.style.display = 'none';
-                }
                 function validacionForm(){
                     var tam =0;
-                    var usuarioE= document.getElementById("usuario").value;
-                    var errorUsuario = document.getElementById("errorUsuario");
-                    if(!(validarVacio(usuarioE))){
+                    var usuarioE= document.getElementById("usuario");
+                    if(!(validarVacio(usuarioE.value))){
                         tam++;
-                        errorUsuario.style.display = 'initial';
+                        usuarioE.style.borderColor = "red";
                     }else{
-                        errorUsuario.style.display = 'none';
+                        usuarioE.style.borderColor = "white";
                     }
-                    var contrasenaE= document.getElementById("password").value;
-                    var errorPassword = document.getElementById("errorPassword");
-                    if(!(validarVacio(contrasenaE))){
+                    var passwordE= document.getElementById("password");
+                    if(!(validarVacio(passwordE.value))){
                         tam++;
-                        errorPassword.style.display = 'initial';
+                        passwordE.style.borderColor = "red";
                     }else{
-                        errorPassword.style.display = 'none';
+                        passwordE.style.borderColor = "white";
                     }
-                    var nombreE= document.getElementById("nombre").value;
-                    var errorNombre = document.getElementById("errorNombre");
-                    if(!(validarVacio(nombreE))){
+                     var nombreE= document.getElementById("nombre");
+                    if(!(validarVacio(nombreE.value))){
                         tam++;
-                        errorNombre.style.display = 'initial';
+                        nombreE.style.borderColor = "red";
                     }else{
-                        errorNombre.style.display = 'none';
+                        nombreE.style.borderColor = "white";
                     }
-                    var apellidosE= document.getElementById("apellidos").value;
-                    var errorApellidos = document.getElementById("errorApellidos");
-                     if(!(validarVacio(apellidosE))){
+                      var apellidosE= document.getElementById("apellidos");
+                    if(!(validarVacio(apellidosE.value))){
                         tam++;
-                        errorApellidos.style.display = 'initial';
+                        apellidosE.style.borderColor = "red";
                     }else{
-                        errorApellidos.style.display = 'none';
+                        apellidosE.style.borderColor = "white";
                     }
-                    var correoE= document.getElementById("correo").value;
-                    var errorCorreo = document.getElementById("errorCorreo");
-                     if(!(validarVacio(correoE))){
+                     var correoE= document.getElementById("correo");
+                    if(!(validarVacio(correoE.value))){
                         tam++;
-                        errorCorreo.style.display = 'initial';
+                        correoE.style.borderColor = "red";
                     }else{
-                        errorCorreo.style.display = 'none';
+                        correoE.style.borderColor = "white";
                     }
-                    var fechaE= $("#fechaNacimiento").find("input").val();
-                    var errorFecha = document.getElementById("errorFecha");
-                     if(!(validarVacio(fechaE))){
+                     var fechaE= document.getElementById("fecha");
+                    if(!(validarVacio(fechaE.value))){
                         tam++;
-                        errorFecha.style.display = 'initial';
+                        fechaE.style.borderColor = "red";
                     }else{
-                        errorFecha.style.display = 'none';
+                        fechaE.style.borderColor = "white";
                     }
-                    var telefonoE= document.getElementById("telefono").value;
-                    var errorTelefono = document.getElementById("errorTelefono");
-                     if(!(validarVacio(telefonoE))){
+                    var telefonoE= document.getElementById("telefono");
+                    if(!(validarVacio(telefonoE.value))){
                         tam++;
-                        errorTelefono.style.display = 'initial';
+                        telefonoE.style.borderColor = "red";
                     }else{
-                        errorTelefono.style.display = 'none';
+                        telefonoE.style.borderColor = "white";
                     }
-                    var celularE= document.getElementById("celular").value;
-                    var errorCelular = document.getElementById("errorCelular");
-                     if(!(validarVacio(celularE))){
+                    var celularE= document.getElementById("celular");
+                    if(!(validarVacio(celularE.value))){
                         tam++;
-                        errorCelular.style.display = 'initial';
+                        celularE.style.borderColor = "red";
                     }else{
-                        errorCelular.style.display = 'none';
+                        celularE.style.borderColor = "white";
                     }
-                    var direccionE= document.getElementById("direccion").value;
-                    var errorDireccion = document.getElementById("errorDireccion");
-                       if(!(validarVacio(direccionE))){
+                    var direccionE= document.getElementById("direccion");
+                    if(!(validarVacio(direccionE.value))){
                         tam++;
-                        errorDireccion.style.display = 'initial';
+                        direccionE.style.borderColor = "red";
                     }else{
-                        errorDireccion.style.display = 'none';
+                        direccionE.style.borderColor = "white";
                     }
-                    alert("hola" + tam);
                      if(tam > 0){
                          
                          return false;
