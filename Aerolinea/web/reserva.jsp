@@ -162,6 +162,7 @@
             Model.prototype = {
                 Model: function () {
                     this.pasajeros = [];
+                    this.viajes = [];
                 }
             };
         </script>
@@ -265,7 +266,8 @@
             function showViajes() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
-                for (var index = 0; index < 2; index++) {
+                console.log(model.viajes.length);
+                for (var index = 0; index < viajes.length; index++) {
                     t.row.add([
                         model.viajes[index].vuelo.numero_vuelo,
                         model.viajes[index].avion.placa,
