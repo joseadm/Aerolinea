@@ -437,8 +437,13 @@
                     }
                     
                 });
-                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
+                 $('#paginacion tbody').on('click', '.btn-view', function (e) { //cambiar
                      $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
+                         document.location = "reserva.jsp";
+                     });
+                 });
+                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) { //arreglo momentaneo para que funcione
+                     $('#paginacion tbody').on('click', '.btn-view', function (e) {
                          document.location = "reserva.jsp";
                      });
                  });
