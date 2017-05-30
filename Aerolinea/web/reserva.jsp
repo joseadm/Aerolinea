@@ -46,7 +46,7 @@
                             <label class="control-label">Nombre</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input  name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
+                                <input  id="nombre" name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                         <!-- Apellido-->
@@ -54,7 +54,7 @@
                             <label class="control-label">Apellidos</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="apellidos" placeholder="Apellidos" class="form-control" type="text" maxlength="45">
+                                <input id = "apellidos" name="apellidos" placeholder="Apellidos" class="form-control" type="text" maxlength="45">
                             </div>
                         </div>
                         <!-- Pasaporte-->
@@ -62,12 +62,12 @@
                             <label class="control-label">Numero Pasaporte</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text" maxlength="45">
+                                <input id="numero_pasaporte" name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text" maxlength="45">
                             </div>
                         </div>
                     </div>
                     <br>
-            <button class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
+                    <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
                 <div class="container">
                     <div class="table-responsive">
                     <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
@@ -161,7 +161,7 @@
 
             Model.prototype = {
                 Model: function () {
-                    this.viajes = [];
+                    this.pasajeros = [];
                 }
             };
         </script>
@@ -174,11 +174,16 @@
                 Controller: function (model, view) {
                     this.model = model;
                     this.view = view;
-                    Proxy.getViajes(function (result) {
-                        model.viajes = result;
-                        view.showViajes();
-                    });
+                    //Proxy.getViajes(function (result) {
+                    //    model.viajes = result;
+                    //    view.showViajes();
+                    //});
+                    view.initTravels;
                     view.showPasajeros();
+                },
+                initTravels: function(){
+                this.model.viajes=JSON.parse(sessionStorage.getItem("viajes")!=null?sessionStorage.getItem("viajes"):"[]",JsonUtils.revive);
+                this.view.showViajes();
                 },
                 sumaTiempos: function(val1,tiempo){
  
@@ -233,6 +238,17 @@
  
                     return string;
                     
+                },
+                PasajerosAdd: function() {
+                    var nombre = this.view.document.getElementById("nombre").value;
+                    var apellidos = this.view.document.getElementById("apellidos").value;
+                    var numero_pasajero = this.view.document.getElementById("numero_pasajero").value;
+                    var table = $('#paginacion2').DataTable();
+                    table.row.add( {
+                        nombre, 
+                        apellidos, 
+                        numero_pasajero
+                     } ).draw();
                 }
 
             };
@@ -266,11 +282,7 @@
             function showPasajeros() {
             var t = $('#paginacion2').DataTable();
                 $('#paginacion2').dataTable().fnClearTable();
-                for (var index=0; index<2; index++) {
-                    t.row.add([
-                        "Jose","Delgado","123"
-                    ]).draw(false);
-                }
+
             }
             
             
