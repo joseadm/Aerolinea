@@ -88,15 +88,9 @@ public class AirlineService extends HttpServlet {
                 case "viajeListSearchByDestiny":
                     String origen_vuelo = request.getParameter("origen");
                     String destino_vuelo = request.getParameter("destino");
-                    String diaIda1 = request.getParameter("diaIda");
-                    String fechaIda1 = request.getParameter("fechaIda");
                     String diaVuelta = request.getParameter("diaVuelta");
                     String fechaVuelta = request.getParameter("fechaVuelta");
-                    viajes2 = model.searchTravels(origen_vuelo, destino_vuelo,diaIda1,fechaIda1);
                     viajes = model.searchTravels(destino_vuelo, origen_vuelo,diaVuelta,fechaVuelta);
-                    viajes2.forEach((v1) -> {
-                        viajes.add(v1);
-                    });
                     json = gson.toJson(viajes);
                     out.write(json);
                     break;

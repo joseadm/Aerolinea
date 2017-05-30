@@ -178,15 +178,13 @@ Proxy.viajesSearch = function(origen, destino,diaIda,fechaIda,callBack) {
    });
 };
 
-Proxy.viajesSearchByDestiny = function(origen, destino,diaIda,fechaIda,diaVuelta,fechaVuelta, callBack) {
+Proxy.viajesSearchByDestiny = function(origen, destino,diaVuelta,fechaVuelta, callBack) {
    $.ajax({
       url: '/Aerolinea/AirlineService?action=viajeListSearchByDestiny',
       data: {
          format: 'json',
          origen: origen,
          destino: destino,
-         diaIda: diaIda,
-         fechaIda : fechaIda,
          diaVuelta : diaVuelta,
          fechaVuelta : fechaVuelta
       },

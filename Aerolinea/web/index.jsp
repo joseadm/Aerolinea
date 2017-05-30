@@ -191,7 +191,8 @@
 
             AirlineModel.prototype = {
                 AirlineModel: function () {
-                    this.buscados = [];
+                    this.buscadosIda = [];
+                    this.buscadosVuelta = [];
                     this.promo = [];
                     this.ciudades = [];
                     this.vuelos = [];
@@ -231,14 +232,17 @@
                     var fechaVuelta = regreso[0];
                     if (radio1.checked) {
                         Proxy.viajesSearch(origen, destino, diaIda, fechaIDa, function (result) {
-                            model.buscados = result;
+                            model.buscadosIda = result;
                             view.showBuscado();
                         });
                     }
                     if (radio2.checked) {
-                        Proxy.viajesSearchByDestiny(origen, destino, diaIda, fechaIDa, diaVuelta, fechaVuelta, function (result) {
-                            model.buscados = result;
+                        Proxy.viajesSearch(origen, destino, diaIda, fechaIDa, function (result) {
+                            model.buscadosIda = result;
                             view.showBuscado();
+                        });
+                        Proxy.viajesSearchByDestiny(origen, destino, diaVuelta, fechaVuelta, function (result) {
+                            model.buscadosVuelta = result;
                             view.showBuscadoVuelta();
                         });
                     }
@@ -359,14 +363,14 @@
             function showBuscado() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
-                for (var index in modelView.buscados) {
+                for (var index in modelView.buscadosIda) {
                     t.row.add([
-                        modelView.buscados[index].numero_viaje,
-                        modelView.buscados[index].vuelo.ciudad_origen.nombre,
-                        modelView.buscados[index].vuelo.ciudad_destino.nombre,
-                        modelView.buscados[index].fecha,
-                        modelView.buscados[index].vuelo.duracion,
-                        "$ " + modelView.buscados[index].vuelo.precio
+                        modelView.buscadosIda[index].numero_viaje,
+                        modelView.buscadosIda[index].vuelo.ciudad_origen.nombre,
+                        modelView.buscadosIda[index].vuelo.ciudad_destino.nombre,
+                        modelView.buscadosIda[index].fecha,
+                        modelView.buscadosIda[index].vuelo.duracion,
+                        "$ " + modelView.buscadosIda[index].vuelo.precio
                     ]).draw(false);
                 }
             }
@@ -374,19 +378,20 @@
             function showBuscadoVuelta() {
                 var t = $('#paginacion2').DataTable();
                 $('#paginacion2').dataTable().fnClearTable();
-                for (var index in modelView.buscados) {
+                for (var index in modelView.buscadosVuelta) {
                     t.row.add([
-                        modelView.buscados[index].numero_viaje,
-                        modelView.buscados[index].vuelo.ciudad_origen.nombre,
-                        modelView.buscados[index].vuelo.ciudad_destino.nombre,
-                        modelView.buscados[index].fecha,
-                        modelView.buscados[index].vuelo.duracion,
-                        "$ " + modelView.buscados[index].vuelo.precio
+                        modelView.buscadosVuelta[index].numero_viaje,
+                        modelView.buscadosVuelta[index].vuelo.ciudad_origen.nombre,
+                        modelView.buscadosVuelta[index].vuelo.ciudad_destino.nombre,
+                        modelView.buscadosVuelta[index].fecha,
+                        modelView.buscadosVuelta[index].vuelo.duracion,
+                        "$ " + modelView.buscadosVuelta[index].vuelo.precio
                     ]).draw(false);
                 }
             }
             
             $(document).ready(function () {
+                var radio1 = document.getElementById("ida");
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
                             "targets": -1,
@@ -408,28 +413,35 @@
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
-                    for (var index in modelView.buscados) {
-                        if (modelView.buscados[index].numero_viaje === row[0]) {
-                            var v1 = new Viaje(modelView.buscados[index].numero_viaje, modelView.buscados[index].fecha, modelView.buscados[index].avion, modelView.buscados[index].vuelo);
+                    for (var index in modelView.buscadosIda) {
+                        if (modelView.buscadosIda[index].numero_viaje === row[0]) {
+                            var v1 = new Viaje(modelView.buscadosIda[index].numero_viaje, modelView.buscadosIda[index].fecha, modelView.buscadosIda[index].avion, modelView.buscadosIda[index].vuelo);
                             viajes.push(v1);
                             Storage.store("viajes", viajes);
+                            if (radio1.checked) {
+                                document.location = "reserva.jsp";
+                            }
                         }
                     }
-                    document.location = "reserva.jsp";
                 });
                 
                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
-                    for (var index in modelView.buscados) {
-                        if (modelView.buscados[index].numero_viaje === row[0]) {
-                            var v1 = new Viaje(modelView.buscados[index].numero_viaje, modelView.buscados[index].fecha, modelView.buscados[index].avion, modelView.buscados[index].vuelo);
+                    for (var index in modelView.buscadosVuelta) {
+                        if (modelView.buscadosVuelta[index].numero_viaje === row[0]) {
+                            var v1 = new Viaje(modelView.buscadosVuelta[index].numero_viaje, modelView.buscadosVuelta[index].fecha, modelView.buscadosVuelta[index].avion, modelView.buscadosVuelta[index].vuelo);
                             viajes.push(v1);
                             Storage.store("viajes", viajes);
                         }
                     }
-                    //document.location = "reserva.jsp";
+                    
                 });
+                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
+                     $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
+                         document.location = "reserva.jsp";
+                     });
+                 });
             });
 
 
