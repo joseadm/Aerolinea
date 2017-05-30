@@ -80,7 +80,8 @@
             <br><br><br>
                 </fieldset>
             </div>
-            <div class="container-fluid">
+            
+            <center><div class="container">
                 <legend align="center">Pago</legend>
             <div id="pago" class="jumbotron">
                 <div class="row">
@@ -128,7 +129,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+                </div></center>
             
                               
         </div>
