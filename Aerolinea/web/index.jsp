@@ -136,7 +136,7 @@
         </div>
         <!--....................................................................................-->
         <!-- Tabla de vuelos............................................................... -->
-        <div class="container">
+        <div class="container" id="tablaVueloVuelta">
             <h2>Vuelo de Vuelta</h2>
             <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
@@ -347,9 +347,13 @@
                 var vuelta = document.getElementById("vuelta");
                 ida.onclick = function () {
                     $("#fecha_regreso").hide();
+                    $('#tablaVueloVuelta').hide();
+  
+                    
                 };
                 vuelta.onclick = function () {
                     $("#fecha_regreso").show();
+                    $('#tablaVueloVuelta').show();
                 };
             }
             function showBuscado() {
