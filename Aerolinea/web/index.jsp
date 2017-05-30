@@ -138,11 +138,11 @@
         <!-- Tabla de vuelos............................................................... -->
         <div class="container">
             <h2>Vuelo de Vuelta</h2>
-            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+            <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr><th>Numero Viaje</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Duración</th><th>Precio</th><th>Reservar</th></tr>
                 </thead>
-                <tbody id="listaBuscados">
+                <tbody id="listaBuscados2">
                 </tbody>
             </table>
         </div>
@@ -157,6 +157,10 @@
         <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
+                    .removeClass('display')
+                    .addClass('table table-striped table-bordered');
+            
+            $('#paginacion2')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
         </script>
@@ -235,6 +239,7 @@
                         Proxy.viajesSearchByDestiny(origen, destino, diaIda, fechaIDa, diaVuelta, fechaVuelta, function (result) {
                             model.buscados = result;
                             view.showBuscado();
+                            view.showBuscadoVuelta();
                         });
                     }
                 }
@@ -361,6 +366,22 @@
                     ]).draw(false);
                 }
             }
+            
+            function showBuscadoVuelta() {
+                var t = $('#paginacion2').DataTable();
+                $('#paginacion2').dataTable().fnClearTable();
+                for (var index in modelView.buscados) {
+                    t.row.add([
+                        modelView.buscados[index].numero_viaje,
+                        modelView.buscados[index].vuelo.ciudad_origen.nombre,
+                        modelView.buscados[index].vuelo.ciudad_destino.nombre,
+                        modelView.buscados[index].fecha,
+                        modelView.buscados[index].vuelo.duracion,
+                        "$ " + modelView.buscados[index].vuelo.precio
+                    ]).draw(false);
+                }
+            }
+            
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
@@ -368,6 +389,15 @@
                             "data": null,
                             "defaultContent":
                                     '<input class="btn-view" name="option" type="radio">'
+                        }]
+                });
+                
+                var table2 = $('#paginacion2').DataTable({
+                    "columnDefs": [{
+                            "targets": -1,
+                            "data": null,
+                            "defaultContent":
+                                    '<input class="btn-view" name="option2" type="radio">'
                         }]
                 });
                         
@@ -383,7 +413,19 @@
                     }
                     document.location = "reserva.jsp";
                 });
-
+                
+                $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr).data();
+                    for (var index in modelView.buscados) {
+                        if (modelView.buscados[index].numero_viaje === row[0]) {
+                            var v1 = new Viaje(modelView.buscados[index].numero_viaje, modelView.buscados[index].fecha, modelView.buscados[index].avion, modelView.buscados[index].vuelo);
+                            viajes.push(v1);
+                            Storage.store("viajes", viajes);
+                        }
+                    }
+                    //document.location = "reserva.jsp";
+                });
             });
 
 

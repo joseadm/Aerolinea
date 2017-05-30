@@ -69,6 +69,7 @@
                     <br>
             <button class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
                 <div class="container">
+                    <div class="table-responsive">
                     <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr><th>Nombre</th><th>Apellidos</th><th>Numero Pasaporte</th></tr>
@@ -76,6 +77,7 @@
                         <tbody id="vuelosReserva">
                         </tbody>
                     </table>
+                    </div>
                 </div>
             <br><br><br>
                 </fieldset>
