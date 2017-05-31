@@ -24,7 +24,7 @@ Vuelo.prototype={
                 this.oferta = oferta;
                 this.imagen = imagen;
                 this.dia = dia;
-                this.decuento= descuento;
+                this.descuento= descuento;
 	},
         toString:function(){
 	  return this.numero_vuelo;
