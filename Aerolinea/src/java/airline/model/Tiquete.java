@@ -15,15 +15,20 @@ public class Tiquete implements Serializable, Jsonable{
     String nombre_pasajero;
     String apellidos_pasajero;
     String pasaporte_pasajero;
+    Reservacion codigo_reservacion;
+    Asiento codigo_asiento;
 
-    public Tiquete(int codigo, Usuario usuario, String nombre_pasajero, String apellidos_pasajero, String pasaporte_pasajero) {
+    public Tiquete(int codigo, Usuario usuario, String nombre_pasajero, String apellidos_pasajero, String pasaporte_pasajero, Reservacion codigo_reservacion, Asiento codigo_asiento) {
         this.codigo = codigo;
         this.usuario = usuario;
         this.nombre_pasajero = nombre_pasajero;
         this.apellidos_pasajero = apellidos_pasajero;
         this.pasaporte_pasajero = pasaporte_pasajero;
-    } 
+        this.codigo_reservacion = codigo_reservacion;
+        this.codigo_asiento = codigo_asiento;
+    }
 
+    
     public Tiquete() {
     }
 
@@ -66,5 +71,21 @@ public class Tiquete implements Serializable, Jsonable{
     public void setPasaporte_pasajero(String pasaporte_pasajero) {
         this.pasaporte_pasajero = pasaporte_pasajero;
     }
-    
+
+    public Reservacion getCodigo_reservacion() {
+        return codigo_reservacion;
+    }
+
+    public void setCodigo_reservacion(Reservacion codigo_reservacion) {
+        this.codigo_reservacion = codigo_reservacion;
+    }
+
+    public Asiento getCodigo_asiento() {
+        return codigo_asiento;
+    }
+
+    public void setCodigo_asiento(Asiento codigo_asiento) {
+        this.codigo_asiento = codigo_asiento;
+    }
+      
 }
