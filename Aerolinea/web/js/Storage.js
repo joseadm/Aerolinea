@@ -30,7 +30,7 @@ revive: function (k,v) {
 			return new Asiento(v.codigo,v.numero,v.estado,v.numero_viaje);
 		}
 		if(v instanceof Object && v._class == 'Tiquete') {
-			return new Tiquete(v.codigo,v.usuario,v.nombre_pasajero,v.apellidos_pasajero,v.pasaporte_pasajero);
+			return new Tiquete(v.codigo,v.usuario,v.nombre_pasajero,v.apellidos_pasajero,v.pasaporte_pasajero,v.codigo_reservacion,v.codigo_asiento);
 		}
 		if(v instanceof Object && v._class == 'Usuario') {
 			return new Usuario(v.usuario,v.contrasena,v.nombre,v.apellidos,v.correo,v.fecha_nac,v.direccion,v.telefono,v.celular,v.tipo);
@@ -42,7 +42,7 @@ revive: function (k,v) {
 			return new Viaje(v.numero_viaje,v.fecha,v.avion,v.vuelo);
 		}
                 if(v instanceof Object && v._class == 'Reservacion') {
-			return new Reservacion(v.codigo,v.viaje1,v.viaje2,v.tiquete,v.asiento,v.fecha_reserva);
+			return new Reservacion(v.codigo,v.viaje1,v.viaje2,v.fecha_reserva);
 		}
 		return v;
 	},
