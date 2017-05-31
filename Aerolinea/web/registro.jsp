@@ -299,63 +299,63 @@
                         tam++;
                         usuarioE.style.borderColor = "red";
                     }else{
-                        usuarioE.style.borderColor = "white";
+                        usuarioE.style.borderColor = "gray";
                     }
                     var passwordE= document.getElementById("password");
                     if(!(validarVacio(passwordE.value))){
                         tam++;
                         passwordE.style.borderColor = "red";
                     }else{
-                        passwordE.style.borderColor = "white";
+                        passwordE.style.borderColor = "gray";
                     }
                      var nombreE= document.getElementById("nombre");
                     if(!(validarVacio(nombreE.value))){
                         tam++;
                         nombreE.style.borderColor = "red";
                     }else{
-                        nombreE.style.borderColor = "white";
+                        nombreE.style.borderColor = "gray";
                     }
                       var apellidosE= document.getElementById("apellidos");
                     if(!(validarVacio(apellidosE.value))){
                         tam++;
                         apellidosE.style.borderColor = "red";
                     }else{
-                        apellidosE.style.borderColor = "white";
+                        apellidosE.style.borderColor = "gray";
                     }
                      var correoE= document.getElementById("correo");
                     if(!(validarVacio(correoE.value))){
                         tam++;
                         correoE.style.borderColor = "red";
                     }else{
-                        correoE.style.borderColor = "white";
+                        correoE.style.borderColor = "gray";
                     }
                      var fechaE= document.getElementById("fecha");
                     if(!(validarVacio(fechaE.value))){
                         tam++;
                         fechaE.style.borderColor = "red";
                     }else{
-                        fechaE.style.borderColor = "white";
+                        fechaE.style.borderColor = "gray";
                     }
                     var telefonoE= document.getElementById("telefono");
                     if(!(validarVacio(telefonoE.value))){
                         tam++;
                         telefonoE.style.borderColor = "red";
                     }else{
-                        telefonoE.style.borderColor = "white";
+                        telefonoE.style.borderColor = "gray";
                     }
                     var celularE= document.getElementById("celular");
                     if(!(validarVacio(celularE.value))){
                         tam++;
                         celularE.style.borderColor = "red";
                     }else{
-                        celularE.style.borderColor = "white";
+                        celularE.style.borderColor = "gray";
                     }
                     var direccionE= document.getElementById("direccion");
                     if(!(validarVacio(direccionE.value))){
                         tam++;
                         direccionE.style.borderColor = "red";
                     }else{
-                        direccionE.style.borderColor = "white";
+                        direccionE.style.borderColor = "gray";
                     }
                      if(tam > 0){
                          

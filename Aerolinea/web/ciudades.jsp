@@ -56,37 +56,21 @@
                                 <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
                                 <br> 
                                 <hr>
-                                    </div>
-                            <!--<div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead class="thead-inverse">
-                                        <tr>
-                                            <th>Codigo</th>
-                                            <th>Pais</th>
-                                            <th>Nombre</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablaCiudades">
-                                        <!-- Contenido de la tabla
-                                    </tbody>
-                                </table>
-                            </div>-->
-                        
-         <!-- Tabla de ciudad............................................................... -->
-        <div class="container">
-            <div class="table-responsive">
-            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
-                <thead>
-                    <tr><th>Codigo</th><th>Pais</th><th>Nombre</th><th>Eliminar</th></tr>
-                </thead>
-                <tbody id="listaCiudades">
-                </tbody>
-            </table>
-            </div>
-        </div>
-         </div>
-        <!--....................................................................................-->
+                            </div>                     
+                            <!-- Tabla de ciudad............................................................... -->
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr><th>Codigo</th><th>Pais</th><th>Nombre</th><th>Eliminar</th></tr>
+                                        </thead>
+                                        <tbody id="listaCiudades">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--....................................................................................-->
                     </div>
                 </div>
                 <hr>
@@ -143,12 +127,13 @@
                     this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
                     this.model.ciudad.pais = this.view.document.getElementById("pais").value;
                     this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
-                    Proxy.CiudadAdd(this.model.ciudad, function (result) {
-                        model.ciudad.codigo = result;
-                        document.location = "/Aerolinea/ciudades.jsp"
-                        view.showMessage();
-                    });
-
+                    if (view.validacionForm()) {
+                        Proxy.CiudadAdd(this.model.ciudad, function (result) {
+                            model.ciudad.codigo = result;
+                            document.location = "/Aerolinea/ciudades.jsp"
+                            view.showMessage();
+                        });
+                    }
                 },
                 doDelete: function (codigo) {
                     Proxy.CiudadDelete(codigo, function (result) {
@@ -159,9 +144,9 @@
                 },
                 doUpdate: function (codigo) {
                     Proxy.ciudadSearch(codigo, function (result) {
-                            model.ciudad = result;
-                            view.showCiudad(model.ciudad);
-                        });
+                        model.ciudad = result;
+                        view.showCiudad(model.ciudad);
+                    });
                 }
 
             };
@@ -174,7 +159,7 @@
                 controller = new Controller(model, window);
                 showCiudades();
             }
-            
+
             function showCiudades() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
@@ -186,7 +171,7 @@
                     ]).draw(false);
                 }
             }
-            
+
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
@@ -196,51 +181,52 @@
                                     '<img src="images/delete.png">'
                         }]
                 });
-               
+
             });
 
-                /*
-            function showCiudades() {
-
-                var tr;
-                var tabla;
-                var td;
-                var img;
-                for (var index in model.ciudades) {
-                    // ----------Agregar nueva fila----------------
-                    tabla = document.getElementById("tablaCiudades");
-                    tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.ciudades[index].codigo));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.ciudades[index].pais));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.ciudades[index].nombre));
-                    tr.appendChild(td);
-
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/delete.png";
-                    img.title = "Eliminar"
-                    img.addEventListener("click", function (e) {
-                        controller.doDelete(model.ciudades[index].codigo);
-                    });
-                    td.appendChild(img);
-                    tr.appendChild(td);
-
-                    tabla.appendChild(tr);
-
-                }
-
-            }*/
             function showMessage() {
                 window.alert("Registro exitoso");
             }
             function showMessageDelete() {
                 window.alert("Eliminacion exitosa");
             }
+            function validacionForm() {
+                var tam = 0;
+                var codigo = document.getElementById("codigo");
+                if (!(requiredField(codigo.value))) {
+                    tam++;
+                    codigo.style.borderColor = "red";
+                } else {
+                    codigo.style.borderColor = "gray";
+                }
+                var pais = document.getElementById("pais");
+                if (!(requiredField(pais.value))) {
+                    tam++;
+                    pais.style.borderColor = "red";
+                } else {
+                    pais.style.borderColor = "gray";
+                }
+                var nombre = document.getElementById("nombre");
+                if (!(requiredField(nombre.value))) {
+                    tam++;
+                    nombre.style.borderColor = "red";
+                } else {
+                    nombre.style.borderColor = "gray";
+                }
+                if (tam > 0) {
+
+                    return false;
+                }
+                return true;
+            }
+            function requiredField(valor) {
+                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+
+                    return false;
+                }
+                return true;
+            }
+
 
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
