@@ -35,53 +35,32 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Vuelo</label>
+                                        <div class="form-group required"><label class="control-label">Vuelo</label></div>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el numero de vuelo " onKeyPress="return controller.justNumbers(event)" >
+                                            <input type="text" class ="form-control" id="vuelo" placeholder="Ingrese el numero de vuelo " onKeyPress="return controller.justNumbers(event)" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Avion</label>
+                                        <div class="form-group required"><label class="control-label">Avion</label></div>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
-                                            <input type="text" class ="form-control" id="avion" placeholder="Ingrese la placa del avion " maxlength="45" >
+                                            <input type="text" class ="form-control" id="avion" placeholder="Ingrese la placa del avion " maxlength="45" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Fecha</label>
+                                        <div class="form-group required"><label class="control-label">Fecha</label></div>
                                         <div class='input-group date' id='fechaViaje' name="fechaViaje">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
-                                            <input type='text' class="form-control"/>
+                                            <input type='text' class="form-control" required/>
                                         </div>
                                     </div>
                                 </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
                                 <hr> 
                             </div>
-                            <!--<div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Numero Viaje</th>
-                                            <th>Numero Vuelo</th>
-                                            <th>Ciudad Origen</th> <!--OPCIONAL 
-                                            <th>Ciudad Destino</th> 
-                                            <th>Avion</th>
-                                            <th>Fecha</th>
-                                            <th>Hora de llegada</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablaViajes">
-                            <!-- Contenido de la tabla 
-                        </tbody>
-                    </table>
-                </div> -->
-
-
                             <!-- Tabla de viajes............................................................... -->
                             <div class="container">
                                 <div class="table-responsive">
@@ -103,7 +82,6 @@
                                     </table>
                                 </div>
                             </div>
-
                             <!--....................................................................................-->
                         </div>
                     </div>
@@ -175,13 +153,14 @@
                     this.model.viaje.fecha = fechaViaje = $("#fechaViaje").find("input").val();
                     this.model.viaje.avion = avion;
                     this.model.viaje.vuelo = vuelo;
-                    this.model.viaje.numero_viaje=0;
-                    Proxy.ViajeAdd(this.model.viaje, function (result) {
-                        this.model.viaje.numero_viaje = result;
-                        document.location = "/Aerolinea/viajes.jsp";
-                        view.showMessage();
-                    });
-
+                    this.model.viaje.numero_viaje = 0;
+                    if (view.validacionForm()) {
+                        Proxy.ViajeAdd(this.model.viaje, function (result) {
+                            this.model.viaje.numero_viaje = result;
+                            document.location = "/Aerolinea/viajes.jsp";
+                            view.showMessage();
+                        });
+                    }
                 },
                 doDelete: function (numero_viaje) {
                     Proxy.ViajeDelete(numero_viaje, function (result) {
@@ -305,6 +284,40 @@
             function showMessageDelete() {
                 window.alert("Eliminacion exitosa");
             }
+            function validacionForm() {
+                var tam = 0;
+                var vuelo = document.getElementById("vuelo");
+                if (!(requiredField(vuelo.value))) {
+                    tam++;
+                    vuelo.style.borderColor = "red";
+                } else {
+                    vuelo.style.borderColor = "gray";
+                }
+                var avion = document.getElementById("avion");
+                if (!(requiredField(avion.value))) {
+                    tam++;
+                    avion.style.borderColor = "red";
+                } else {
+                    avion.style.borderColor = "gray";
+                }
+                var fecha = $("#fechaViaje").find("input");
+                if (fecha.val() === "") {
+                    tam++;
+                }
+                if (tam > 0) {
+
+                    return false;
+                }
+                return true;
+            }
+            function requiredField(valor) {
+                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+
+                    return false;
+                }
+                return true;
+            }
+
 
 
             document.addEventListener("DOMContentLoaded", pageLoad);
