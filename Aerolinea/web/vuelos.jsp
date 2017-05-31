@@ -55,7 +55,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-cog"></span></span>
                                             <select id="estado" name="estado" class="form-control" >
-                                                <option  value=" ">Disponible</option>
+                                                <option>Disponible</option>
                                                 <option>Inhabilitado</option>
                                             </select>
                                         </div>
@@ -105,7 +105,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-cog"></span></span>
                                             <select id="oferta" name="oferta" class="form-control" >
-                                                <option  value=" ">Aplicar Oferta</option>
+                                                <option>Aplicar Oferta</option>
                                                 <option>No Aplicar</option>
                                             </select>
                                         </div>
@@ -239,23 +239,17 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    var ciudad1 = new Ciudad(this.view.document.getElementById("ciudad_origen").value,"","");
-                    var ciudad2 = new Ciudad(this.view.document.getElementById("ciudad_destino").value,"","");
-                    //Proxy.getCiudad(this.view.document.getElementById("ciudad_origen").value, function (result) {
-                        //ciudad1 = result;
-                    //});
-                    //Proxy.getCiudad(this.view.document.getElementById("ciudad_destino").value, function (result) {
-                        //ciudad2 = result;
-                    //});
-                    
+                    var ciudad1 = new Ciudad(this.view.document.getElementById("ciudad_origen").value, "", "");
+                    var ciudad2 = new Ciudad(this.view.document.getElementById("ciudad_destino").value, "", "");
+                    if(ciudad1.codigo !== ciudad2.codigo){
                     this.model.vuelo.numero_vuelo = 0;
                     this.model.vuelo.ciudad_origen = ciudad1;
                     this.model.vuelo.ciudad_destino = ciudad2;
-                    this.model.vuelo.estado = this.view.estado(this.view.document.getElementById("estado").value);
+                    this.model.vuelo.estado = Boolean(this.estado(this.view.document.getElementById("estado").value));
                     this.model.vuelo.precio = parseInt(this.view.document.getElementById("precio").value);
                     this.model.vuelo.duracion = $("#duracion").find("input").val();
                     this.model.vuelo.hora = $("#hora").find("input").val();
-                    this.model.vuelo.oferta = this.view.oferta(this.view.document.getElementById("oferta").value);
+                    this.model.vuelo.oferta = Boolean(this.oferta(this.view.document.getElementById("oferta").value));
                     this.model.vuelo.imagen = "NOT YET";
                     this.model.vuelo.dia = $("#dia").find("input").val();
                     this.model.vuelo.descuento = parseInt(this.view.document.getElementById("descuento").value);
@@ -264,6 +258,9 @@
                         document.location = "/Aerolinea/vuelos.jsp";
                         view.showMessage();
                     });
+                }else{
+                    view.showMessageError();
+                }
 
                 },
                 doDelete: function (numero_vuelo) {
@@ -282,20 +279,20 @@
                 estado: function (estado) {
                     switch (estado) {
                         case"Disponible":
-                            return "true";
+                            return 1;
                             break;
                         case"Inhabilitado":
-                            return "false";
+                            return 0;
                             break;
                     }
                 },
                 oferta: function (oferta) {
-                    switch (estado) {
+                    switch (oferta) {
                         case"Aplicar Oferta":
-                            return "true";
+                            return 1;
                             break;
                         case"No Aplicar":
-                            return "false";
+                            return 0;
                             break;
                     }
                 }
@@ -310,6 +307,12 @@
                 model = new Model();
                 controller = new Controller(model, window);
                 showVuelos();
+            }
+            function showMessage() {
+                window.alert("Registro exitoso");
+            }
+            function showMessageError() {
+                window.alert("Campos Invalidos");
             }
 
             function showVuelos() {
@@ -342,83 +345,7 @@
                 });
 
             });
-            /*
-             function showVuelos() {
-             
-             var tr;
-             var tabla;
-             var td;
-             for (var index in model.vuelos) {
-             // ----------Agregar nueva fila----------------
-             tabla = document.getElementById("tablaVuelos");
-             tr = document.createElement("tr");
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].numero_vuelo));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen.nombre));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino.nombre));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].estado));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].precio));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].duracion));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].hora));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].dia));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].oferta));
-             tr.appendChild(td);
-             td = document.createElement("td");
-             td.appendChild(document.createTextNode(model.vuelos[index].descuento));
-             tr.appendChild(td);
-             
-             
-             td = document.createElement("td");
-             img = document.createElement("img");
-             img.src = "images/delete.png";
-             img.title = "Eliminar"
-             img.addEventListener("click", function(e){
-             doDelete(model.vuelos[index].numero_vuelo);});
-             td.appendChild(img);
-             tr.appendChild(td);
-             
-             tabla.appendChild(tr);
-             
-             }
-             
-             }*/
-            function estado(estado) {
-                switch (estado) {
-                    case"Disponible":
-                        return 1;
-                        break;
-                    case"Inhabilitado":
-                        return 0;
-                        break;
-                }
-            }
-            function oferta(oferta) {
-                switch (estado) {
-                    case"Aplicar Oferta":
-                        return 1;
-                        break;
-                    case"No Aplicar":
-                        return 0;
-                        break;
-                }
-            }
-             function listCiudades() {
+            function listCiudades() {
                 var select = document.getElementById("ciudad_origen");
                 var select2 = document.getElementById("ciudad_destino");
                 for (var index in model.ciudades) {
