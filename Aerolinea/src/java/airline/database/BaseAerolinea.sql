@@ -283,4 +283,3 @@ direccion,telefono,celular,tipo) values ("p002","000","andrey","chaverri","andre
 
 
 
-

@@ -228,16 +228,17 @@ public class model {
         sql = String.format(sql, new SimpleDateFormat("yyyy-MM-dd").format(p.getFecha()), p.getAvion().getPlaca(),
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
-        int numeroAsiento = 1;
-        Asiento spot;
-        for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
-            for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
-                spot = new Asiento(numeroAsiento, true, p);
-                numeroAsiento++;
-                AsientoAdd(spot);
-            }
-        }
         if (rs.next()) {
+            int numeroAsiento = 1;
+            Asiento spot;
+            p.setNumero_viaje(rs.getInt(1));
+            for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
+                for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
+                    spot = new Asiento(numeroAsiento, true,p);
+                    numeroAsiento++;
+                    AsientoAdd(spot);
+                }
+            }
             return rs.getInt(1);
         } else {
             return 0;
@@ -474,7 +475,7 @@ public class model {
 
     public static int AsientoAdd(Asiento p) throws Exception {
         String sql = "insert into Asiento (numero, estado, numero_viaje) "
-                + "values('%s','%s','%s')";
+                + "values(%s,%b,%s)";
         sql = String.format(sql, p.getNumero(), p.isEstado(), p.getViaje().getNumero_viaje());
         ResultSet rs = asientos.executeUpdateWithKeys(sql);
         if (rs.next()) {

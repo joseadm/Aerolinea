@@ -39,7 +39,7 @@ Vuelo.from= function(plain){
 Vuelo.to = function(vuelo){
     return{
         _class : 'Vuelo',
-        codigo: vuelo.numero_vuelo,
+        numero_vuelo: vuelo.numero_vuelo,
         ciudad_origen: vuelo.ciudad_origen,
         ciudad_destino: vuelo.ciudad_destino,
         estado: vuelo.estado,
