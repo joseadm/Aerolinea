@@ -38,14 +38,16 @@
                                         <label class="control-label">Ciudad Origen</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese codigo de la ciudad" maxlength="45">
+                                            <!--<input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese codigo de la ciudad" maxlength="45">-->
+                                            <select id="ciudad_origen" name="ciudad_origen" class="form-control" ></select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Ciudad Destino</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese codigo de la ciudad" maxlength="45">
+                                            <!--<input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese codigo de la ciudad" maxlength="45">-->
+                                            <select id="ciudad_destino" name="ciudad_destino" class="form-control" ></select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -118,7 +120,7 @@
                                 </div>
                                 <br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
-                              <hr> 
+                                <hr> 
                             </div>
                             <!-- Tabla de vuelos............................................................... 
                             <div class="table-responsive">
@@ -142,35 +144,35 @@
                                     </tbody>
                                 </table>
                             </div>-->
-                        <!-- Tabla de viajes............................................................... -->
-            <div class="container">
-            <div class="table-responsive">
-            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
-                <thead>
-                                   <tr>
-                                            <th>Numero Vuelo</th>
-                                            <th>Ciudad Origen</th>
-                                            <th>Ciudad Destino</th>
-                                            <th>Estado</th>
-                                            <th>Precio</th>
-                                            <th>Duracion</th>
-                                            <th>Hora</th>
-                                            <th>Dia</th>
-                                            <th>Oferta</th>
-                                            <th>Descuento</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                </thead>
-                <tbody id="listaViajes">
-                </tbody>
-            </table>
-        </div>
-                </div>
-                        <!--............................................................... -->
-                        
+                            <!-- Tabla de viajes............................................................... -->
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Numero Vuelo</th>
+                                                <th>Ciudad Origen</th>
+                                                <th>Ciudad Destino</th>
+                                                <th>Estado</th>
+                                                <th>Precio</th>
+                                                <th>Duracion</th>
+                                                <th>Hora</th>
+                                                <th>Dia</th>
+                                                <th>Oferta</th>
+                                                <th>Descuento</th>
+                                                <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="listaViajes">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--............................................................... -->
+
+                        </div>
                     </div>
                 </div>
-                    </div>
                 <hr>
                 <br>
             </fieldset>
@@ -224,6 +226,10 @@
                         model.vuelos = result;
                         view.showVuelos();
                     });
+                    Proxy.getCiudades(function (result) {
+                        model.ciudades = result;
+                        view.listCiudades();
+                    });
                     this.initVuelo();
                 },
                 initVuelo: function () {
@@ -233,8 +239,18 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    this.model.vuelo.ciudad_origen = this.view.document.getElementById("ciudad_origen").value;
-                    this.model.vuelo.ciudad_destino = this.view.document.getElementById("ciudad_destino").value;
+                    var ciudad1 = new Ciudad(this.view.document.getElementById("ciudad_origen").value,"","");
+                    var ciudad2 = new Ciudad(this.view.document.getElementById("ciudad_destino").value,"","");
+                    //Proxy.getCiudad(this.view.document.getElementById("ciudad_origen").value, function (result) {
+                        //ciudad1 = result;
+                    //});
+                    //Proxy.getCiudad(this.view.document.getElementById("ciudad_destino").value, function (result) {
+                        //ciudad2 = result;
+                    //});
+                    
+                    this.model.vuelo.numero_vuelo = 0;
+                    this.model.vuelo.ciudad_origen = ciudad1;
+                    this.model.vuelo.ciudad_destino = ciudad2;
                     this.model.vuelo.estado = this.view.estado(this.view.document.getElementById("estado").value);
                     this.model.vuelo.precio = parseInt(this.view.document.getElementById("precio").value);
                     this.model.vuelo.duracion = $("#duracion").find("input").val();
@@ -244,6 +260,7 @@
                     this.model.vuelo.dia = $("#dia").find("input").val();
                     this.model.vuelo.descuento = parseInt(this.view.document.getElementById("descuento").value);
                     Proxy.VueloAdd(this.model.vuelo, function (result) {
+                        this.model.vuelo.numero_vuelo = result;
                         document.location = "/Aerolinea/vuelos.jsp";
                         view.showMessage();
                     });
@@ -261,6 +278,26 @@
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
                     return (key >= 48 && key <= 57);
+                },
+                estado: function (estado) {
+                    switch (estado) {
+                        case"Disponible":
+                            return "true";
+                            break;
+                        case"Inhabilitado":
+                            return "false";
+                            break;
+                    }
+                },
+                oferta: function (oferta) {
+                    switch (estado) {
+                        case"Aplicar Oferta":
+                            return "true";
+                            break;
+                        case"No Aplicar":
+                            return "false";
+                            break;
+                    }
                 }
 
 
@@ -274,7 +311,7 @@
                 controller = new Controller(model, window);
                 showVuelos();
             }
-            
+
             function showVuelos() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
@@ -293,7 +330,7 @@
                     ]).draw(false);
                 }
             }
-            
+
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
@@ -303,82 +340,90 @@
                                     '<img src="images/delete.png">'
                         }]
                 });
-               
+
             });
             /*
-            function showVuelos() {
-
-                var tr;
-                var tabla;
-                var td;
-                for (var index in model.vuelos) {
-                    // ----------Agregar nueva fila----------------
-                    tabla = document.getElementById("tablaVuelos");
-                    tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].numero_vuelo));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen.nombre));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino.nombre));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].estado));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].precio));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].duracion));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].hora));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].dia));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].oferta));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.vuelos[index].descuento));
-                    tr.appendChild(td);
-
-
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/delete.png";
-                    img.title = "Eliminar"
-                    img.addEventListener("click", function(e){
-                        doDelete(model.vuelos[index].numero_vuelo);});
-                    td.appendChild(img);
-                    tr.appendChild(td);
-
-                    tabla.appendChild(tr);
-
-                }
-
-            }*/
+             function showVuelos() {
+             
+             var tr;
+             var tabla;
+             var td;
+             for (var index in model.vuelos) {
+             // ----------Agregar nueva fila----------------
+             tabla = document.getElementById("tablaVuelos");
+             tr = document.createElement("tr");
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].numero_vuelo));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].ciudad_origen.nombre));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].ciudad_destino.nombre));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].estado));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].precio));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].duracion));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].hora));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].dia));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].oferta));
+             tr.appendChild(td);
+             td = document.createElement("td");
+             td.appendChild(document.createTextNode(model.vuelos[index].descuento));
+             tr.appendChild(td);
+             
+             
+             td = document.createElement("td");
+             img = document.createElement("img");
+             img.src = "images/delete.png";
+             img.title = "Eliminar"
+             img.addEventListener("click", function(e){
+             doDelete(model.vuelos[index].numero_vuelo);});
+             td.appendChild(img);
+             tr.appendChild(td);
+             
+             tabla.appendChild(tr);
+             
+             }
+             
+             }*/
             function estado(estado) {
                 switch (estado) {
                     case"Disponible":
-                        return "true";
+                        return 1;
                         break;
                     case"Inhabilitado":
-                        return "false";
+                        return 0;
                         break;
                 }
             }
             function oferta(oferta) {
                 switch (estado) {
                     case"Aplicar Oferta":
-                        return "true";
+                        return 1;
                         break;
                     case"No Aplicar":
-                        return "false";
+                        return 0;
                         break;
+                }
+            }
+             function listCiudades() {
+                var select = document.getElementById("ciudad_origen");
+                var select2 = document.getElementById("ciudad_destino");
+                for (var index in model.ciudades) {
+                    select.options[select.options.length] = new Option(model.ciudades[index].codigo);
+                    select2.options[select2.options.length] = new Option(model.ciudades[index].codigo);
                 }
             }
 

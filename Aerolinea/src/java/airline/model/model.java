@@ -96,11 +96,11 @@ public class model {
      //EL SIGUIENTE METODO agrega un vuelo
         public static int VueloAdd(Vuelo p) throws Exception{
         String sql="insert into Vuelo (ciudadOrigen, ciudadDestino, estado,precio,"
-                + "duracion,hora,oferta,imagen,descuento) "+
-                "values('%s','%s',%b,%s,'%s','%s',%b,'%s',%s)"; 
+                + "duracion,hora,oferta,imagen,dia,descuento) "+
+                "values('%s','%s',%b,%s,'%s','%s',%b,'%s','%s',%s)"; 
         sql=String.format(sql,p.getCiudad_origen().getCodigo(),p.getCiudad_destino().getCodigo(),
-                p.isEstado(),p.getPrecio(),p.getDuracion(), new SimpleDateFormat("yyyy-MM-dd").format(p.getHora()),
-                p.isOferta(),p.getImagen(),p.getDescuento());
+                    p.isEstado(),p.getPrecio(),p.getDuracion(),p.getHora(),
+                p.isOferta(),p.getImagen(),p.getDia(),p.getDescuento());
         ResultSet rs = vuelos.executeUpdateWithKeys(sql);
         if (rs.next()) {
                 return rs.getInt(1);

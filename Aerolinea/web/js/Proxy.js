@@ -69,7 +69,7 @@ Proxy.ViajeAdd = function(viaje, callBack){
     AJAX_req.send("viaje="+jsonViaje);   
 };
 
-Proxy.VueloAdd = function(vuelo,fechaviaje, callBack){
+Proxy.VueloAdd = function(vuelo,callBack){
     jsonVuelo = JSON.stringify(vuelo,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
     url="/Aerolinea/AirlineService?action=vueloAdd";
@@ -149,6 +149,21 @@ Proxy.getViaje = function(numero,callBack) {
       data: {
          format: 'json',
          numeroV: numero
+      },
+      dataType: 'text',
+      type: 'GET',
+      success: function(data) {
+         var object = $.parseJSON(data,JsonUtils.revive);
+         callBack(object);
+      }
+   });
+};
+Proxy.getCiudad = function(codigo,callBack) {
+   $.ajax({
+      url: '/Aerolinea/AirlineService?action=getCiudad',
+      data: {
+         format: 'json',
+         codigoC: codigo
       },
       dataType: 'text',
       type: 'GET',

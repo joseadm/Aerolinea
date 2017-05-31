@@ -28,7 +28,7 @@ import airline.model.Usuario;
     @WebInitParam(name = "TipoUsuario", value = "1")})
 public class SecurityFilter implements Filter{
 
-    List<String> clientActions = Arrays.asList("/usuario.jsp");
+    List<String> clientActions = Arrays.asList("/usuario.jsp","/reserva.jsp");
     List<String> managerActions = Arrays.asList("/tablero.jsp","/aviones.jsp","/ciudades.jsp","/viajes.jsp","/vuelos.jsp","/AirlineService_viajesListAll"
     ,"/AirlineService_avionesListAll","/AirlineService_vuelosListAll","/AirlineService_usuariosListAll","/AirlineService_avionAdd"
     ,"/AirlineService_ciudadAdd","/AirlineService_viajeAdd","/AirlineService_vueloAdd","/AirlineService_ciudadDelete","/AirlineService_viajeDelete",
