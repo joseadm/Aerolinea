@@ -197,14 +197,18 @@
                     var s1 = t1.substr(dot1 + 1);
                     var s2 = t2.substr(dot2 + 1);
                     var sRes = (Number(s1) + Number(s2));
+                    var sRes1 = (Number(m1) + Number(m2));
                     var mRes;
                     var addMinute = false;
                     var horaFinal;
-                    if (sRes >= 60){
+                    if (sRes >= 59){
                         addMinute = true;
                         sRes -= 60;
                     }
-                    mRes = (Number(m1) + Number(m2) + (addMinute? 1: 0));
+                    if (sRes1 >= 23){
+                        sRes1 -= 24;
+                    }
+                    mRes = (sRes1 + (addMinute? 1: 0));
                     return horaFinal = this.formatString2(String(mRes),2) + ":" + this.formatString(String(sRes),2);
                 },
  

@@ -130,6 +130,10 @@ aside {
 #listaBuscados {
   list-style: none;
 }
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
 
 /*------------------------------------------------------------------------------*/
 

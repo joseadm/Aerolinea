@@ -38,7 +38,6 @@
                                         <label class="control-label">Ciudad Origen</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <!--<input type="text" class ="form-control" id="ciudad_origen" placeholder="Ingrese codigo de la ciudad" maxlength="45">-->
                                             <select id="ciudad_origen" name="ciudad_origen" class="form-control" ></select>
                                         </div>
                                     </div>
@@ -46,7 +45,6 @@
                                         <label class="control-label">Ciudad Destino</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <!--<input type="text" class ="form-control" id="ciudad_destino" placeholder="Ingrese codigo de la ciudad" maxlength="45">-->
                                             <select id="ciudad_destino" name="ciudad_destino" class="form-control" ></select>
                                         </div>
                                     </div>
@@ -64,30 +62,30 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Dia</label>
+                                        <div class="form-group required"><label class="control-label">Dia</label></div>
                                         <div class='input-group date' id='dia' name="dia">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
-                                            <input type='text' class="form-control"/>
+                                            <input type='text' class="form-control" required/>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Hora</label>
+                                        <div class="form-group required"><label class="control-label">Hora</label></div>
                                         <div class='input-group date' id='hora' name="hora">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-time"></span>
                                             </span>
-                                            <input type='text' class="form-control" />
+                                            <input type='text' class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
-                                        <label class="control-label">Duracion</label>
+                                        <div class="form-group required"><label class="control-label">Duracion</label></div>
                                         <div class='input-group date' id='duracion' name="duracion">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-time"></span>
                                             </span>
-                                            <input type='text' class="form-control"/>
+                                            <input type='text' class="form-control" required/>
                                         </div>
                                     </div> 
                                 </div>
@@ -97,7 +95,7 @@
                                         <label class="control-label">Precio</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                            <input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio" onKeyPress="return controller.justNumbers(event)">
+                                            <input type="text" class ="form-control" id="precio" placeholder="Ingrese el precio" onKeyPress="return controller.justNumbers(event)" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -122,29 +120,7 @@
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
                                 <hr> 
                             </div>
-                            <!-- Tabla de vuelos............................................................... 
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Numero Vuelo</th>
-                                            <th>Ciudad Origen</th>
-                                            <th>Ciudad Destino</th>
-                                            <th>Estado</th>
-                                            <th>Precio</th>
-                                            <th>Duracion</th>
-                                            <th>Hora</th>
-                                            <th>Dia</th>
-                                            <th>Oferta</th>
-                                            <th>Descuento</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablaVuelos">
-                                    </tbody>
-                                </table>
-                            </div>-->
-                            <!-- Tabla de viajes............................................................... -->
+                            <!-- Tabla de vuelos............................................................... -->
                             <div class="container">
                                 <div class="table-responsive">
                                     <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
@@ -153,7 +129,6 @@
                                                 <th>Numero Vuelo</th>
                                                 <th>Ciudad Origen</th>
                                                 <th>Ciudad Destino</th>
-                                                <th>Estado</th>
                                                 <th>Precio</th>
                                                 <th>Duracion</th>
                                                 <th>Hora</th>
@@ -196,10 +171,10 @@
                 useCurrent: false
             });
             $('#hora').datetimepicker({
-                format: 'hh:ss'
+                format: 'HH:ss'
             });
             $('#duracion').datetimepicker({
-                format: 'hh:ss'
+                format: 'HH:ss'
             });
         </script> 
         <script> // Model
@@ -241,26 +216,35 @@
                     var view = this.view;
                     var ciudad1 = new Ciudad(this.view.document.getElementById("ciudad_origen").value, "", "");
                     var ciudad2 = new Ciudad(this.view.document.getElementById("ciudad_destino").value, "", "");
-                    if(ciudad1.codigo !== ciudad2.codigo){
-                    this.model.vuelo.numero_vuelo = 0;
-                    this.model.vuelo.ciudad_origen = ciudad1;
-                    this.model.vuelo.ciudad_destino = ciudad2;
-                    this.model.vuelo.estado = Boolean(this.estado(this.view.document.getElementById("estado").value));
-                    this.model.vuelo.precio = parseInt(this.view.document.getElementById("precio").value);
-                    this.model.vuelo.duracion = $("#duracion").find("input").val();
-                    this.model.vuelo.hora = $("#hora").find("input").val();
-                    this.model.vuelo.oferta = Boolean(this.oferta(this.view.document.getElementById("oferta").value));
-                    this.model.vuelo.imagen = "NOT YET";
-                    this.model.vuelo.dia = $("#dia").find("input").val();
-                    this.model.vuelo.descuento = parseInt(this.view.document.getElementById("descuento").value);
-                    Proxy.VueloAdd(this.model.vuelo, function (result) {
-                        this.model.vuelo.numero_vuelo = result;
-                        document.location = "/Aerolinea/vuelos.jsp";
-                        view.showMessage();
-                    });
-                }else{
-                    view.showMessageError();
-                }
+                    if (ciudad1.codigo !== ciudad2.codigo) {
+                        this.model.vuelo.numero_vuelo = 0;
+                        this.model.vuelo.ciudad_origen = ciudad1;
+                        this.model.vuelo.ciudad_destino = ciudad2;
+                        this.model.vuelo.estado = Boolean(this.estado(this.view.document.getElementById("estado").value));
+                        this.model.vuelo.duracion = $("#duracion").find("input").val();
+                        this.model.vuelo.hora = $("#hora").find("input").val();
+                        this.model.vuelo.oferta = Boolean(this.oferta(this.view.document.getElementById("oferta").value));
+                        this.model.vuelo.imagen = "NOT YET";
+                        this.model.vuelo.dia = $("#dia").find("input").val();
+                        if (this.view.document.getElementById("descuento").value === "") {
+                            this.model.vuelo.descuento = 0;
+                        } else {
+                            var descuento = parseInt(this.view.document.getElementById("descuento").value);
+                            this.model.vuelo.descuento = descuento;
+                            var precio = parseInt(this.view.document.getElementById("precio").value);
+                            var porcentaje = (precio * descuento) / 100;
+                            this.model.vuelo.precio = precio - porcentaje;
+                        }
+                        if (view.validacionForm()) {
+                            Proxy.VueloAdd(this.model.vuelo, function (result) {
+                                this.model.vuelo.numero_vuelo = result;
+                                document.location = "/Aerolinea/vuelos.jsp";
+                                view.showMessage();
+                            });
+                        }
+                    } else {
+                        view.showMessageInvalid();
+                    }
 
                 },
                 doDelete: function (numero_vuelo) {
@@ -311,7 +295,7 @@
             function showMessage() {
                 window.alert("Registro exitoso");
             }
-            function showMessageError() {
+            function showMessageInvalid() {
                 window.alert("Campos Invalidos");
             }
 
@@ -323,13 +307,12 @@
                         model.vuelos[index].numero_vuelo,
                         model.vuelos[index].ciudad_origen.nombre,
                         model.vuelos[index].ciudad_destino.nombre,
-                        model.vuelos[index].estado,
-                        model.vuelos[index].precio,
+                        "$ " + model.vuelos[index].precio,
                         model.vuelos[index].duracion,
                         model.vuelos[index].hora,
                         model.vuelos[index].dia,
                         model.vuelos[index].oferta,
-                        model.vuelos[index].descuento
+                        model.vuelos[index].descuento + " %"
                     ]).draw(false);
                 }
             }
@@ -353,8 +336,55 @@
                     select2.options[select2.options.length] = new Option(model.ciudades[index].codigo);
                 }
             }
+            function validacionForm() {
+                var tam = 0;
+                var dia = $("#dia").find("input");
+                if (dia.val() === "") {
+                    tam++;
+                }
+                var hora = $("#hora").find("input");
+                if (hora.val() === "") {
+                    tam++;
+                }
+                var duracion = $("#duracion").find("input");
+                if (duracion.val() === "") {
+                    tam++;
+                }
+                var precio = document.getElementById("precio");
+                if (!(requiredField(precio.value))) {
+                    tam++;
+                    precio.style.borderColor = "red";
+                } else {
+                    precio.style.borderColor = "gray";
+                }
+                var numero = parseInt(document.getElementById("descuento").value);
+                var descuento = document.getElementById("descuento");
+                if (descuento.value !== "") {
+                    if (numero > 99 || numero ===0) {
+                        tam++;
+                    }
+                }
+                var oferta = document.getElementById("oferta").value;
+                if( oferta === "Aplicar Oferta" && descuento.value === ""){
+                    tam++;
+                    descuento.style.borderColor = "red";
+                } else {
+                    descuento.style.borderColor = "gray";
+                }
+                if (tam > 0) {
 
+                    return false;
+                }
+                return true;
+            }
+            function requiredField(valor) {
+                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
 
+                    return false;
+                }
+                return true;
+            }
+            
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
     </body>
