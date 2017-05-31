@@ -59,7 +59,7 @@
                                     </div>
                                 </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
-                               <hr> 
+                                <hr> 
                             </div>
                             <!--<div class="table-responsive">
                                 <table class="table table-bordered table-hover">
@@ -76,37 +76,37 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tablaViajes">
-                                        <!-- Contenido de la tabla 
-                                    </tbody>
-                                </table>
-                            </div> -->
-                        
-                        
-                         <!-- Tabla de viajes............................................................... -->
-        <div class="container">
-            <div class="table-responsive">
-            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Numero Viaje</th>
-                        <th>Numero Vuelo</th>
-                        <th>Ciudad Origen</th>  
-                        <th>Ciudad Destino</th> 
-                        <th>Avion</th>
-                        <th>Fecha</th>
-                        <th>Hora de llegada</th>
-                         <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody id="listaViajes">
-                </tbody>
-            </table>
-                </div>
-        </div>
-                        
-        <!--....................................................................................-->
-                    </div>
+                            <!-- Contenido de la tabla 
+                        </tbody>
+                    </table>
+                </div> -->
+
+
+                            <!-- Tabla de viajes............................................................... -->
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Numero Viaje</th>
+                                                <th>Numero Vuelo</th>
+                                                <th>Ciudad Origen</th>  
+                                                <th>Ciudad Destino</th> 
+                                                <th>Avion</th>
+                                                <th>Fecha</th>
+                                                <th>Hora de llegada</th>
+                                                <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="listaViajes">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!--....................................................................................-->
                         </div>
+                    </div>
                 </div>
                 <hr>
                 <br>
@@ -118,7 +118,7 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
-                <script type="text/javascript">
+        <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
                     .removeClass('display')
@@ -149,19 +149,32 @@
                         model.viajes = result;
                         view.showViajes();
                     });
+                    Proxy.getVuelos(function (result) {
+                        model.vuelos = result;
+                    });
+                    Proxy.getAviones(function (result) {
+                        model.aviones = result;
+                    });
                     this.initViaje();
                 },
                 initViaje: function () {
                     var model = this.model;
                     model.viaje = new Viaje();
                 },
-
                 ViajeAdd: function () {
                     var model = this.model;
                     var view = this.view;
+                    var placaA = this.view.document.getElementById("avion").value;
+                    var avion = this.model.aviones.find(function (a) {
+                        return a.placa === placaA;
+                    });
+                    var numeroVuelo = (parseInt(this.view.document.getElementById("vuelo").value));
+                    var vuelo = this.model.vuelos.find(function (v1) {
+                        return v1.numero_vuelo === numeroVuelo;
+                    });
                     this.model.viaje.fecha = fechaViaje = $("#fechaViaje").find("input").val();
-                    this.model.viaje.avion = this.view.document.getElementById("avion").value;
-                    this.model.viaje.vuelo = parseInt(this.view.document.getElementById("vuelo").value);
+                    this.model.viaje.avion = avion;
+                    this.model.viaje.vuelo = vuelo;
                     Proxy.ViajeAdd(this.model.viaje, function (result) {
                         this.model.viaje.numero_viaje = result;
                         document.location = "/Aerolinea/viajes.jsp";
@@ -185,11 +198,11 @@
                     var key = window.Event ? e.which : e.keyCode
                     return (key >= 48 && key <= 57)
                 },
-                sumaTiempos: function(val1,tiempo){
- 
-                    t1=val1;
-                    t2=tiempo;
- 
+                sumaTiempos: function (val1, tiempo) {
+
+                    t1 = val1;
+                    t2 = tiempo;
+
                     var dot1 = t1.indexOf(":");
                     var dot2 = t2.indexOf(":");
                     var m1 = t1.substr(0, dot1);
@@ -201,48 +214,48 @@
                     var mRes;
                     var addMinute = false;
                     var horaFinal;
-                    if (sRes >= 59){
+                    if (sRes >= 59) {
                         addMinute = true;
                         sRes -= 60;
                     }
-                    if (sRes1 >= 23){
+                    if (sRes1 >= 23) {
                         sRes1 -= 24;
                     }
-                    mRes = (sRes1 + (addMinute? 1: 0));
-                    return horaFinal = this.formatString2(String(mRes),2) + ":" + this.formatString(String(sRes),2);
+                    mRes = (sRes1 + (addMinute ? 1 : 0));
+                    return horaFinal = this.formatString2(String(mRes), 2) + ":" + this.formatString(String(sRes), 2);
                 },
- 
-                formatString2: function(string, len){           
- 
-                    if (string.length < len){
-                        addchar=(len - string.length) ;
-                        for (i = 0; i < addchar; i++){
-                            string="0"+string ;
+
+                formatString2: function (string, len) {
+
+                    if (string.length < len) {
+                        addchar = (len - string.length);
+                        for (i = 0; i < addchar; i++) {
+                            string = "0" + string;
                         }
                     }
- 
-                    if (string.length > len){
-                        string=substr(string,0,len);
-                    }
- 
-                    return string;
-                },
- 
-                formatString: function(string, len){
- 
-                    if (string.length < len){
-                        addchar=(len - string.length) ;
-                        for (i = 0; i < addchar; i++){
-                            string=string +"0";
-                        }
-                    }
- 
+
                     if (string.length > len) {
-                        string=substr(string,0,len);
+                        string = substr(string, 0, len);
                     }
- 
+
                     return string;
-                    
+                },
+
+                formatString: function (string, len) {
+
+                    if (string.length < len) {
+                        addchar = (len - string.length);
+                        for (i = 0; i < addchar; i++) {
+                            string = string + "0";
+                        }
+                    }
+
+                    if (string.length > len) {
+                        string = substr(string, 0, len);
+                    }
+
+                    return string;
+
                 }
 
             };
@@ -256,7 +269,7 @@
                 controller = new Controller(model, window);
                 showViajes();
             }
-            
+
             function showViajes() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
@@ -268,11 +281,11 @@
                         model.viajes[index].vuelo.ciudad_destino.nombre,
                         model.viajes[index].avion.placa,
                         model.viajes[index].fecha,
-                        controller.sumaTiempos(model.viajes[index].vuelo.hora,model.viajes[index].vuelo.duracion)
+                        controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion)
                     ]).draw(false);
                 }
             }
-            
+
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
@@ -282,55 +295,9 @@
                                     '<img src="images/delete.png">'
                         }]
                 });
-               
+
             });
-            /*
-            function showViajes() {
 
-                var tr;
-                var tabla;
-                var td;
-
-                for (var index in model.viajes) {
-                    // ----------Agregar nueva fila----------------
-                    tabla = document.getElementById("tablaViajes");
-                    tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].numero_viaje));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].vuelo.numero_vuelo));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_origen.nombre));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].vuelo.ciudad_destino.nombre));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].avion.placa));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.viajes[index].fecha));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(controller.sumaTiempos(model.viajes[index].vuelo.hora,model.viajes[index].vuelo.duracion)));
-                    tr.appendChild(td);
-
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/delete.png";
-                    img.title = "Eliminar"
-                    img.addEventListener("click", function(e){
-                        doDelete(model.viajes[index].numero_viaje);});
-                    td.appendChild(img);
-                    tr.appendChild(td);
-
-                    tabla.appendChild(tr);
-
-                }
-
-            }*/
             function showMessage() {
                 window.alert("Registro exitoso");
             }

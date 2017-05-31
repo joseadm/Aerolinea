@@ -65,6 +65,8 @@ public class AirlineService extends HttpServlet {
             Usuario usuario;
             Viaje v;
             Ciudad c1;
+            Vuelo vu;
+            Avion a;
             switch (accion) {
                 case "ciudadListAll":
                     ciudades = model.selectAllCities();
@@ -188,6 +190,24 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(v);
                     out.write(json);
                     break;
+                case "getCiudad":
+                    String codigoC = request.getParameter("codigoC");
+                    c1 = model.selectCity(codigoC);
+                    json = gson.toJson(c1);
+                    out.write(json);
+                    break;
+                case "getAvion":
+                    String placaA = request.getParameter("placaA");
+                    a = model.selectPlane(placaA);
+                    json = gson.toJson(a);
+                    out.write(json);
+                    break;
+                case "getVuelo":
+                    int numeroVu = Integer.parseInt(request.getParameter("numeroVu"));
+                    vu = model.selectFlight(numeroVu);
+                    json = gson.toJson(vu);
+                    out.write(json);
+                    break;
                 case "ciudadDelete":
                     String codigo = request.getParameter("codigo");
                     int n1 = model.deleteCiudad(codigo);
@@ -210,12 +230,6 @@ public class AirlineService extends HttpServlet {
                     String placa = request.getParameter("placa");
                     int n4 = model.deleteAvion(placa);
                     json = gson.toJson(n4);
-                    out.write(json);
-                    break;
-                case "getCiudad":
-                    String codigoC = request.getParameter("codigoC");
-                    c1 = model.selectCity(codigoC);
-                    json = gson.toJson(c1);
                     out.write(json);
                     break;
             }

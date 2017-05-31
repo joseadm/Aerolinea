@@ -173,7 +173,36 @@ Proxy.getCiudad = function(codigo,callBack) {
       }
    });
 };
-
+Proxy.getAvion = function(placa,callBack) {
+   $.ajax({
+      url: '/Aerolinea/AirlineService?action=getAvion',
+      data: {
+         format: 'json',
+         placaA: placa
+      },
+      dataType: 'text',
+      type: 'GET',
+      success: function(data) {
+         var object = $.parseJSON(data,JsonUtils.revive);
+         callBack(object);
+      }
+   });
+};
+Proxy.getVuelo = function(numero,callBack) {
+   $.ajax({
+      url: '/Aerolinea/AirlineService?action=getVuelo',
+      data: {
+         format: 'json',
+         numeroVu: numero
+      },
+      dataType: 'text',
+      type: 'GET',
+      success: function(data) {
+         var object = $.parseJSON(data,JsonUtils.revive);
+         callBack(object);
+      }
+   });
+};
 Proxy.viajesSearch = function(origen, destino,diaIda,fechaIda,callBack) {
    $.ajax({
       url: '/Aerolinea/AirlineService?action=viajeListSearch',

@@ -214,8 +214,14 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    var ciudad1 = new Ciudad(this.view.document.getElementById("ciudad_origen").value, "", "");
-                    var ciudad2 = new Ciudad(this.view.document.getElementById("ciudad_destino").value, "", "");
+                    var ciu1 = this.view.document.getElementById("ciudad_origen").value;
+                    var ciu2 = this.view.document.getElementById("ciudad_destino").value;
+                    var ciudad1 = this.model.ciudades.find(function (c1) {
+                        return c1.codigo === ciu1;
+                    });
+                    var ciudad2 = this.model.ciudades.find(function (c1) {
+                        return c1.codigo === ciu2;
+                    });
                     if (ciudad1.codigo !== ciudad2.codigo) {
                         this.model.vuelo.numero_vuelo = 0;
                         this.model.vuelo.ciudad_origen = ciudad1;
@@ -360,12 +366,12 @@
                 var numero = parseInt(document.getElementById("descuento").value);
                 var descuento = document.getElementById("descuento");
                 if (descuento.value !== "") {
-                    if (numero > 99 || numero ===0) {
+                    if (numero > 99 || numero === 0) {
                         tam++;
                     }
                 }
                 var oferta = document.getElementById("oferta").value;
-                if( oferta === "Aplicar Oferta" && descuento.value === ""){
+                if (oferta === "Aplicar Oferta" && descuento.value === "") {
                     tam++;
                     descuento.style.borderColor = "red";
                 } else {
@@ -384,7 +390,7 @@
                 }
                 return true;
             }
-            
+
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
     </body>
