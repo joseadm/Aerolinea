@@ -22,113 +22,113 @@
         <%@ include file="Header.jspf" %>
         <!-- ....................................Formulario Contacto............................................... -->
         <div class="container">
-        <div  id="myform" class="form-group well form-horizontal">
+            <div  id="myform" class="form-group well form-horizontal">
                 <fieldset>
                     <legend align="center">Registro</legend>
-
-                        <label class="col-md-4 control-label">Usuario</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="usuario" name="usuario" placeholder="Usuario" class="form-control"  type="text" maxlength="45">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4 control-label">Usuario</label>
+                    <div class=" col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="usuario" name="usuario" placeholder="Usuario" class="form-control"  type="text" maxlength="45">
                         </div>
-                 
+                    </div>
+                    </div><br><br><br>
 
                     <!-- Password-->
-               
-                        <label class="col-md-4  control-label" >Contraseña</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" name="password" placeholder="********" class="form-control" type="password" maxlength="45">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4  control-label" >Contraseña</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="password" name="password" placeholder="********" class="form-control" type="password" maxlength="45">
                         </div>
-              
+                    </div>
+                    </div><br><br><br>
                     <!-- Nombre -->
-
-                        <label class="col-md-4  control-label">Nombre</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="nombre"  name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4  control-label">Nombre</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="nombre"  name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
                         </div>
-                 
+                    </div>
+                    </div><br><br><br>
 
                     <!-- Apellido-->
-
-                        <label class="col-md-4  control-label" >Apellidos</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                 <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text" maxlength="45">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4  control-label" >Apellidos</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="apellidos" name="apellidos" placeholder="Apellidos" class="form-control"  type="text" maxlength="45">
                         </div>
-  
+                    </div>
+                    </div><br><br><br>
 
                     <!-- Correo-->
-               
-                        <label class="col-md-4  control-label">Correo Electrónico</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text" maxlength="45">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-sm-6 col-md-4   control-label">Correo Electrónico</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input id="correo" name="correo" placeholder="Correo Electronico" class="form-control"  type="text" maxlength="45">
                         </div>
-            
+                    </div>
+                    </div><br><br><br>
                     <!-- Fecha de nacimiento-->
-               
-                        <label class="col-md-4  control-label">Fecha de Nacimiento</label>
-                        <div class="col-md-6 col-md-offset-3  inputGroupContainer">
-                            <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                                <input type='text' id="fecha" class="form-control" />
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4  control-label">Fecha de Nacimiento</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class='input-group date' id='fechaNacimiento' name="fechaNacimiento">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type='text' id="fecha" class="form-control" />
                         </div>
-              
+                    </div>
+                    </div><br><br><br>
                     <!-- Telefono-->
 
-                  
-                        <label class="col-md-4  control-label">Teléfono</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                <input id="telefono" name="telefono" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4  control-label">Teléfono</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                            <input id="telefono" name="telefono" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
                         </div>
-               
+                    </div>
+                    </div><br><br><br>
                     <!-- Celular-->
-                
-                        <label class="col-md-4 control-label">Celular</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                                <input id="celular" name="celular" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4 control-label">Celular</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                            <input id="celular" name="celular" placeholder="(562)8990-3452" class="form-control" type="text" onKeyPress="return controller.justNumbers(event)">
                         </div>
-                
+                    </div>
+                    </div><br><br><br>
 
                     <!-- Direccion-->
 
-               
-                        <label class="col-md-4  control-label" >Direccion</label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <input id="direccion" name="direccion" placeholder="Direccion" class="form-control"  type="text" disabled>
-                            </div>
+                    <div class="col-xs-12 col-sm-4 col-md-10">
+                    <label class="col-md-4  control-label" >Direccion</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input id="direccion" name="direccion" placeholder="Direccion" class="form-control"  type="text" disabled>
                         </div>
-                        
-                        <br>
+                    </div>
+                    </div>
+                    <br>
                     <!--Mapa....................................................................... -->
                     <center>
                         <div class="col-md-6 col-md-offset-3">
-                        <h3>Direccion</h3></div>
+                            <h3>Direccion</h3></div>
                         <div id="map"action="javascript:initMap();"></div>
-                        
+
                     </center>
                     <br>
                     <!--............................................. -->
@@ -136,15 +136,15 @@
                     <div class="alert alert-success" role="alert" id="exito">Exito al enviar <i class="glyphicon glyphicon-thumbs-up"></i> Gracias por contactarnos, nos comunicaremos pronto</div>
 
                     <!-- Button -->
-                        <label class="col-md-6 col-md-offset-3 control-label"></label>
-                        <div class="col-md-6 col-md-offset-3 inputGroupContainer" align="center">
-                            <button id="Registrar" class="btn btn-primary" onclick="controller.UsuarioAdd();">Registrar<span class="glyphicon glyphicon-save"></span></button>
-                        </div>
-                         <div class="col-md-6 col-md-offset-3 inputGroupContainer" align="center">
-                    <p align="center">¿Ya tiene una cuenta? <a href="login.jsp">Inicia sesión</a><span class="fontawesome-arrow-right"></span></p>
-                         </div>
+                    <label class="col-md-6 col-md-offset-3 control-label"></label>
+                    <div class="col-md-6 col-md-offset-3 inputGroupContainer" align="center">
+                        <button id="Registrar" class="btn btn-primary" onclick="controller.UsuarioAdd();">Registrar<span class="glyphicon glyphicon-save"></span></button>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3 inputGroupContainer" align="center">
+                        <p align="center">¿Ya tiene una cuenta? <a href="login.jsp">Inicia sesión</a><span class="fontawesome-arrow-right"></span></p>
+                    </div>
                 </fieldset>
-             </div>
+            </div>
             <!-- .......................................................................................................-->
 
             <!-- Footer -->
@@ -207,7 +207,7 @@
                     });
                 }
             </script>
-           <!-- ................................................................................... -->
+            <!-- ................................................................................... -->
             <script> // Model
                 function Model() {
                     this.Model();
@@ -251,14 +251,14 @@
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
                         this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
                         this.model.usuario.tipo = 1;
-                        if(view.validacionForm())
+                        if (view.validacionForm())
                             this.view.showMessage();
-                        if(view.validacionForm() /*&&!(usuarioExiste(this.model.usuario.usuario))*/){
+                        if (view.validacionForm() /*&&!(usuarioExiste(this.model.usuario.usuario))*/) {
                             Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
                                 document.location = "/Aerolinea/registro.jsp";
                             });
-                            
-                            
+
+
                         }
 
                     },
@@ -266,18 +266,18 @@
                         var key = window.Event ? e.which : e.keyCode;
                         return (key >= 48 && key <= 57);
                     },
-                    usuarioExiste: function(val){
+                    usuarioExiste: function (val) {
                         var resultado;
-                        Proxy.usuarioExiste(val ,function (result){
-                        resultado = result;
+                        Proxy.usuarioExiste(val, function (result) {
+                            resultado = result;
                         });
-                        if(resultado === true){
+                        if (resultado === true) {
                             return true; //usuario ya existe
-                            
+
                         }
                         return false;
                     }
-                    
+
 
                 };
             </script>
@@ -287,89 +287,90 @@
                 function pageLoad(event) {
                     model = new Model();
                     controller = new Controller(model, window);
-                     
+
                 }
                 function showMessage() {
                     window.alert("Registro exitoso");
                 }
-                function validacionForm(){
-                    var tam =0;
-                    var usuarioE= document.getElementById("usuario");
-                    if(!(validarVacio(usuarioE.value))){
+                function validacionForm() {
+                    var tam = 0;
+                    var usuarioE = document.getElementById("usuario");
+                    if (!(validarVacio(usuarioE.value))) {
                         tam++;
                         usuarioE.style.borderColor = "red";
-                    }else{
+                    } else {
                         usuarioE.style.borderColor = "gray";
                     }
-                    var passwordE= document.getElementById("password");
-                    if(!(validarVacio(passwordE.value))){
+                    var passwordE = document.getElementById("password");
+                    if (!(validarVacio(passwordE.value))) {
                         tam++;
                         passwordE.style.borderColor = "red";
-                    }else{
+                    } else {
                         passwordE.style.borderColor = "gray";
                     }
-                     var nombreE= document.getElementById("nombre");
-                    if(!(validarVacio(nombreE.value))){
+                    var nombreE = document.getElementById("nombre");
+                    if (!(validarVacio(nombreE.value))) {
                         tam++;
                         nombreE.style.borderColor = "red";
-                    }else{
+                    } else {
                         nombreE.style.borderColor = "gray";
                     }
-                      var apellidosE= document.getElementById("apellidos");
-                    if(!(validarVacio(apellidosE.value))){
+                    var apellidosE = document.getElementById("apellidos");
+                    if (!(validarVacio(apellidosE.value))) {
                         tam++;
                         apellidosE.style.borderColor = "red";
-                    }else{
+                    } else {
                         apellidosE.style.borderColor = "gray";
                     }
-                     var correoE= document.getElementById("correo");
-                    if(!(validarVacio(correoE.value))){
+                    var correoE = document.getElementById("correo");
+                    if (!(validarVacio(correoE.value))) {
                         tam++;
                         correoE.style.borderColor = "red";
-                    }else{
+                    } else {
                         correoE.style.borderColor = "gray";
                     }
-                     var fechaE= document.getElementById("fecha");
-                    if(!(validarVacio(fechaE.value))){
+                    var fechaE = document.getElementById("fecha");
+                    if (!(validarVacio(fechaE.value))) {
                         tam++;
                         fechaE.style.borderColor = "red";
-                    }else{
+                    } else {
                         fechaE.style.borderColor = "gray";
                     }
-                    var telefonoE= document.getElementById("telefono");
-                    if(!(validarVacio(telefonoE.value))){
+                    var telefonoE = document.getElementById("telefono");
+                    if (!(validarVacio(telefonoE.value))) {
                         tam++;
                         telefonoE.style.borderColor = "red";
-                    }else{
+                    } else {
                         telefonoE.style.borderColor = "gray";
                     }
-                    var celularE= document.getElementById("celular");
-                    if(!(validarVacio(celularE.value))){
+                    var celularE = document.getElementById("celular");
+                    if (!(validarVacio(celularE.value))) {
                         tam++;
                         celularE.style.borderColor = "red";
-                    }else{
+                    } else {
                         celularE.style.borderColor = "gray";
                     }
-                    var direccionE= document.getElementById("direccion");
-                    if(!(validarVacio(direccionE.value))){
+                    var direccionE = document.getElementById("direccion");
+                    if (!(validarVacio(direccionE.value))) {
                         tam++;
                         direccionE.style.borderColor = "red";
-                    }else{
+                    } else {
                         direccionE.style.borderColor = "gray";
                     }
-                     if(tam > 0){
-                         
-                         return false;
-                     }
-                     return true;
+                    if (tam > 0) {
+
+                        return false;
+                    }
+                    return true;
                 }
-                function validarVacio(valor){
-                    if( valor === null || valor.length === 0 || /^\s+$/.test(valor) ) {
-                    
-                    return false;
-                    }return true;
+                function validarVacio(valor) {
+                    if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+
+                        return false;
+                    }
+                    return true;
                 }
-              
+
                 document.addEventListener("DOMContentLoaded", pageLoad);
             </script> 
     </body>
