@@ -232,15 +232,16 @@
                         this.model.vuelo.oferta = Boolean(this.oferta(this.view.document.getElementById("oferta").value));
                         this.model.vuelo.imagen = "NOT YET";
                         this.model.vuelo.dia = $("#dia").find("input").val();
+                        var precio = parseInt(this.view.document.getElementById("precio").value);
                         if (this.view.document.getElementById("descuento").value === "") {
                             this.model.vuelo.descuento = 0;
                         } else {
-                            var descuento = parseInt(this.view.document.getElementById("descuento").value);
+                            var descuento = parseInt(this.view.document.getElementById("descuento").value);                           
                             this.model.vuelo.descuento = descuento;
-                            var precio = parseInt(this.view.document.getElementById("precio").value);
                             var porcentaje = (precio * descuento) / 100;
                             this.model.vuelo.precio = precio - porcentaje;
                         }
+                        this.model.vuelo.precio = precio;
                         if (view.validacionForm()) {
                             Proxy.VueloAdd(this.model.vuelo, function (result) {
                                 this.model.vuelo.numero_vuelo = result;
