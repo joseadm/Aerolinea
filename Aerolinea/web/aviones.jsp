@@ -38,21 +38,21 @@
                                         <label class="control-label">Placa</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa" maxlength="45">
+                                            <input type="text" class ="form-control" id="placa" placeholder="Ingrese la placa" maxlength="45" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Modelo</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo" maxlength="45">
+                                            <input type="text" class ="form-control" id="modelo" placeholder="Ingrese la modelo" maxlength="45" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Marca</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca" maxlength="45">
+                                            <input type="text" class ="form-control" id="marca" placeholder="Ingrese la marca" maxlength="45" required>
                                         </div>
                                     </div>
                                 </div><br>
@@ -61,14 +61,14 @@
                                         <label class="control-label">Cantidad Filas</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="cant_filas" placeholder="Ingrese la cantidad de filas" onKeyPress="return controller.justNumbers(event)">
+                                            <input type="text" class ="form-control" id="cant_filas" placeholder="Ingrese la cantidad de filas" onKeyPress="return controller.justNumbers(event)" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <label class="control-label">Cantidad Asientos Fila</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila" onKeyPress="return controller.justNumbers(event)">
+                                            <input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila" onKeyPress="return controller.justNumbers(event)" required>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -77,55 +77,37 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
-                                            <input type='text' class="form-control" />
+                                            <input type='text' class="form-control" required/>
                                         </div>
                                     </div>
                                 </div><br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
-                               <hr> 
+                                <hr> 
+                            </div>                       
+                            <!-- Tabla de aviones............................................................... -->
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Placa</th>
+                                                <th>Modelo</th>
+                                                <th>Marca</th>
+                                                <th>Año</th>
+                                                <th>Pasajeros</th>
+                                                <th>Filas</th>
+                                                <th>Ascientos</th>
+                                                <th>Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="listaViajes">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!--<table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Placa</th>
-                                        <th>Modelo</th>
-                                        <th>Marca</th>
-                                        <th>Año</th>
-                                        <th>Pasajeros</th>
-                                        <th>Filas</th>
-                                        <th>Ascientos</th>
-                                        <th>Eliminar</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tablaAviones">
-                                    <!-- Contenido de la tabla 
-                                </tbody>
-                            </table>-->
-                        
-         <!-- Tabla de aviones............................................................... -->
-        <div class="container">
-            <div class="table-responsive">
-            <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
-                <thead>
-                                    <tr>
-                                        <th>Placa</th>
-                                        <th>Modelo</th>
-                                        <th>Marca</th>
-                                        <th>Año</th>
-                                        <th>Pasajeros</th>
-                                        <th>Filas</th>
-                                        <th>Ascientos</th>
-                                        <th>Eliminar</th>
-                                    </tr>
-                </thead>
-                <tbody id="listaViajes">
-                </tbody>
-            </table>
-        </div>
-            </div>
-        <!--....................................................................................-->
-                    </div>
+                            <!--....................................................................................-->
                         </div>
+                    </div>
                 </div>
                 <hr>
                 <br>
@@ -137,7 +119,7 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
-        
+
         <script type="text/javascript">
             // For demo to fit into DataTables site builder...
             $('#paginacion')
@@ -185,13 +167,14 @@
                     this.model.avion.annio = $("#annio").find("input").val();
                     this.model.avion.cant_filas = this.view.document.getElementById("cant_filas").value;
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
-                    cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value)*parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
+                    cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
-                    Proxy.AvionAdd(this.model.avion, function (result) {
-                        document.location = "/Aerolinea/aviones.jsp"
-                        view.showMessage();
-                    });
-
+                    if (view.validacionForm()) {
+                        Proxy.AvionAdd(this.model.avion, function (result) {
+                            document.location = "/Aerolinea/aviones.jsp"
+                            view.showMessage();
+                        });
+                    }
                 },
                 doDelete: function (placa) {
                     Proxy.ViajeDelete(placa, function (result) {
@@ -221,7 +204,7 @@
                 controller = new Controller(model, window);
                 showAviones();
             }
-             function showAviones() {
+            function showAviones() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
                 for (var index in model.aviones) {
@@ -236,7 +219,7 @@
                     ]).draw(false);
                 }
             }
-            
+
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
@@ -246,61 +229,69 @@
                                     '<img src="images/delete.png">'
                         }]
                 });
-               
+
             });
-            /*
-            function showAviones() {
-
-                var tr;
-                var tabla;
-                var td;
-
-                for (var index in model.aviones) {
-                    // ----------Agregar nueva fila----------------
-                    tabla = document.getElementById("tablaAviones");
-                    tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].placa));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].modelo));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].marca));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].annio));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].cant_pasajeros));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].cant_filas));
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.appendChild(document.createTextNode(model.aviones[index].cant_asientos_por_fila));
-                    tr.appendChild(td);
-
-                    td = document.createElement("td");
-                    img = document.createElement("img");
-                    img.src = "images/delete.png";
-                    img.title = "Eliminar"
-                    img.addEventListener("click", function(e){
-                        doDelete(model.aviones[index].placa);});
-                    td.appendChild(img);
-                    tr.appendChild(td);
-
-                    tabla.appendChild(tr);
-
-                }
-
-            }*/
             function clean() {
                 document.getElementById("placa").textContent = "";
             }
             function showMessage() {
                 window.alert("Registro exitoso");
             }
+            function validacionForm() {
+                var tam = 0;
+                var placa = document.getElementById("placa");
+                if (!(requiredField(placa.value))) {
+                    tam++;
+                    placa.style.borderColor = "red";
+                } else {
+                    placa.style.borderColor = "gray";
+                }
+                var modelo = document.getElementById("modelo");
+                if (!(requiredField(modelo.value))) {
+                    tam++;
+                    modelo.style.borderColor = "red";
+                } else {
+                    modelo.style.borderColor = "gray";
+                }
+                var marca = document.getElementById("marca");
+                if (!(requiredField(marca.value))) {
+                    tam++;
+                    marca.style.borderColor = "red";
+                } else {
+                    marca.style.borderColor = "gray";
+                }
+                var cant_filas = document.getElementById("cant_filas");
+                if (!(requiredField(cant_filas.value))) {
+                    tam++;
+                    cant_filas.style.borderColor = "red";
+                } else {
+                    cant_filas.style.borderColor = "gray";
+                }
+                var cant_asientos_por_fila = document.getElementById("cant_asientos_por_fila");
+                if (!(requiredField(cant_asientos_por_fila.value))) {
+                    tam++;
+                    cant_asientos_por_fila.style.borderColor = "red";
+                } else {
+                    cant_asientos_por_fila.style.borderColor = "gray";
+                }
+                var annio = $("#annio").find("input");
+                if (annio.val() === "") {
+                    tam++;
+                }
+                if (tam > 0) {
+
+                    return false;
+                }
+                return true;
+            }
+            function requiredField(valor) {
+                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+
+                    return false;
+                }
+                return true;
+            }
+
 
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script> 
