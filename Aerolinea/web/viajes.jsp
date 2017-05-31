@@ -74,6 +74,7 @@
                                                 <th>Avion</th>
                                                 <th>Fecha</th>
                                                 <th>Hora de llegada</th>
+                                                <th>Editar</th>
                                                 <th>Eliminar</th>
                                             </tr>
                                         </thead>
@@ -269,12 +270,27 @@
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
+                            "targets": -2,
+                            "data": null, 
+                            "defaultContent":'<img class="btn-edit" src="images/edit.png">'
+                            
+                        }, {
                             "targets": -1,
                             "data": null,
                             "defaultContent":
-                                    '<img src="images/delete.png">'
+                                    '<img class="btn-delete" src="images/delete.png">'
                         }]
                 });
+                
+                $('#paginacion tbody').on( 'click', '.btn-edit', function () {
+                    var data = table.row( $(this).parents('tr') ).data();
+                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                 } );
+                 
+                 $('#paginacion tbody').on( 'click', '.btn-delete', function () {
+                    var data = table.row( $(this).parents('tr') ).data();
+                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                 } );
 
             });
 

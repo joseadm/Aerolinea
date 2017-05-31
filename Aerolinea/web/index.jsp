@@ -255,7 +255,7 @@
         <script> // View
             var model;
             var controller;
-            var viajes;
+            var viajes = [];
             function pageLoad(event) {
                 modelView = new AirlineModel();
                 controllerView = new AirlineController(modelView, window);
@@ -263,11 +263,11 @@
                 addEventListeners();
                 listCiudades();
                 oneWay();
-                viajes = Storage.retrieve("viajes");
-                if (viajes === null) {
-                    viajes = [];
-                    Storage.store("viajes", viajes);
-                }
+                //viajes = Storage.retrieve("viajes");
+                //if (viajes === null) {
+                    //viajes = [];
+                    //Storage.store("viajes", viajes);
+                //}
             }
 
             function showPromos() {
@@ -307,6 +307,7 @@
                     boton.addEventListener('click',function(e) {
                             var v1 = new Viaje(modelView.promo[index].numero_viaje, modelView.promo[index].fecha, modelView.promo[index].avion, modelView.promo[index].vuelo);
                             viajes.push(v1);
+                            alert("Esta mandando"+v1.numero_viaje);
                             Storage.store("viajes", viajes);
                             document.location = "reserva.jsp";
                     });
@@ -426,9 +427,13 @@
                         if (modelView.buscadosIda[index].numero_viaje === row[0]) {
                             var v1 = new Viaje(modelView.buscadosIda[index].numero_viaje, modelView.buscadosIda[index].fecha, modelView.buscadosIda[index].avion, modelView.buscadosIda[index].vuelo);
                             viajes.push(v1);
-                            Storage.store("viajes", viajes);
+                            for(var i=0; i<viajes.length; i++) {
+                                alert(viajes[i].numero_viaje);
+                            }
+                            sessionStorage.setItem("viajes", JSON.stringify(viajes,JsonUtils.replacer));
+
                             if (radio1.checked) {
-                                document.location = "reserva.jsp";
+                                //document.location = "reserva.jsp";
                             }
                         }
                     }
@@ -441,6 +446,7 @@
                         if (modelView.buscadosVuelta[index].numero_viaje === row[0]) {
                             var v1 = new Viaje(modelView.buscadosVuelta[index].numero_viaje, modelView.buscadosVuelta[index].fecha, modelView.buscadosVuelta[index].avion, modelView.buscadosVuelta[index].vuelo);
                             viajes.push(v1);
+                            alert("Esta mandando"+v1.numero_viaje);
                             Storage.store("viajes", viajes);
                         }
                     }

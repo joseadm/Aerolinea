@@ -62,7 +62,7 @@
                                 <div class="table-responsive">
                                     <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                                         <thead>
-                                            <tr><th>Codigo</th><th>Pais</th><th>Nombre</th><th>Eliminar</th></tr>
+                                            <tr><th>Codigo</th><th>Pais</th><th>Nombre</th><th>Editar</th><th>Eliminar</th></tr>
                                         </thead>
                                         <tbody id="listaCiudades">
                                         </tbody>
@@ -175,12 +175,26 @@
             $(document).ready(function () {
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
+                            "targets": -2,
+                            "data": null, 
+                            "defaultContent":'<img class="btn-edit" src="images/edit.png">'
+                            
+                        }, {
                             "targets": -1,
-                            "data": null,
-                            "defaultContent":
-                                    '<img src="images/delete.png">'
+                            "data": null, 
+                            "defaultContent":'<img class="btn-delete" src="images/delete.png">'
                         }]
                 });
+                
+                $('#paginacion tbody').on( 'click', '.btn-edit', function () {
+                    var data = table.row( $(this).parents('tr') ).data();
+                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                 } );
+                 
+                 $('#paginacion tbody').on( 'click', '.btn-delete', function () {
+                    var data = table.row( $(this).parents('tr') ).data();
+                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                 } );
 
             });
 
