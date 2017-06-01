@@ -54,6 +54,7 @@
                                     </div>
                                 </div><br>
                                 <button onclick='controller.CiudadesAdd();' class="btn btn-success" id="agregarRuta">Agregar</button>
+                                <button onclick='controller.CiudadesUpdate();' class="btn btn-warning" id="agregarRuta">Actualizar</button>
                                 <br> 
                                 <hr>
                             </div>                     
@@ -135,18 +136,19 @@
                         });
                     }
                 },
-                doDelete: function (codigo) {
-                    Proxy.CiudadDelete(codigo, function (result) {
-                        model.ciudad.codigo = result;
-                        document.location = "/Aerolinea/ciudades.jsp"
-                        view.showMessageDelete();
-                    });
-                },
-                doUpdate: function (codigo) {
-                    Proxy.ciudadSearch(codigo, function (result) {
-                        model.ciudad = result;
-                        view.showCiudad(model.ciudad);
-                    });
+                CiudadesUpdate: function (codigo) {
+                    var model = this.model;
+                    var view = this.view;
+                    this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
+                    this.model.ciudad.pais = this.view.document.getElementById("pais").value;
+                    this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
+                    if (view.validacionForm()) {
+                        Proxy.CiudadUpdate(this.model.ciudad, function (result) {
+                            model.ciudad.codigo = result;
+                            document.location = "/Aerolinea/ciudades.jsp"
+                            view.showMessageUpdate();
+                        });
+                    }
                 }
 
             };
@@ -188,12 +190,22 @@
                 
                 $('#paginacion tbody').on( 'click', '.btn-edit', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                     Proxy.getCiudad(data[0], function(result){
+                        var codigo = document.getElementById('codigo');
+                        var nombre = document.getElementById('nombre');
+                        var pais = document.getElementById('pais');
+                        codigo.value = result.codigo;
+                        nombre.value = result.nombre;
+                        pais.value = result.pais;
+                     });
                  } );
                  
                  $('#paginacion tbody').on( 'click', '.btn-delete', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                     Proxy.CiudadDelete(data[0], function(result){
+                        document.location = "/Aerolinea/ciudades.jsp"
+                        this.showMessageDelete();
+                     });
                  } );
 
             });
@@ -203,6 +215,9 @@
             }
             function showMessageDelete() {
                 window.alert("Eliminacion exitosa");
+            }
+            function showMessageUpdate() {
+                window.alert("Actualizacion exitosa");
             }
             function validacionForm() {
                 var tam = 0;

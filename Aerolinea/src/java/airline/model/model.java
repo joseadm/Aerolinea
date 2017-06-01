@@ -334,6 +334,24 @@ public class model {
             return 0;
         }
     }
+    
+    public static int updateCiudad(Ciudad ciudad) throws Exception {
+        //  return 1;
+
+        String sql = "update Ciudad "
+                + "set pais='%s', nombre='%s' "
+                + "where codigo='%s'";
+        sql = String.format(sql,
+                ciudad.getPais(),
+                ciudad.getNombre(),
+                ciudad.getCodigo());
+        ResultSet rs = ciudades.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
 
     public static List<Avion> selectAllPlanes() throws Exception {
         List<Avion> planes;

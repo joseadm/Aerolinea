@@ -232,6 +232,13 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(n4);
                     out.write(json);
                     break;
+                case "ciudadUpdate":
+                    String jsonCiudad2 = request.getParameter("ciudad");
+                    Ciudad ciudad2 = gson.fromJson(jsonCiudad2, Ciudad.class);
+                    int ciudadNumber2 = model.updateCiudad(ciudad2);
+                    json = gson.toJson(ciudadNumber2);
+                    out.write(json);
+                    break;
             }
         } catch (Exception e) {
             System.out.println(e);
