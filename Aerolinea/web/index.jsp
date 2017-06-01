@@ -236,14 +236,16 @@
                             view.showBuscado();
                         });
                     }
-                    if (radio2.checked) {
+                    if (radio2.checked && fechaVuelta !== "") {
                         Proxy.viajesSearch(origen, destino, diaIda, fechaIDa, function (result) {
                             model.buscadosIda = result;
-                            view.showBuscado();
                         });
                         Proxy.viajesSearchByDestiny(origen, destino, diaVuelta, fechaVuelta, function (result) {
                             model.buscadosVuelta = result;
-                            view.showBuscadoVuelta();
+                            if (model.buscadosIda !== null && model.buscadosVuelta !== null) {
+                                view.showBuscado();
+                                view.showBuscadoVuelta();
+                            }
                         });
                     }
                 },
@@ -325,6 +327,7 @@
                 var pasajeros = document.getElementById("listPassengers");
                 var buscar = document.getElementById("btn-search");
                 $('#btn_search').click(function () {
+                    sessionStorage.clear();
                     controllerView.search();
                 });
             }
@@ -423,7 +426,7 @@
                             }
                         }
                     }
-                    sessionStorage.setItem("cantidadPasajeros",canPasajeros);
+                    sessionStorage.setItem("cantidadPasajeros", canPasajeros);
                 });
                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
@@ -442,7 +445,7 @@
                         if (radio2.checked) {
                             document.location = "reserva.jsp";
                         }
-                        sessionStorage.setItem("cantidadPasajeros",canPasajeros);
+                        sessionStorage.setItem("cantidadPasajeros", canPasajeros);
                     });
                 });
                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
@@ -451,7 +454,7 @@
                         if (radio2.checked) {
                             document.location = "reserva.jsp";
                         }
-                        sessionStorage.setItem("cantidadPasajeros",canPasajeros);
+                        sessionStorage.setItem("cantidadPasajeros", canPasajeros);
                     });
                 });
             });
