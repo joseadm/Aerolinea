@@ -18,7 +18,7 @@
     <body>
         <%@ include file="Header.jspf" %>
 
-        <div id="seatmap">
+        <%--<div id="seatmap">
             <div id="plane">
                 <table id="cabecera" class="rows">
 
@@ -26,7 +26,7 @@
 
                 <div id="cabin">        
                     <table id="tablaAsientos">
-                        <%--<tr id="top" class="wingRowTop">
+        <%--<tr id="top" class="wingRowTop">
 
                         </tr>
                         <tr>
@@ -148,57 +148,28 @@
                         </tr>
                         <tr id="bot" class="wingRowBottom">
 
-                        </tr>--%>
+                        </tr>
                     </table>            
                 </div>
 
+            </div>--%>
+
+        <div class="plane">
+            <div class="cockpit">
+                <h1>Please select a seat</h1>
             </div>
-
-            <%--<div class="plane">
-                <div class="cockpit">
-                    <h1>Please select a seat</h1>
-                </div>
-                <div class="exit exit--front fuselage">
+            <div class="exit exit--front fuselage">
 
             </div>
-            <ol class="cabin fuselage">
+            <ol id="tablaAsientos" class="cabin fuselage">
 
-                <li class="row row--1">
-      <ol class="seats" type="A">
-        <li class="seat">
-          <input type="checkbox" id="1A" />
-          <label for="1A">1A</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" id="1B" />
-          <label for="1B">1B</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" id="1C" />
-          <label for="1C">1C</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" disabled id="1D" />
-          <label for="1D">Occupied</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" id="1E" />
-          <label for="1E">1E</label>
-        </li>
-        <li class="seat">
-          <input type="checkbox" id="1F" />
-          <label for="1F">1F</label>
-        </li>
-      </ol>
-    </li>
-                
             </ol>
             <div class="exit exit--back fuselage">
 
             </div>
         </div>
 
-        //<div class="container">
+        <%--<div class="container">
             <h1>Reservar asientos</h1>
             <hr>
 
@@ -210,281 +181,237 @@
                     
                 </tbody>
             </table>
-            <div id="listaAsientos" class="btn-group" data-toggle="buttons">
+        <div id="listaAsientos" class="btn-group" data-toggle="buttons">
+            
+        </div>
 
-            </div>
-            <br>
-            <a href="pago.jsp" class="btn btn-sucess">Continuar</a>
         </div>--%>
 
-            <hr>
-            <br><br><br>
-            <!-- Footer -->
-            <div class="container">
-                <footer class="footer">
-                    <p>&copy; 2017 Baratísimo, Inc.</p>
-                </footer>
-            </div>
+        <%--<br>
+        <button class="btn btn-sucess"><a href="pago.jsp">Continuar</a></button>--%>
+
+        <hr>
+        <br><br><br>
+        <!-- Footer -->
+        <div class="container">
+            <footer class="footer">
+                <p>&copy; 2017 Baratísimo, Inc.</p>
+            </footer>
+        </div>
 
 
-            <script> // Model
-                function Model() {
-                    this.Model();
+        <script> // Model
+            function Model() {
+                this.Model();
+            }
+
+            Model.prototype = {
+                Model: function () {
+                    this.asientos = [];
+                    this.viajes = [];
+                    this.aviones = [];
                 }
+            };
+        </script>
+        <script> // Controller
+            function Controller(model, view) {
+                this.Controller(model, view);
+            }
 
-                Model.prototype = {
-                    Model: function () {
-                        this.asientos = [];
-                        this.viajes = [];
-                        this.aviones = [];
-                    }
-                };</script>
-            <script> // Controller
-                function Controller(model, view) {
-                    this.Controller(model, view);
+            Controller.prototype = {
+                Controller: function (model, view) {
+                    this.model = model;
+                    this.view = view;
+                    Proxy.getAsientos(function (result) {
+                        model.asientos = result;
+                    });
+                    /*Proxy.getViajes(function (result) {
+                     model.viajes = result;
+                     });*/
+                    Proxy.getAviones(function (result) {
+                        model.aviones = result;
+                    });
+                    this.initAsiento();
+                    //this.initViajes();
+                },
+                initAsiento: function () {
+                    var model = this.model;
+                    model.asiento = new Asiento();
+                },
+                /*initViaje: function () {
+                 var model = this.model;
+                 model.viaje = new Viaje();
+                 },*/
+                initAvion: function () {
+                    var model = this.model;
+                    model.avion = new Asiento();
+                },
+                asientoAdd: function (numero) {
+                    var view = this.view;
+                    var codigo = 0;
+                    var numero = numero;
+                    this.model.asiento.codigo = parseInt(codigo++);
+                    this.model.asiento.numero = parseInt(codigo++);
+                    this.model.asiento.estado = false;
+                    this.model.asiento.numero_viaje = 0;
+                    Proxy.AvionAdd(this.model.asiento, function (result) {
+                        document.location = "/Aerolinea/asiento.jsp";
+                        view.showMessage();
+                    });
+                },
+                LimpiaPantalla: function () {
+                    view.clean();
                 }
+            };
+        </script>
+        <script> // View
+            var model;
+            var controller;
+            function pageLoad(event) {
+                model = new Model();
+                controller = new Controller(model, window);
+                crearAsientos();
+            }
 
-                Controller.prototype = {
-                    Controller: function (model, view) {
-                        this.model = model;
-                        this.view = view;
-                        Proxy.getAsientos(function (result) {
-                            model.asientos = result;
-                        });
-                        /*Proxy.getViajes(function (result) {
-                         model.viajes = result;
-                         });
-                         Proxy.getAviones(function (result) {
-                         model.aviones = result;
-                         });*/
-                        this.initAsiento();
-                        //this.initViajes();
-                    },
-                    initAsiento: function () {
-                        var model = this.model;
-                        model.asiento = new Asiento();
-                    },
-                    /*initViaje: function () {
-                     var model = this.model;
-                     model.viaje = new Viaje();
-                     },
-                     initAvion: function () {
-                     var model = this.model;
-                     model.avion = new Asiento();
-                     },*/
-                    asientoAdd: function (numero) {
-                        var view = this.view;
-                        var codigo = 0;
-                        var numero = numero;
-                        this.model.asiento.codigo = parseInt(codigo++);
-                        this.model.asiento.numero = parseInt(codigo++);
-                        this.model.asiento.estado = false;
-                        this.model.asiento.numero_viaje = 0;
-                        Proxy.AvionAdd(this.model.asiento, function (result) {
-                            document.location = "/Aerolinea/asiento.jsp";
-                            view.showMessage();
-                        });
-                    },
-                    LimpiaPantalla: function () {
-                        view.clean();
-                    }
-                };</script>
-            <script> // View
-                var model;
-                var controller;
-                function pageLoad(event) {
-                    model = new Model();
-                    controller = new Controller(model, window);
-                    var ala1 = document.getElementById("top");
-                    var ala2 = document.getElementById("bot");
-                    //crearAsientos();
-                    showAsientos();
+            function crearAsientos() {
+                var tabla = document.getElementById("tablaAsientos");
+                var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+                                 "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                var li, ol, li2, tmp, lbl, cont=1;
+                
+                for (var i = 1; i <= 12; i++) {//cant filasfor (var j = 0; j < 6; i++) {
+                li = document.createElement("li");
+                li.className = "row row--" + cont;
+                ol = document.createElement("ol");
+                ol.className = "seats";
+                ol.type = "A";
+                
+                for (var j = 0; j < 6; i++) {
+                li2 = document.createElement("li");
+                li2.className = "seat";
+                tmp = document.createElement("input");
+                tmp.type = "checkbox";
+                tmp.id = cont + etiquetas[cont];
+                tmp.disabled = false;
+                lbl = document.createElement("label");
+                lbl.htmlFor = cont + etiquetas[cont];
+                lbl.appendChild(document.createTextNode(cont + etiquetas[cont]));
+
+                li2.appendChild(tmp);
+                li2.appendChild(lbl);
+                ol.appendChild(li2);
+                //li.appendChild(ol);
+                //tabla.appendChild(li);
+                //cont++;
                 }
-
-                function crearAsientos() {
-                    var lista = document.getElementById("cabin fuselage");
-                    //for (var i = 0; 6 < max; i++) {
-                    crearFilas(lista);
-                    //}
+                //ol.appendChild(li2);
+                li.appendChild(ol);
+                tabla.appendChild(li);
+                cont++;
                 }
-
-                function crearFilas(lista) {
-                    var tr, td, li, ol, tmp, tmp2, txt;
-                    //tr = document.createElement("tr");
-                    //var filas = parseInt(document.getElementById("cant_asientos_por_fila"));
-                    //for (var i = 0; i < 12; i++) {
-                    //td = document.createElement("td");
-                    //td.setAttribute("class", "seats");
-                    li = document.createElement("li");
-                    li.setAttribute("class", "row");
-                    ol = document.createElement("ol");
-                    ol.setAttribute("class", "seats");
-                    tmp = document.createElement("li");
-                    tmp.setAttribute("class", "seat");
-                    tmp2 = document.createElement("input");
-                    tmp2.setAttribute("type", "checkbox");
-                    li.appendChild(ol);
-                    ol.appendChild(tmp);
-                    tmp.appendChild(tmp2);
-                    //tr.appendChild(li);
-                    /*tmp = document.createElement("label");
-                     tmp.setAttribute("class", "seat");
-                     tmp2 = document.createElement("input");
-                     tmp2.setAttribute("type", "checkbox");
-                     tmp2.setAttribute("id", ""); //ingresar a  la clase asiento y tomar su codigo/numero=id 
-                     txt = document.createTextNode("asiento"); //ingresar a  la clase asiento y tomar su codigo/numero
-                     tmp.appendChild(tmp2);
-                     tmp.appendChild(txt);
-                     tr.appenChild(tmp);*/
-                    //controller.asientoAdd();
-                    //}
-                    lista.appendChild(li);
-                }
-
-                //si el numero de viaje del asiento coincide con el numero de viaje de 'viaje' cargar los asientos de ese viaje
-                /*function crearAsientos() {
-                 //obtener las columnas de asientos del viaje
-                 var filas = parseInt(this.model.document.getElementById("cant_filas"));
-                 console.log(filas);
-                 var lista = document.getElementById("listaAsientos");
-                 for (var i = 1; i <= filas + 2; i++) { //9 o 6
-                 if (i % 4 === 0)
-                 crearPasillo(lista);
-                 else
-                 crearFilas(lista);
-                 }
-                 }
-             
-                 function crearFilas(lista) {
-                 var tmp, tmp2, txt;
-                 //obtener las filas de asientos del viaje
-                 var filas = parseInt(document.getElementById("cant_asientos_por_fila"));
-                 for (var i = 0; i < 12; i++) {
-                 tmp = document.createElement("label");
-                 tmp.setAttribute("class", "btn btn-primary btn-xs");
-                 tmp2 = document.createElement("input");
-                 tmp2.setAttribute("type", "checkbox");
-                 tmp2.setAttribute("id", ""); //ingresar a  la clase asiento y tomar su codigo/numero=id 
-                 txt = document.createTextNode("asiento"); //ingresar a  la clase asiento y tomar su codigo/numero
-                 tmp.appendChild(tmp2);
-                 tmp.appendChild(txt);
-                 lista.appendChild(tmp);
-                 }
-                 lista.appendChild(document.createElement("br"));
-                 }
-             
-                 function crearPasillo(lista) {
-                 lista.appendChild(document.createElement("hr"));
-                 lista.appendChild(document.createElement("hr"));
-                 }
-             
-                 */
-
-                function showAsientos() {
-                    showCabecera();
-                    var tabla = document.getElementById("tablaAsientos");
-                    //var ala1 = document.getElementById("top");
-                    //var ala2 = document.getElementById("bot");
-                    //var cantFilas = model.avion.cant_filas;
-                    var tr, td;
-                    for (var i = 1; i <= 9 + 4; i++) {//6 0 9
-                        tr = document.createElement("tr");
-
-                        if (i === 1) {
-                            tr = document.createElement("tr");
-                            tr.setAttribute("class", "wingRowTop");
-                            tabla.appendChild(tr);
-                            showAlas(tr);
-                        } else
-                        if (i === 9 + 4) {
-                            tr = document.createElement("tr");
-                            tr.setAttribute("class", "wingRowBottom");
-                            tabla.appendChild(tr);
-                            showAlas(tr);
-                        } else
-                        if (i === 5 || i === 10) {
-                            var cont = parseInt(1);
-                            for (var i = 0; i < 12; i++) {//cant asientos por filas
-                                td = document.createElement("td");
-                                td.setAttribute("class", "noSeatGalley");
-                                td.appendChild(document.createTextNode(cont++));
-                                tr.appendChild(td);
-                                //tabla.appendChild(tr);
-                            }
-                            tabla.appendChild(tr);
-                        } else
-                        /*if (i === 2 || i === 3 || i === 4 ||
-                                i === 6 || i === 7 || i === 8 ||
-                                i === 9 | i === 11 || i === 12)*/ {
-                            var etiquetas = ["", "", "A", "B", "C", "", "D", "E", "F", "G", "", "H", "I"];
-                            //var tmp;
-                            for (var j = 1; j <= 12; j++) {//cant asientos por filas
-                                /*USAR CHECKBOXES
-                                 * if (checked())
-                                 * asiento.estado=true;
-                                 * input.setAttribute("id",j+etiquetas[i]);
-                                 * */
-                                td = document.createElement("td");
-                                td.setAttribute("tittle", etiquetas[i]);
-                                td.setAttribute("class", "seatAvailable");
-                                tr.appendChild(td);
-                                //tabla.appendChild(tr);
-
-                            }
-                            tabla.appendChild(tr);
-                        }
-                    }
-                }
-
-                function showAlas(ala) {
-                    var tr, td;
+            }
+/*
+            function showAsientos() {
+                showCabecera();
+                var tabla = document.getElementById("tablaAsientos");
+                //var etiquetas = ["", "", "A", "B", "C", "", "D", "E", "F", "G", "", "H", "I"];
+                //var ala1 = document.getElementById("top");
+                //var ala2 = document.getElementById("bot");
+                //var cantFilas = model.avion.cant_filas;
+                var tr, td;
+                //tr = document.createElement("tr");
+                //td = document.createElement("td");
+                for (var i = 1; i <= 9 + 4; i++) {//6 o 9
                     tr = document.createElement("tr");
-                    for (var i = 0; i < 11; i++) {
-
-                        td = document.createElement("td");
-                        if (i > 3 && i < 10) {
-                            td.setAttribute("class", "wingSeat");
-                            td.appendChild(document.createTextNode(""));
-                            tr.appendChild(td);
-                            ala.appendChild(tr);
-                        } else {
-                            td.appendChild(document.createTextNode(""));
-                            tr.appendChild(td);
-                            ala.appendChild(tr);
-                        }
-                    }
-                }
-
-                function showCabecera() {
-                    var tablaCabecera = document.getElementById("cabecera");
-                    //var cantFilas = model.avion.cant_filas;
-                    var etiquetas = ["", "A", "B", "C", "", "D", "E", "F", "", "G", "H", "I"];
-                    var tr, td;
-                    for (var i = 1; i <= 9 + 2; i++) {//6 o 9
+                    td = document.createElement("td");
+                    if (i === 1) {
                         tr = document.createElement("tr");
-                        if (i % 4 === 0) {
+                        tr.setAttribute("class", "wingRowTop");
+                        tabla.appendChild(tr);
+                        showAlas(tr);
+                    } else
+                    if (i === 9 + 4) {
+                        tr = document.createElement("tr");
+                        tr.setAttribute("class", "wingRowBottom");
+                        tabla.appendChild(tr);
+                        showAlas(tr);
+                    } else
+                    if (i === 5 || i === 10) {
+                        var cont = parseInt(1);
+                        for (var i = 0; i < 12; i++) {//cant asientos por filas
                             td = document.createElement("td");
-                            td.appendChild(document.createTextNode(""));
+                            td.setAttribute("class", "noSeatGalley");
+                            td.appendChild(document.createTextNode(cont++));
                             tr.appendChild(td);
-                            tablaCabecera.appendChild(tr);
-                        } else {
-                            td = document.createElement("td");
-                            td.appendChild(document.createTextNode(etiquetas[i]));
-                            tr.appendChild(td);
-                            tablaCabecera.appendChild(tr);
+                            //tabla.appendChild(tr);
                         }
+                        tabla.appendChild(tr);
+                    } else {
+                                var etiquetas = ["", "", "A", "B", "C", "", "D", "E", "F", "G", "", "H", "I"];
+                                //var tmp;
+                                for (var j = 1; j <= 12; j++) {//cant asientos por filas
+                                    td = document.createElement("td");
+                                    td.setAttribute("title", String.valueOf(j) + etiquetas[i]);
+                                    td.setAttribute("class", "seatAvailable");
+                                    tr.appendChild(td);
+                                    //tabla.appendChild(tr);
+
+                                }
+                                tabla.appendChild(tr);
+                            }
+                }
+            }
+
+            function showAlas(ala) {
+                var tr, td;
+                tr = document.createElement("tr");
+                for (var i = 0; i < 11; i++) {
+
+                    td = document.createElement("td");
+                    if (i > 3 && i < 10) {
+                        td.setAttribute("class", "wingSeat");
+                        td.appendChild(document.createTextNode(""));
+                        tr.appendChild(td);
+                        ala.appendChild(tr);
+                    } else {
+                        td.appendChild(document.createTextNode(""));
+                        tr.appendChild(td);
+                        ala.appendChild(tr);
                     }
                 }
+            }
 
-                function showMessage() {
-                    window.alert("Registro exitoso");
+            function showCabecera() {
+                var tablaCabecera = document.getElementById("cabecera");
+                //var cantFilas = model.avion.cant_filas;
+                var etiquetas = ["", "A", "B", "C", "", "D", "E", "F", "", "G", "H", "I"];
+                var tr, td;
+                for (var i = 1; i <= 9 + 2; i++) {//6 o 9
+                    tr = document.createElement("tr");
+                    if (i % 4 === 0) {
+                        td = document.createElement("td");
+                        td.appendChild(document.createTextNode(""));
+                        tr.appendChild(td);
+                        tablaCabecera.appendChild(tr);
+                    } else {
+                        td = document.createElement("td");
+                        td.appendChild(document.createTextNode(etiquetas[i]));
+                        tr.appendChild(td);
+                        tablaCabecera.appendChild(tr);
+                    }
                 }
-                function clean() {
-                    document.getElementById("codigoAsiento").textContent = "";
-                    document.getElementById("numeroAsiento").textContent = "";
-                }
-                document.addEventListener("DOMContentLoaded", pageLoad);
-            </script>
+            }
+
+            function showMessage() {
+                window.alert("Registro exitoso");
+            }
+            function clean() {
+                document.getElementById("codigoAsiento").textContent = "";
+                document.getElementById("numeroAsiento").textContent = "";
+            }
+            */
+            document.addEventListener("DOMContentLoaded", pageLoad);
+        </script>
 
     </body>
 </html>
