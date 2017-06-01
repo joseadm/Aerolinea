@@ -30,7 +30,7 @@
                     <div class="table-responsive">
                         <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                             <thead>
-                                <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Hora Llegada</th><th>Duración</th><th>Asiento</th></tr>
+                                <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Hora Llegada</th><th>Duración</th></tr>
                             </thead>
                             <tbody id="vuelosReserva">
                             </tbody>
@@ -180,16 +180,11 @@
                 Controller: function (model, view) {
                     this.model = model;
                     this.view = view;
-                    //Proxy.getViajes(function (result) {
-                    //    model.viajes = result;
-                    //    view.showViajes();
-                    //});
-                    view.initTravels;
+                    this.initTravels();
                     view.showPasajeros();
                 },
                 initTravels: function () {
-                    this.model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", JsonUtils.revive);
-                    this.view.showViajes();
+                    model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
                 },
                 sumaTiempos: function (val1, tiempo) {
 
@@ -203,14 +198,18 @@
                     var s1 = t1.substr(dot1 + 1);
                     var s2 = t2.substr(dot2 + 1);
                     var sRes = (Number(s1) + Number(s2));
+                    var sRes1 = (Number(m1) + Number(m2));
                     var mRes;
                     var addMinute = false;
                     var horaFinal;
-                    if (sRes >= 60) {
+                    if (sRes >= 59) {
                         addMinute = true;
                         sRes -= 60;
                     }
-                    mRes = (Number(m1) + Number(m2) + (addMinute ? 1 : 0));
+                    if (sRes1 >= 23) {
+                        sRes1 -= 24;
+                    }
+                    mRes = (sRes1 + (addMinute ? 1 : 0));
                     return horaFinal = this.formatString2(String(mRes), 2) + ":" + this.formatString(String(sRes), 2);
                 },
                 formatString2: function (string, len) {
@@ -271,18 +270,17 @@
             function showViajes() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
-                console.log(model.viajes.length);
-                for (var index = 0; index < model.viajes.length; index++) {
+                console.log(this.model.viajes.length);
+                for (var index = 0; index < this.model.viajes.length; index++) {
                     t.row.add([
-                        model.viajes[index].vuelo.numero_vuelo,
-                        model.viajes[index].avion.placa,
-                        model.viajes[index].vuelo.ciudad_origen.nombre,
-                        model.viajes[index].vuelo.ciudad_destino.nombre,
-                        model.viajes[index].fecha,
-                        model.viajes[index].vuelo.hora,
+                        this.model.viajes[index].vuelo.numero_vuelo,
+                        this.model.viajes[index].avion.marca +" "+this.model.viajes[index].avion.modelo,
+                        this.model.viajes[index].vuelo.ciudad_origen.nombre,
+                        this.model.viajes[index].vuelo.ciudad_destino.nombre,
+                        this.model.viajes[index].fecha,
+                        this.model.viajes[index].vuelo.hora,
                         controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion),
-                        model.viajes[index].vuelo.duracion,
-                        "A1"
+                        this.model.viajes[index].vuelo.duracion
                     ]).draw(false);
                 }
             }

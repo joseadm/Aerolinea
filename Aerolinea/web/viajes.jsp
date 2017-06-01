@@ -176,8 +176,8 @@
                     view.clean();
                 },
                 justNumbers: function (e) {
-                    var key = window.Event ? e.which : e.keyCode
-                    return (key >= 48 && key <= 57)
+                    var key = window.Event ? e.which : e.keyCode;
+                    return (key >= 48 && key <= 57);
                 },
                 sumaTiempos: function (val1, tiempo) {
 
