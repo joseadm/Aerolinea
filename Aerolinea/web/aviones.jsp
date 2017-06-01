@@ -297,13 +297,6 @@
                 } else {
                     cant_filas.style.borderColor = "gray";
                 }
-                var cant_asientos_por_fila = document.getElementById("cant_asientos_por_fila");
-                if (!(requiredField(cant_asientos_por_fila.value))) {
-                    tam++;
-                    cant_asientos_por_fila.style.borderColor = "red";
-                } else {
-                    cant_asientos_por_fila.style.borderColor = "gray";
-                }
                 var annio = $("#annio").find("input");
                 if (annio.val() === "") {
                     tam++;
