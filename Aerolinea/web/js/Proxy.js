@@ -33,6 +33,23 @@ Proxy.AvionAdd = function(avion, callBack){
     AJAX_req.send("avion="+jsonAvion);   
 };
 
+Proxy.AvionUpdate = function(avion, callBack){
+    jsonAvion = JSON.stringify(avion,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    url="/Aerolinea/AirlineService?action=avionUpdate";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonAvion=AJAX_req.responseText;
+            var object = JSON.parse( jsonAvion,JsonUtils.revive );
+            callBack(object);
+            
+        }
+    };
+    AJAX_req.send("avion="+jsonAvion);   
+};
+
 Proxy.CiudadAdd = function(ciudad, callBack){
     jsonCiudad = JSON.stringify(ciudad,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();

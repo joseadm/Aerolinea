@@ -317,6 +317,28 @@ public class model {
             return 0;
         }
     }
+    
+    public static int updateAvion(Avion avion) throws Exception {
+        //  return 1;
+
+        String sql = "update Avion "
+                + "set modelo='%s', marca='%s', annio='%s', cant_pasajeros='%s', cant_filas='%s', cant_asientos_por_fila='%s' "
+                + "where placa ='%s'";
+        sql = String.format(sql,
+                avion.getModelo(),
+                avion.getMarca(),
+                avion.getAnnio(),
+                avion.getCant_pasajeros(),
+                avion.getCant_filas(),
+                avion.getCant_cant_asientos_por_fila(),
+                avion.getPlaca());
+        ResultSet rs = aviones.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
 
     public static int insertCiudad(Ciudad ciudad) throws Exception {
         //  return 1;

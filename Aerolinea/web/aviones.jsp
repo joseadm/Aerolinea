@@ -82,6 +82,7 @@
                                     </div>
                                 </div><br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.AvionAdd();">Agregar</button>
+                                <button onclick='controller.AvionUpdate();' class="btn btn-warning" id="agregarRuta">Actualizar</button>
                                 <hr> 
                             </div>                       
                             <!-- Tabla de aviones............................................................... -->
@@ -177,14 +178,24 @@
                         });
                     }
                 },
-                doDelete: function (placa) {
-                    Proxy.ViajeDelete(placa, function (result) {
-                        model.avion.placa = result;
-                        document.location = "/Aerolinea/aviones.jsp"
-                        view.showMessageDelete();
-                    });
-                },
-                doUpdate: function (placa) {
+                AvionUpdate: function (codigo) {
+                    var model = this.model;
+                    var view = this.view;
+                    var cantidadPasajeros;
+                    this.model.avion.placa = this.view.document.getElementById("placa").value;
+                    this.model.avion.modelo = this.view.document.getElementById("modelo").value;
+                    this.model.avion.marca = this.view.document.getElementById("marca").value;
+                    this.model.avion.annio = $("#annio").find("input").val();
+                    this.model.avion.cant_filas = this.view.document.getElementById("cant_filas").value;
+                    this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
+                    cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
+                    this.model.avion.cant_pasajeros = cantidadPasajeros;
+                    if (view.validacionForm()) {
+                        Proxy.AvionUpdate(this.model.avion, function (result) {
+                            document.location = "/Aerolinea/aviones.jsp"
+                            view.showMessage();
+                        });
+                    }
                 },
                 LimpiaPantalla: function () {
                     view.clean();
