@@ -47,7 +47,7 @@
                             <label class="control-label">Nombre</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input  id="nombre" name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45">
+                                <input  id="nombre" name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45" required>
                             </div>
                         </div>
                         <!-- Apellido-->
@@ -55,7 +55,7 @@
                             <label class="control-label">Apellidos</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id = "apellidos" name="apellidos" placeholder="Apellidos" class="form-control" type="text" maxlength="45">
+                                <input id = "apellidos" name="apellidos" placeholder="Apellidos" class="form-control" type="text" maxlength="45" required>
                             </div>
                         </div>
                         <!-- Pasaporte-->
@@ -63,7 +63,7 @@
                             <label class="control-label">Numero Pasaporte</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="numero_pasaporte" name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text" maxlength="45">
+                                <input id="numero_pasaporte" name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text" maxlength="45" required onKeyPress="return controller.justNumbers(event)">
                             </div>
                         </div>
                     </div>
@@ -254,6 +254,10 @@
                         apellidos,
                         numero_pasajero
                     }).draw();
+                },
+                justNumbers: function (e) {
+                    var key = window.Event ? e.which : e.keyCode;
+                    return (key >= 48 && key <= 57);
                 }
 
             };
