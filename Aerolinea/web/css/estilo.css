@@ -236,6 +236,7 @@ html {
 .plane {
   margin: 20px auto;
   max-width: 300px;
+  /*transform: rotate(90deg);*/
 }
 
 .cockpit {
@@ -310,7 +311,8 @@ ol {
   padding: 5px;
   position: relative;
 }
-.seat:nth-child(3) {
+/*nth-child(number)*/
+.seat:nth-child(3n+0) { /*(3n+0) selecciona los multiplos de 3*/
   margin-right: 14.28571428571429%;
 }
 .seat input[type=checkbox] {
