@@ -264,6 +264,7 @@
                 listCiudades();
                 oneWay();
                 window.localStorage.clear();
+                window.sessionStorage.clear();
             }
 
             function showPromos() {
@@ -411,6 +412,7 @@
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
+                    var canPasajeros = document.getElementById("listPassengers").value;
                     for (var index in modelView.buscadosIda) {
                         if (modelView.buscadosIda[index].numero_viaje === row[0]) {
                             var v1 = new Viaje(modelView.buscadosIda[index].numero_viaje, modelView.buscadosIda[index].fecha, modelView.buscadosIda[index].avion, modelView.buscadosIda[index].vuelo);
@@ -421,6 +423,7 @@
                             }
                         }
                     }
+                    sessionStorage.setItem("cantidadPasajeros",canPasajeros);
                 });
                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
@@ -435,16 +438,20 @@
                 });
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
+                        var canPasajeros = document.getElementById("listPassengers").value;
                         if (radio2.checked) {
                             document.location = "reserva.jsp";
                         }
+                        sessionStorage.setItem("cantidadPasajeros",canPasajeros);
                     });
                 });
                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
                     $('#paginacion tbody').on('click', '.btn-view', function (e) {
+                        var canPasajeros = document.getElementById("listPassengers").value;
                         if (radio2.checked) {
                             document.location = "reserva.jsp";
                         }
+                        sessionStorage.setItem("cantidadPasajeros",canPasajeros);
                     });
                 });
             });

@@ -269,7 +269,6 @@
                 model = new Model();
                 controller = new Controller(model, window);
                 showViajes();
-                window.localStorage.clear();
             }
 
             function showViajes() {
