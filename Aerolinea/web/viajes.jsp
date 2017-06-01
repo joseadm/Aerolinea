@@ -59,6 +59,8 @@
                                     </div>
                                 </div><br>
                                 <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
+                                <button onclick="controller.ViajeUpdate();" class="btn btn-warning" id="agregarRuta">Actualizar</button>
+
                                 <hr> 
                             </div>
                             <!-- Tabla de viajes............................................................... -->
@@ -284,12 +286,19 @@
                 
                 $('#paginacion tbody').on( 'click', '.btn-edit', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                     Proxy.getViaje(data[0], function(result){
+                        document.getElementById('vuelo').value = result.vuelo.numero_vuelo;
+                        document.getElementById('avion').value = result.avion.placa;
+                        document.getElementById('fecha').value = result.fecha;
+                     });
                  } );
                  
                  $('#paginacion tbody').on( 'click', '.btn-delete', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                     Proxy.ViajeDelete(data[0], function(result){
+                        document.location = "/Aerolinea/viajes.jsp"
+                        this.showMessageDelete();
+                     });
                  } );
 
             });

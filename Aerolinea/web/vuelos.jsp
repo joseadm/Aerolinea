@@ -118,6 +118,8 @@
                                 </div>
                                 <br>
                                 <button class="btn btn-success" id="agregarRuta" onclick="controller.VueloAdd();" >Agregar</button>
+                                <button class="btn btn-warning" id="agregarRuta" onclick="controller.VueloUpdate();" >Actualizar</button>
+
                                 <hr> 
                             </div>
                             <!-- Tabla de vuelos............................................................... -->
@@ -255,14 +257,25 @@
                     }
 
                 },
-                doDelete: function (numero_vuelo) {
-                    Proxy.VueloDelete(numero_vuelo, function (result) {
-                        model.viaje.numero_viaje = result;
-                        document.location = "/Aerolinea/vuelos.jsp"
-                        view.showMessageDelete();
-                    });
-                },
-                doUpdate: function (numero_vuelo) {
+                VueloUpdate: function (numero_vuelo) {
+                    var model = this.model;
+                    var view = this.view;
+                    this.model.vuelo.ciudad_origen = this.view.document.getElementById('ciudad_origen').value = result.ciudad_origen.codigo;
+                    this.model.vuelo.ciudad_destino =this.view.document.getElementById('ciudad_destino').value = result.ciudad_destino.codigo;
+                    this.model.vuelo.estado =this.view.document.getElementById('estado').value = result.estado;
+                    this.model.vuelo.dia =this.view.document.getElementById('dia').value = result.dia;
+                    this.model.vuelo.hora =this.view.document.getElementById('hora').value = result.hora;
+                    this.model.vuelo.duracion =this.view. document.getElementById('duracion').value = result.duracion;
+                    this.model.vuelo.precio =this.view.document.getElementById('precio').value = result.precio;
+                    this.model.vuelo.oferta =this.view.document.getElementById('oferta').value = result.oferta;
+                    this.model.vuelo.descuento =this.view.document.getElementById('descuento').value = result.descuento;
+                    if (view.validacionForm()) {
+                        Proxy.VueloUpdate(this.model.vuelo, function (result) {
+                            model.ciudad.codigo = result;
+                            document.location = "/Aerolinea/vuelos.jsp"
+                            view.showMessageUpdate();
+                        });
+                    }
                 },
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
@@ -342,7 +355,17 @@
                 
                 $('#paginacion tbody').on( 'click', '.btn-edit', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
+                     Proxy.getVuelo(data[0], function(result){
+                        document.getElementById('ciudad_origen').value = result.ciudad_origen.codigo;
+                        document.getElementById('ciudad_destino').value = result.ciudad_destino.codigo;
+                        document.getElementById('estado').value = result.estado;
+                        document.getElementById('dia').value = result.dia;
+                        document.getElementById('hora').value = result.hora;
+                        document.getElementById('duracion').value = result.duracion;
+                        document.getElementById('precio').value = result.precio;
+                        document.getElementById('oferta').value = result.oferta;
+                        document.getElementById('descuento').value = result.descuento;
+                    });
                  } );
                  
                  $('#paginacion tbody').on( 'click', '.btn-delete', function () {

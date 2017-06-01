@@ -120,6 +120,22 @@ Proxy.VueloAdd = function(vuelo,callBack){
     AJAX_req.send("vuelo="+jsonVuelo);   
 };
 
+Proxy.VueloUpdate = function(vuelo,callBack){
+    jsonVuelo = JSON.stringify(vuelo,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    url="/Aerolinea/AirlineService?action=vueloUpdate";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonVuelo=AJAX_req.responseText;
+            var object = JSON.parse( jsonVuelo,JsonUtils.revive );
+            callBack(object);
+            
+        }
+    };
+    AJAX_req.send("vuelo="+jsonVuelo);   
+};
 
 Proxy.getPromo = function(callBack) {
   var AJAX_req = new XMLHttpRequest();

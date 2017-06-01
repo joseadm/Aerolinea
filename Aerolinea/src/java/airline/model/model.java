@@ -160,6 +160,22 @@ public class model {
             return 0;
         }
     }
+    
+    public static int VueloUpdate(Vuelo p) throws Exception {
+        String sql = "update Vuelo set ciudadOrigen='%s', ciudadDestino='%s', estado=%b,precio=%s,"
+                + "duracion='%s',hora='%s',oferta=%b,imagen='%s',dia='%s',descuento=%s"
+                + "values('%s','%s',%b,%s,'%s','%s',%b,'%s','%s',%s"
+                + "where numero_vuelo='%s')";
+        sql = String.format(sql, p.getCiudad_origen().getCodigo(), p.getCiudad_destino().getCodigo(),
+                p.isEstado(), p.getPrecio(), p.getDuracion(), p.getHora(),
+                p.isOferta(), p.getImagen(), p.getDia(), p.getDescuento(),p.getNumero_vuelo());
+        ResultSet rs = vuelos.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
 
     public static List<Vuelo> selectAllFlights() throws Exception {
         List<Vuelo> flights;
@@ -322,7 +338,7 @@ public class model {
         //  return 1;
 
         String sql = "update Avion "
-                + "set modelo='%s', marca='%s', annio='%s', cant_pasajeros='%s', cant_filas='%s', cant_asientos_por_fila='%s' "
+                + "set modelo='%s', marca='%s', annio=%s, cant_pasajeros='%s', cant_filas='%s', cant_asientos_por_fila='%s' "
                 + "where placa ='%s'";
         sql = String.format(sql,
                 avion.getModelo(),

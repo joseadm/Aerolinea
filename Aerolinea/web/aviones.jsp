@@ -252,12 +252,21 @@
                 
                 $('#paginacion tbody').on( 'click', '.btn-edit', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[0] );
+                     Proxy.getAvion(data[0], function(result){
+                        var placa = document.getElementById("placa"); placa.value=result.placa;
+                        var modelo = document.getElementById("modelo"); modelo.value=result.modelo;
+                        var marca = document.getElementById("marca"); marca.value=result.marca;
+                        var cant_filas = document.getElementById("cant_filas"); cant_filas.value=result.cant_filas;
+                        var cant_asientos_por_fila = document.getElementById("cant_asientos_por_fila"); cant_asientos_por_fila.value=result.cant_asientos_por_fila;
+                     });
                  } );
                  
                  $('#paginacion tbody').on( 'click', '.btn-delete', function () {
                     var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[0] );
+                     Proxy.AvionDelete(data[0], function(result){
+                        document.location = "/Aerolinea/aviones.jsp"
+                        this.showMessageDelete();
+                     });
                  } );
 
             });
@@ -266,6 +275,12 @@
             }
             function showMessage() {
                 window.alert("Registro exitoso");
+            }
+            function showMessageUpdate() {
+                window.alert("Actualizacion exitosa");
+            }
+            function showMessageDelete() {
+                window.alert("Eliminacion exitosa");
             }
             function validacionForm() {
                 var tam = 0;
