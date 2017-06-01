@@ -123,37 +123,34 @@
                 var tabla = document.getElementById("tablaAsientos");
                 var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                                  "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
-                var li, ol, li2, tmp, lbl, cont=1;
+                var li, ol, li2, tmp, lbl;
                 
                 for (var i = 1; i <= 12; i++) { //cant filas
                 li = document.createElement("li");
-                li.className = "row row--" + cont;
+                li.className = "row row--" + i;
                 ol = document.createElement("ol");
                 ol.className = "seats";
                 ol.type = "A";
                 
-                //for (var j = 0; j < 6; i++) { //cant asientos por fila
+                for (var j = 1; j <= 9; j++) { //cant asientos por fila
                 li2 = document.createElement("li");
                 li2.className = "seat";
                 tmp = document.createElement("input");
                 tmp.type = "checkbox";
-                tmp.id = cont + etiquetas[cont];
+                tmp.id = i + etiquetas[j];
                 tmp.disabled = false;
                 lbl = document.createElement("label");
-                lbl.htmlFor = cont + etiquetas[cont];
-                lbl.appendChild(document.createTextNode(cont + etiquetas[cont]));
+                lbl.htmlFor = i + etiquetas[j];
+                lbl.appendChild(document.createTextNode(i + etiquetas[j]));
 
                 li2.appendChild(tmp);
                 li2.appendChild(lbl);
                 ol.appendChild(li2);
-                li.appendChild(ol);
-                //tabla.appendChild(li);
-                //cont++;
-                //}
-                //ol.appendChild(li2);
                 //li.appendChild(ol);
+                
+                }
+                li.appendChild(ol);
                 tabla.appendChild(li);
-                cont++;
                 }
             }
 
