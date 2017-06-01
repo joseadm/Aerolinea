@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
   `codigo_asiento` INT NOT NULL,
   `nombre_pasajero` VARCHAR(45) NOT NULL,
   `apellidos_Pasajero` VARCHAR(45) NOT NULL,
-  `pasaporte_pasajero`  VARCHAR(45) NOT NULL,
+  `pasaporte_pasajero`  INT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
   INDEX `codigo_reservacion_idx` (`codigo_reservacion` ASC),

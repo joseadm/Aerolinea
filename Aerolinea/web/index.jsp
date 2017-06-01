@@ -159,7 +159,7 @@
             $('#paginacion')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
-            
+
             $('#paginacion2')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
@@ -247,8 +247,8 @@
                         });
                     }
                 },
-                oferta: function() {
-                    
+                oferta: function () {
+
                 }
             };
         </script>
@@ -263,7 +263,7 @@
                 addEventListeners();
                 listCiudades();
                 oneWay();
-                Storage.clear();
+                window.localStorage.clear();
             }
 
             function showPromos() {
@@ -300,11 +300,11 @@
                     boton = document.createElement("button");
                     boton.setAttribute("class", "btn btn-view btn-primary");
                     boton.appendChild(document.createTextNode("Ordenar"));
-                    boton.addEventListener('click',function(e) {
-                            var v1 = new Viaje(modelView.promo[index].numero_viaje, modelView.promo[index].fecha, modelView.promo[index].avion, modelView.promo[index].vuelo);
-                            viajes.push(v1);
-                            sessionStorage.setItem("viajes", JSON.stringify(viajes,JsonUtils.replacer));
-                            document.location = "reserva.jsp";
+                    boton.addEventListener('click', function (e) {
+                        var v1 = new Viaje(modelView.promo[index].numero_viaje, modelView.promo[index].fecha, modelView.promo[index].avion, modelView.promo[index].vuelo);
+                        viajes.push(v1);
+                        sessionStorage.setItem("viajes", JSON.stringify(viajes, JsonUtils.replacer));
+                        document.location = "reserva.jsp";
                     });
                     div2.appendChild(titulo);
                     div2.appendChild(precio);
@@ -349,8 +349,8 @@
                 ida.onclick = function () {
                     $("#fecha_regreso").hide();
                     $('#tablaVueloVuelta').hide();
-  
-                    
+
+
                 };
                 vuelta.onclick = function () {
                     $("#fecha_regreso").show();
@@ -371,7 +371,7 @@
                     ]).draw(false);
                 }
             }
-            
+
             function showBuscadoVuelta() {
                 var t = $('#paginacion2').DataTable();
                 $('#paginacion2').dataTable().fnClearTable();
@@ -386,9 +386,10 @@
                     ]).draw(false);
                 }
             }
-            
+
             $(document).ready(function () {
                 var radio1 = document.getElementById("ida");
+                var radio2 = document.getElementById("vuelta");
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
                             "targets": -1,
@@ -397,7 +398,7 @@
                                     '<input class="btn-view" name="option" type="radio">'
                         }]
                 });
-                
+
                 var table2 = $('#paginacion2').DataTable({
                     "columnDefs": [{
                             "targets": -1,
@@ -406,7 +407,7 @@
                                     '<input class="btn-view" name="option2" type="radio">'
                         }]
                 });
-                        
+
                 $('#paginacion tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
                     var row = table.row(tr).data();
@@ -414,36 +415,38 @@
                         if (modelView.buscadosIda[index].numero_viaje === row[0]) {
                             var v1 = new Viaje(modelView.buscadosIda[index].numero_viaje, modelView.buscadosIda[index].fecha, modelView.buscadosIda[index].avion, modelView.buscadosIda[index].vuelo);
                             viajes.push(v1);
-                            sessionStorage.setItem("viajes", JSON.stringify(viajes,JsonUtils.replacer));
+                            sessionStorage.setItem("viajes", JSON.stringify(viajes, JsonUtils.replacer));
                             if (radio1.checked) {
                                 document.location = "reserva.jsp";
                             }
                         }
                     }
                 });
-                
                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
                     var tr = $(this).closest('tr');
-                    var row = table.row(tr).data();
+                    var row = table2.row(tr).data();
                     for (var index in modelView.buscadosVuelta) {
                         if (modelView.buscadosVuelta[index].numero_viaje === row[0]) {
                             var v1 = new Viaje(modelView.buscadosVuelta[index].numero_viaje, modelView.buscadosVuelta[index].fecha, modelView.buscadosVuelta[index].avion, modelView.buscadosVuelta[index].vuelo);
                             viajes.push(v1);
-                            sessionStorage.setItem("viajes", JSON.stringify(viajes,JsonUtils.replacer));
+                            sessionStorage.setItem("viajes", JSON.stringify(viajes, JsonUtils.replacer));
                         }
                     }
-                    
                 });
-                 $('#paginacion tbody').on('click', '.btn-view', function (e) { //cambiar
-                     $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
-                         document.location = "reserva.jsp";
-                     });
-                 });
-                 $('#paginacion2 tbody').on('click', '.btn-view', function (e) { //arreglo momentaneo para que funcione
-                     $('#paginacion tbody').on('click', '.btn-view', function (e) {
-                         document.location = "reserva.jsp";
-                     });
-                 });
+                $('#paginacion tbody').on('click', '.btn-view', function (e) {
+                    $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
+                        if (radio2.checked) {
+                            document.location = "reserva.jsp";
+                        }
+                    });
+                });
+                $('#paginacion2 tbody').on('click', '.btn-view', function (e) {
+                    $('#paginacion tbody').on('click', '.btn-view', function (e) {
+                        if (radio2.checked) {
+                            document.location = "reserva.jsp";
+                        }
+                    });
+                });
             });
 
 

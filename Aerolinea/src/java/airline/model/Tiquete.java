@@ -14,11 +14,11 @@ public class Tiquete implements Serializable, Jsonable{
     Usuario usuario;
     String nombre_pasajero;
     String apellidos_pasajero;
-    String pasaporte_pasajero;
+    int pasaporte_pasajero;
     Reservacion codigo_reservacion;
     Asiento codigo_asiento;
 
-    public Tiquete(int codigo, Usuario usuario, String nombre_pasajero, String apellidos_pasajero, String pasaporte_pasajero, Reservacion codigo_reservacion, Asiento codigo_asiento) {
+    public Tiquete(int codigo, Usuario usuario, String nombre_pasajero, String apellidos_pasajero, int pasaporte_pasajero, Reservacion codigo_reservacion, Asiento codigo_asiento) {
         this.codigo = codigo;
         this.usuario = usuario;
         this.nombre_pasajero = nombre_pasajero;
@@ -48,7 +48,7 @@ public class Tiquete implements Serializable, Jsonable{
         return apellidos_pasajero;
     }
 
-    public String getPasaporte_pasajero() {
+    public int getPasaporte_pasajero() {
         return pasaporte_pasajero;
     }
 
@@ -68,7 +68,7 @@ public class Tiquete implements Serializable, Jsonable{
         this.apellidos_pasajero = apellidos_pasajero;
     }
 
-    public void setPasaporte_pasajero(String pasaporte_pasajero) {
+    public void setPasaporte_pasajero(int pasaporte_pasajero) {
         this.pasaporte_pasajero = pasaporte_pasajero;
     }
 

@@ -30,7 +30,7 @@
                     <div class="table-responsive">
                         <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                             <thead>
-                                <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Hora Llegada</th><th>Duración</th></tr>
+                                <tr><th>Número de Vuelo</th><th>Avion</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Hora Salida</th><th>Duración</th><th>Hora Llegada</th></tr>
                             </thead>
                             <tbody id="vuelosReserva">
                             </tbody>
@@ -265,22 +265,23 @@
                 model = new Model();
                 controller = new Controller(model, window);
                 showViajes();
+                window.localStorage.clear();
             }
 
             function showViajes() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
-                console.log(this.model.viajes.length);
-                for (var index = 0; index < this.model.viajes.length; index++) {
+                console.log(model.viajes.length);
+                for (var index = 0; index < model.viajes.length; index++) {
                     t.row.add([
-                        this.model.viajes[index].vuelo.numero_vuelo,
-                        this.model.viajes[index].avion.marca +" "+this.model.viajes[index].avion.modelo,
-                        this.model.viajes[index].vuelo.ciudad_origen.nombre,
-                        this.model.viajes[index].vuelo.ciudad_destino.nombre,
-                        this.model.viajes[index].fecha,
-                        this.model.viajes[index].vuelo.hora,
+                        model.viajes[index].vuelo.numero_vuelo,
+                        model.viajes[index].avion.marca +" "+model.viajes[index].avion.modelo,
+                        model.viajes[index].vuelo.ciudad_origen.nombre,
+                        model.viajes[index].vuelo.ciudad_destino.nombre,
+                        model.viajes[index].fecha,
+                        model.viajes[index].vuelo.hora,
+                        model.viajes[index].vuelo.duracion,
                         controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion),
-                        this.model.viajes[index].vuelo.duracion
                     ]).draw(false);
                 }
             }
