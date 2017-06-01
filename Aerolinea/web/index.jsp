@@ -433,7 +433,7 @@
                             sessionStorage.setItem("viajes", JSON.stringify(viajes,JsonUtils.replacer));
 
                             if (radio1.checked) {
-                                //document.location = "reserva.jsp";
+                                document.location = "reserva.jsp";
                             }
                         }
                     }

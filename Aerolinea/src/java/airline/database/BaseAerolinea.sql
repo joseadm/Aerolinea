@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Usuario` (
   `nombre` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
-  `fechaNacimiento` DATETIME(6) NOT NULL,
+  `fechaNacimiento` DATE NOT NULL,
   `direccion` VARCHAR(45) NOT NULL,
   `telefono` INT NOT NULL,
   `celular` INT NOT NULL,
