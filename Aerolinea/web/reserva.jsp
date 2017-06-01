@@ -247,13 +247,13 @@
                 PasajerosAdd: function () {
                     var nombre = this.view.document.getElementById("nombre").value;
                     var apellidos = this.view.document.getElementById("apellidos").value;
-                    var numero_pasajero = this.view.document.getElementById("numero_pasajero").value;
+                    var numero_pasajero = parseInt(this.view.document.getElementById("numero_pasaporte").value);
                     var table = $('#paginacion2').DataTable();
-                    table.row.add({
+                    table.row.add([
                         nombre,
                         apellidos,
                         numero_pasajero
-                    }).draw();
+                    ]).draw(false);
                 },
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
@@ -269,6 +269,7 @@
                 model = new Model();
                 controller = new Controller(model, window);
                 showViajes();
+                showPasajeros();
             }
 
             function showViajes() {
@@ -291,7 +292,6 @@
             function showPasajeros() {
                 var t = $('#paginacion2').DataTable();
                 $('#paginacion2').dataTable().fnClearTable();
-
             }
 
 
