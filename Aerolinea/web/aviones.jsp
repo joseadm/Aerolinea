@@ -68,7 +68,10 @@
                                         <label class="control-label">Cantidad Asientos Fila</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                            <input type="text" class ="form-control" id="cant_asientos_por_fila" placeholder="Ingrese la cantidad de asientos por fila" onKeyPress="return controller.justNumbers(event)" required>
+                                            <select id="cant_asientos_por_fila" name="cant_asientos_por_fila" class="form-control" >
+                                                <option>6</option>
+                                                <option>9</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
