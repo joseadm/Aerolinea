@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Usuario` (
   `nombre` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
-  `fechaNacimiento` DATE NOT NULL,
-  `direccion` TinyText NOT NULL,
+  `fechaNacimiento` DATETIME(6) NOT NULL,
+  `direccion` VARCHAR(45) NOT NULL,
   `telefono` INT NOT NULL,
   `celular` INT NOT NULL,
   `tipo` INT NOT NULL,
@@ -52,12 +52,12 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Vuelo` (
   `ciudadDestino` VARCHAR(45) NOT NULL,
   `estado` TINYINT(1) NOT NULL,
   `precio` INT NOT NULL,
-  `duracion` VARCHAR(20) NOT NULL,
-  `hora` VARCHAR(20) NULL,
+  `duracion` VARCHAR(45) NOT NULL,
+  `hora` VARCHAR(45) NOT NULL,
   `oferta` TINYINT(1) NOT NULL,
   `imagen` TEXT NULL,
-  `dia` VARCHAR(20) NOT NULL,
-  `descuento` INT NOT NULL, 
+  `dia` VARCHAR(45) NOT NULL,
+  `descuento` INT NOT NULL,
   PRIMARY KEY (`numeroVuelo`),
   INDEX `ciudadOrigen_idx` (`ciudadOrigen` ASC),
   INDEX `ciudadDestino_idx` (`ciudadDestino` ASC),
@@ -132,40 +132,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `BaseAerolinea`.`Tiquete`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nombre_usuario` VARCHAR(45) NOT NULL,
-  `nombre_pasajero` VARCHAR(45) NOT NULL,
-  `apellidos_pasajero` VARCHAR(45) NOT NULL,
-  `pasaporte_pasajero` INT NOT NULL,
-  PRIMARY KEY (`codigo`),
-  INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
-  CONSTRAINT `nombre_usuario`
-    FOREIGN KEY (`nombre_usuario`)
-    REFERENCES `BaseAerolinea`.`Usuario` (`nombreUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `BaseAerolinea`.`Reservacion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
   `numero_viaje1` INT NOT NULL,
   `numero_viaje2` INT NULL,
-  `codigo_asiento` INT NOT NULL,
-  `codigo_asiento2` INT NULL,
-  `codigo_tiquete` INT NOT NULL,
+  `fecha_reserva` DATE NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `numero_viaje1_idx` (`numero_viaje1` ASC),
   INDEX `numero_viaje2_idx` (`numero_viaje2` ASC),
-  INDEX `codigo_asiento_idx` (`codigo_asiento` ASC),
-  INDEX `codigo_tiquete_idx` (`codigo_tiquete` ASC),
-  INDEX `codigo_asiento2_idx` (`codigo_asiento2` ASC),
   CONSTRAINT `numero_viaje1`
     FOREIGN KEY (`numero_viaje1`)
     REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
@@ -175,19 +151,37 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
     FOREIGN KEY (`numero_viaje2`)
     REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `BaseAerolinea`.`Tiquete`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
+  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `nombre_usuario` VARCHAR(45) NOT NULL,
+  `codigo_reservacion` INT NOT NULL,
+  `codigo_asiento` INT NOT NULL,
+  `nombre_pasajero` VARCHAR(45) NOT NULL,
+  `apellidosPasajero` VARCHAR(45) NOT NULL,
+  `pasaporte` INT NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
+  INDEX `codigo_reservacion_idx` (`codigo_reservacion` ASC),
+  INDEX `codigo_asietno_idx` (`codigo_asiento` ASC),
+  CONSTRAINT `nombre_usuario`
+    FOREIGN KEY (`nombre_usuario`)
+    REFERENCES `BaseAerolinea`.`Usuario` (`nombreUsuario`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `codigo_asiento`
+  CONSTRAINT `codigo_reservacion`
+    FOREIGN KEY (`codigo_reservacion`)
+    REFERENCES `BaseAerolinea`.`Reservacion` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `codigo_asietno`
     FOREIGN KEY (`codigo_asiento`)
-    REFERENCES `BaseAerolinea`.`Asiento` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `codigo_tiquete`
-    FOREIGN KEY (`codigo_tiquete`)
-    REFERENCES `BaseAerolinea`.`Tiquete` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `codigo_asiento2`
-    FOREIGN KEY (`codigo_asiento2`)
     REFERENCES `BaseAerolinea`.`Asiento` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
