@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="airline.model.TipoCambio"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -90,8 +91,12 @@
                             <div id="imagenTarjeta" class="container">
                                 <img src="images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
                             </div>
-                        </div>
+                            <div>
+                                <label class="control-label">Tipo de Cambio Actual: ‎₡ </label> <%= new TipoCambio().getVenta() %>
+                            </div>
+                        </div> 
                         <hr>
+                        
                         <form id="formPago" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="inputType" class="col-md-5 control-label">Numero de Tarjeta: </label>
@@ -170,7 +175,7 @@
             function Controller(model, view) {
                 this.Controller(model, view);
             }
-
+            var tipoC;
             Controller.prototype = {
                 Controller: function (model, view) {
                     this.model = model;
@@ -267,7 +272,7 @@
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
                 console.log(model.viajes.length);
-                for (var index = 0; index < viajes.length; index++) {
+                for (var index = 0; index < model.viajes.length; index++) {
                     t.row.add([
                         model.viajes[index].vuelo.numero_vuelo,
                         model.viajes[index].avion.placa,
