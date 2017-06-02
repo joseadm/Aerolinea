@@ -12,13 +12,15 @@ import java.util.Date;
  */
 public class Reservacion implements Serializable, Jsonable{
     String codigo;
+    Usuario nombreUsuario;
     Viaje viaje1;
     Viaje viaje2;
     Date fecha_reserva;
     int precioTotal;
 
-    public Reservacion(String codigo, Viaje viaje1, Viaje viaje2, Date fecha_reserva, int precioTotal) {
+    public Reservacion(String codigo, Usuario nombreUsuario, Viaje viaje1, Viaje viaje2, Date fecha_reserva, int precioTotal) {
         this.codigo = codigo;
+        this.nombreUsuario = nombreUsuario;
         this.viaje1 = viaje1;
         this.viaje2 = viaje2;
         this.fecha_reserva = fecha_reserva;
@@ -34,6 +36,14 @@ public class Reservacion implements Serializable, Jsonable{
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public Usuario getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(Usuario nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public Viaje getViaje1() {
@@ -67,6 +77,8 @@ public class Reservacion implements Serializable, Jsonable{
     public void setPrecioTotal(int precioTotal) {
         this.precioTotal = precioTotal;
     }
+
+    
     
     
     

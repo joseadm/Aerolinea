@@ -8,12 +8,14 @@ function Reservacion(codigo,viaje1,viaje2,fecha_reserva){
 }
 Reservacion.prototype={
         codigo: 0,
+        nombreUsuario:"",
         viaje1: 0,
         viaje2: 0,
         fecha_reserva:"",
         precioTotal: 0,
-	Reservacion:function(codigo,viaje1,viaje2,fecha_reserva,precioTotal){
+	Reservacion:function(codigo,nombreUsuario,viaje1,viaje2,fecha_reserva,precioTotal){
 		this.codigo=codigo;
+                this.nombreUsuario =nombreUsuario;
 		this.viaje1=viaje1;
                 this.viaje2=viaje2;
                 this.fecha_reserva= fecha_reserva;
@@ -24,7 +26,7 @@ Reservacion.prototype={
 	}
 }
 Reservacion.from = function(plain){
-    reservacion = new Reservacion(plain.codigo,plain.viaje1,plain.viaje2,plain.fecha_reserva,precioTotal);
+    reservacion = new Reservacion(plain.codigo,plain.nombreUsuario,plain.viaje1,plain.viaje2,plain.fecha_reserva,precioTotal);
     return reservacion;
 };
 Reservacion.to = function(reserva){
@@ -34,6 +36,7 @@ Reservacion.to = function(reserva){
         viaje1: reserva.viaje1,
         viaje2: reserva.viaje2,
         fecha_reserva: reserva.fecha_reserva,
-        precioTotal: reserva.precioTotal
+        precioTotal: reserva.precioTotal,
+        nombreUsuario: reserva.nombreUsuario
     };
 };
