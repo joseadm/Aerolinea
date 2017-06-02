@@ -15,6 +15,9 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.DocumentException;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(name = "GeneratePDF", urlPatterns = {"/GeneratePDF"})
 
 public class GeneratePDF extends HttpServlet {
 
@@ -24,7 +27,10 @@ public class GeneratePDF extends HttpServlet {
         //Set content type to application / pdf
         //browser will open the document only if this is set
         response.setContentType("application/pdf");
-        //Get the output stream for writing PDF object        
+        //Get the output stream for writing PDF object 
+        
+        String accion = request.getParameter("action");
+        if(accion=="generatePDF") {
         OutputStream out=response.getOutputStream();
         try {
             Document document = new Document();
@@ -40,6 +46,7 @@ public class GeneratePDF extends HttpServlet {
                 }
         finally {            
             out.close();
+        }
         }
     }
     @Override

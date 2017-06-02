@@ -38,7 +38,7 @@
                     </div> </div>
             </fieldset>
             <br>
-            <div class="container"> 
+            <div class="container table-pasajeros"> 
                 <fieldset>
                     <legend align="center">Informacion de los Pasajeros</legend>
                     <div class="row">
@@ -69,18 +69,7 @@
                     </div>
                     <br>
                     <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
-                    <legend align="center">Pasajeros</legend>
-                    <div class="container">
-                        <div class="table-responsive">
-                            <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr><th>Nombre</th><th>Apellidos</th><th>Numero Pasaporte</th></tr>
-                                </thead>
-                                <tbody id="vuelosReserva">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    
                     <br>
                 </fieldset>
             </div><br><br><br>
@@ -94,6 +83,23 @@
 
                     </div>
                     <ol id="tablaAsientos" class="cabin fuselage">
+
+                    </ol>
+                    <div class="exit exit--back fuselage">
+
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="asientosVuelta">
+                <legend align="center">Asientos de VUELTA</legend>
+                <div class="plane">
+                    <div class="cockpit">
+                        <h1>Selecciona un asiento</h1>
+                    </div>
+                    <div class="exit exit--front fuselage">
+
+                    </div>
+                    <ol id="tablaAsientos2" class="cabin fuselage">
 
                     </ol>
                     <div class="exit exit--back fuselage">
@@ -188,9 +194,6 @@
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
 
-            $('#paginacion2')
-                    .removeClass('display')
-                    .addClass('table table-striped table-bordered');
             $('#paginacion3')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
@@ -218,7 +221,6 @@
                     this.model = model;
                     this.view = view;
                     this.initTravels();
-                    view.showPasajeros();
                     Proxy.getAsientos(function (result) {
                         model.asientos = result;
                     });
@@ -337,9 +339,10 @@
                 model = new Model();
                 controller = new Controller(model, window);
                 showViajes();
-                showPasajeros();
                 createSeat();
+                createSeat2();
                 showTiquet();
+                //showPasajeros();
             }
 
             function showViajes() {
@@ -359,10 +362,23 @@
                     ]).draw(false);
                 }
             }
-            function showPasajeros() {
-                var t = $('#paginacion2').DataTable();
-                $('#paginacion2').dataTable().fnClearTable();
-            }
+            /*function showPasajeros() {
+                
+                var tabla = document.getElementById("table-pasajeros");
+                var label; var div;
+                var div2; var span;
+                var input;
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                
+                for(int i=0; i<cant_pasajeros; i++) {
+                    label = document.createElement("label");
+                    label.setAttribute("class","control-label");
+                    label.appendChild(document.createTextNode("Nombre"));
+                    tabla.appendChild(label);
+                    
+                }
+    
+            }*/
             function showTiquet(){
                 var t = $('#paginacion3').DataTable();
                 $('#paginacion3').dataTable().fnClearTable();
@@ -377,12 +393,6 @@
                     "searching": false
                 });
 
-                var table2 = $('#paginacion2').DataTable({
-                    "paging": false,
-                    "ordering": false,
-                    "info": false,
-                    "searching": false
-                });
                 var table3 = $('#paginacion3').DataTable({
                     "paging": false,
                     "ordering": false,
@@ -425,6 +435,47 @@
                     tabla.appendChild(li);
                 }
             }
+            
+             function createSeat2() {
+                 if(model.viajes[1]==null) {
+                     $("#asientosVuelta").hide();
+                } else {
+                 
+                var tabla = document.getElementById("tablaAsientos2");
+                var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+                    "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                var li, ol, li2, tmp, lbl;
+                var filas =  model.viajes[1].avion.cant_filas;
+                var cant_asientos_por_fila = model.viajes[1].avion.cant_asientos_por_fila;
+
+                for (var i = 1; i <= filas; i++) { //cant filas
+                    li = document.createElement("li");
+                    li.className = "row row--" + i;
+                    ol = document.createElement("ol");
+                    ol.className = "seats";
+                    ol.type = "A";
+
+                    for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
+                        typeAvion(cant_asientos_por_fila);
+                        li2 = document.createElement("li");
+                        li2.className = "seat";
+                        tmp = document.createElement("input");
+                        tmp.type = "checkbox";
+                        tmp.id = i + etiquetas[j];
+                        tmp.disabled = false;
+                        lbl = document.createElement("label");
+                        lbl.htmlFor = i + etiquetas[j];
+                        lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+
+                        li2.appendChild(tmp);
+                        li2.appendChild(lbl);
+                        ol.appendChild(li2);
+                    }
+                    li.appendChild(ol);
+                    tabla.appendChild(li);
+                }
+            }
+        }
 
             function typeAvion(asientos) {
                 if (asientos === 9)
