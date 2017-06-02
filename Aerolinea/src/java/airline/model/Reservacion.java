@@ -15,12 +15,14 @@ public class Reservacion implements Serializable, Jsonable{
     Viaje viaje1;
     Viaje viaje2;
     Date fecha_reserva;
+    int precioTotal;
 
-    public Reservacion(String codigo, Viaje viaje1, Viaje viaje2, Date fecha_reserva) {
+    public Reservacion(String codigo, Viaje viaje1, Viaje viaje2, Date fecha_reserva, int precioTotal) {
         this.codigo = codigo;
         this.viaje1 = viaje1;
         this.viaje2 = viaje2;
         this.fecha_reserva = fecha_reserva;
+        this.precioTotal = precioTotal;
     }
 
     public Reservacion() {
@@ -58,6 +60,14 @@ public class Reservacion implements Serializable, Jsonable{
         this.fecha_reserva = fecha_reserva;
     }
 
+    public int getPrecioTotal() {
+        return precioTotal;
+    }
 
+    public void setPrecioTotal(int precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+    
+    
     
 }

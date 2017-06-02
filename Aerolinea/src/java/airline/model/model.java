@@ -245,16 +245,16 @@ public class model {
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
         if (rs.next()) {
-            int numeroAsiento = 1;
-            Asiento spot;
-            p.setNumero_viaje(rs.getInt(1));
-            for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
-                for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
-                    spot = new Asiento(numeroAsiento, true,p);
-                    numeroAsiento++;
-                    AsientoAdd(spot);
-                }
-            }
+//            String numeroAsiento = 1;
+//            Asiento spot;
+//            p.setNumero_viaje(rs.getInt(1));
+//            for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
+//                for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
+//                    spot = new Asiento(numeroAsiento, true,p);
+//                    numeroAsiento++;
+//                    AsientoAdd(spot);
+//                }
+//            }
             return rs.getInt(1);
         } else {
             return 0;
@@ -520,7 +520,7 @@ public class model {
     private static Asiento toSits(ResultSet rs) throws Exception {
         try {
             Asiento obj = new Asiento();
-            obj.setNumero(rs.getInt("numero"));
+            obj.setNumero(rs.getString("numero"));
             obj.setEstado(rs.getBoolean("estado"));
             obj.setViaje(toTravels(rs));
             return obj;

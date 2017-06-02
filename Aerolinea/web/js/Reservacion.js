@@ -11,18 +11,20 @@ Reservacion.prototype={
         viaje1: 0,
         viaje2: 0,
         fecha_reserva:"",
-	Reservacion:function(codigo,viaje1,viaje2,fecha_reserva){
+        precioTotal: 0,
+	Reservacion:function(codigo,viaje1,viaje2,fecha_reserva,precioTotal){
 		this.codigo=codigo;
 		this.viaje1=viaje1;
                 this.viaje2=viaje2;
                 this.fecha_reserva= fecha_reserva;
+                this.precioTotal = precioTotal;
 	},
         toString:function(){
 	  return this.codigo;
 	}
 }
 Reservacion.from = function(plain){
-    reservacion = new Reservacion(plain.codigo,plain.viaje1,plain.viaje2,plain.fecha_reserva);
+    reservacion = new Reservacion(plain.codigo,plain.viaje1,plain.viaje2,plain.fecha_reserva,precioTotal);
     return reservacion;
 };
 Reservacion.to = function(reserva){
@@ -31,6 +33,7 @@ Reservacion.to = function(reserva){
         codigo: reserva.codigo,
         viaje1: reserva.viaje1,
         viaje2: reserva.viaje2,
-        fecha_reserva: reserva.fecha_reserva
+        fecha_reserva: reserva.fecha_reserva,
+        precioTotal: reserva.precioTotal
     };
 };
