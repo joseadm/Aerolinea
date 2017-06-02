@@ -245,11 +245,12 @@
                             this.model.vuelo.precio = precio - porcentaje;
                         }
                         this.model.vuelo.precio = precio;
+                        if (view.validacionForm())
+                            view.showMessage();
                         if (view.validacionForm()) {
                             Proxy.VueloAdd(this.model.vuelo, function (result) {
                                 this.model.vuelo.numero_vuelo = result;
                                 document.location = "/Aerolinea/vuelos.jsp";
-                                view.showMessage();
                             });
                         }
                     } else {
@@ -269,11 +270,13 @@
                     this.model.vuelo.precio =this.view.document.getElementById('precio').value = result.precio;
                     this.model.vuelo.oferta =this.view.document.getElementById('oferta').value = result.oferta;
                     this.model.vuelo.descuento =this.view.document.getElementById('descuento').value = result.descuento;
+                    if (view.validacionForm())
+                        view.showMessage();
                     if (view.validacionForm()) {
                         Proxy.VueloUpdate(this.model.vuelo, function (result) {
                             model.ciudad.codigo = result;
                             document.location = "/Aerolinea/vuelos.jsp"
-                            view.showMessageUpdate();
+                            
                         });
                     }
                 },
