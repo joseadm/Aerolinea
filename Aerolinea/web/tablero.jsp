@@ -27,45 +27,42 @@
         <div class="container">
             <fieldset>
                 <legend align="center">Menu Administrativo</legend>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-8 col-md-10 main">
-                            <h1 class="page-header">Tablero</h1>
-                            <div class="panel-heading">Cinco rutas mas vendidas o reservadas</div>
+                <div class="col-sm-8 col-md-10 main">
+            <h1 class="page-header">Tablero</h1>
+            <div class="panel-heading">Cinco rutas mas vendidas o reservadas</div>
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">Cantidad facturado por mes</div>
-                                        <div class="panel-body">
-                                            <div id="ventaMensual" class="canvas-wrapper">
-                                                <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">Cantidad ingresos por año</div>
-                                        <div class="panel-body">
-                                            <div id="ventaAnual" class="canvas-wrapper">
-                                                <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel-heading">Listado de clientes</div>
-
-                        </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Cantidad facturado por mes</div>
+                  <div class="panel-body">
+                    <div id="ventaMensual" class="canvas-wrapper">
+                      <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
                     </div>
+                  </div>
                 </div>
-                <hr>
-                <br>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Cantidad ingresos por año</div>
+                  <div class="panel-body">
+                    <div id="ventaAnual" class="canvas-wrapper">
+                      <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-heading">Listado de clientes</div>
+
+          </div>
+        </div>
+      <hr>
+      <br>
             </fieldset>
         </div>
         <!-- Footer -->
@@ -74,5 +71,114 @@
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
         </div>
+        <!--....................................................-->
+        <script type="text/javascript">
+      Highcharts.chart('ventaAnual', {
+          
+    title: {
+        text: 'Ventas Anuales'
+    },
+
+    subtitle: {
+        text: 'Baratico.inc'
+    },
+
+    xAxis: {
+        categories: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+
+        title: {
+          text: 'Meses'
+        }
+      },
+      yAxis: {
+
+        title: {
+          text: 'Dolares'
+        }
+      },
+
+      tooltip: {
+        enabled: true,
+        formatter: function() {
+          return '<b>'+ this.series.name +'</b><br/>'+
+            this.x +': '+ this.y +' '+this.series.name;
+        }
+      },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        line: {
+          dataLabels: {
+            enabled: true
+          },
+          enableMouseTracking: true
+        }
+    },
+
+    series: [{
+        name: 'Ganancias',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175, 97031, 119931, 137133, 154175]
+    }]
+
+});
+
+Highcharts.chart('ventaMensual', {
+
+title: {
+  text: 'Ventas Mensuales'
+},
+
+subtitle: {
+  text: 'Baratico.inc'
+},
+
+xAxis: {
+  categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+
+  title: {
+    text: 'Meses'
+  }
+},
+yAxis: {
+
+  title: {
+    text: 'Dolares'
+  }
+},
+
+tooltip: {
+  enabled: true,
+  formatter: function() {
+    return '<b>'+ this.series.name +'</b><br/>'+
+      this.x +': '+ this.y +' '+this.series.name;
+  }
+},
+legend: {
+  layout: 'vertical',
+  align: 'right',
+  verticalAlign: 'middle'
+},
+
+plotOptions: {
+  line: {
+    dataLabels: {
+      enabled: true
+    },
+    enableMouseTracking: true
+  }
+},
+
+series: [{
+  name: 'Ganancias',
+  data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175, 97031, 119931, 137133, 154175]
+}]
+
+});
+      </script>
     </body>
 </html>
