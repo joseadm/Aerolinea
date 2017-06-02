@@ -421,10 +421,10 @@
                         li2.className = "seat";
                         tmp = document.createElement("input");
                         tmp.type = "checkbox";
-                        tmp.id = i + etiquetas[j];
+                        tmp.id = i + etiquetas[j]+model.viajes[0].numero_viaje;
                         tmp.disabled = false;
                         lbl = document.createElement("label");
-                        lbl.htmlFor = i + etiquetas[j];
+                        lbl.htmlFor = i + etiquetas[j]+model.viajes[0].numero_viaje;
                         lbl.appendChild(document.createTextNode(i + etiquetas[j]));
 
                         li2.appendChild(tmp);
@@ -461,10 +461,10 @@
                         li2.className = "seat";
                         tmp = document.createElement("input");
                         tmp.type = "checkbox";
-                        tmp.id = i + etiquetas[j];
+                        tmp.id = i + etiquetas[j]+model.viajes[1].numero_viaje;
                         tmp.disabled = false;
                         lbl = document.createElement("label");
-                        lbl.htmlFor = i + etiquetas[j];
+                        lbl.htmlFor = i + etiquetas[j]+model.viajes[1].numero_viaje;
                         lbl.appendChild(document.createTextNode(i + etiquetas[j]));
 
                         li2.appendChild(tmp);
