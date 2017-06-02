@@ -11,16 +11,14 @@ import java.io.Serializable;
  */
 public class Tiquete implements Serializable, Jsonable{
     int codigo;
-    Usuario usuario;
     String nombre_pasajero;
     String apellidos_pasajero;
     int pasaporte_pasajero;
     Reservacion codigo_reservacion;
     Asiento codigo_asiento;
 
-    public Tiquete(int codigo, Usuario usuario, String nombre_pasajero, String apellidos_pasajero, int pasaporte_pasajero, Reservacion codigo_reservacion, Asiento codigo_asiento) {
+    public Tiquete(int codigo,  String nombre_pasajero, String apellidos_pasajero, int pasaporte_pasajero, Reservacion codigo_reservacion, Asiento codigo_asiento) {
         this.codigo = codigo;
-        this.usuario = usuario;
         this.nombre_pasajero = nombre_pasajero;
         this.apellidos_pasajero = apellidos_pasajero;
         this.pasaporte_pasajero = pasaporte_pasajero;
@@ -36,9 +34,6 @@ public class Tiquete implements Serializable, Jsonable{
         return codigo;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
 
     public String getNombre_pasajero() {
         return nombre_pasajero;
@@ -56,9 +51,6 @@ public class Tiquete implements Serializable, Jsonable{
         this.codigo = codigo;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     public void setNombre_pasajero(String nombre_pasajero) {
         this.nombre_pasajero = nombre_pasajero;

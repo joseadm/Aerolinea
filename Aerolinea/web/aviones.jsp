@@ -174,10 +174,11 @@
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
                     cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
+                    if (view.validacionForm())
+                        view.showMessage();
                     if (view.validacionForm()) {
                         Proxy.AvionAdd(this.model.avion, function (result) {
-                            document.location = "/Aerolinea/aviones.jsp"
-                            view.showMessage();
+                            document.location = "/Aerolinea/aviones.jsp";
                         });
                     }
                 },
@@ -193,10 +194,12 @@
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
                     cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
+                    if (view.validacionForm())
+                        view.showMessageUpdate();
                     if (view.validacionForm()) {
                         Proxy.AvionUpdate(this.model.avion, function (result) {
                             document.location = "/Aerolinea/aviones.jsp"
-                            view.showMessage();
+                           
                         });
                     }
                 },

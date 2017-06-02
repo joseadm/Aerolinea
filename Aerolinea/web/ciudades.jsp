@@ -128,11 +128,12 @@
                     this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
                     this.model.ciudad.pais = this.view.document.getElementById("pais").value;
                     this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
+                    if (view.validacionForm())
+                        view.showMessage();
                     if (view.validacionForm()) {
                         Proxy.CiudadAdd(this.model.ciudad, function (result) {
                             model.ciudad.codigo = result;
                             document.location = "/Aerolinea/ciudades.jsp"
-                            view.showMessage();
                         });
                     }
                 },
@@ -142,11 +143,13 @@
                     this.model.ciudad.codigo = this.view.document.getElementById("codigo").value;
                     this.model.ciudad.pais = this.view.document.getElementById("pais").value;
                     this.model.ciudad.nombre = this.view.document.getElementById("nombre").value;
+                    if (view.validacionForm())
+                        view.showMessageUpdate();
                     if (view.validacionForm()) {
                         Proxy.CiudadUpdate(this.model.ciudad, function (result) {
                             model.ciudad.codigo = result;
                             document.location = "/Aerolinea/ciudades.jsp"
-                            view.showMessageUpdate();
+                            
                         });
                     }
                 }
