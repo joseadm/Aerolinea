@@ -133,6 +133,7 @@
                 ol.type = "A";
                 
                 for (var j = 1; j <= 9; j++) { //cant asientos por fila
+                    typeAvion(9);
                 li2 = document.createElement("li");
                 li2.className = "seat";
                 tmp = document.createElement("input");
@@ -146,13 +147,18 @@
                 li2.appendChild(tmp);
                 li2.appendChild(lbl);
                 ol.appendChild(li2);
-                //li.appendChild(ol);
-                
                 }
                 li.appendChild(ol);
                 tabla.appendChild(li);
                 }
             }
+            
+            function typeAvion(asientos){
+                if(asientos === 9)
+                    document.querySelector(".cabin").style.padding = "0px 106px 0px 0px";
+            }
+            
+            
 
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
