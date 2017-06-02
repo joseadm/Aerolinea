@@ -136,6 +136,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
+  `nombre_usuario` VARCHAR(45) NOT NULL,
   `numero_viaje1` INT NOT NULL,
   `numero_viaje2` INT NULL,
   `fecha_reserva` DATE NOT NULL,
@@ -143,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
   PRIMARY KEY (`codigo`),
   INDEX `numero_viaje1_idx` (`numero_viaje1` ASC),
   INDEX `numero_viaje2_idx` (`numero_viaje2` ASC),
+  INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
   CONSTRAINT `numero_viaje1`
     FOREIGN KEY (`numero_viaje1`)
     REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
@@ -151,6 +153,11 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
   CONSTRAINT `numero_viaje2`
     FOREIGN KEY (`numero_viaje2`)
     REFERENCES `BaseAerolinea`.`Viaje` (`numeroviaje`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `nombre_usuario`
+    FOREIGN KEY (`nombre_usuario`)
+    REFERENCES `BaseAerolinea`.`Usuario` (`nombreUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -161,21 +168,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nombre_usuario` VARCHAR(45) NOT NULL,
   `codigo_reservacion` INT NOT NULL,
   `codigo_asiento` INT NOT NULL,
   `nombre_pasajero` VARCHAR(45) NOT NULL,
   `apellidosPasajero` VARCHAR(45) NOT NULL,
   `pasaporte` INT NOT NULL,
   PRIMARY KEY (`codigo`),
-  INDEX `nombre_usuario_idx` (`nombre_usuario` ASC),
   INDEX `codigo_reservacion_idx` (`codigo_reservacion` ASC),
   INDEX `codigo_asietno_idx` (`codigo_asiento` ASC),
-  CONSTRAINT `nombre_usuario`
-    FOREIGN KEY (`nombre_usuario`)
-    REFERENCES `BaseAerolinea`.`Usuario` (`nombreUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `codigo_reservacion`
     FOREIGN KEY (`codigo_reservacion`)
     REFERENCES `BaseAerolinea`.`Reservacion` (`codigo`)
@@ -192,6 +192,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 /*INSERT DE CIUDADES------------------------------*/
 insert into ciudad values("SJO","Costa Rica","San Jose");
