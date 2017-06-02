@@ -125,7 +125,7 @@
                                  "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
                 var li, ol, li2, tmp, lbl;
                 
-                for (var i = 1; i <= 12; i++) { //cant filas
+                for (var i = 1; i <= 22; i++) { //cant filas
                 li = document.createElement("li");
                 li.className = "row row--" + i;
                 ol = document.createElement("ol");
@@ -155,7 +155,7 @@
             
             function typeAvion(asientos){
                 if(asientos === 9)
-                    document.querySelector(".cabin").style.padding = "0px 106px 0px 0px";
+                    document.querySelector(".cabin").style.padding = "0px 200px 0px 15px";
             }
             
             

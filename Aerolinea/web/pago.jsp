@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="airline.model.TipoCambio"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,11 +34,15 @@
                 </tbody>
             </table>
         </div>
-        <div class="container">
+    <center><div class="container">
+            <legend align="center">Pago</legend>
             <div id="pago" class="jumbotron">
                 <div class="row">
                     <div id="imagenTarjeta" class="container">
                         <img src="images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
+                    </div>
+                    <div>
+                        <label class="control-label">Tipo de Cambio Actual: ‎₡ </label> <%= new TipoCambio().getVenta()%>
                     </div>
                 </div>
                 <hr>
@@ -80,50 +85,50 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div></center>
 
-        <script> // Model
-            function Model() {
-                this.Model();
+    <script> // Model
+        function Model() {
+            this.Model();
+        }
+
+        Model.prototype = {
+            Model: function () {
+            }
+        };
+    </script>
+    <script> // Controller
+        function Controller(model, view) {
+            this.Controller(model, view);
+        }
+
+        Controller.prototype = {
+            Controller: function (model, view) {
+                this.model = model;
+                this.view = view;
             }
 
-            Model.prototype = {
-                Model: function () {
-                }
-            };
-        </script>
-        <script> // Controller
-            function Controller(model, view) {
-                this.Controller(model, view);
-            }
-
-            Controller.prototype = {
-                Controller: function (model, view) {
-                    this.model = model;
-                    this.view = view;
-                }
-
-            };
-        </script>
-        <script> // View
-            var model;
-            var controller;
-            function pageLoad(event) {
-                model = new Model();
-                controller = new Controller(model, window);
-            }
+        };
+    </script>
+    <script> // View
+        var model;
+        var controller;
+        function pageLoad(event) {
+            model = new Model();
+            controller = new Controller(model, window);
+        }
 
 
-            document.addEventListener("DOMContentLoaded", pageLoad);
-        </script>
+        document.addEventListener("DOMContentLoaded", pageLoad);
+    </script>
 
-        <hr>
-        <br><br><br>
-        <!-- Footer -->
-        <div class="container">
-            <footer class="footer">
-                <p>&copy; 2017 Baratísimo, Inc.</p>
-            </footer>
-        </div>
-    </body>
+    <hr>
+    <br><br><br>
+    <!-- Footer -->
+    <div class="container">
+        <footer class="footer">
+            <p>&copy; 2017 Baratísimo, Inc.</p>
+        </footer>
+    </div>
+</body>
 </html>
