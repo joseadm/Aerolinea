@@ -40,7 +40,7 @@
             <br>
             <div class="container"> 
                 <fieldset>
-                    <legend align="center">Pasajeros</legend>
+                    <legend align="center">Informacion de los Pasajeros</legend>
                     <div class="row">
                         <!-- Nombre -->
                         <div class="col-xs-12 col-sm-4 col-md-4">
@@ -69,6 +69,7 @@
                     </div>
                     <br>
                     <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
+                    <legend align="center">Pasajeros</legend>
                     <div class="container">
                         <div class="table-responsive">
                             <table id="paginacion2" class="display nowrap" cellspacing="0" width="100%">
@@ -80,10 +81,43 @@
                             </table>
                         </div>
                     </div>
-                    <br><br><br>
+                    <br>
                 </fieldset>
-            </div>
+            </div><br><br><br>
+            <fieldset>
+                <legend align="center">Asientos de IDA</legend>
+                <div class="plane">
+                    <div class="cockpit">
+                        <h1>Selecciona un asiento</h1>
+                    </div>
+                    <div class="exit exit--front fuselage">
 
+                    </div>
+                    <ol id="tablaAsientos" class="cabin fuselage">
+
+                    </ol>
+                    <div class="exit exit--back fuselage">
+
+                    </div>
+                </div>
+            </fieldset>
+            <br><br><br>
+            <center><div class="container">
+                    <fieldset>
+                        <legend align="center">Desglose de la Reservación</legend>
+                        <div class="container">
+                        <div class="table-responsive">
+                            <table id="paginacion3" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr><th>Cantidad de Tiquetes</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Total</th></tr>
+                                </thead>
+                                <tbody id="desgloseReservacion">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </fieldset>
+                </div></center><br><br>
             <center><div class="container">
                     <legend align="center">Pago</legend>
                     <div id="pago" class="jumbotron">
@@ -92,11 +126,11 @@
                                 <img src="images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
                             </div>
                             <div>
-                                <label class="control-label">Tipo de Cambio Actual: ‎₡ </label> <%= new TipoCambio().getVenta() %>
+                                <label class="control-label">Tipo de Cambio Actual: ‎₡ </label> <%= new TipoCambio().getVenta()%>
                             </div>
                         </div> 
                         <hr>
-                        
+
                         <form id="formPago" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="inputType" class="col-md-5 control-label">Numero de Tarjeta: </label>
@@ -157,6 +191,9 @@
             $('#paginacion2')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
+            $('#paginacion3')
+                    .removeClass('display')
+                    .addClass('table table-striped table-bordered');
         </script>
 
         <script> // Model
@@ -182,6 +219,13 @@
                     this.view = view;
                     this.initTravels();
                     view.showPasajeros();
+                    Proxy.getAsientos(function (result) {
+                        model.asientos = result;
+                    });
+                    Proxy.getAviones(function (result) {
+                        model.aviones = result;
+                    });
+                    this.initAsiento();
                 },
                 initTravels: function () {
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
@@ -258,6 +302,30 @@
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
                     return (key >= 48 && key <= 57);
+                },
+                initAsiento: function () {
+                    var model = this.model;
+                    model.asiento = new Asiento();
+                },
+                initAvion: function () {
+                    var model = this.model;
+                    model.avion = new Asiento();
+                },
+                asientoAdd: function (numero) {
+                    var view = this.view;
+                    var codigo = 0;
+                    var numero = numero;
+                    this.model.asiento.codigo = parseInt(codigo++);
+                    this.model.asiento.numero = parseInt(codigo++);
+                    this.model.asiento.estado = false;
+                    this.model.asiento.numero_viaje = 0;
+                    Proxy.AvionAdd(this.model.asiento, function (result) {
+                        document.location = "/Aerolinea/asiento.jsp";
+                        view.showMessage();
+                    });
+                },
+                LimpiaPantalla: function () {
+                    view.clean();
                 }
 
             };
@@ -270,6 +338,8 @@
                 controller = new Controller(model, window);
                 showViajes();
                 showPasajeros();
+                createSeat();
+                showTiquet();
             }
 
             function showViajes() {
@@ -279,7 +349,7 @@
                 for (var index = 0; index < model.viajes.length; index++) {
                     t.row.add([
                         model.viajes[index].vuelo.numero_vuelo,
-                        model.viajes[index].avion.marca +" "+model.viajes[index].avion.modelo,
+                        model.viajes[index].avion.marca + " " + model.viajes[index].avion.modelo,
                         model.viajes[index].vuelo.ciudad_origen.nombre,
                         model.viajes[index].vuelo.ciudad_destino.nombre,
                         model.viajes[index].fecha,
@@ -293,12 +363,73 @@
                 var t = $('#paginacion2').DataTable();
                 $('#paginacion2').dataTable().fnClearTable();
             }
+            function showTiquet(){
+                var t = $('#paginacion3').DataTable();
+                $('#paginacion3').dataTable().fnClearTable();
+            }
 
 
             $(document).ready(function () {
-                var table = $('#paginacion').DataTable();
-                var table2 = $('#paginacion2').DataTable();
+                var table = $('#paginacion').DataTable({
+                    "paging": false,
+                    "ordering": false,
+                    "info": false,
+                    "searching": false
+                });
+
+                var table2 = $('#paginacion2').DataTable({
+                    "paging": false,
+                    "ordering": false,
+                    "info": false,
+                    "searching": false
+                });
+                var table3 = $('#paginacion3').DataTable({
+                    "paging": false,
+                    "ordering": false,
+                    "info": false,
+                    "searching": false
+                });
             });
+            function createSeat() {
+                var tabla = document.getElementById("tablaAsientos");
+                var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+                    "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                var li, ol, li2, tmp, lbl;
+                var filas =  model.viajes[0].avion.cant_filas;
+                var cant_asientos_por_fila = model.viajes[0].avion.cant_asientos_por_fila;
+
+                for (var i = 1; i <= filas; i++) { //cant filas
+                    li = document.createElement("li");
+                    li.className = "row row--" + i;
+                    ol = document.createElement("ol");
+                    ol.className = "seats";
+                    ol.type = "A";
+
+                    for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
+                        typeAvion(cant_asientos_por_fila);
+                        li2 = document.createElement("li");
+                        li2.className = "seat";
+                        tmp = document.createElement("input");
+                        tmp.type = "checkbox";
+                        tmp.id = i + etiquetas[j];
+                        tmp.disabled = false;
+                        lbl = document.createElement("label");
+                        lbl.htmlFor = i + etiquetas[j];
+                        lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+
+                        li2.appendChild(tmp);
+                        li2.appendChild(lbl);
+                        ol.appendChild(li2);
+                    }
+                    li.appendChild(ol);
+                    tabla.appendChild(li);
+                }
+            }
+
+            function typeAvion(asientos) {
+                if (asientos === 9)
+                    document.querySelector(".cabin").style.padding = "0px 200px 0px 15px";
+            }
 
 
             document.addEventListener("DOMContentLoaded", pageLoad);
