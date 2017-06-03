@@ -219,6 +219,7 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
+                    if(model.ciudades !== null){
                     var ciu1 = this.view.document.getElementById("ciudad_origen").value;
                     var ciu2 = this.view.document.getElementById("ciudad_destino").value;
                     var ciudad1 = this.model.ciudades.find(function (c1) {
@@ -258,7 +259,7 @@
                     } else {
                         view.showMessageInvalid();
                     }
-
+                }
                 },
                 VueloUpdate: function (numero_vuelo) {
                     var model = this.model;

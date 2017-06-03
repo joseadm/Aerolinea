@@ -145,25 +145,33 @@
                 ViajeAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    var placaA = this.view.document.getElementById("avion").value;
-                    var avion = this.model.aviones.find(function (a) {
-                        return a.placa === placaA;
-                    });
-                    var numeroVuelo = (parseInt(this.view.document.getElementById("vuelo").value));
-                    var vuelo = this.model.vuelos.find(function (v1) {
-                        return v1.numero_vuelo === numeroVuelo;
-                    });
-                    this.model.viaje.fecha = fechaViaje = $("#fechaViaje").find("input").val();
-                    this.model.viaje.avion = avion;
-                    this.model.viaje.vuelo = vuelo;
-                    this.model.viaje.numero_viaje = 0;
-                    if (view.validacionForm())
-                        view.showMessage();
-                    if (view.validacionForm()) {
-                        Proxy.ViajeAdd(this.model.viaje, function (result) {
-                            this.model.viaje.numero_viaje = result;
-                            document.location = "/Aerolinea/viajes.jsp";
+                    if (model.vuelos !== null && model.aviones !== null) {
+                        var dateComplet = $("#fechaViaje").find("input").val().split(" ");
+                        var day = dateComplet[1];
+                        var numeroVuelo = (parseInt(this.view.document.getElementById("vuelo").value));
+                        var vuelo = this.model.vuelos.find(function (v1) {
+                            return v1.numero_vuelo === numeroVuelo;
                         });
+                        if (vuelo.dia === day) {
+                            var placaA = this.view.document.getElementById("avion").value;
+                            var avion = this.model.aviones.find(function (a) {
+                                return a.placa === placaA;
+                            });
+                            this.model.viaje.fecha = fechaViaje = $("#fechaViaje").find("input").val();
+                            this.model.viaje.avion = avion;
+                            this.model.viaje.vuelo = vuelo;
+                            this.model.viaje.numero_viaje = 0;
+                            if (view.validacionForm())
+                                view.showMessage();
+                            if (view.validacionForm()) {
+                                Proxy.ViajeAdd(this.model.viaje, function (result) {
+                                    this.model.viaje.numero_viaje = result;
+                                    document.location = "/Aerolinea/viajes.jsp";
+                                });
+                            }
+                        }else{
+                            view.showMessageErrorDay()
+                        }
                     }
                 },
                 doDelete: function (numero_viaje) {
@@ -307,6 +315,9 @@
             function showMessage() {
                 window.alert("Registro exitoso");
             }
+            function showMessageErrorDay() {
+                window.alert("El dia del vuelo no coincide con el dia seleccionado");
+            }
             function showMessageDelete() {
                 window.alert("Eliminacion exitosa");
             }
@@ -351,7 +362,7 @@
         <script type="text/javascript">
             $(function () {
                 $('#fechaViaje').datetimepicker({
-                    format: 'YYYY-MM-DD',
+                    format: 'YYYY-MM-DD dddd',
                     useCurrent: false
                 });
                 $('#fechaViaje').data("DateTimePicker").minDate(new Date());
