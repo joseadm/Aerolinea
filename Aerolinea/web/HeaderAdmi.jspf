@@ -21,6 +21,7 @@
                 <li><a href="aviones.jsp">Aviones</a></li>
                 <li><a href="ciudades.jsp">Ciudades</a></li>
                 <li><a href="tablero.jsp">Ventas</a></li>
+                <li><a href="programarViajes.jsp">Programar Viajes</a></li>
             </ul>
             <% Usuario user = (Usuario) request.getSession().getAttribute("usuario"); %>
             <% if (user.getTipo() == 2) {%>   

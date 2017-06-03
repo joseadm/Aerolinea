@@ -167,13 +167,13 @@
         <script type="text/javascript">
             $(function () {
                 $('#fecha_ida').datetimepicker({
-                    minDate: moment(),
                     format: 'YYYY-MM-DD dddd',
                     useCurrent: false
                 });
                 $('#fecha_regreso').datetimepicker({
                     format: 'YYYY-MM-DD dddd',
-                    useCurrent: false
+                    useCurrent: false,
+                    minDate: moment()
                 });
                 $("#fecha_ida").on("dp.change", function (e) {
                     $('#fecha_regreso').data("DateTimePicker").minDate(e.date);
@@ -248,9 +248,6 @@
                             }
                         });
                     }
-                },
-                oferta: function () {
-
                 }
             };
         </script>

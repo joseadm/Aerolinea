@@ -274,9 +274,9 @@
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
                             "targets": -2,
-                            "data": null, 
-                            "defaultContent":'<img class="btn-edit" src="images/edit.png">'
-                            
+                            "data": null,
+                            "defaultContent": '<img class="btn-edit" src="images/edit.png">'
+
                         }, {
                             "targets": -1,
                             "data": null,
@@ -284,23 +284,23 @@
                                     '<img class="btn-delete" src="images/delete.png">'
                         }]
                 });
-                
-                $('#paginacion tbody').on( 'click', '.btn-edit', function () {
-                    var data = table.row( $(this).parents('tr') ).data();
-                     Proxy.getViaje(data[0], function(result){
+
+                $('#paginacion tbody').on('click', '.btn-edit', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    Proxy.getViaje(data[0], function (result) {
                         document.getElementById('vuelo').value = result.vuelo.numero_vuelo;
                         document.getElementById('avion').value = result.avion.placa;
                         document.getElementById('fecha').value = result.fecha;
-                     });
-                 } );
-                 
-                 $('#paginacion tbody').on( 'click', '.btn-delete', function () {
-                    var data = table.row( $(this).parents('tr') ).data();
-                     Proxy.ViajeDelete(data[0], function(result){
+                    });
+                });
+
+                $('#paginacion tbody').on('click', '.btn-delete', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    Proxy.ViajeDelete(data[0], function (result) {
                         document.location = "/Aerolinea/viajes.jsp"
                         this.showMessageDelete();
-                     });
-                 } );
+                    });
+                });
 
             });
 
@@ -349,10 +349,12 @@
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script> 
         <script type="text/javascript">
-            $('#fechaViaje').datetimepicker({
-                minDate: moment(),
-                format: 'YYYY-MM-DD',
-                useCurrent: false
+            $(function () {
+                $('#fechaViaje').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    useCurrent: false
+                });
+                $('#fechaViaje').data("DateTimePicker").minDate(new Date());
             });
         </script> 
     </body>

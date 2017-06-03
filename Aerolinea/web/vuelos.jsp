@@ -168,16 +168,18 @@
                     .addClass('table table-bordered table-hover');
         </script>
         <script type="text/javascript">
-            $('#dia').datetimepicker({
-                minDate: moment(),
-                format: 'dddd',
-                useCurrent: false
-            });
-            $('#hora').datetimepicker({
-                format: 'HH:ss'
-            });
-            $('#duracion').datetimepicker({
-                format: 'HH:ss'
+            $(function () {
+                $('#dia').datetimepicker({
+                    useCurrent: false,
+                    format: 'dddd'
+                });
+                $('#hora').datetimepicker({
+                    format: 'HH:ss'
+                });
+                $('#duracion').datetimepicker({
+                    format: 'HH:ss'
+                });
+                $('#dia').data("DateTimePicker").minDate(new Date());
             });
         </script> 
         <script> // Model
@@ -239,7 +241,7 @@
                         if (this.view.document.getElementById("descuento").value === "") {
                             this.model.vuelo.descuento = 0;
                         } else {
-                            var descuento = parseInt(this.view.document.getElementById("descuento").value);                           
+                            var descuento = parseInt(this.view.document.getElementById("descuento").value);
                             this.model.vuelo.descuento = descuento;
                             var porcentaje = (precio * descuento) / 100;
                             this.model.vuelo.precio = precio - porcentaje;
@@ -262,21 +264,21 @@
                     var model = this.model;
                     var view = this.view;
                     this.model.vuelo.ciudad_origen = this.view.document.getElementById('ciudad_origen').value = result.ciudad_origen.codigo;
-                    this.model.vuelo.ciudad_destino =this.view.document.getElementById('ciudad_destino').value = result.ciudad_destino.codigo;
-                    this.model.vuelo.estado =this.view.document.getElementById('estado').value = result.estado;
-                    this.model.vuelo.dia =this.view.document.getElementById('dia').value = result.dia;
-                    this.model.vuelo.hora =this.view.document.getElementById('hora').value = result.hora;
-                    this.model.vuelo.duracion =this.view. document.getElementById('duracion').value = result.duracion;
-                    this.model.vuelo.precio =this.view.document.getElementById('precio').value = result.precio;
-                    this.model.vuelo.oferta =this.view.document.getElementById('oferta').value = result.oferta;
-                    this.model.vuelo.descuento =this.view.document.getElementById('descuento').value = result.descuento;
+                    this.model.vuelo.ciudad_destino = this.view.document.getElementById('ciudad_destino').value = result.ciudad_destino.codigo;
+                    this.model.vuelo.estado = this.view.document.getElementById('estado').value = result.estado;
+                    this.model.vuelo.dia = this.view.document.getElementById('dia').value = result.dia;
+                    this.model.vuelo.hora = this.view.document.getElementById('hora').value = result.hora;
+                    this.model.vuelo.duracion = this.view.document.getElementById('duracion').value = result.duracion;
+                    this.model.vuelo.precio = this.view.document.getElementById('precio').value = result.precio;
+                    this.model.vuelo.oferta = this.view.document.getElementById('oferta').value = result.oferta;
+                    this.model.vuelo.descuento = this.view.document.getElementById('descuento').value = result.descuento;
                     if (view.validacionForm())
                         view.showMessage();
                     if (view.validacionForm()) {
                         Proxy.VueloUpdate(this.model.vuelo, function (result) {
                             model.ciudad.codigo = result;
                             document.location = "/Aerolinea/vuelos.jsp"
-                            
+
                         });
                     }
                 },
@@ -345,9 +347,9 @@
                 var table = $('#paginacion').DataTable({
                     "columnDefs": [{
                             "targets": -2,
-                            "data": null, 
-                            "defaultContent":'<img class="btn-edit" src="images/edit.png">'
-                            
+                            "data": null,
+                            "defaultContent": '<img class="btn-edit" src="images/edit.png">'
+
                         }, {
                             "targets": -1,
                             "data": null,
@@ -355,10 +357,10 @@
                                     '<img class="btn-delete" src="images/delete.png">'
                         }]
                 });
-                
-                $('#paginacion tbody').on( 'click', '.btn-edit', function () {
-                    var data = table.row( $(this).parents('tr') ).data();
-                     Proxy.getVuelo(data[0], function(result){
+
+                $('#paginacion tbody').on('click', '.btn-edit', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    Proxy.getVuelo(data[0], function (result) {
                         document.getElementById('ciudad_origen').value = result.ciudad_origen.codigo;
                         document.getElementById('ciudad_destino').value = result.ciudad_destino.codigo;
                         document.getElementById('estado').value = result.estado;
@@ -369,12 +371,12 @@
                         document.getElementById('oferta').value = result.oferta;
                         document.getElementById('descuento').value = result.descuento;
                     });
-                 } );
-                 
-                 $('#paginacion tbody').on( 'click', '.btn-delete', function () {
-                    var data = table.row( $(this).parents('tr') ).data();
-                     alert( data[2] +" tiene codigo: "+ data[ 0 ] );
-                 } );
+                });
+
+                $('#paginacion tbody').on('click', '.btn-delete', function () {
+                    var data = table.row($(this).parents('tr')).data();
+                    alert(data[2] + " tiene codigo: " + data[ 0 ]);
+                });
 
             });
             function listCiudades() {

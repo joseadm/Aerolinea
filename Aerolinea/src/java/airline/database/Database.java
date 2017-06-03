@@ -34,7 +34,7 @@ public class Database {
             String servidor=(servidorArg==null?SERVIDOR:servidorArg);
             String usuario=(usuarioArg==null?USUARIO:usuarioArg);
             String clave=(claveArg==null?CLAVE:claveArg);
-            String URL_conexion=PROTOCOLO+"//"+ servidor+":"+PUERTO+"/"+BASEDATOS+"?user="+usuario;//+"&password="+clave;
+            String URL_conexion=PROTOCOLO+"//"+ servidor+":"+PUERTO+"/"+BASEDATOS+"?user="+usuario+"&password="+clave;
             Class.forName(MANEJADOR_DB).newInstance();
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {
@@ -82,6 +82,6 @@ public class Database {
     private static final String SERVIDOR = "localhost";
     private static final String PUERTO = "3306";
     private static final String USUARIO = "root";
-    private static final String CLAVE = "root";
+    private static final String CLAVE = "chaverri1411";
     private static final String BASEDATOS = "BaseAerolinea";
 }
