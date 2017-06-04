@@ -161,17 +161,17 @@
                     return v1.numero_vuelo === numeroVuelo;
                 });
                 var count = 0;
-                var FlightDay = vuelo.dia;
-                var numberDay = this.numberDays(FlightDay);
-                var startDate = new Date(dateBegin1);
-                var endDate = new Date(dateBegin2);
-                for (startDate; startDate <= endDate; startDate.setDate(startDate.getDate() + 1)) {
-                    if (startDate.getDay() === numberDay) {
-                        this.model.viaje.fecha = startDate;
-                        this.model.viaje.avion = avion;
-                        this.model.viaje.vuelo = vuelo;
-                        this.model.viaje.numero_viaje = 0;
-                        if (view.validacionForm()) {
+                if (view.validacionForm()) {
+                    var FlightDay = vuelo.dia;
+                    var numberDay = this.numberDays(FlightDay);
+                    var startDate = new Date(dateBegin1);
+                    var endDate = new Date(dateBegin2);
+                    for (startDate; startDate <= endDate; startDate.setDate(startDate.getDate() + 1)) {
+                        if (startDate.getDay() === numberDay) {
+                            this.model.viaje.fecha = startDate;
+                            this.model.viaje.avion = avion;
+                            this.model.viaje.vuelo = vuelo;
+                            this.model.viaje.numero_viaje = 0;
                             //Proxy.ViajeAdd(this.model.viaje, function (result) {
                             //this.model.viaje.numero_viaje = result;
                             //document.location = "/Aerolinea/viajes.jsp";
@@ -179,9 +179,9 @@
                         }
                         count++;
                     }
-                }
-                if (view.validacionForm()) {
-                    view.showMessageCount(count);
+                    if (view.validacionForm()) {
+                        view.showMessageCount(count);
+                    }
                 }
                 console.log(count);
                 //view.showMessageCount(count);
