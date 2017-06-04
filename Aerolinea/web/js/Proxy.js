@@ -16,6 +16,26 @@ Proxy.getCiudades = function(callBack) {
   AJAX_req.send();
 };
 
+Proxy.getPDF = function(callBack) {
+   alert("Inside create PDF ajax");
+    $.ajax({
+        url : '/Aerolinea/GeneratePDF',
+        type : 'get',
+        dataType : 'json',
+        contentType : 'application/json',
+
+        success : function(map) {
+            console.log(map);
+        },
+
+        error : function(map) {
+            alert(map);
+            alert("error occured!!!");
+        },
+
+    });
+};
+
 Proxy.AvionAdd = function(avion, callBack){
     jsonAvion = JSON.stringify(avion,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();

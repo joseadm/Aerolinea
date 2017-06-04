@@ -45,8 +45,6 @@
                         
                     </div>
                     <br>
-                    <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
-
                     <br>
                 </fieldset>
             </div><br><br><br>
@@ -153,7 +151,7 @@
                             <div class="row">
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-8 text-center">
-                                    <input type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
+                                    <input onclick='controller.compra();' type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
                                     <input type="button" class="btn btn-default btn-lg" value="Cancelar" id="cancelar">
                                 </div>
                             </div>
@@ -211,6 +209,12 @@
                         model.aviones = result;
                     });
                     this.initAsiento();
+                },
+                compra: function() {
+                    // Debe realizar el ingreso a la base de reserva
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros"); // Cantidad de Pasajeros
+                    view.showMessage();
+                    Proxy.getPDF();
                 },
                 initTravels: function () {
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
@@ -296,7 +300,7 @@
                     var model = this.model;
                     model.avion = new Asiento();
                 },
-                asientoAdd: function (numero) {
+                /*asientoAdd: function (numero) {
                     var view = this.view;
                     var codigo = 0;
                     var numero = numero;
@@ -308,7 +312,7 @@
                         document.location = "/Aerolinea/asiento.jsp";
                         view.showMessage();
                     });
-                }
+                }*/
             };
         </script>
         <script> // View
@@ -348,7 +352,6 @@
              var div2; var span;
              var input; var i;
              var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-             alert(cant_pasajeros);
              for(var j=0; j<cant_pasajeros; j++) {
                 
                 div = document.createElement("div");
@@ -366,7 +369,7 @@
                 span.appendChild(i);
                 div2.appendChild(span);
                 input = document.createElement("input");
-                input.setAttribute("id","nombre");
+                input.setAttribute("id","nombre"+j);
                 input.setAttribute("placeholder","Nombre");
                 input.setAttribute("class","form-control");
                 input.setAttribute("type","text");
@@ -389,7 +392,7 @@
                 span.appendChild(i);
                 div2.appendChild(span);
                 input = document.createElement("input");
-                input.setAttribute("id","apellidos");
+                input.setAttribute("id","apellidos"+j);
                 input.setAttribute("placeholder","Apellidos");
                 input.setAttribute("class","form-control");
                 input.setAttribute("type","text");
@@ -412,7 +415,7 @@
                 span.appendChild(i);
                 div2.appendChild(span);
                 input = document.createElement("input");
-                input.setAttribute("id","numero_pasaporte");
+                input.setAttribute("id","numero_pasaporte"+j);
                 input.setAttribute("placeholder","Numero Pasaporte");
                 input.setAttribute("class","form-control");
                 input.setAttribute("type","text");
@@ -543,6 +546,10 @@
                         x[i].disabled = true;
                     }
                 }
+            }
+            
+            function showMessage() {
+                window.alert("Compra exitosa");
             }
 
 
