@@ -245,22 +245,37 @@ public class model {
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
         if (rs.next()) {
-//            String numeroAsiento = 1;
-//            Asiento spot;
-//            p.setNumero_viaje(rs.getInt(1));
-//            for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
-//                for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
-//                    spot = new Asiento(numeroAsiento, true,p);
-//                    numeroAsiento++;
-//                    AsientoAdd(spot);
-//                }
-//            }
+            String numeroAsiento="";
+            Asiento spot;
+            p.setNumero_viaje(rs.getInt(1));
+            for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
+                for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
+                    numeroAsiento = Integer.toString(i) + columnaAsiento(j)
+                            + Integer.toString( p.getNumero_viaje());
+                    spot = new Asiento(numeroAsiento, true,p);
+                    AsientoAdd(spot);
+                }
+            }
             return rs.getInt(1);
         } else {
             return 0;
         }
     }
-
+    public static String columnaAsiento(int x){
+        String asiento ="";
+        switch(x){
+            case 1: asiento= "A";break;
+            case 2: asiento= "B";break;
+            case 3: asiento= "C";break;
+            case 4: asiento= "D";break;
+            case 5: asiento= "E";break;
+            case 6: asiento= "F";break;
+            case 7: asiento= "G";break;
+            case 8: asiento= "H";break;
+            case 9: asiento= "I";break;
+        }
+        return asiento;
+    }
     public static List<Viaje> selectAllTravels() throws Exception {
         List<Viaje> travels;
         travels = new ArrayList();
@@ -520,6 +535,7 @@ public class model {
     private static Asiento toSits(ResultSet rs) throws Exception {
         try {
             Asiento obj = new Asiento();
+            obj.setCodigo(rs.getInt("codigo"));
             obj.setNumero(rs.getString("numero"));
             obj.setEstado(rs.getBoolean("estado"));
             obj.setViaje(toTravels(rs));
@@ -531,7 +547,7 @@ public class model {
 
     public static int AsientoAdd(Asiento p) throws Exception {
         String sql = "insert into Asiento (numero, estado, numero_viaje) "
-                + "values(%s,%b,%s)";
+                + "values('%s','%s','%s')";
         sql = String.format(sql, p.getNumero(), p.isEstado(), p.getViaje().getNumero_viaje());
         ResultSet rs = asientos.executeUpdateWithKeys(sql);
         if (rs.next()) {
@@ -539,6 +555,20 @@ public class model {
         } else {
             return 0;
         }
+    }
+      public static List<Asiento> selectTripSits(Viaje p) throws Exception {
+        List<Asiento> sits;
+        sits = new ArrayList();
+        try {
+            String sql = "select * from Asiento where numero_viaje = "+p.getNumero_viaje();
+            ResultSet rs = asientos.executeQuery(sql);
+            while (rs.next()) {
+                sits.add(toSits(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen asientos pare ese viaje");
+        }
+        return sits;
     }
 
     //----------------Delete ----------------------------------
