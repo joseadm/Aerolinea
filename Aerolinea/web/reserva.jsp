@@ -349,7 +349,7 @@
              var input; var i;
              var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
              alert(cant_pasajeros);
-             for(var i=0; i<cant_pasajeros; i++) {
+             for(var j=0; j<cant_pasajeros; j++) {
                 
                 div = document.createElement("div");
                 div.setAttribute("class","col-xs-12 col-sm-4 col-md-4");
