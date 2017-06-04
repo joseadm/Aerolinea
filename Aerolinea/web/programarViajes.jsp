@@ -176,15 +176,13 @@
                             //this.model.viaje.numero_viaje = result;
                             //document.location = "/Aerolinea/viajes.jsp";
                             //});
+                            count++;
                         }
-                        count++;
                     }
                     if (view.validacionForm()) {
                         view.showMessageCount(count);
                     }
                 }
-                console.log(count);
-                //view.showMessageCount(count);
             }
         },
         LimpiaPantalla: function () {
