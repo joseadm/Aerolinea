@@ -132,8 +132,8 @@
                                                 <th>Ciudad Origen</th>
                                                 <th>Ciudad Destino</th>
                                                 <th>Precio</th>
-                                                <th>Duracion</th>
                                                 <th>Hora</th>
+                                                <th>Duracion</th>
                                                 <th>Dia</th>
                                                 <th>Oferta</th>
                                                 <th>Descuento</th>
@@ -219,47 +219,47 @@
                 VueloAdd: function () {
                     var model = this.model;
                     var view = this.view;
-                    if(model.ciudades !== null){
-                    var ciu1 = this.view.document.getElementById("ciudad_origen").value;
-                    var ciu2 = this.view.document.getElementById("ciudad_destino").value;
-                    var ciudad1 = this.model.ciudades.find(function (c1) {
-                        return c1.codigo === ciu1;
-                    });
-                    var ciudad2 = this.model.ciudades.find(function (c1) {
-                        return c1.codigo === ciu2;
-                    });
-                    if (ciudad1.codigo !== ciudad2.codigo) {
-                        this.model.vuelo.numero_vuelo = 0;
-                        this.model.vuelo.ciudad_origen = ciudad1;
-                        this.model.vuelo.ciudad_destino = ciudad2;
-                        this.model.vuelo.estado = Boolean(this.estado(this.view.document.getElementById("estado").value));
-                        this.model.vuelo.duracion = $("#duracion").find("input").val();
-                        this.model.vuelo.hora = $("#hora").find("input").val();
-                        this.model.vuelo.oferta = Boolean(this.oferta(this.view.document.getElementById("oferta").value));
-                        this.model.vuelo.imagen = "NOT YET";
-                        this.model.vuelo.dia = $("#dia").find("input").val();
-                        var precio = parseInt(this.view.document.getElementById("precio").value);
-                        if (this.view.document.getElementById("descuento").value === "") {
-                            this.model.vuelo.descuento = 0;
+                    if (model.ciudades !== null) {
+                        var ciu1 = this.view.document.getElementById("ciudad_origen").value;
+                        var ciu2 = this.view.document.getElementById("ciudad_destino").value;
+                        var ciudad1 = this.model.ciudades.find(function (c1) {
+                            return c1.codigo === ciu1;
+                        });
+                        var ciudad2 = this.model.ciudades.find(function (c1) {
+                            return c1.codigo === ciu2;
+                        });
+                        if (ciudad1.codigo !== ciudad2.codigo) {
+                            this.model.vuelo.numero_vuelo = 0;
+                            this.model.vuelo.ciudad_origen = ciudad1;
+                            this.model.vuelo.ciudad_destino = ciudad2;
+                            this.model.vuelo.estado = Boolean(this.estado(this.view.document.getElementById("estado").value));
+                            this.model.vuelo.duracion = $("#duracion").find("input").val();
+                            this.model.vuelo.hora = $("#hora").find("input").val();
+                            this.model.vuelo.oferta = Boolean(this.oferta(this.view.document.getElementById("oferta").value));
+                            this.model.vuelo.imagen = "NOT YET";
+                            this.model.vuelo.dia = $("#dia").find("input").val();
+                            var precio = parseInt(this.view.document.getElementById("precio").value);
+                            if (this.view.document.getElementById("descuento").value === "") {
+                                this.model.vuelo.descuento = 0;
+                            } else {
+                                var descuento = parseInt(this.view.document.getElementById("descuento").value);
+                                this.model.vuelo.descuento = descuento;
+                                var porcentaje = (precio * descuento) / 100;
+                                this.model.vuelo.precio = precio - porcentaje;
+                            }
+                            this.model.vuelo.precio = precio;
+                            if (view.validacionForm())
+                                view.showMessage();
+                            if (view.validacionForm()) {
+                                Proxy.VueloAdd(this.model.vuelo, function (result) {
+                                    this.model.vuelo.numero_vuelo = result;
+                                    document.location = "/Aerolinea/vuelos.jsp";
+                                });
+                            }
                         } else {
-                            var descuento = parseInt(this.view.document.getElementById("descuento").value);
-                            this.model.vuelo.descuento = descuento;
-                            var porcentaje = (precio * descuento) / 100;
-                            this.model.vuelo.precio = precio - porcentaje;
+                            view.showMessageInvalid();
                         }
-                        this.model.vuelo.precio = precio;
-                        if (view.validacionForm())
-                            view.showMessage();
-                        if (view.validacionForm()) {
-                            Proxy.VueloAdd(this.model.vuelo, function (result) {
-                                this.model.vuelo.numero_vuelo = result;
-                                document.location = "/Aerolinea/vuelos.jsp";
-                            });
-                        }
-                    } else {
-                        view.showMessageInvalid();
                     }
-                }
                 },
                 VueloUpdate: function (numero_vuelo) {
                     var model = this.model;
@@ -306,6 +306,42 @@
                             return 0;
                             break;
                     }
+                },
+                dayOfTheWeek: function (day) {
+                    switch (day) {
+                        case "Sunday":
+                            return "Domingo";
+                            break;
+                        case "Monday":
+                            return "Lunes";
+                            break;
+                        case "Tuesday":
+                            return "Martes";
+                            break;
+                        case "Wednesday":
+                            return "Miércoles";
+                            break;
+                        case "Thursday":
+                            return "Jueves";
+                            break;
+                        case "Friday":
+                            return "Viernes";
+                            break;
+                        case "Saturday":
+                            return "Sábado";
+                            break;
+
+                    }
+                },
+                ParseBoolean: function (bool) {
+                    switch (bool) {
+                        case true:
+                            return "Si";
+                            break;
+                        case false:
+                            return "No";
+                            break;
+                    }
                 }
 
 
@@ -335,10 +371,10 @@
                         model.vuelos[index].ciudad_origen.nombre,
                         model.vuelos[index].ciudad_destino.nombre,
                         "$ " + model.vuelos[index].precio,
-                        model.vuelos[index].duracion,
                         model.vuelos[index].hora,
-                        model.vuelos[index].dia,
-                        model.vuelos[index].oferta,
+                        model.vuelos[index].duracion,
+                        controller.dayOfTheWeek(model.vuelos[index].dia),
+                        controller.ParseBoolean(model.vuelos[index].oferta),
                         model.vuelos[index].descuento + " %"
                     ]).draw(false);
                 }

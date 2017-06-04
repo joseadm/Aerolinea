@@ -69,7 +69,7 @@
                     </div>
                     <br>
                     <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
-                    
+
                     <br>
                 </fieldset>
             </div><br><br><br>
@@ -112,16 +112,16 @@
                     <fieldset>
                         <legend align="center">Desglose de la Reservación</legend>
                         <div class="container">
-                        <div class="table-responsive">
-                            <table id="paginacion3" class="display nowrap" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr><th>Cantidad de Tiquetes</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Total</th></tr>
-                                </thead>
-                                <tbody id="desgloseReservacion">
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table id="paginacion3" class="display nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr><th>Cantidad de Tiquetes</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Total</th></tr>
+                                    </thead>
+                                    <tbody id="desgloseReservacion">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                     </fieldset>
                 </div></center><br><br>
             <center><div class="container">
@@ -363,23 +363,23 @@
                 }
             }
             /*function showPasajeros() {
-                
-                var tabla = document.getElementById("table-pasajeros");
-                var label; var div;
-                var div2; var span;
-                var input;
-                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                
-                for(int i=0; i<cant_pasajeros; i++) {
-                    label = document.createElement("label");
-                    label.setAttribute("class","control-label");
-                    label.appendChild(document.createTextNode("Nombre"));
-                    tabla.appendChild(label);
-                    
-                }
-    
-            }*/
-            function showTiquet(){
+             
+             var tabla = document.getElementById("table-pasajeros");
+             var label; var div;
+             var div2; var span;
+             var input;
+             var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+             
+             for(int i=0; i<cant_pasajeros; i++) {
+             label = document.createElement("label");
+             label.setAttribute("class","control-label");
+             label.appendChild(document.createTextNode("Nombre"));
+             tabla.appendChild(label);
+             
+             }
+             
+             }*/
+            function showTiquet() {
                 var t = $('#paginacion3').DataTable();
                 $('#paginacion3').dataTable().fnClearTable();
             }
@@ -405,7 +405,7 @@
                 var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                     "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
                 var li, ol, li2, tmp, lbl;
-                var filas =  model.viajes[0].avion.cant_filas;
+                var filas = model.viajes[0].avion.cant_filas;
                 var cant_asientos_por_fila = model.viajes[0].avion.cant_asientos_por_fila;
 
                 for (var i = 1; i <= filas; i++) { //cant filas
@@ -421,10 +421,10 @@
                         li2.className = "seat";
                         tmp = document.createElement("input");
                         tmp.type = "checkbox";
-                        tmp.id = i + etiquetas[j]+model.viajes[0].numero_viaje;
+                        tmp.id = i + etiquetas[j] + model.viajes[0].numero_viaje;
                         tmp.disabled = false;
                         lbl = document.createElement("label");
-                        lbl.htmlFor = i + etiquetas[j]+model.viajes[0].numero_viaje;
+                        lbl.htmlFor = i + etiquetas[j] + model.viajes[0].numero_viaje;
                         lbl.appendChild(document.createTextNode(i + etiquetas[j]));
 
                         li2.appendChild(tmp);
@@ -435,47 +435,47 @@
                     tabla.appendChild(li);
                 }
             }
-            
-             function createSeat2() {
-                 if(model.viajes[1]==null) {
-                     $("#asientosVuelta").hide();
+
+            function createSeat2() {
+                if (model.viajes[1] === null) {
+                    $("#asientosVuelta").hide();
                 } else {
-                 
-                var tabla = document.getElementById("tablaAsientos2");
-                var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-                    "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
-                var li, ol, li2, tmp, lbl;
-                var filas =  model.viajes[1].avion.cant_filas;
-                var cant_asientos_por_fila = model.viajes[1].avion.cant_asientos_por_fila;
 
-                for (var i = 1; i <= filas; i++) { //cant filas
-                    li = document.createElement("li");
-                    li.className = "row row--" + i;
-                    ol = document.createElement("ol");
-                    ol.className = "seats";
-                    ol.type = "A";
+                    var tabla = document.getElementById("tablaAsientos2");
+                    var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+                        "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                    var li, ol, li2, tmp, lbl;
+                    var filas = model.viajes[1].avion.cant_filas;
+                    var cant_asientos_por_fila = model.viajes[1].avion.cant_asientos_por_fila;
 
-                    for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
-                        typeAvion(cant_asientos_por_fila);
-                        li2 = document.createElement("li");
-                        li2.className = "seat";
-                        tmp = document.createElement("input");
-                        tmp.type = "checkbox";
-                        tmp.id = i + etiquetas[j]+model.viajes[1].numero_viaje;
-                        tmp.disabled = false;
-                        lbl = document.createElement("label");
-                        lbl.htmlFor = i + etiquetas[j]+model.viajes[1].numero_viaje;
-                        lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+                    for (var i = 1; i <= filas; i++) { //cant filas
+                        li = document.createElement("li");
+                        li.className = "row row--" + i;
+                        ol = document.createElement("ol");
+                        ol.className = "seats";
+                        ol.type = "A";
 
-                        li2.appendChild(tmp);
-                        li2.appendChild(lbl);
-                        ol.appendChild(li2);
+                        for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
+                            typeAvion(cant_asientos_por_fila);
+                            li2 = document.createElement("li");
+                            li2.className = "seat";
+                            tmp = document.createElement("input");
+                            tmp.type = "checkbox";
+                            tmp.id = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                            tmp.disabled = false;
+                            lbl = document.createElement("label");
+                            lbl.htmlFor = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                            lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+
+                            li2.appendChild(tmp);
+                            li2.appendChild(lbl);
+                            ol.appendChild(li2);
+                        }
+                        li.appendChild(ol);
+                        tabla.appendChild(li);
                     }
-                    li.appendChild(ol);
-                    tabla.appendChild(li);
                 }
             }
-        }
 
             function typeAvion(asientos) {
                 if (asientos === 9)

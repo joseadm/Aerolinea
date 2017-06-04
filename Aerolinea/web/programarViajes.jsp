@@ -255,7 +255,7 @@
                 case "Monday":
                     return 1;
                     break;
-                case "Tueday":
+                case "Tuesday":
                     return 2;
                     break;
                 case "Wednesday":
@@ -272,6 +272,7 @@
                     break;
             }
         }
+    }
 
     };</script>
 <script> // View

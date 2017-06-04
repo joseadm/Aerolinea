@@ -214,7 +214,7 @@ values ("SJO","MAD", true, 450,"10:00","04:20",true,"NADA YET","Saturday",20);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
 values ("MIA","SJO", true, 200,"02:20","14:50",true,"NADA YET","Friday",10);
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
-values ("VIE","MAD", true, 100,"06:00","12:00",true,"NADA YET","Thurday",0);
+values ("VIE","MAD", true, 100,"06:00","12:00",true,"NADA YET","Thursday",0);
 
 insert into vuelo (ciudadOrigen, ciudadDestino,estado, precio, duracion,hora,oferta,imagen,dia,descuento)
 values ("SJO","MIA", true, 200,"01:20","08:20",false,"NADA YET","Wednesday",0);
