@@ -89,6 +89,9 @@
 
                     </div>
                 </div>
+                <div id="divR" class="container">
+                    <button id="btnReserva" onclick="reservarAsientos()" type="button" class="btn btn-success">Reservar</button>
+                </div>
             </fieldset>
             <fieldset id="asientosVuelta">
                 <legend align="center">Asientos de VUELTA</legend>
@@ -105,6 +108,9 @@
                     <div class="exit exit--back fuselage">
 
                     </div>
+                </div>
+                <div id="divR" class="container">
+                    <button id="btnReserva" onclick="reservarAsientos2()" type="button" class="btn btn-success">Reservar</button>
                 </div>
             </fieldset>
             <br><br><br>
@@ -325,11 +331,7 @@
                         document.location = "/Aerolinea/asiento.jsp";
                         view.showMessage();
                     });
-                },
-                LimpiaPantalla: function () {
-                    view.clean();
                 }
-
             };
         </script>
         <script> // View
@@ -480,6 +482,24 @@
             function typeAvion(asientos) {
                 if (asientos === 9)
                     document.querySelector(".cabin").style.padding = "0px 200px 0px 15px";
+            }
+
+            function reservarAsientos() {
+                var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                for (var i = 0; i < x.length; i++) {
+                    if (x[i].checked && !x[i].disabled) {
+                        x[i].disabled = true;
+                    }
+                }
+            }
+            
+            function reservarAsientos2() {
+                var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                for (var i = 0; i < x.length; i++) {
+                    if (x[i].checked && !x[i].disabled) {
+                        x[i].disabled = true;
+                    }
+                }
             }
 
 
