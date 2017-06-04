@@ -52,7 +52,7 @@ public class AirlineService extends HttpServlet {
                     .registerSubtype(Asiento.class, "Asiento")
                     .registerSubtype(Usuario.class, "Usuario")
                     .registerSubtype(Viaje.class, "Viaje");
-            Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
+            Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("yyyy-MM-dd").create();
             String json;
             String accion = request.getParameter("action");
             System.out.println(accion);

@@ -62,8 +62,6 @@
                             </div><br>
                         </div>
                         <button onclick="controller.ViajeAdd();" class="btn btn-success" id="agregarRuta">Agregar</button>
-                        <button onclick="controller.ViajeUpdate();" class="btn btn-warning" id="agregarRuta">Actualizar</button>
-
                         <hr> 
                     </div>
                     <!-- Tabla de viajes............................................................... -->
@@ -79,8 +77,6 @@
                                         <th>Avion</th>
                                         <th>Fecha</th>
                                         <th>Hora de llegada</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody id="listaViajes">
@@ -169,27 +165,27 @@
                 var numberDay = this.numberDays(FlightDay);
                 var startDate = new Date(dateBegin1);
                 var endDate = new Date(dateBegin2);
-                for (startDate; startDate <=endDate; startDate.setDate(startDate.getDate() + 1)) {
+                for (startDate; startDate <= endDate; startDate.setDate(startDate.getDate() + 1)) {
                     if (startDate.getDay() === numberDay) {
+                        this.model.viaje.fecha = startDate;
+                        this.model.viaje.avion = avion;
+                        this.model.viaje.vuelo = vuelo;
+                        this.model.viaje.numero_viaje = 0;
+                        if (view.validacionForm()) {
+                            //Proxy.ViajeAdd(this.model.viaje, function (result) {
+                            //this.model.viaje.numero_viaje = result;
+                            //document.location = "/Aerolinea/viajes.jsp";
+                            //});
+                        }
                         count++;
                     }
                 }
+                if (view.validacionForm()) {
+                    view.showMessageCount(count);
+                }
                 console.log(count);
-                view.showMessageCount(count);
-                //this.model.viaje.fecha = fechaViaje = $("#fechaViaje").find("input").val();
-                this.model.viaje.avion = avion;
-                this.model.viaje.vuelo = vuelo;
-                this.model.viaje.numero_viaje = 0;
+                //view.showMessageCount(count);
             }
-        },
-        doDelete: function (numero_viaje) {
-            Proxy.ViajeDelete(numero_viaje, function (result) {
-                model.viaje.numero_viaje = result;
-                document.location = "/Aerolinea/viajes.jsp"
-                view.showMessageDelete();
-            });
-        },
-        doUpdate: function (numero_viaje) {
         },
         LimpiaPantalla: function () {
             view.clean();
@@ -304,42 +300,11 @@
             ]).draw(false);
         }
     }
-
-    $(document).ready(function () {
-        var table = $('#paginacion').DataTable({
-            "columnDefs": [{
-                    "targets": -2,
-                    "data": null,
-                    "defaultContent": '<img class="btn-edit" src="images/edit.png">'
-
-                }, {
-                    "targets": -1,
-                    "data": null,
-                    "defaultContent":
-                            '<img class="btn-delete" src="images/delete.png">'
-                }]
-        });
-        $('#paginacion tbody').on('click', '.btn-edit', function () {
-            var data = table.row($(this).parents('tr')).data();
-            Proxy.getViaje(data[0], function (result) {
-                document.getElementById('vuelo').value = result.vuelo.numero_vuelo;
-                document.getElementById('avion').value = result.avion.placa;
-                document.getElementById('fecha').value = result.fecha;
-            });
-        });
-        $('#paginacion tbody').on('click', '.btn-delete', function () {
-            var data = table.row($(this).parents('tr')).data();
-            Proxy.ViajeDelete(data[0], function (result) {
-                document.location = "/Aerolinea/viajes.jsp"
-                this.showMessageDelete();
-            });
-        });
-    });
     function showMessage() {
         window.alert("Registro exitoso");
     }
     function showMessageCount(number) {
-        window.alert("Cantidad de vuelos programados: "+number);
+        window.alert("Registro exitoso de " + number + " viajes");
     }
     function validacionForm() {
         var tam = 0;
