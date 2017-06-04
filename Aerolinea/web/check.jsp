@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div>
+        <div id="divR" class="container">
             <button id="btnReserva" onclick="reservarAsientos()" type="button" class="btn btn-success">Reservar</button>
             <%--<p id="verasientos"></p>--%>
         </div>
