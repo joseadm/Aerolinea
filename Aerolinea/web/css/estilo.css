@@ -349,3 +349,11 @@ ol {
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
 }
+
+#btnReserva {
+    float: right;
+}
+
+#divR {
+    width: 500px;
+}
