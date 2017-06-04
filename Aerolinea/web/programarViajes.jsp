@@ -272,8 +272,6 @@
                     break;
             }
         }
-    }
-
     };</script>
 <script> // View
     var model;
