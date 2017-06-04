@@ -34,7 +34,7 @@
         </div>
 
         <div>
-            <button onclick="reservarAsientos()" type="button" class="btn btn-success">Reservar</button>
+            <button id="btnReserva" onclick="reservarAsientos()" type="button" class="btn btn-success">Reservar</button>
             <%--<p id="verasientos"></p>--%>
         </div>
 
