@@ -38,34 +38,11 @@
                     </div> </div>
             </fieldset>
             <br>
-            <div class="container table-pasajeros"> 
+            <div class="container"> 
                 <fieldset>
                     <legend align="center">Informacion de los Pasajeros</legend>
-                    <div class="row">
-                        <!-- Nombre -->
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <label class="control-label">Nombre</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input  id="nombre" name="nombre" placeholder="Nombre" class="form-control"  type="text" maxlength="45" required>
-                            </div>
-                        </div>
-                        <!-- Apellido-->
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <label class="control-label">Apellidos</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id = "apellidos" name="apellidos" placeholder="Apellidos" class="form-control" type="text" maxlength="45" required>
-                            </div>
-                        </div>
-                        <!-- Pasaporte-->
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <label class="control-label">Numero Pasaporte</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="numero_pasaporte" name="pasaporte" placeholder="Pasaporte" class="form-control"  type="text" maxlength="45" required onKeyPress="return controller.justNumbers(event)">
-                            </div>
-                        </div>
+                    <div class="row" id="table-pasajeros">
+                        
                     </div>
                     <br>
                     <button onclick='controller.PasajerosAdd();' class="btn btn-success" id="agregarPasajero">Agregar</button><br><br><br>
@@ -344,7 +321,7 @@
                 createSeat();
                 createSeat2();
                 showTiquet();
-                //showPasajeros();
+                showPasajeros();
             }
 
             function showViajes() {
@@ -364,23 +341,89 @@
                     ]).draw(false);
                 }
             }
-            /*function showPasajeros() {
+            function showPasajeros() {
              
              var tabla = document.getElementById("table-pasajeros");
              var label; var div;
              var div2; var span;
-             var input;
+             var input; var i;
              var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-             
-             for(int i=0; i<cant_pasajeros; i++) {
-             label = document.createElement("label");
-             label.setAttribute("class","control-label");
-             label.appendChild(document.createTextNode("Nombre"));
-             tabla.appendChild(label);
+             alert(cant_pasajeros);
+             for(var i=0; i<cant_pasajeros; i++) {
+                
+                div = document.createElement("div");
+                div.setAttribute("class","col-xs-12 col-sm-4 col-md-4");
+                label = document.createElement("label");
+                label.setAttribute("class","control-label");
+                label.appendChild(document.createTextNode("Nombre"));
+                div.appendChild(label);
+                div2 = document.createElement("div");
+                div2.setAttribute("class","input-group");
+                span = document.createElement("span");
+                span.setAttribute("class","input-group-addon");
+                i = document.createElement("i");
+                i.setAttribute("class","glyphicon glyphicon-user");
+                span.appendChild(i);
+                div2.appendChild(span);
+                input = document.createElement("input");
+                input.setAttribute("id","nombre");
+                input.setAttribute("placeholder","Nombre");
+                input.setAttribute("class","form-control");
+                input.setAttribute("type","text");
+                div2.appendChild(input);
+                div.appendChild(div2);                
+                tabla.appendChild(div);
+                
+                div = document.createElement("div");
+                div.setAttribute("class","col-xs-12 col-sm-4 col-md-4");
+                label = document.createElement("label");
+                label.setAttribute("class","control-label");
+                label.appendChild(document.createTextNode("Apellidos"));
+                div.appendChild(label);
+                div2 = document.createElement("div");
+                div2.setAttribute("class","input-group");
+                span = document.createElement("span");
+                span.setAttribute("class","input-group-addon");
+                i = document.createElement("i");
+                i.setAttribute("class","glyphicon glyphicon-user");
+                span.appendChild(i);
+                div2.appendChild(span);
+                input = document.createElement("input");
+                input.setAttribute("id","apellidos");
+                input.setAttribute("placeholder","Apellidos");
+                input.setAttribute("class","form-control");
+                input.setAttribute("type","text");
+                div2.appendChild(input);
+                div.appendChild(div2);                
+                tabla.appendChild(div);
+                
+                div = document.createElement("div");
+                div.setAttribute("class","col-xs-12 col-sm-4 col-md-4");
+                label = document.createElement("label");
+                label.setAttribute("class","control-label");
+                label.appendChild(document.createTextNode("Numero Pasaporte"));
+                div.appendChild(label);
+                div2 = document.createElement("div");
+                div2.setAttribute("class","input-group");
+                span = document.createElement("span");
+                span.setAttribute("class","input-group-addon");
+                i = document.createElement("i");
+                i.setAttribute("class","glyphicon glyphicon-user");
+                span.appendChild(i);
+                div2.appendChild(span);
+                input = document.createElement("input");
+                input.setAttribute("id","numero_pasaporte");
+                input.setAttribute("placeholder","Numero Pasaporte");
+                input.setAttribute("class","form-control");
+                input.setAttribute("type","text");
+                div2.appendChild(input);
+                div.appendChild(div2);                
+                tabla.appendChild(div);
+
+             }
+             tabla.appendChild(document.createElement("br"));
              
              }
-             
-             }*/
             function showTiquet() {
                 var t = $('#paginacion3').DataTable();
                 $('#paginacion3').dataTable().fnClearTable();
