@@ -736,5 +736,39 @@ public class model {
      } else {
          return 0;
      }
- }
+    }
+   //Para parte de graficos-----------------------------------
+     public static List<String> selectClientsByPlane(String placa) throws Exception {
+          //Usuario es el nombre de usuario
+        List<String> nombres;
+        nombres = new ArrayList();
+        try {
+            String sql = "select T.nombre_pasajero from " +
+                        "(select R.codigo from " +
+                        "(select V.numeroViaje from " +
+                        "(select placa from Avion where placa ="
+                    + placa + ")A, " +
+                        "(select placa_avion , numeroViaje from Viaje)V " +
+                        "where A.placa = V.placa_avion)a1, " +
+                        "(select codigo,numero_viaje1, numero_viaje2 from Reservacion)R " +
+                        "where R.numero_viaje1 = a1.numeroViaje Or R.numero_viaje2 = a1.numeroViaje)a2, " +
+                        "(select codigo_reservacion , nombre_pasajero from Tiquete)T " +
+                        "where T.codigo_reservacion = a2.codigo;";
+            ResultSet rs = tiquetes.executeQuery(sql);
+            while (rs.next()) {
+                nombres.add(toStringList(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("Ningun usuario ha viajado en este avion");
+        }
+        return nombres;
+    }
+    private static String toStringList(ResultSet rs) throws Exception {
+     try {
+       
+         return rs.getString("nombre_pasajero");
+     } catch (SQLException ex) {
+         return null;
+     }
+    }
 }
