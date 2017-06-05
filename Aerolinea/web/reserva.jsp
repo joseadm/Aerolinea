@@ -485,7 +485,7 @@
             }
 
             function createSeat2() {
-                if (model.viajes[1] === null) {
+                if (model.viajes[1] == null) {
                     $("#asientosVuelta").hide();
                 } else {
 
