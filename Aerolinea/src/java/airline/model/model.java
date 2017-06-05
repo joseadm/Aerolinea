@@ -25,6 +25,8 @@ public class model {
     static Database aviones;
     static Database usuarios;
     static Database asientos;
+    static Database reservaciones;
+    static Database tiquetes;
 
     static {
         initCiudades();
@@ -33,6 +35,8 @@ public class model {
         initAviones();
         initUsuarios();
         initAsientos();
+        initReservaciones();
+        initTiquetes();
     }
 
     private static void initCiudades() {
@@ -58,6 +62,14 @@ public class model {
     private static void initAsientos() {
         asientos = new Database(null, null, null);
     }
+    private static void initReservaciones() {
+        reservaciones = new Database(null, null, null);
+    }
+     private static void initTiquetes() {
+        tiquetes = new Database(null, null, null);
+    }
+
+
 
     /*--------------------------------Ciudades-----------------------------------------*/
     public static List<Ciudad> selectAllCities() throws Exception {
@@ -555,7 +567,7 @@ public class model {
         }
 
     }
-      public static List<Asiento> selectTripSits(Viaje p) throws Exception {
+      public static List<Asiento> selectSitsByTrip(Viaje p) throws Exception {
         List<Asiento> sits;
         sits = new ArrayList();
         try {
@@ -610,4 +622,118 @@ public class model {
             return 0;
         }
     }
+    //RESERVACIONES________________________________________________________
+    //---Update estado asiento a ocupado
+     public static int updateAsientoOcupado(Asiento asiento) throws Exception {
+        //  return 1;
+
+        String sql = "update Asiento "
+                + "set estado=%s "
+                + "where numero=%s";
+        sql = String.format(sql,
+                asiento.isEstado(),
+                asiento.getNumero());
+        ResultSet rs = asientos.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
+      public static List<Asiento> selectSitsByNumber(String p) throws Exception {
+        List<Asiento> sits;
+        sits = new ArrayList();
+        try {
+            String sql = "select * from Asiento where numero = "+p;
+            ResultSet rs = asientos.executeQuery(sql);
+            while (rs.next()) {
+                sits.add(toSits(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen asientos pare ese viaje");
+        }
+        return sits;
+    }
+      public static List<Reservacion> selectReservacionByUser(Usuario p) throws Exception {
+        List<Reservacion> re;
+        re = new ArrayList();
+        try {
+            String sql = "select * from Reservacion where nombre_usuario = "+p.getUsuario();
+            ResultSet rs = reservaciones.executeQuery(sql);
+            while (rs.next()) {
+                re.add(toReservacion(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen reservaciones pare este usuario");
+        }
+        return re;
+    }
+    private static Reservacion toReservacion(ResultSet rs) throws Exception {
+     try {
+         Reservacion obj = new Reservacion();
+         obj.setCodigo(rs.getString("codigo"));
+         obj.setNombreUsuario(toUsers(rs));
+         obj.setViaje1(toTravels(rs));
+         obj.setViaje2(toTravels(rs));
+         obj.setFecha_reserva(rs.getDate("fecha_reserva"));
+         obj.setPrecioTotal(rs.getInt("precioTotal"));
+         return obj;
+     } catch (SQLException ex) {
+         return null;
+     }
+    }
+    
+      public static int insertReservacionOneWay(Reservacion reservacion) throws Exception {
+        //  return 1;
+
+        String sql = "insert into Reservacion "
+                + "(nombre_usuario, numero_viaje1,fecha_reserva,precioTotal) "
+                + "values ('%s',%s,'%s',%s)";
+        sql = String.format(sql, reservacion.getNombreUsuario().getUsuario(),
+                reservacion.getViaje1().getNumero_viaje(),
+                new SimpleDateFormat("yyyy-MM-dd").format(reservacion.getFecha_reserva()),
+                reservacion.getPrecioTotal());
+        ResultSet rs = reservaciones.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
+       public static int insertReservacionTwoWays(Reservacion reservacion) throws Exception {
+        //  return 1;
+
+        String sql = "insert into Reservacion "
+                + "(nombre_usuario, numero_viaje1,numero_viaje2,fecha_reserva,precioTotal) "
+                + "values ('%s',%s,'%s','%s',%s)";
+        sql = String.format(sql, reservacion.getNombreUsuario().getUsuario(),
+                reservacion.getViaje1().getNumero_viaje(),
+                reservacion.getViaje2().getNumero_viaje(),
+                new SimpleDateFormat("yyyy-MM-dd").format(reservacion.getFecha_reserva()),
+                reservacion.getPrecioTotal());
+        ResultSet rs = reservaciones.executeUpdateWithKeys(sql);
+        if (rs.next()) {
+            return rs.getInt(1);
+        } else {
+            return 0;
+        }
+    }
+    public static int insertIntoTiquete(Tiquete tiquete) throws Exception {
+     //  return 1;
+
+     String sql = "insert into Tiquete "
+             + "(codigo_reservacion, codigo_asiento,nombre_pasajero,apellidosPasajero,pasaporte) "
+             + "values (%s,%s,'%s','%s',%s)";
+     sql = String.format(sql, tiquete.getCodigo_reservacion().getCodigo(),
+             tiquete.getCodigo_asiento().getCodigo(),
+             tiquete.getNombre_pasajero(),
+             tiquete.getApellidos_pasajero(),
+             tiquete.getPasaporte_pasajero());
+     ResultSet rs = tiquetes.executeUpdateWithKeys(sql);
+     if (rs.next()) {
+         return rs.getInt(1);
+     } else {
+         return 0;
+     }
+ }
 }
