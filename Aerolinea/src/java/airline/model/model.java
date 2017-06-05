@@ -245,12 +245,12 @@ public class model {
                 p.getVuelo().getNumero_vuelo());
         ResultSet rs = viajes.executeUpdateWithKeys(sql);
         if (rs.next()) {
-            String numeroAsiento="";
+            String numeroAsiento;
             Asiento spot;
-            p.setNumero_viaje(rs.getInt(1));
+           p.setNumero_viaje(rs.getInt(1));
             for (int i = 0; i < p.getAvion().getCant_filas(); i++) {
                 for (int j = 0; j < p.getAvion().getCant_cant_asientos_por_fila(); j++) {
-                    numeroAsiento = Integer.toString(i) + columnaAsiento(j)
+                    numeroAsiento = Integer.toString(i+1) + columnaAsiento(j+1)
                             + Integer.toString( p.getNumero_viaje());
                     spot = new Asiento(numeroAsiento, true,p);
                     AsientoAdd(spot);
@@ -545,16 +545,15 @@ public class model {
         }
     }
 
-    public static int AsientoAdd(Asiento p) throws Exception {
+    public static void AsientoAdd(Asiento p) throws Exception {
         String sql = "insert into Asiento (numero, estado, numero_viaje) "
-                + "values('%s','%s','%s')";
+                + "values('%s',%s,%s)";
         sql = String.format(sql, p.getNumero(), p.isEstado(), p.getViaje().getNumero_viaje());
-        ResultSet rs = asientos.executeUpdateWithKeys(sql);
-        if (rs.next()) {
-            return rs.getInt(1);
-        } else {
-            return 0;
+         int count =  asientos.executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Usuario ya existente");
         }
+
     }
       public static List<Asiento> selectTripSits(Viaje p) throws Exception {
         List<Asiento> sits;
