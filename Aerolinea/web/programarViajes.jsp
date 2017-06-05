@@ -172,15 +172,15 @@
                             this.model.viaje.avion = avion;
                             this.model.viaje.vuelo = vuelo;
                             this.model.viaje.numero_viaje = 0;
-                            //Proxy.ViajeAdd(this.model.viaje, function (result) {
-                            //this.model.viaje.numero_viaje = result;
-                            //document.location = "/Aerolinea/viajes.jsp";
-                            //});
+                            Proxy.ViajeAdd(this.model.viaje, function (result) {
+                                this.model.viaje.numero_viaje = result;
+                            });
                             count++;
                         }
                     }
                     if (view.validacionForm()) {
                         view.showMessageCount(count);
+                        document.location = "/Aerolinea/programarViajes.jsp";
                     }
                 }
             }
