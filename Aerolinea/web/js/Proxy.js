@@ -310,7 +310,21 @@ Proxy.viajesSearchByDestiny = function(origen, destino,diaVuelta,fechaVuelta, ca
       }
    });
 };
-
+Proxy.reservacionesSearchByUser = function(usuario,callBack) {
+   $.ajax({
+      url: '/Aerolinea/AirlineService?action=selectReservacionByUser',
+      data: {
+         format: 'json',
+         usuario: usuario
+      },
+      dataType: 'text',
+      type: 'POST',
+      success: function(data) {
+         var object = $.parseJSON(data,JsonUtils.revive);
+         callBack(object);
+      }
+   });
+};
 Proxy.UsuarioAdd = function(usuario, callBack){
     jsonUsuario = JSON.stringify(usuario,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();

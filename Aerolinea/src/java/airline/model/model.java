@@ -654,11 +654,12 @@ public class model {
         }
         return sits;
     }
-      public static List<Reservacion> selectReservacionByUser(Usuario p) throws Exception {
+      public static List<Reservacion> selectReservacionByUser(String usuario) throws Exception {
+          //Usuario es el nombre de usuario
         List<Reservacion> re;
         re = new ArrayList();
         try {
-            String sql = "select * from Reservacion where nombre_usuario = "+p.getUsuario();
+            String sql = "select * from Reservacion where nombre_usuario = "+usuario;
             ResultSet rs = reservaciones.executeQuery(sql);
             while (rs.next()) {
                 re.add(toReservacion(rs));
