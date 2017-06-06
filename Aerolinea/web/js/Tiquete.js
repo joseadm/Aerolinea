@@ -1,5 +1,5 @@
-function Tiquete(codigo,usuario,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero,codigo_reservacion,codigo_asiento){
-	this.Tiquete(codigo,usuario,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero,codigo_reservacion,codigo_asiento);
+function Tiquete(codigo,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero,codigo_reservacion,codigo_asiento){
+	this.Tiquete(codigo,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero,codigo_reservacion,codigo_asiento);
 }
 Tiquete.prototype={
         codigo:0,

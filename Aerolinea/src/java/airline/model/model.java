@@ -707,7 +707,7 @@ public class model {
 
         String sql = "insert into Reservacion "
                 + "(nombre_usuario, numero_viaje1,numero_viaje2,fecha_reserva,precioTotal) "
-                + "values ('%s',%s,'%s','%s',%s)";
+                + "values ('%s',%s,%s,'%s',%s)";
         sql = String.format(sql, reservacion.getNombreUsuario().getUsuario(),
                 reservacion.getViaje1().getNumero_viaje(),
                 reservacion.getViaje2().getNumero_viaje(),

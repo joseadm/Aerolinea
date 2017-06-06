@@ -143,7 +143,7 @@ Proxy.VueloAdd = function(vuelo,callBack){
 Proxy.ReservacionAdd = function(reservacion,callBack){
     jsonReservacion = JSON.stringify(reservacion,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
-    url="/Aerolinea/AirlineService?action=reservacionAdd";
+    url="/Aerolinea/AirlineService?action=reservacionAdd1";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -155,6 +155,22 @@ Proxy.ReservacionAdd = function(reservacion,callBack){
         }
     };
     AJAX_req.send("reservacion="+jsonReservacion);   
+};
+Proxy.ReservacionAdd2 = function(reservacion,callBack){
+    jsonReservacion = JSON.stringify(reservacion,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    url="/Aerolinea/AirlineService?action=reservacionAdd2";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonReservacion=AJAX_req.responseText;
+            var object = JSON.parse( jsonReservacion,JsonUtils.revive );
+            callBack(object);
+            
+        }
+    };
+    AJAX_req.send("reservacion2="+jsonReservacion);   
 };
 
 Proxy.VueloUpdate = function(vuelo,callBack){

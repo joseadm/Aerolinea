@@ -318,35 +318,58 @@
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     if (view.validacionForm()) {
                         var loginUsuario = new Usuario(<%user1.getUsuario();%>,<%user1.getContrasena();%>,<%user1.getNombre();%>,
-                                            <%user1.getApellidos();%>,<%user1.getCorreo();%>,<%user1.getFecha_nac();%>,
-                                            <%user1.getDireccion();%>,<%user1.getTelefono();%>,<%user1.getCelular();%>,<%user1.getTipo();%>);
+            <%user1.getApellidos();%>,<%user1.getCorreo();%>,<%user1.getFecha_nac();%>,
+            <%user1.getDireccion();%>,<%user1.getTelefono();%>,<%user1.getCelular();%>,<%user1.getTipo();%>);
+                        this.model.reservacion.codigo = 0;
                         this.model.reservacion.nombreUsuario = loginUsuario;
                         this.model.reservacion.viaje1 = this.model.viajes[0];
-                        this.model.reservacion.precioTotal = cant_pasajeros * this.model.viajes[0].vuelo.precio ;
-                        if (this.model.viajes[1] !== null) {
+                        this.model.reservacion.precioTotal = cant_pasajeros * this.model.viajes[0].vuelo.precio;
+                        this.model.reservacion.fecha_reserva = new Date();
+                        this.AsientoUpdate1();
+                        if (this.model.viajes[1] != null) {
                             this.model.reservacion.viaje2 = this.model.viajes[1];
                             var subtotal1 = this.model.reservacion.precioTotal;
                             var subtotal2 = cant_pasajeros * this.model.viajes[1].vuelo.precio;
                             this.model.reservacion.precioTotal = subtotal1 + subtotal2;
+                            this.AsientoUpdate2();
+                            Proxy.ReservacionAdd2(this.model.reservacion, function (result) {
+                                this.model.reservacion.codigo = result;
+                            });
                         }
-                        this.model.reservacion.fecha_reserva = new Date();
-                        Proxy.ReservacionAdd(this.model.reservacion, function (result) {
-                            //view.showMessage();
-                            this.model.reservacion = result;
-                        });
+                        if (this.model.viajes[1] == null) {
+                            Proxy.ReservacionAdd(this.model.reservacion, function (result) {
+                                this.model.reservacion.codigo = result;
+                            });
+                        }
                     }
                 },
-                TiqueteAdd: function(){
+                TiqueteAdd: function () {
                 },
-                AsientoUpdate1: function(){
-                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                     for (var i = 0; i < x.length; i++) {
+                AsientoUpdate1: function () {
+                    var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                    for (var i = 0; i < x.length; i++) {
                         if (x[i].checked && !x[i].disabled) {
-                            
+                            this.model.asiento.codigo = 0;
+                            this.model.asiento.estado = true;
+                            this.model.asiento.numero = $(x[i]).attr('id');
+                            this.model.asiento.numero_viaje = this.model.viajes[0];
+                            Proxy.AsientoUpdate(this.model.asiento, function (result) {
+                            });
                         }
                     }
                 },
-                AsientoUpdate2: function(){
+                AsientoUpdate2: function () {
+                    var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                    for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            this.model.asiento.codigo = 0;
+                            this.model.asiento.estado = true;
+                            this.model.asiento.numero = $(x[i]).attr('id');
+                            this.model.asiento.numero_viaje = this.model.viajes[1];
+                            Proxy.AsientoUpdate(this.model.asiento, function (result) {
+                            });
+                        }
+                    }
                 }
 
                 /*asientoAdd: function (numero) {

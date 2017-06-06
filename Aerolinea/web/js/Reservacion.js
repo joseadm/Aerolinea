@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function Reservacion(codigo,viaje1,viaje2,fecha_reserva){
-	this.Reservacion(codigo,viaje1,viaje2,fecha_reserva);
+function Reservacion(codigo,nombreUsuario,viaje1,viaje2,fecha_reserva,precioTotal){
+	this.Reservacion(codigo,nombreUsuario,viaje1,viaje2,fecha_reserva,precioTotal);
 }
 Reservacion.prototype={
         codigo: 0,
