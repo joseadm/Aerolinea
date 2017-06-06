@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="airline.model.TipoCambio"%>
+<%@page import="airline.model.Usuario"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +22,7 @@
     </head>
     <body>
         <%@ include file="Header.jspf" %>
+        <% Usuario user1 = (Usuario) request.getSession().getAttribute("usuario"); %>
         <div class="container"> 
             <fieldset>
                 <!-- Nombre Formulario -->
@@ -113,7 +115,8 @@
                                 <img src="images/tarjetas.png" class="img-responsive img-center" alt="forma de pago">
                             </div>
                             <div>
-                                <label class="control-label">Tipo de Cambio Actual: ‎₡ </label> <%= new TipoCambio().getVenta()%>
+                                <% double tipoCambio = new TipoCambio().getVenta();%>
+                                <label class="control-label">Tipo de Cambio Actual: ‎₡ </label> <%=tipoCambio%>
                             </div>
                         </div> 
                         <hr>
@@ -310,7 +313,7 @@
                 initAvion: function () {
                     var model = this.model;
                     model.avion = new Asiento();
-                },
+                }
                 /*asientoAdd: function (numero) {
                     var view = this.view;
                     var codigo = 0;
@@ -353,7 +356,7 @@
                         model.viajes[index].fecha,
                         model.viajes[index].vuelo.hora,
                         model.viajes[index].vuelo.duracion,
-                        controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion),
+                        controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion)
                     ]).draw(false);
                 }
             }
