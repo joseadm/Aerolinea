@@ -659,7 +659,7 @@ public class model {
         List<Reservacion> re;
         re = new ArrayList();
         try {
-            String sql = "select * from Reservacion where nombre_usuario = "+usuario;
+            String sql = "select * from Reservacion where nombre_usuario = '"+usuario+"'";
             ResultSet rs = reservaciones.executeQuery(sql);
             while (rs.next()) {
                 re.add(toReservacion(rs));
