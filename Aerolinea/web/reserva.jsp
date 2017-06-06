@@ -189,6 +189,7 @@
                 Model: function () {
                     this.pasajeros = [];
                     this.viajes = [];
+                    this.reservas = [];
                 }
             };
         </script>
@@ -326,6 +327,7 @@
                 createSeat2();
                 showTiquet();
                 showPasajeros();
+                showReserva();
             }
 
             function showViajes() {
@@ -345,6 +347,23 @@
                     ]).draw(false);
                 }
             }
+            function showReserva() {
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                var t = $('#paginacion3').DataTable();
+                $('#paginacion3').dataTable().fnClearTable();
+                for (var index = 0; index < model.reservas.length; index++) {
+                    t.row.add([
+                        
+                        cant_pasajeros,
+                        model.reservas.viaje1.vuelo.ciudad_origen,
+                        model.reservas.viaje1.vuelo.ciudad_destino,
+                        model.reservas.viaje1.fecha,
+                        model.reservas.fecha_reserva,
+                        model.reservas.precioTotal
+                        
+                    ]).draw(false);
+                }
+            }
             function showPasajeros() {
              
              var tabla = document.getElementById("table-pasajeros");
@@ -352,6 +371,7 @@
              var div2; var span;
              var input; var i;
              var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+
              for(var j=0; j<cant_pasajeros; j++) {
                 
                 div = document.createElement("div");
@@ -485,10 +505,10 @@
             }
 
             function createSeat2() {
-                if (model.viajes[1] === null) {
+                
+                if (model.viajes[1] == null) {
                     $("#asientosVuelta").hide();
                 } else {
-
                     var tabla = document.getElementById("tablaAsientos2");
                     var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                         "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
@@ -532,9 +552,22 @@
 
             function reservarAsientos() {
                 var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                var reserva;
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                var user = "andrey";
+                // var cambio = new TipoCambio().getVenta(); No lo agarra
                 for (var i = 0; i < x.length; i++) {
                     if (x[i].checked && !x[i].disabled) {
                         x[i].disabled = true;
+                        // Se crea la reserva
+                        reserva = new Reservacion();
+                        reserva.nombreUsuario =  user;
+                        reserva.viaje1 = model.viajes[0];
+                        reserva.fecha_reserva = model.viajes[0].fecha;
+                        reserva.precioTotal = cant_pasajeros * 300;
+                        // Aqui se hace add reserva
+                        model.reservas.push(reserva);
+                        document.location = "/Aerolinea/reserva.jsp"
                     }
                 }
             }
