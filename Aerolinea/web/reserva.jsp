@@ -154,7 +154,7 @@
                             <div class="row">
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-8 text-center">
-                                    <input onclick='controller.ReservaAdd();' type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
+                                    <input onclick='controller.ReservaAdd2();' type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
                                     <input type="button" class="btn btn-default btn-lg" value="Cancelar" id="cancelar">
                                 </div>
                             </div>
@@ -316,7 +316,7 @@
                 },
                 ReservaAdd2: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                    if (view.validacionForm()) {
+                    if (this.view.validacionForm()) {
                         var loginUsuario = new Usuario("<%=user1.getUsuario()%>","<%=user1.getContrasena()%>","<%=user1.getNombre()%>",
                                         "<%=user1.getApellidos()%>","<%=user1.getCorreo()%>",new Date('<%=user1.getFecha_nac()%>'),
                                         "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
@@ -343,12 +343,12 @@
                         }
                         this.TiqueteAdd(this.model.reservacion);
                     }
-                    if (view.validacionForm()) {
+                    if (this.view.validacionForm()) {
                         view.showMessage();
                         document.location = "/Aerolinea/index.jsp";
                     }
                 },
-                TiqueteAdd: function (reserva) {
+                /*TiqueteAdd: function (reserva) {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < cant_pasajeros && i < x.length; i++) {
@@ -366,13 +366,13 @@
                         this.model.asiento.numero_viaje = this.model.viajes[0];
                         this.model.tiquete.codigo_asiento = this.model.asiento;
                     }
-                },
+                },*/
                 AsientoUpdate1: function () {
                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
                         if (x[i].checked && !x[i].disabled) {
                             this.model.asiento.codigo = 0;
-                            this.model.asiento.estado = true;
+                            this.model.asiento.estado = false;
                             this.model.asiento.numero = $(x[i]).attr('id');
                             this.model.asiento.numero_viaje = this.model.viajes[0];
                             Proxy.AsientoUpdate(this.model.asiento, function (result) {
@@ -386,7 +386,7 @@
                     for (var i = 0; i < x.length; i++) {
                         if (x[i].checked && !x[i].disabled) {
                             this.model.asiento.codigo = 0;
-                            this.model.asiento.estado = true;
+                            this.model.asiento.estado = false;
                             this.model.asiento.numero = $(x[i]).attr('id');
                             this.model.asiento.numero_viaje = this.model.viajes[1];
                             Proxy.AsientoUpdate(this.model.asiento, function (result) {
@@ -703,7 +703,7 @@
                 } else {
                     numero_pasaporte0.style.borderColor = "gray";
                 }
-                var nombre1 = document.getElementById("nombre1");
+                /*var nombre1 = document.getElementById("nombre1");
                 if (!(requiredField(nombre1.value))) {
                     tam++;
                     nombre1.style.borderColor = "red";
@@ -807,7 +807,7 @@
                     numero_pasaporte5.style.borderColor = "red";
                 } else {
                     numero_pasaporte5.style.borderColor = "gray";
-                }
+                }*/
                 var numTarjeta = document.getElementById("numTarjeta");
                 if (!(requiredField(numTarjeta.value))) {
                     tam++;
