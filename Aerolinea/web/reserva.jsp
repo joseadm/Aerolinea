@@ -341,7 +341,7 @@
                                 this.model.reservacion.codigo = result;
                             });
                         }
-                        this.TiqueteAdd(this.model.reservacion);
+                        //this.TiqueteAdd(this.model.reservacion);
                     }
                     if (this.view.validacionForm()) {
                         view.showMessage();
@@ -644,7 +644,7 @@
             }
 
             function typeAvion(asientos) {
-                if (asientos === 9)
+                if (asientos == 9)
                     document.querySelector(".cabin").style.padding = "0px 200px 0px 15px";
             }
 
