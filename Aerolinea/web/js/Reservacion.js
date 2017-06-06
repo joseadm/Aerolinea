@@ -26,7 +26,7 @@ Reservacion.prototype={
 	}
 }
 Reservacion.from = function(plain){
-    reservacion = new Reservacion(plain.codigo,plain.nombreUsuario,plain.viaje1,plain.viaje2,plain.fecha_reserva,precioTotal);
+    reservacion = new Reservacion(plain.codigo,plain.nombreUsuario,plain.viaje1,plain.viaje2,plain.fecha_reserva,plain.precioTotal);
     return reservacion;
 };
 Reservacion.to = function(reserva){

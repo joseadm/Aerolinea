@@ -673,7 +673,7 @@ public class model {
     private static Reservacion toReservacion(ResultSet rs) throws Exception {
      try {
          Reservacion obj = new Reservacion();
-         obj.setCodigo(rs.getString("codigo"));
+         obj.setCodigo(rs.getInt("codigo"));
          obj.setNombreUsuario(toUsers(rs));
          obj.setViaje1(toTravels(rs));
          obj.setViaje2(toTravels(rs));
