@@ -317,9 +317,9 @@
                 ReservaAdd2: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     if (view.validacionForm()) {
-                        var loginUsuario = new Usuario(<%user1.getUsuario();%>,<%user1.getContrasena();%>,<%user1.getNombre();%>,
-            <%user1.getApellidos();%>,<%user1.getCorreo();%>,<%user1.getFecha_nac();%>,
-            <%user1.getDireccion();%>,<%user1.getTelefono();%>,<%user1.getCelular();%>,<%user1.getTipo();%>);
+                        var loginUsuario = new Usuario("<%=user1.getUsuario()%>","<%=user1.getContrasena()%>","<%=user1.getNombre()%>",
+                                        "<%=user1.getApellidos()%>","<%=user1.getCorreo()%>",new Date('<%=user1.getFecha_nac()%>'),
+                                        "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
                         this.model.reservacion.codigo = 0;
                         this.model.reservacion.nombreUsuario = loginUsuario;
                         this.model.reservacion.viaje1 = this.model.viajes[0];
@@ -342,10 +342,10 @@
                             });
                         }
                         this.TiqueteAdd(this.model.reservacion);
-                        if (view.validacionForm()) {
-                            view.showMessage();
-                            document.location = "/Aerolinea/index.jsp";
-                        }
+                    }
+                    if (view.validacionForm()) {
+                        view.showMessage();
+                        document.location = "/Aerolinea/index.jsp";
                     }
                 },
                 TiqueteAdd: function (reserva) {
@@ -537,7 +537,6 @@
                     input.setAttribute("placeholder", "Numero Pasaporte");
                     input.setAttribute("class", "form-control");
                     input.setAttribute("type", "text");
-                    input.onkeypress = controller.justNumbers;
                     div2.appendChild(input);
                     div.appendChild(div2);
                     tabla.appendChild(div);
