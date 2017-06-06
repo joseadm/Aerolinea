@@ -341,9 +341,31 @@
                                 this.model.reservacion.codigo = result;
                             });
                         }
+                        this.TiqueteAdd(this.model.reservacion);
+                        if (view.validacionForm()) {
+                            view.showMessage();
+                            document.location = "/Aerolinea/index.jsp";
+                        }
                     }
                 },
-                TiqueteAdd: function () {
+                TiqueteAdd: function (reserva) {
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                    var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                    for (var i = 0; i < cant_pasajeros && i < x.length; i++) {
+                        var nombreP = document.getElementById("nombre" + i);
+                        var apellidosP = document.getElementById("apellidos" + i);
+                        var pasaporteP = document.getElementById("numero_pasaporte" + i);
+                        this.model.tiquete.codigo = 0;
+                        this.model.tiquete.nombre_pasajero = nombreP;
+                        this.model.tiquete.apellidos_pasajero = apellidosP;
+                        this.model.tiquete.pasaporte_pasajero = pasaporteP;
+                        this.model.tiquete.codigo_reservacion = reserva;
+                        this.model.asiento.codigo = 0;
+                        this.model.asiento.estado = true;
+                        this.model.asiento.numero = $(x[i]).attr('id');
+                        this.model.asiento.numero_viaje = this.model.viajes[0];
+                        this.model.tiquete.codigo_asiento = this.model.asiento;
+                    }
                 },
                 AsientoUpdate1: function () {
                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
@@ -354,6 +376,7 @@
                             this.model.asiento.numero = $(x[i]).attr('id');
                             this.model.asiento.numero_viaje = this.model.viajes[0];
                             Proxy.AsientoUpdate(this.model.asiento, function (result) {
+                                this.model.asiento.codigo = result;
                             });
                         }
                     }
@@ -367,6 +390,7 @@
                             this.model.asiento.numero = $(x[i]).attr('id');
                             this.model.asiento.numero_viaje = this.model.viajes[1];
                             Proxy.AsientoUpdate(this.model.asiento, function (result) {
+                                this.model.asiento.codigo = result;
                             });
                         }
                     }
@@ -513,6 +537,7 @@
                     input.setAttribute("placeholder", "Numero Pasaporte");
                     input.setAttribute("class", "form-control");
                     input.setAttribute("type", "text");
+                    input.onkeypress = controller.justNumbers;
                     div2.appendChild(input);
                     div.appendChild(div2);
                     tabla.appendChild(div);
