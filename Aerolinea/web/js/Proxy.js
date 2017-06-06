@@ -400,10 +400,10 @@ Proxy.getAsientos = function(callBack) {
     };
   AJAX_req.send();
 };
-Proxy.AsientoAdd = function(asiento, callBack){
+Proxy.AsientoUpdate = function(asiento, callBack){
     jsonAsiento = JSON.stringify(asiento,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
-    url="/Aerolinea/AirlineService?action=asientoAdd";
+    url="/Aerolinea/AirlineService?action=asientoUpdate";
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function(){
@@ -414,7 +414,7 @@ Proxy.AsientoAdd = function(asiento, callBack){
             
         }
     };
-    AJAX_req.send("asiento="+jsonAsiento);   
+    AJAX_req.send("asiento="+jsonAsiento);  
 };
 
 

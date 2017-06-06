@@ -335,6 +335,18 @@
                             this.model.reservacion = result;
                         });
                     }
+                },
+                TiqueteAdd: function(){
+                },
+                AsientoUpdate1: function(){
+                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                     for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            
+                        }
+                    }
+                },
+                AsientoUpdate2: function(){
                 }
 
                 /*asientoAdd: function (numero) {

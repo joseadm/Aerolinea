@@ -629,8 +629,8 @@ public class model {
         //  return 1;
 
         String sql = "update Asiento "
-                + "set estado=%s "
-                + "where numero=%s";
+                + "set estado=%b "
+                + "where numero='%s'";
         sql = String.format(sql,
                 asiento.isEstado(),
                 asiento.getNumero());
