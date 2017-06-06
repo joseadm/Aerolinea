@@ -151,7 +151,7 @@
                             <div class="row">
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-8 text-center">
-                                    <input onclick='controller.compra();' type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
+                                    <input onclick='controller.ReservaAdd();' type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
                                     <input type="button" class="btn btn-default btn-lg" value="Cancelar" id="cancelar">
                                 </div>
                             </div>
@@ -210,12 +210,22 @@
                         model.aviones = result;
                     });
                     this.initAsiento();
+                    this.initReservaciones();
                 },
-                compra: function() {
-                    // Debe realizar el ingreso a la base de reserva
-                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros"); // Cantidad de Pasajeros
-                    view.showMessage();
-                    Proxy.getPDF();
+                
+                initReservaciones: function () {
+                    var model = this.model;
+                    model.reservacion = new Reservacion();
+                },
+                ReservaAdd: function () {
+                    this.model.reservacion.nombreUsuario.usuario = "p001";
+                    this.model.reservacion.viaje1.numero_viaje = this.model.viajes[0].numero_viaje;
+                    this.model.reservacion.viaje2.numero_viaje = this.model.viajes[1].numero_viaje;
+                    this.model.reservacion.fecha_reserva = this.model.viajes[0].fecha;
+                    this.model.reservacion.precioTotal = 300 * 2;
+                    Proxy.ReservacionAdd(this.model.reservacion, function(result){
+                       view.showMessage();
+                    });
                 },
                 initTravels: function () {
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
@@ -560,14 +570,12 @@
                     if (x[i].checked && !x[i].disabled) {
                         x[i].disabled = true;
                         // Se crea la reserva
-                        reserva = new Reservacion();
-                        reserva.nombreUsuario =  user;
-                        reserva.viaje1 = model.viajes[0];
-                        reserva.fecha_reserva = model.viajes[0].fecha;
-                        reserva.precioTotal = cant_pasajeros * 300;
+                        model.reservacion.nombreUsuario =  "p001";
+                        model.reservacion.viaje1 = model.viajes[0];
+                        model.reservacion.fecha_reserva = model.viajes[0].fecha;
+                        model.reservacion.precioTotal = cant_pasajeros * 300;
                         // Aqui se hace add reserva
-                        model.reservas.push(reserva);
-                        document.location = "/Aerolinea/reserva.jsp"
+                        model.reservas.push(model.reservacion);
                     }
                 }
             }
@@ -582,7 +590,7 @@
             }
             
             function showMessage() {
-                window.alert("Compra exitosa");
+                window.alert("Reserva exitosa");
             }
 
 

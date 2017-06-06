@@ -72,7 +72,7 @@
                     this.model = model;
                     this.view = view;
                     var usuario = JSON.stringify(<%=user1.getUsuario()%>);
-                    Proxy.reservacionesSearchByUser(usuario.parseString() ,function (result) {
+                    Proxy.reservacionesSearchByUser(usuario ,function (result) {
                         model.reservaciones = result;
                         view.showReservaciones();
                     });

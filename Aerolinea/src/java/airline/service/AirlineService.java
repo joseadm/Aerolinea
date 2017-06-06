@@ -130,6 +130,13 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(avionNumber);
                     out.write(json);
                     break;
+                case "reservacionAdd":
+                    String jsonReservacion = request.getParameter("reservacion");
+                    Reservacion reservacion = gson.fromJson(jsonReservacion, Reservacion.class);
+                    int reservacionNumber = model.insertReservacionOneWay(reservacion);
+                    json = gson.toJson(reservacionNumber);
+                    out.write(json);
+                    break;
                 case "ciudadAdd":
                     String jsonCiudad = request.getParameter("ciudad");
                     Ciudad ciudad = gson.fromJson(jsonCiudad, Ciudad.class);
