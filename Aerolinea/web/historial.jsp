@@ -4,6 +4,7 @@
     Author     : JoseManuel
 --%>
 
+<%@page import="com.google.gson.Gson"%>
 <%@ page import="airline.model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -71,8 +72,9 @@
                 Controller: function (model, view) {
                     this.model = model;
                     this.view = view;
-                    var usuario = JSON.stringify(<%=user1.getUsuario()%>);
+                    var usuario = <%=new Gson().toJson(user1.getUsuario())%>;
                     Proxy.reservacionesSearchByUser(usuario ,function (result) {
+                        console.log(result);
                         model.reservaciones = result;
                         view.showReservaciones();
                     });
@@ -100,9 +102,9 @@
                 for (var index in model.reservaciones) {
                     t.row.add([
                         model.reservaciones[index].codigo,
-                        "model.reservaciones[index].nombreUsuario.usuario",
-                        "model.reservaciones[index].viaje1.numero_viaje",
-                        "model.reservaciones[index].viaje2.numero_viaje",
+                        model.reservaciones[index].nombreUsuario.usuario,
+                        model.reservaciones[index].viaje1.numero_viaje,
+                        model.reservaciones[index].viaje2.numero_viaje,
                         model.reservaciones[index].fecha_reserva,
                         model.reservaciones[index].precioTotal
                     ]).draw(false);
