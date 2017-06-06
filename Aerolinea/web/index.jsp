@@ -172,8 +172,7 @@
                 });
                 $('#fecha_regreso').datetimepicker({
                     format: 'YYYY-MM-DD dddd',
-                    useCurrent: false,
-                    minDate: moment()
+                    useCurrent: false
                 });
                 $("#fecha_ida").on("dp.change", function (e) {
                     $('#fecha_regreso').data("DateTimePicker").minDate(e.date);
@@ -181,6 +180,7 @@
                 $("#fecha_regreso").on("dp.change", function (e) {
                     $('#fecha_ida').data("DateTimePicker").maxDate(e.date);
                 });
+                $('#fecha_ida').data("DateTimePicker").minDate(new Date());
             });
         </script> 
         <script> // Model
