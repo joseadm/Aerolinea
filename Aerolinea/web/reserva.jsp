@@ -204,9 +204,6 @@
                     this.model = model;
                     this.view = view;
                     this.initTravels();
-                    Proxy.getAsientos(function (result) {
-                        model.asientos = result;
-                    });
                     Proxy.getAviones(function (result) {
                         model.aviones = result;
                     });
@@ -394,20 +391,6 @@
                         }
                     }
                 }
-
-                /*asientoAdd: function (numero) {
-                 var view = this.view;
-                 var codigo = 0;
-                 var numero = numero;
-                 this.model.asiento.codigo = parseInt(codigo++);
-                 this.model.asiento.numero = parseInt(codigo++);
-                 this.model.asiento.estado = false;
-                 this.model.asiento.numero_viaje = 0;
-                 Proxy.AvionAdd(this.model.asiento, function (result) {
-                 document.location = "/Aerolinea/asiento.jsp";
-                 view.showMessage();
-                 });
-                 }*/
             };
         </script>
         <script> // View
@@ -648,6 +631,16 @@
                  }
                 if(this.model.viajes[1] != null && asientos == 9){
                      document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
+                }
+            }
+            function loadSeats(){
+                Proxy.getAsientosIda(this.model.viajes[0],function (result) {
+                        model.asientosIda = result;
+                    });
+                if(this.model.viajes[1] != null){
+                    Proxy.getAsientosVuelta(this.model.viajes[1],function (result) {
+                        model.asientosVuelta = result;
+                    });
                 }
             }
 
