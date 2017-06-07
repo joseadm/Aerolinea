@@ -302,6 +302,7 @@
                 },
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
+                    if (key==8 || key==127 || key==9) return true;
                     return (key >= 48 && key <= 57);
                 },
                 initAsiento: function () {
