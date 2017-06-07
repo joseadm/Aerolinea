@@ -16,169 +16,158 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="js/Graficas.js" charset="utf-8"></script>
+       
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+     
 
     </head>
     <body>
         <%@ include file="HeaderAdmi.jspf" %>
         <!--Side Bar and content -->
         <div class="container">
-            <fieldset>
                 <legend align="center">Menu Administrativo</legend>
                 <div class="col-sm-8 col-md-10 main">
-            <h1 class="page-header">Tablero</h1>
-            <div class="panel-heading">Cinco rutas mas vendidas o reservadas</div>
-
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading">Cantidad facturado por mes</div>
-                  <div class="panel-body">
-                    <div id="ventaMensual" class="canvas-wrapper">
-                      <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
-                    </div>
-                  </div>
+            <h1 class="page-header">Reportes</h1>
+            
+            
+           <div class="row">
+           <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Buscar pasajero que han viajado en un avion <br>
+              <label for="placa">Placa del Avion</label>
+              <input type="text" class="form-control" id="placa" placeholder="Digite la placa del avion">
+              <button onclick='controller.buscarPasajeros();' type="button" class="btn btn-primary">Buscar</button></div><br>
+                <div class="panel-body"><!--Body para tabla -->
+                 <div class="col-sm-12 col-md-12 main">         
+                    <div class="contasiner">
+                       <div class="table-responsive">
+                           <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr><th>Nombre Pasajero</th></tr>
+                               </thead>
+                               <tbody id="listaReservaciones">
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
                 </div>
-              </div>
             </div>
-
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading">Cantidad ingresos por año</div>
-                  <div class="panel-body">
-                    <div id="ventaAnual" class="canvas-wrapper">
-                      <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-
+            </div>
+            </div>
+              
             <div class="panel-heading">Listado de clientes</div>
 
           </div>
-        </div>
+       
       <hr>
       <br>
-            </fieldset>
-        </div>
-        <!-- Footer -->
+           
+        
+        <!-- Footer 
         <div class="container">
             <footer class="footer">
                 <p>&copy; 2017 Baratisimo, Inc.</p>
             </footer>
-        </div>
+        </div> -->
         <!--....................................................-->
+         <script> // Model
+            function Model() {
+                this.Model();
+            }
+
+            Model.prototype = {
+                Model: function () {
+                    this.tiquetes = [];
+                }
+            };
+        </script>
+        <script> // Controller
+            function Controller(model, view) {
+                this.Controller(model, view);
+            }
+
+            Controller.prototype = {
+                Controller: function (model, view) {
+                    this.model = model;
+                    this.view = view;
+                    
+                    this.initTiquetes();
+                },
+                initTiquetes: function () {
+                    var model = this.model;
+                    model.tiquete = new Tiquete();
+                },
+                 buscarPasajeros: function () {
+                    var model = this.model;
+                    var view = this.view;
+                    var avion = this.view.document.getElementById("placa").value;
+                    if (view.validacionPlaca()){
+                    Proxy.selectClientsByPlane(avion ,function (result) {
+                        console.log(result);
+                        model.tiquetes = result;
+                        if(result.length ===0){
+                            view.showMessageNoSeEnctraronPasajeros()
+                        }else{
+                        view.showPasajeros();}
+                    });}
+                }
+
+            };
+        </script>
+        <script> // View
+            var model;
+            var controller;
+            function pageLoad(event) {
+                model = new Model();
+                controller = new Controller(model, window);
+                showPasajeros();
+            }
+            function showMessageNoSeEnctraronPasajeros() {
+                window.alert("No se encontraron Pasjaeros");
+            }
+            function showPasajeros() {
+                var t = $('#paginacion').DataTable();
+                $('#paginacion').dataTable().fnClearTable();
+                for (var index in model.tiquetes) {
+                    t.row.add([
+                        model.tiquetes[index].nombre_pasajero
+                    ]).draw(false);
+                }
+            }
+            function validacionPlaca() {
+                var tam = 0;
+                var placa = document.getElementById("placa");
+                if (!(requiredField(placa.value))) {
+                    tam++;
+                    placa.style.borderColor = "red";
+                } else {
+                    placa.style.borderColor = "gray";
+                }
+                if (tam > 0) {
+
+                    return false;
+                }
+                return true;
+            }
+            function requiredField(valor) {
+                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+
+                    return false;
+                }
+                return true;
+            }
+
+            document.addEventListener("DOMContentLoaded", pageLoad);
+        </script>
         <script type="text/javascript">
-      Highcharts.chart('ventaAnual', {
-          
-    title: {
-        text: 'Ventas Anuales'
-    },
-
-    subtitle: {
-        text: 'Baratico.inc'
-    },
-
-    xAxis: {
-        categories: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-
-        title: {
-          text: 'Meses'
-        }
-      },
-      yAxis: {
-
-        title: {
-          text: 'Dolares'
-        }
-      },
-
-      tooltip: {
-        enabled: true,
-        formatter: function() {
-          return '<b>'+ this.series.name +'</b><br/>'+
-            this.x +': '+ this.y +' '+this.series.name;
-        }
-      },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    plotOptions: {
-        line: {
-          dataLabels: {
-            enabled: true
-          },
-          enableMouseTracking: true
-        }
-    },
-
-    series: [{
-        name: 'Ganancias',
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175, 97031, 119931, 137133, 154175]
-    }]
-
-});
-
-Highcharts.chart('ventaMensual', {
-
-title: {
-  text: 'Ventas Mensuales'
-},
-
-subtitle: {
-  text: 'Baratico.inc'
-},
-
-xAxis: {
-  categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
-
-  title: {
-    text: 'Meses'
-  }
-},
-yAxis: {
-
-  title: {
-    text: 'Dolares'
-  }
-},
-
-tooltip: {
-  enabled: true,
-  formatter: function() {
-    return '<b>'+ this.series.name +'</b><br/>'+
-      this.x +': '+ this.y +' '+this.series.name;
-  }
-},
-legend: {
-  layout: 'vertical',
-  align: 'right',
-  verticalAlign: 'middle'
-},
-
-plotOptions: {
-  line: {
-    dataLabels: {
-      enabled: true
-    },
-    enableMouseTracking: true
-  }
-},
-
-series: [{
-  name: 'Ganancias',
-  data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175, 97031, 119931, 137133, 154175]
-}]
-
-});
-      </script>
+            // For demo to fit into DataTables site builder...
+            $('#paginacion')
+                    .removeClass('display')
+                    .addClass('table table-bordered table-hover');
+        </script>
+        
     </body>
 </html>

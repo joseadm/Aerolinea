@@ -62,6 +62,7 @@ public class AirlineService extends HttpServlet {
             List<Viaje> viajes;
             List<Viaje> viajes2;
             List<Reservacion> reservaciones;
+            List<Tiquete> tiquetes;
             List<Usuario> usuarios;
             List<Asiento> asientosIda;
             List<Asiento> asientosVuelta;
@@ -105,6 +106,12 @@ public class AirlineService extends HttpServlet {
                     String Nusuario = request.getParameter("usuario");
                     reservaciones = model.selectReservacionByUser(Nusuario);
                     json = gson.toJson(reservaciones);
+                    out.write(json);
+                    break;
+                case "selectClientsByPlane":
+                    String plane1 = request.getParameter("avion");
+                    tiquetes = model.selectClientsByPlane(plane1);
+                    json = gson.toJson(tiquetes);
                     out.write(json);
                     break;
                 case "viajesListAll":

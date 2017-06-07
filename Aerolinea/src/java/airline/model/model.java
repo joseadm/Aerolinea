@@ -795,30 +795,29 @@ public class model {
  }
     
     //Para parte de graficos-----------------------------------
-     public static List<String> selectClientsByPlane(String placa) throws Exception {
+     public static List<Tiquete> selectClientsByPlane(String placa) throws Exception {
           //Usuario es el nombre de usuario
-        List<String> nombres;
-        nombres = new ArrayList();
+        List<Tiquete> ticket;
+        ticket = new ArrayList();
         try {
-            String sql = "select T.nombre_pasajero from " +
-                        "(select R.codigo from " +
-                        "(select V.numeroViaje from " +
-                        "(select placa from Avion where placa ="
-                    + placa + ")A, " +
-                        "(select placa_avion , numeroViaje from Viaje)V " +
-                        "where A.placa = V.placa_avion)a1, " +
-                        "(select codigo,numero_viaje1, numero_viaje2 from Reservacion)R " +
-                        "where R.numero_viaje1 = a1.numeroViaje Or R.numero_viaje2 = a1.numeroViaje)a2, " +
-                        "(select codigo_reservacion , nombre_pasajero from Tiquete)T " +
+            String sql = "select T.nombre_pasajero from\n" +
+                        "(select R.codigo from\n" +
+                        "	(select V.numeroViaje from\n" +
+                        "		(select placa from Avion where placa ='"+placa+"')A,\n" +
+                        "		(select placa_avion , numeroViaje from Viaje)V\n" +
+                        "		where A.placa = V.placa_avion)a1,\n" +
+                        "	(select codigo,numero_viaje1, numero_viaje2 from Reservacion)R\n" +
+                        "where R.numero_viaje1 = a1.numeroViaje Or R.numero_viaje2 = a1.numeroViaje)a2,\n" +
+                        "(select codigo_reservacion , nombre_pasajero from Tiquete)T\n" +
                         "where T.codigo_reservacion = a2.codigo;";
             ResultSet rs = tiquetes.executeQuery(sql);
             while (rs.next()) {
-                nombres.add(toStringList(rs));
+                 ticket.add(toPasajeroTiquete(rs));
             }
         } catch (SQLException ex) {
             throw new Exception("Ningun usuario ha viajado en este avion");
         }
-        return nombres;
+        return ticket;
     }
     private static String toStringList(ResultSet rs) throws Exception {
      try {
@@ -827,5 +826,14 @@ public class model {
      } catch (SQLException ex) {
          return null;
      }
+    }
+    private static Tiquete toPasajeroTiquete(ResultSet rs) throws Exception {
+        try {
+            Tiquete obj = new Tiquete();
+            obj.setNombre_pasajero(rs.getString("nombre_pasajero"));
+            return obj;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 }

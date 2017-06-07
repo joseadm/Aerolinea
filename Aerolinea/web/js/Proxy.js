@@ -485,6 +485,21 @@ Proxy.reservacionesSearchByUser = function (usuario, callBack) {
         }
     });
 };
+Proxy.selectClientsByPlane = function (avion, callBack) {
+    $.ajax({
+        url: '/Aerolinea/AirlineService?action=selectClientsByPlane',
+        data: {
+            format: 'json',
+            avion: avion
+        },
+        dataType: 'text',
+        type: 'POST',
+        success: function (data) {
+            var object = $.parseJSON(data, JsonUtils.revive);
+            callBack(object);
+        }
+    });
+};
 //DELETE
 Proxy.CiudadDelete = function (codigo, callBack) {
     var AJAX_req = new XMLHttpRequest();
