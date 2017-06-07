@@ -67,7 +67,6 @@
                     </div>
                 </div>
                 <div id="divR" class="container">
-                    <button id="btnReserva" onclick="reservarAsientos()" type="button" class="btn btn-success">Reservar</button>
                 </div>
             </fieldset>
             <fieldset id="asientosVuelta">
@@ -87,7 +86,6 @@
                     </div>
                 </div>
                 <div id="divR" class="container">
-                    <button id="btnReserva" onclick="reservarAsientos2()" type="button" class="btn btn-success">Reservar</button>
                 </div>
             </fieldset>
             <br><br><br>
@@ -644,8 +642,12 @@
             }
 
             function typeAvion(asientos) {
-                if (asientos == 9)
-                    document.querySelector(".cabin").style.padding = "0px 200px 0px 15px";
+                if (asientos == 9){
+                     document.getElementById("tablaAsientos").style.padding = "0px 200px 0px 15px";
+                 }
+                if(this.model.viajes[1] != null && asientos == 9){
+                     document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
+                }
             }
 
             function reservarAsientos() {
@@ -657,13 +659,6 @@
                 for (var i = 0; i < x.length; i++) {
                     if (x[i].checked && !x[i].disabled) {
                         x[i].disabled = true;
-                        // Se crea la reserva
-                        model.reservacion.nombreUsuario = "p001";
-                        model.reservacion.viaje1 = model.viajes[0];
-                        model.reservacion.fecha_reserva = model.viajes[0].fecha;
-                        model.reservacion.precioTotal = cant_pasajeros * 300;
-                        // Aqui se hace add reserva
-                        model.reservas.push(model.reservacion);
                     }
                 }
             }

@@ -180,7 +180,7 @@
                     }
                     if (view.validacionForm()) {
                         view.showMessageCount(count);
-                        document.location = "/Aerolinea/programarViajes.jsp";
+                        document.location = "/Aerolinea/viajes.jsp";
                     }
                 }
             }
