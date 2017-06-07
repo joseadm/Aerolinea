@@ -249,23 +249,12 @@ insert into Avion (placa, modelo, marca, annio, cant_pasajeros, cant_filas, cant
 values ("NVCR0314","380-800","Airbus","2012",450,50,9);
 /*INSERTS DE VIAJES-------------------------*/
 
-insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-05',"TI-BGV",1);
-insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-07-07',"TI-CRLA",5);
 
-insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-14',"TI-BGV",7);
-insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-10',"NV123",8);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
 values('2017-06-12',"TI-BGV98",1);
 insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-07-14',"NV888",5);
-insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-21',"NV654",7);
-insert into Viaje (fecha, placa_avion, numero_vuelo)
-values('2017-06-17',"NV888",8);
+values('2017-06-16',"NV888",5);
+
 
 
 insert into Usuario(nombreUsuario,contrasena,nombre,apellidos,correo,fechaNacimiento,

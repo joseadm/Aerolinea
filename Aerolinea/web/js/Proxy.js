@@ -181,7 +181,7 @@ Proxy.getAsientosIda = function (viaje, callBack) {
     var AJAX_req = new XMLHttpRequest();
     jsonViaje = JSON.stringify(viaje, JsonUtils.replacer);
     url = "/Aerolinea/AirlineService?action=asientosIda";
-    AJAX_req.open("GET", url, true);
+    AJAX_req.open("POST", url, true);
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function () {
         if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
@@ -196,12 +196,11 @@ Proxy.getAsientosVuelta = function (viaje, callBack) {
     var AJAX_req = new XMLHttpRequest();
     jsonViaje = JSON.stringify(viaje, JsonUtils.replacer);
     url = "/Aerolinea/AirlineService?action=asientosVuelta";
-    AJAX_req.open("GET", url, true);
+    AJAX_req.open("POST", url, true);
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     AJAX_req.onreadystatechange = function () {
         if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
-            jsonAsiento = AJAX_req.responseText;
-            var object = JSON.parse(jsonAsiento, JsonUtils.revive);
+            var object = JSON.parse(AJAX_req.responseText, JsonUtils.revive);
             callBack(object);
         }
     };

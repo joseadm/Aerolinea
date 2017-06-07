@@ -191,6 +191,8 @@
                     this.pasajeros = [];
                     this.viajes = [];
                     this.reservas = [];
+                    this.asientosIda = [];
+                    this.asientosVuelta = [];
                 }
             };
         </script>
@@ -209,6 +211,7 @@
                     });
                     this.initAsiento();
                     this.initReservaciones();
+                    this.loadSeats();
                 },
 
                 initReservaciones: function () {
@@ -299,7 +302,7 @@
                 },
                 initAvion: function () {
                     var model = this.model;
-                    model.avion = new Asiento();
+                    model.avion = new Avion();
                 },
                 ReservaAdd: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
@@ -415,7 +418,17 @@
                             });
                         }
                     }
+                },
+                loadSeats: function() {
+                 Proxy.getAsientosIda(model.viajes[0], function (result) {
+                    model.asientosIda = result;
+                 });
+                 if (this.model.viajes[1] != null) {
+                    Proxy.getAsientosVuelta(model.viajes[1], function (result) {
+                        model.asientosVuelta = result;
+                    });
                 }
+            }
             };
         </script>
         <script> // View
@@ -430,17 +443,25 @@
                 showTiquet();
                 showPasajeros();
                 showReserva();
-                //showOcupado();
+                showOcupado2();
             }
 
             function showOcupado() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
-            if ((model.asiento.numero_viaje === model.viajes[0].numero_viaje) && (!model.asiento.estado)) {
-            x[i].disabled = true;
+                        if ((model.asiento.numero_viaje === model.viajes[0].numero_viaje) && (!model.asiento.estado)) {
+                            x[i].disabled = true;
+                        }
+                    }
             }
+            function showOcupado2() {
+            var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                    for (var i = 0; i < x.length; i++) {
+                        if (model.asientosIda[i].estado == false) {
+                            x[i].disabled = true;
+                        }
+                    }
             }
-
             function showViajes() {
             var t = $('#paginacion').DataTable();
                     $('#paginacion').dataTable().fnClearTable();
@@ -651,16 +672,6 @@
                 }
                 if (this.model.viajes[1] != null && asientos >= 9) {
                     document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
-                }
-            }
-            function loadSeats() {
-                 Proxy.getAsientosIda(this.model.viajes[0], function (result) {
-                    model.asientosIda = result;
-                 });
-                 if (this.model.viajes[1] != null) {
-                    Proxy.getAsientosVuelta(this.model.viajes[1], function (result) {
-                        model.asientosVuelta = result;
-                    });
                 }
             }
 
