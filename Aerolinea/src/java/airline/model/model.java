@@ -645,7 +645,7 @@ public class model {
         List<Asiento> sits;
         sits = new ArrayList();
         try {
-            String sql = "select * from Asiento where numero = "+p;
+            String sql = "select * from Asiento where numero = '"+p+"'";
             ResultSet rs = asientos.executeQuery(sql);
             while (rs.next()) {
                 sits.add(toSits(rs));
@@ -654,6 +654,19 @@ public class model {
             throw new Exception("No existen asientos pare ese viaje");
         }
         return sits;
+    }
+      public static Asiento selectSitByNumber(String p) throws Exception {
+        Asiento sit = new Asiento();
+        try {
+            String sql = "select * from Asiento where numero = '"+p+"'";
+            ResultSet rs = asientos.executeQuery(sql);
+            while (rs.next()) {
+                sit =(toSits(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen asientos pare ese viaje");
+        }
+        return sit;
     }
       public static List<Reservacion> selectReservacionByUser(String usuario) throws Exception {
           //Usuario es el nombre de usuario
@@ -669,6 +682,35 @@ public class model {
             throw new Exception("No existen reservaciones pare este usuario");
         }
         return re;
+    }
+     public static Reservacion selectReservacion(int numero) throws Exception {
+          //Usuario es el nombre de usuario
+        Reservacion re = new Reservacion();
+        try {
+            String sql = "select * from Reservacion where codigo = "+numero+"";
+            ResultSet rs = reservaciones.executeQuery(sql);
+            while (rs.next()) {
+                re = (toReservacion(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen reservaciones pare este usuario");
+        }
+        return re;
+    }
+    public int getIDLastReserv()throws Exception{
+        String sql= "select MAX(codigo) FROM Reservacion";
+        ResultSet rs= reservaciones.executeQuery(sql);
+        if(rs.next()){
+            return rs.getInt("MAX(codigo)");
+        }
+        else{
+            throw new Exception("No hay facturas en espera");
+        }
+    }
+     public Reservacion getLastReser() throws Exception{
+        int lastId = this.getIDLastReserv();
+        return this.selectReservacion(lastId);
+        
     }
     private static Reservacion toReservacion(ResultSet rs) throws Exception {
      try {

@@ -148,21 +148,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <hr class="my-4">
-                            <div class="row">
-                                <div class="col-xs-2"></div>
-                                <div class="col-xs-8 text-center">
-                                    <input onclick='controller.ReservaAdd();' type="submit" class="btn btn-default btn-lg" value="Aceptar" id="aceptar">
-                                    <input type="button" class="btn btn-default btn-lg" value="Cancelar" id="cancelar">
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div></center>
-
-
-        </div>
-
+                            <div class="row" align="center">
+                                    <button onclick='controller.ReservaAdd();' class="btn btn-success btn-lg" id="aceptar">Aceptar</button>
+                                    <button onclick="window.location.href='/Aerolinea/index.jsp'" class="btn btn-danger btn-lg" id="cancelar">Cancelar</button>
+                            </div>
+         </div>
         <!-- Footer -->
         <div class="container">
             <footer class="footer">
@@ -211,12 +204,14 @@
                     });
                     this.initAsiento();
                     this.initReservaciones();
-                    this.loadSeats();
+                    //this.loadSeats();
+                    this.initTiquete();
                 },
 
                 initReservaciones: function () {
                     var model = this.model;
                     model.reservacion = new Reservacion();
+                    model.reservacion1 = new Reservacion();
                 },
                 initTravels: function () {
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
@@ -304,6 +299,10 @@
                     var model = this.model;
                     model.avion = new Avion();
                 },
+                initTiquete: function () {
+                    var model = this.model;
+                    model.tiquete = new Tiquete();
+                },
                 ReservaAdd: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     if (this.view.validacionForm()) {
@@ -329,14 +328,14 @@
                         }
                         if (this.model.viajes[1] == null) {
                             Proxy.ReservacionAdd(this.model.reservacion, function (result) {
-                                this.model.reservacion.codigo = result;
+                                this.model.reservacion1 = result;
                             });
-                            this.TiqueteAddIda(this.model.reservacion);
+                            this.TiqueteAddIda(this.model.reservacion1);
                         }
                     }
                     if (this.view.validacionForm()) {
-                        view.showMessage();
-                        document.location = "/Aerolinea/index.jsp";
+                        this.view.showMessage();
+                        //document.location = "/Aerolinea/index.jsp";
                     }
                 },
                 TiqueteAddIda: function (reserva) {
@@ -353,10 +352,10 @@
                         this.model.tiquete.apellidos_pasajero = apellidosP;
                         this.model.tiquete.pasaporte_pasajero = pasaporteP;
                         this.model.tiquete.codigo_reservacion = reserva;
-                        this.model.asiento.codigo = 0;
-                        this.model.asiento.estado = false;
-                        this.model.asiento.numero = $(x[i]).attr('id');
-                        this.model.asiento.numero_viaje = this.model.viajes[0];
+                        //this.model.asiento.codigo = 0;
+                        //this.model.asiento.estado = false;
+                        //this.model.asiento.numero = $(x[i]).attr('id');
+                        //this.model.asiento.numero_viaje = this.model.viajes[0];
                         this.model.tiquete.codigo_asiento = this.model.asiento;
                         j++;
                         Proxy.tiqueteAdd(this.model.tiquete,function (result) {
@@ -386,7 +385,7 @@
                         this.model.tiquete.codigo_asiento = this.model.asiento;
                         j++;
                         Proxy.tiqueteAdd(this.model.tiquete,function (result) {
-                                this.model.tiquete.codigo = result;
+                                this.model.tiquete = result;
                         });
                     }
                 }
@@ -400,7 +399,7 @@
                                 this.model.asiento.numero = $(x[i]).attr('id');
                                 this.model.asiento.numero_viaje = this.model.viajes[0];
                                 Proxy.AsientoUpdate(this.model.asiento, function (result) {
-                                    this.model.asiento.codigo = result;
+                                    this.model.asiento = result;
                                 });
                             }
                             }
@@ -414,7 +413,7 @@
                             this.model.asiento.numero = $(x[i]).attr('id');
                             this.model.asiento.numero_viaje = this.model.viajes[1];
                             Proxy.AsientoUpdate(this.model.asiento, function (result) {
-                                this.model.asiento.codigo = result;
+                                this.model.asiento = result;
                             });
                         }
                     }
@@ -443,7 +442,7 @@
                 showTiquet();
                 showPasajeros();
                 showReserva();
-                showOcupado2();
+                //showOcupado2();
             }
 
             function showOcupado() {
@@ -454,14 +453,14 @@
                         }
                     }
             }
-            function showOcupado2() {
+            /*function showOcupado2() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
                         if (model.asientosIda[i].estado == false) {
                             x[i].disabled = true;
                         }
                     }
-            }
+            }*/
             function showViajes() {
             var t = $('#paginacion').DataTable();
                     $('#paginacion').dataTable().fnClearTable();

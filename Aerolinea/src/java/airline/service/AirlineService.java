@@ -70,6 +70,8 @@ public class AirlineService extends HttpServlet {
             Ciudad c1;
             Vuelo vu;
             Avion a;
+            Reservacion r1;
+            Asiento a1;
             switch (accion) {
                 case "ciudadListAll":
                     ciudades = model.selectAllCities();
@@ -150,7 +152,8 @@ public class AirlineService extends HttpServlet {
                     String jsonReservacion = request.getParameter("reservacion");
                     Reservacion reservacion = gson.fromJson(jsonReservacion, Reservacion.class);
                     int reservacionNumber = model.insertReservacionOneWay(reservacion);
-                    json = gson.toJson(reservacionNumber);
+                    reservacion.setCodigo(reservacionNumber);
+                    json = gson.toJson(reservacion);
                     out.write(json);
                     break;
                 case "reservacionAdd2":
@@ -301,7 +304,8 @@ public class AirlineService extends HttpServlet {
                     String asiento1 = request.getParameter("asiento");
                     Asiento asiento2 = gson.fromJson(asiento1, Asiento.class);
                     int asiento3 = model.updateAsientoOcupado(asiento2);
-                    json = gson.toJson(asiento3);
+                    a1 = model.selectSitByNumber(asiento2.getNumero());
+                    json = gson.toJson(a1);
                     out.write(json);
             }
         } catch (Exception e) {

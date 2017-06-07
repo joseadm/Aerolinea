@@ -296,7 +296,7 @@ Proxy.ReservacionAdd = function (reservacion, callBack) {
         if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
             jsonReservacion = AJAX_req.responseText;
             var object = JSON.parse(jsonReservacion, JsonUtils.revive);
-            callBack(object);
+            callBack(object);         
 
         }
     };
