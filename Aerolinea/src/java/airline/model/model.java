@@ -548,10 +548,12 @@ public class model {
     private static Asiento toSits(ResultSet rs) throws Exception {
         try {
             Asiento obj = new Asiento();
-            obj.setCodigo(rs.getInt("codigo"));
             obj.setNumero(rs.getString("numero"));
             obj.setEstado(rs.getBoolean("estado"));
-            obj.setViaje(toTravels(rs));
+            Viaje v1 = new Viaje();
+            v1.setNumero_viaje(rs.getInt("numero_viaje"));
+            v1 = selectTravel(v1.getNumero_viaje());
+            obj.setViaje(v1);
             return obj;
         } catch (SQLException ex) {
             return null;
@@ -715,7 +717,7 @@ public class model {
     private static Reservacion toReservacion(ResultSet rs) throws Exception {
      try {
          Reservacion obj = new Reservacion();
-         obj.setCodigo(rs.getInt("codigo"));
+         obj.setCodigo(rs.getString("codigo"));
          Usuario u = toUsers2(rs);
          obj.setNombreUsuario(u);
          int numViaje = rs.getInt("numero_viaje1");
@@ -744,9 +746,10 @@ public class model {
         //  return 1;
 
         String sql = "insert into Reservacion "
-                + "(nombre_usuario, numero_viaje1,fecha_reserva,precioTotal) "
-                + "values ('%s',%s,'%s',%s)";
-        sql = String.format(sql, reservacion.getNombreUsuario().getUsuario(),
+                + "(codigo,nombre_usuario, numero_viaje1,fecha_reserva,precioTotal) "
+                + "values ('%s','%s',%s,'%s',%s)";
+        sql = String.format(sql, reservacion.getCodigo(),
+                reservacion.getNombreUsuario().getUsuario(),
                 reservacion.getViaje1().getNumero_viaje(),
                 new SimpleDateFormat("yyyy-MM-dd").format(reservacion.getFecha_reserva()),
                 reservacion.getPrecioTotal());
@@ -761,9 +764,10 @@ public class model {
         //  return 1;
 
         String sql = "insert into Reservacion "
-                + "(nombre_usuario, numero_viaje1,numero_viaje2,fecha_reserva,precioTotal) "
-                + "values ('%s',%s,%s,'%s',%s)";
-        sql = String.format(sql, reservacion.getNombreUsuario().getUsuario(),
+                + "(codigo,nombre_usuario, numero_viaje1,numero_viaje2,fecha_reserva,precioTotal) "
+                + "values ('%s','%s',%s,%s,'%s',%s)";
+        sql = String.format(sql,reservacion.getCodigo(),
+                reservacion.getNombreUsuario().getUsuario(),
                 reservacion.getViaje1().getNumero_viaje(),
                 reservacion.getViaje2().getNumero_viaje(),
                 new SimpleDateFormat("yyyy-MM-dd").format(reservacion.getFecha_reserva()),
@@ -780,9 +784,9 @@ public class model {
 
      String sql = "insert into Tiquete "
              + "(codigo_reservacion, codigo_asiento,nombre_pasajero,apellidosPasajero,pasaporte) "
-             + "values (%s,%s,'%s','%s',%s)";
+             + "values ('%s','%s','%s','%s',%s)";
      sql = String.format(sql, tiquete.getCodigo_reservacion().getCodigo(),
-             tiquete.getCodigo_asiento().getCodigo(),
+             tiquete.getCodigo_asiento().getNumero(),
              tiquete.getNombre_pasajero(),
              tiquete.getApellidos_pasajero(),
              tiquete.getPasaporte_pasajero());
@@ -837,3 +841,5 @@ public class model {
         }
     }
 }
+
+

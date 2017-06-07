@@ -212,6 +212,7 @@
                     var model = this.model;
                     model.reservacion = new Reservacion();
                     model.reservacion1 = new Reservacion();
+                    model.reservacion2 = new Reservacion();
                 },
                 initTravels: function () {
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
@@ -294,6 +295,8 @@
                 initAsiento: function () {
                     var model = this.model;
                     model.asiento = new Asiento();
+                    model.asiento1 = new Asiento();
+                    model.asiento2 = new Asiento();
                 },
                 initAvion: function () {
                     var model = this.model;
@@ -309,7 +312,8 @@
                         var loginUsuario = new Usuario("<%=user1.getUsuario()%>", "<%=user1.getContrasena()%>", "<%=user1.getNombre()%>",
                                 "<%=user1.getApellidos()%>", "<%=user1.getCorreo()%>", new Date('<%=user1.getFecha_nac()%>'),
                                 "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
-                        this.model.reservacion.codigo = 0;
+                        var codigoReserva = "<%=user1.getUsuario()%>" + this.model.viajes[0].numero_viaje;
+                        this.model.reservacion.codigo = codigoReserva;
                         this.model.reservacion.nombreUsuario = loginUsuario;
                         this.model.reservacion.viaje1 = this.model.viajes[0];
                         this.model.reservacion.precioTotal = cant_pasajeros * this.model.viajes[0].vuelo.precio;
@@ -321,22 +325,28 @@
                             var subtotal2 = cant_pasajeros * this.model.viajes[1].vuelo.precio;
                             this.model.reservacion.precioTotal = subtotal1 + subtotal2;
                             this.AsientoUpdate2();
-                            Proxy.ReservacionAdd2(this.model.reservacion, function (result) {
-                                this.model.reservacion.codigo = result;
-                            });
-                            this.TiqueteAddVuelta(this.model.reservacion);
+                            this.ReservacionVuelta(this.model.reservacion);
+                            this.TiqueteAddVuelta(this.model.reservacion2);
                         }
                         if (this.model.viajes[1] == null) {
-                            Proxy.ReservacionAdd(this.model.reservacion, function (result) {
-                                this.model.reservacion1 = result;
-                            });
-                            this.TiqueteAddIda(this.model.reservacion1);
+                            this.ReservacionIda(this.model.reservacion);
+                            this.TiqueteAddIda(this.model.reservacion);
                         }
                     }
                     if (this.view.validacionForm()) {
                         this.view.showMessage();
-                        //document.location = "/Aerolinea/index.jsp";
+                        document.location = "/Aerolinea/index.jsp";
                     }
+                },
+                ReservacionIda: function(reserva){
+                    Proxy.ReservacionAdd(reserva, function (result) {
+                                model.reservacion = result;
+                            });
+                },
+                ReservacionVuelta: function(reserva){
+                    Proxy.ReservacionAdd2(reserva, function (result) {
+                                this.model.reservacion2 = result;
+                            });
                 },
                 TiqueteAddIda: function (reserva) {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
@@ -351,12 +361,11 @@
                         this.model.tiquete.nombre_pasajero = nombreP;
                         this.model.tiquete.apellidos_pasajero = apellidosP;
                         this.model.tiquete.pasaporte_pasajero = pasaporteP;
-                        this.model.tiquete.codigo_reservacion = reserva;
-                        //this.model.asiento.codigo = 0;
-                        //this.model.asiento.estado = false;
-                        //this.model.asiento.numero = $(x[i]).attr('id');
-                        //this.model.asiento.numero_viaje = this.model.viajes[0];
-                        this.model.tiquete.codigo_asiento = this.model.asiento;
+                        model.tiquete.codigo_reservacion = reserva;
+                        this.model.asiento.estado = false;
+                        this.model.asiento.numero = $(x[i]).attr('id');
+                        this.model.asiento.numero_viaje = this.model.viajes[0];
+                        model.tiquete.codigo_asiento = model.asiento;
                         j++;
                         Proxy.tiqueteAdd(this.model.tiquete,function (result) {
                                 this.model.tiquete.codigo = result;
@@ -394,12 +403,11 @@
                         var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                         for (var i = 0; i < x.length; i++) {
                             if (x[i].checked && !x[i].disabled) {
-                                this.model.asiento.codigo = 0;
                                 this.model.asiento.estado = false;
                                 this.model.asiento.numero = $(x[i]).attr('id');
                                 this.model.asiento.numero_viaje = this.model.viajes[0];
                                 Proxy.AsientoUpdate(this.model.asiento, function (result) {
-                                    this.model.asiento = result;
+                                    model.asiento = result;
                                 });
                             }
                             }
@@ -456,7 +464,7 @@
             /*function showOcupado2() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
-                        if (model.asientosIda[i].estado == false) {
+                        if (model.asientosIda[i].estado == 0) {
                             x[i].disabled = true;
                         }
                     }

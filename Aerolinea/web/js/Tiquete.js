@@ -6,8 +6,8 @@ Tiquete.prototype={
 	nombre_pasajero:"",
 	apellidos_pasajero:"",
 	pasaporte_pasajero:0,
-        codigo_reservacion: 0,
-        codigo_asiento: 0,
+        codigo_reservacion: "",
+        codigo_asiento: "",
 	Tiquete:function(codigo,nombre_pasajero,apellidos_pasajero,pasaporte_pasajero,codigo_reservacion,codigo_asiento){
 		this.codigo=codigo;
 		this.nombre_pasajero=nombre_pasajero;

@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function Asiento(codigo,numero,estado,numero_viaje){
-	this.Asiento(codigo,numero,estado,numero_viaje);
+function Asiento(numero,estado,numero_viaje){
+	this.Asiento(numero,estado,numero_viaje);
 }
 Asiento.prototype={
-        codigo:0,
         numero:"",
         estado:false,
         numero_viaje:0,
-	Asiento:function(codigo,numero,estado,numero_viaje){
-		this.codigo= codigo;
+	Asiento:function(numero,estado,numero_viaje){
                 this.numero=numero;
 		this.estado=estado;
 		this.numero_viaje=numero_viaje;
@@ -22,13 +20,12 @@ Asiento.prototype={
 	}
 }
 Asiento.from= function(plain){
-    asiento = new Asiento(plain.codigo,plain.numero,plain.estado,plain.numero_viaje);
+    asiento = new Asiento(plain.numero,plain.estado,plain.numero_viaje);
     return asiento;
 };
 Asiento.to= function(asiento){
     return {
         _class : 'Asiento',
-        codigo: asiento.codigo,
         numero: asiento.numero,
         estado: asiento.estado,
         numero_viaje : asiento.numero_viaje

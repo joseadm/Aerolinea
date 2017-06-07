@@ -7,7 +7,7 @@ function Reservacion(codigo,nombreUsuario,viaje1,viaje2,fecha_reserva,precioTota
 	this.Reservacion(codigo,nombreUsuario,viaje1,viaje2,fecha_reserva,precioTotal);
 }
 Reservacion.prototype={
-        codigo: 0,
+        codigo: "",
         nombreUsuario:"",
         viaje1: 0,
         viaje2: 0,

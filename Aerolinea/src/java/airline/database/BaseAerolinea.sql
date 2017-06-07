@@ -117,11 +117,10 @@ ENGINE = InnoDB;
 -- Table `BaseAerolinea`.`Asiento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Asiento` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
   `numero` VARCHAR(5) NOT NULL,
   `estado` TINYINT(1) NOT NULL,
   `numero_viaje` INT NOT NULL,
-  PRIMARY KEY (`codigo`),
+  PRIMARY KEY (`numero`),
   INDEX `numero_viaje_idx` (`numero_viaje` ASC),
   CONSTRAINT `numero_viaje`
     FOREIGN KEY (`numero_viaje`)
@@ -135,7 +134,7 @@ ENGINE = InnoDB;
 -- Table `BaseAerolinea`.`Reservacion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Reservacion` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `codigo` VARCHAR(45) NOT NULL,
   `nombre_usuario` VARCHAR(45) NOT NULL,
   `numero_viaje1` INT NOT NULL,
   `numero_viaje2` INT NULL,
@@ -168,8 +167,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `codigo_reservacion` INT NOT NULL,
-  `codigo_asiento` INT NOT NULL,
+  `codigo_reservacion` VARCHAR(45) NOT NULL,
+  `codigo_asiento` VARCHAR(5) NOT NULL,
   `nombre_pasajero` VARCHAR(45) NOT NULL,
   `apellidosPasajero` VARCHAR(45) NOT NULL,
   `pasaporte` INT NOT NULL,
@@ -181,9 +180,9 @@ CREATE TABLE IF NOT EXISTS `BaseAerolinea`.`Tiquete` (
     REFERENCES `BaseAerolinea`.`Reservacion` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `codigo_asietno`
+  CONSTRAINT `codigo_asiento`
     FOREIGN KEY (`codigo_asiento`)
-    REFERENCES `BaseAerolinea`.`Asiento` (`codigo`)
+    REFERENCES `BaseAerolinea`.`Asiento` (`numero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -263,5 +262,4 @@ direccion,telefono,celular,tipo) values ("p001","123","andrey","chaverri","andre
 insert into Usuario(nombreUsuario,contrasena,nombre,apellidos,correo,fechaNacimiento,
 direccion,telefono,celular,tipo) values ("p002","000","andrey","chaverri","andrey5757@hotmail.com",'1996-11-14',
 "alajuela",8888888,88888888,2);
-
 
