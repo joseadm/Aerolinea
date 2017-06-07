@@ -299,7 +299,8 @@
                 },
                 justNumbers: function (e) {
                     var key = window.Event ? e.which : e.keyCode;
-                    if (key==8 || key==127 || key==9) return true;
+                    if (key == 8 || key == 127 || key == 9)
+                        return true;
                     return (key >= 48 && key <= 57);
                 },
                 initAsiento: function () {
@@ -313,9 +314,9 @@
                 ReservaAdd2: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     if (this.view.validacionForm()) {
-                        var loginUsuario = new Usuario("<%=user1.getUsuario()%>","<%=user1.getContrasena()%>","<%=user1.getNombre()%>",
-                                        "<%=user1.getApellidos()%>","<%=user1.getCorreo()%>",new Date('<%=user1.getFecha_nac()%>'),
-                                        "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
+                        var loginUsuario = new Usuario("<%=user1.getUsuario()%>", "<%=user1.getContrasena()%>", "<%=user1.getNombre()%>",
+                                "<%=user1.getApellidos()%>", "<%=user1.getCorreo()%>", new Date('<%=user1.getFecha_nac()%>'),
+                                "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
                         this.model.reservacion.codigo = 0;
                         this.model.reservacion.nombreUsuario = loginUsuario;
                         this.model.reservacion.viaje1 = this.model.viajes[0];
@@ -345,24 +346,24 @@
                     }
                 },
                 /*TiqueteAdd: function (reserva) {
-                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                    var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                    for (var i = 0; i < cant_pasajeros && i < x.length; i++) {
-                        var nombreP = document.getElementById("nombre" + i);
-                        var apellidosP = document.getElementById("apellidos" + i);
-                        var pasaporteP = document.getElementById("numero_pasaporte" + i);
-                        this.model.tiquete.codigo = 0;
-                        this.model.tiquete.nombre_pasajero = nombreP;
-                        this.model.tiquete.apellidos_pasajero = apellidosP;
-                        this.model.tiquete.pasaporte_pasajero = pasaporteP;
-                        this.model.tiquete.codigo_reservacion = reserva;
-                        this.model.asiento.codigo = 0;
-                        this.model.asiento.estado = true;
-                        this.model.asiento.numero = $(x[i]).attr('id');
-                        this.model.asiento.numero_viaje = this.model.viajes[0];
-                        this.model.tiquete.codigo_asiento = this.model.asiento;
-                    }
-                },*/
+                 var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                 var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                 for (var i = 0; i < cant_pasajeros && i < x.length; i++) {
+                 var nombreP = document.getElementById("nombre" + i);
+                 var apellidosP = document.getElementById("apellidos" + i);
+                 var pasaporteP = document.getElementById("numero_pasaporte" + i);
+                 this.model.tiquete.codigo = 0;
+                 this.model.tiquete.nombre_pasajero = nombreP;
+                 this.model.tiquete.apellidos_pasajero = apellidosP;
+                 this.model.tiquete.pasaporte_pasajero = pasaporteP;
+                 this.model.tiquete.codigo_reservacion = reserva;
+                 this.model.asiento.codigo = 0;
+                 this.model.asiento.estado = true;
+                 this.model.asiento.numero = $(x[i]).attr('id');
+                 this.model.asiento.numero_viaje = this.model.viajes[0];
+                 this.model.tiquete.codigo_asiento = this.model.asiento;
+                 }
+                 },*/
                 AsientoUpdate1: function () {
                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
@@ -405,196 +406,165 @@
                 showTiquet();
                 showPasajeros();
                 showReserva();
+                //showOcupado();
             }
 
-            function showViajes() {
-                var t = $('#paginacion').DataTable();
-                $('#paginacion').dataTable().fnClearTable();
-                console.log(model.viajes.length);
-                for (var index = 0; index < model.viajes.length; index++) {
-                    t.row.add([
-                        model.viajes[index].vuelo.numero_vuelo,
-                        model.viajes[index].avion.marca + " " + model.viajes[index].avion.modelo,
-                        model.viajes[index].vuelo.ciudad_origen.nombre,
-                        model.viajes[index].vuelo.ciudad_destino.nombre,
-                        model.viajes[index].fecha,
-                        model.viajes[index].vuelo.hora,
-                        model.viajes[index].vuelo.duracion,
-                        controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion)
-                    ]).draw(false);
-                }
-            }
-            function showReserva() {
-                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                var t = $('#paginacion3').DataTable();
-                $('#paginacion3').dataTable().fnClearTable();
-                for (var index = 0; index < model.reservas.length; index++) {
-                    t.row.add([
-
-                        cant_pasajeros,
-                        model.reservas.viaje1.vuelo.ciudad_origen,
-                        model.reservas.viaje1.vuelo.ciudad_destino,
-                        model.reservas.viaje1.fecha,
-                        model.reservas.fecha_reserva,
-                        model.reservas.precioTotal
-
-                    ]).draw(false);
-                }
-            }
-            function showPasajeros() {
-
-                var tabla = document.getElementById("table-pasajeros");
-                var label;
-                var div;
-                var div2;
-                var span;
-                var input;
-                var i;
-                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-
-                for (var j = 0; j < cant_pasajeros; j++) {
-
-                    div = document.createElement("div");
-                    div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
-                    label = document.createElement("label");
-                    label.setAttribute("class", "control-label");
-                    label.appendChild(document.createTextNode("Nombre"));
-                    div.appendChild(label);
-                    div2 = document.createElement("div");
-                    div2.setAttribute("class", "input-group");
-                    span = document.createElement("span");
-                    span.setAttribute("class", "input-group-addon");
-                    i = document.createElement("i");
-                    i.setAttribute("class", "glyphicon glyphicon-user");
-                    span.appendChild(i);
-                    div2.appendChild(span);
-                    input = document.createElement("input");
-                    input.setAttribute("id", "nombre" + j);
-                    input.setAttribute("placeholder", "Nombre");
-                    input.setAttribute("class", "form-control");
-                    input.setAttribute("type", "text");
-                    div2.appendChild(input);
-                    div.appendChild(div2);
-                    tabla.appendChild(div);
-
-                    div = document.createElement("div");
-                    div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
-                    label = document.createElement("label");
-                    label.setAttribute("class", "control-label");
-                    label.appendChild(document.createTextNode("Apellidos"));
-                    div.appendChild(label);
-                    div2 = document.createElement("div");
-                    div2.setAttribute("class", "input-group");
-                    span = document.createElement("span");
-                    span.setAttribute("class", "input-group-addon");
-                    i = document.createElement("i");
-                    i.setAttribute("class", "glyphicon glyphicon-user");
-                    span.appendChild(i);
-                    div2.appendChild(span);
-                    input = document.createElement("input");
-                    input.setAttribute("id", "apellidos" + j);
-                    input.setAttribute("placeholder", "Apellidos");
-                    input.setAttribute("class", "form-control");
-                    input.setAttribute("type", "text");
-                    div2.appendChild(input);
-                    div.appendChild(div2);
-                    tabla.appendChild(div);
-
-                    div = document.createElement("div");
-                    div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
-                    label = document.createElement("label");
-                    label.setAttribute("class", "control-label");
-                    label.appendChild(document.createTextNode("Numero Pasaporte"));
-                    div.appendChild(label);
-                    div2 = document.createElement("div");
-                    div2.setAttribute("class", "input-group");
-                    span = document.createElement("span");
-                    span.setAttribute("class", "input-group-addon");
-                    i = document.createElement("i");
-                    i.setAttribute("class", "glyphicon glyphicon-user");
-                    span.appendChild(i);
-                    div2.appendChild(span);
-                    input = document.createElement("input");
-                    input.setAttribute("id", "numero_pasaporte" + j);
-                    input.setAttribute("placeholder", "Numero Pasaporte");
-                    input.setAttribute("class", "form-control");
-                    input.setAttribute("type", "text");
-                    div2.appendChild(input);
-                    div.appendChild(div2);
-                    tabla.appendChild(div);
-
-                }
-                tabla.appendChild(document.createElement("br"));
-
-            }
-            function showTiquet() {
-                var t = $('#paginacion3').DataTable();
-                $('#paginacion3').dataTable().fnClearTable();
-            }
-
-
-            $(document).ready(function () {
-                var table = $('#paginacion').DataTable({
-                    "paging": false,
-                    "ordering": false,
-                    "info": false,
-                    "searching": false
-                });
-
-                var table3 = $('#paginacion3').DataTable({
-                    "paging": false,
-                    "ordering": false,
-                    "info": false,
-                    "searching": false
-                });
-            });
-            function createSeat() {
-                var tabla = document.getElementById("tablaAsientos");
-                var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-                    "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
-                var li, ol, li2, tmp, lbl;
-                var filas = model.viajes[0].avion.cant_filas;
-                var cant_asientos_por_fila = model.viajes[0].avion.cant_asientos_por_fila;
-
-                for (var i = 1; i <= filas; i++) { //cant filas
-                    li = document.createElement("li");
-                    li.className = "row row--" + i;
-                    ol = document.createElement("ol");
-                    ol.className = "seats";
-                    ol.type = "A";
-
-                    for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
-                        typeAvion(cant_asientos_por_fila);
-                        li2 = document.createElement("li");
-                        li2.className = "seat";
-                        tmp = document.createElement("input");
-                        tmp.type = "checkbox";
-                        tmp.id = i + etiquetas[j] + model.viajes[0].numero_viaje;
-                        tmp.disabled = false;
-                        lbl = document.createElement("label");
-                        lbl.htmlFor = i + etiquetas[j] + model.viajes[0].numero_viaje;
-                        lbl.appendChild(document.createTextNode(i + etiquetas[j]));
-
-                        li2.appendChild(tmp);
-                        li2.appendChild(lbl);
-                        ol.appendChild(li2);
+            function showOcupado() {
+                var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                for (var i = 0; i < x.length; i++) {
+                    if ((model.asiento.numero_viaje === model.viajes[0].numero_viaje) && (!model.asiento.estado)) {
+                        x[i].disabled = true;
                     }
-                    li.appendChild(ol);
-                    tabla.appendChild(li);
                 }
-            }
 
-            function createSeat2() {
+                function showViajes() {
+                    var t = $('#paginacion').DataTable();
+                    $('#paginacion').dataTable().fnClearTable();
+                    console.log(model.viajes.length);
+                    for (var index = 0; index < model.viajes.length; index++) {
+                        t.row.add([
+                            model.viajes[index].vuelo.numero_vuelo,
+                            model.viajes[index].avion.marca + " " + model.viajes[index].avion.modelo,
+                            model.viajes[index].vuelo.ciudad_origen.nombre,
+                            model.viajes[index].vuelo.ciudad_destino.nombre,
+                            model.viajes[index].fecha,
+                            model.viajes[index].vuelo.hora,
+                            model.viajes[index].vuelo.duracion,
+                            controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion)
+                        ]).draw(false);
+                    }
+                }
+                function showReserva() {
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                    var t = $('#paginacion3').DataTable();
+                    $('#paginacion3').dataTable().fnClearTable();
+                    for (var index = 0; index < model.reservas.length; index++) {
+                        t.row.add([
 
-                if (model.viajes[1] == null) {
-                    $("#asientosVuelta").hide();
-                } else {
-                    var tabla = document.getElementById("tablaAsientos2");
+                            cant_pasajeros,
+                            model.reservas.viaje1.vuelo.ciudad_origen,
+                            model.reservas.viaje1.vuelo.ciudad_destino,
+                            model.reservas.viaje1.fecha,
+                            model.reservas.fecha_reserva,
+                            model.reservas.precioTotal
+
+                        ]).draw(false);
+                    }
+                }
+                function showPasajeros() {
+
+                    var tabla = document.getElementById("table-pasajeros");
+                    var label;
+                    var div;
+                    var div2;
+                    var span;
+                    var input;
+                    var i;
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+
+                    for (var j = 0; j < cant_pasajeros; j++) {
+
+                        div = document.createElement("div");
+                        div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
+                        label = document.createElement("label");
+                        label.setAttribute("class", "control-label");
+                        label.appendChild(document.createTextNode("Nombre"));
+                        div.appendChild(label);
+                        div2 = document.createElement("div");
+                        div2.setAttribute("class", "input-group");
+                        span = document.createElement("span");
+                        span.setAttribute("class", "input-group-addon");
+                        i = document.createElement("i");
+                        i.setAttribute("class", "glyphicon glyphicon-user");
+                        span.appendChild(i);
+                        div2.appendChild(span);
+                        input = document.createElement("input");
+                        input.setAttribute("id", "nombre" + j);
+                        input.setAttribute("placeholder", "Nombre");
+                        input.setAttribute("class", "form-control");
+                        input.setAttribute("type", "text");
+                        div2.appendChild(input);
+                        div.appendChild(div2);
+                        tabla.appendChild(div);
+
+                        div = document.createElement("div");
+                        div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
+                        label = document.createElement("label");
+                        label.setAttribute("class", "control-label");
+                        label.appendChild(document.createTextNode("Apellidos"));
+                        div.appendChild(label);
+                        div2 = document.createElement("div");
+                        div2.setAttribute("class", "input-group");
+                        span = document.createElement("span");
+                        span.setAttribute("class", "input-group-addon");
+                        i = document.createElement("i");
+                        i.setAttribute("class", "glyphicon glyphicon-user");
+                        span.appendChild(i);
+                        div2.appendChild(span);
+                        input = document.createElement("input");
+                        input.setAttribute("id", "apellidos" + j);
+                        input.setAttribute("placeholder", "Apellidos");
+                        input.setAttribute("class", "form-control");
+                        input.setAttribute("type", "text");
+                        div2.appendChild(input);
+                        div.appendChild(div2);
+                        tabla.appendChild(div);
+
+                        div = document.createElement("div");
+                        div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
+                        label = document.createElement("label");
+                        label.setAttribute("class", "control-label");
+                        label.appendChild(document.createTextNode("Numero Pasaporte"));
+                        div.appendChild(label);
+                        div2 = document.createElement("div");
+                        div2.setAttribute("class", "input-group");
+                        span = document.createElement("span");
+                        span.setAttribute("class", "input-group-addon");
+                        i = document.createElement("i");
+                        i.setAttribute("class", "glyphicon glyphicon-user");
+                        span.appendChild(i);
+                        div2.appendChild(span);
+                        input = document.createElement("input");
+                        input.setAttribute("id", "numero_pasaporte" + j);
+                        input.setAttribute("placeholder", "Numero Pasaporte");
+                        input.setAttribute("class", "form-control");
+                        input.setAttribute("type", "text");
+                        div2.appendChild(input);
+                        div.appendChild(div2);
+                        tabla.appendChild(div);
+
+                    }
+                    tabla.appendChild(document.createElement("br"));
+
+                }
+                function showTiquet() {
+                    var t = $('#paginacion3').DataTable();
+                    $('#paginacion3').dataTable().fnClearTable();
+                }
+
+
+                $(document).ready(function () {
+                    var table = $('#paginacion').DataTable({
+                        "paging": false,
+                        "ordering": false,
+                        "info": false,
+                        "searching": false
+                    });
+
+                    var table3 = $('#paginacion3').DataTable({
+                        "paging": false,
+                        "ordering": false,
+                        "info": false,
+                        "searching": false
+                    });
+                });
+                function createSeat() {
+                    var tabla = document.getElementById("tablaAsientos");
                     var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                         "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
                     var li, ol, li2, tmp, lbl;
-                    var filas = model.viajes[1].avion.cant_filas;
-                    var cant_asientos_por_fila = model.viajes[1].avion.cant_asientos_por_fila;
+                    var filas = model.viajes[0].avion.cant_filas;
+                    var cant_asientos_por_fila = model.viajes[0].avion.cant_asientos_por_fila;
 
                     for (var i = 1; i <= filas; i++) { //cant filas
                         li = document.createElement("li");
@@ -609,10 +579,10 @@
                             li2.className = "seat";
                             tmp = document.createElement("input");
                             tmp.type = "checkbox";
-                            tmp.id = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                            tmp.id = i + etiquetas[j] + model.viajes[0].numero_viaje;
                             tmp.disabled = false;
                             lbl = document.createElement("label");
-                            lbl.htmlFor = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                            lbl.htmlFor = i + etiquetas[j] + model.viajes[0].numero_viaje;
                             lbl.appendChild(document.createTextNode(i + etiquetas[j]));
 
                             li2.appendChild(tmp);
@@ -623,202 +593,242 @@
                         tabla.appendChild(li);
                     }
                 }
-            }
 
-            function typeAvion(asientos) {
-                if (asientos == 9){
-                     document.getElementById("tablaAsientos").style.padding = "0px 200px 0px 15px";
-                 }
-                if(this.model.viajes[1] != null && asientos == 9){
-                     document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
+                function createSeat2() {
+
+                    if (model.viajes[1] == null) {
+                        $("#asientosVuelta").hide();
+                    } else {
+                        var tabla = document.getElementById("tablaAsientos2");
+                        var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+                            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                        var li, ol, li2, tmp, lbl;
+                        var filas = model.viajes[1].avion.cant_filas;
+                        var cant_asientos_por_fila = model.viajes[1].avion.cant_asientos_por_fila;
+
+                        for (var i = 1; i <= filas; i++) { //cant filas
+                            li = document.createElement("li");
+                            li.className = "row row--" + i;
+                            ol = document.createElement("ol");
+                            ol.className = "seats";
+                            ol.type = "A";
+
+                            for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
+                                typeAvion(cant_asientos_por_fila);
+                                li2 = document.createElement("li");
+                                li2.className = "seat";
+                                tmp = document.createElement("input");
+                                tmp.type = "checkbox";
+                                tmp.id = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                                tmp.disabled = false;
+                                lbl = document.createElement("label");
+                                lbl.htmlFor = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                                lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+
+                                li2.appendChild(tmp);
+                                li2.appendChild(lbl);
+                                ol.appendChild(li2);
+                            }
+                            li.appendChild(ol);
+                            tabla.appendChild(li);
+                        }
+                    }
                 }
-            }
-            function loadSeats(){
-                Proxy.getAsientosIda(this.model.viajes[0],function (result) {
+
+                function typeAvion(asientos) {
+                    if (asientos >= 9) {
+                        document.getElementById("tablaAsientos").style.padding = "0px 200px 0px 15px";
+                    }
+                    if (this.model.viajes[1] != null && asientos >= 9) {
+                        document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
+                    }
+                }
+                function loadSeats() {
+                    Proxy.getAsientosIda(this.model.viajes[0], function (result) {
                         model.asientosIda = result;
                     });
-                if(this.model.viajes[1] != null){
-                    Proxy.getAsientosVuelta(this.model.viajes[1],function (result) {
-                        model.asientosVuelta = result;
-                    });
-                }
-            }
-
-            function reservarAsientos() {
-                var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                var reserva;
-                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                var user = "andrey";
-                // var cambio = new TipoCambio().getVenta(); No lo agarra
-                for (var i = 0; i < x.length; i++) {
-                    if (x[i].checked && !x[i].disabled) {
-                        x[i].disabled = true;
+                    if (this.model.viajes[1] != null) {
+                        Proxy.getAsientosVuelta(this.model.viajes[1], function (result) {
+                            model.asientosVuelta = result;
+                        });
                     }
                 }
-            }
 
-            function reservarAsientos2() {
-                var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
-                for (var i = 0; i < x.length; i++) {
-                    if (x[i].checked && !x[i].disabled) {
-                        x[i].disabled = true;
+                function reservarAsientos() {
+                    var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                    var reserva;
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                    var user = "andrey";
+                    // var cambio = new TipoCambio().getVenta(); No lo agarra
+                    for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            x[i].disabled = true;
+                        }
                     }
                 }
-            }
 
-            function showMessage() {
-                window.alert("Reserva exitosa");
-            }
-            function validacionForm() {
-                var tam = 0;
-                var nombre0 = document.getElementById("nombre0");
-                if (!(requiredField(nombre0.value))) {
-                    tam++;
-                    nombre0.style.borderColor = "red";
-                } else {
-                    nombre0.style.borderColor = "gray";
+                function reservarAsientos2() {
+                    var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                    for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            x[i].disabled = true;
+                        }
+                    }
                 }
-                var apellidos0 = document.getElementById("apellidos0");
-                if (!(requiredField(apellidos0.value))) {
-                    tam++;
-                    apellidos0.style.borderColor = "red";
-                } else {
-                    apellidos0.style.borderColor = "gray";
-                }
-                var numero_pasaporte0 = document.getElementById("numero_pasaporte0");
-                if (!(requiredField(numero_pasaporte0.value))) {
-                    tam++;
-                    numero_pasaporte0.style.borderColor = "red";
-                } else {
-                    numero_pasaporte0.style.borderColor = "gray";
-                }
-                /*var nombre1 = document.getElementById("nombre1");
-                if (!(requiredField(nombre1.value))) {
-                    tam++;
-                    nombre1.style.borderColor = "red";
-                } else {
-                    nombre1.style.borderColor = "gray";
-                }
-                var apellidos1 = document.getElementById("apellidos1");
-                if (!(requiredField(apellidos1.value))) {
-                    tam++;
-                    apellidos1.style.borderColor = "red";
-                } else {
-                    apellidos1.style.borderColor = "gray";
-                }
-                var numero_pasaporte1 = document.getElementById("numero_pasaporte1");
-                if (!(requiredField(numero_pasaporte1.value))) {
-                    tam++;
-                    numero_pasaporte1.style.borderColor = "red";
-                } else {
-                    numero_pasaporte1.style.borderColor = "gray";
-                }
-                var nombre2 = document.getElementById("nombre2");
-                if (!(requiredField(nombre2.value))) {
-                    tam++;
-                    nombre2.style.borderColor = "red";
-                } else {
-                    nombre2.style.borderColor = "gray";
-                }
-                var apellidos2 = document.getElementById("apellidos2");
-                if (!(requiredField(apellidos2.value))) {
-                    tam++;
-                    apellidos2.style.borderColor = "red";
-                } else {
-                    apellidos2.style.borderColor = "gray";
-                }
-                var numero_pasaporte2 = document.getElementById("numero_pasaporte2");
-                if (!(requiredField(numero_pasaporte2.value))) {
-                    tam++;
-                    numero_pasaporte2.style.borderColor = "red";
-                } else {
-                    numero_pasaporte2.style.borderColor = "gray";
-                }
-                var nombre3 = document.getElementById("nombre3");
-                if (!(requiredField(nombre3.value))) {
-                    tam++;
-                    nombre3.style.borderColor = "red";
-                } else {
-                    nombre3.style.borderColor = "gray";
-                }
-                var apellidos3 = document.getElementById("apellidos3");
-                if (!(requiredField(apellidos3.value))) {
-                    tam++;
-                    apellidos3.style.borderColor = "red";
-                } else {
-                    apellidos3.style.borderColor = "gray";
-                }
-                var numero_pasaporte3 = document.getElementById("numero_pasaporte3");
-                if (!(requiredField(numero_pasaporte3.value))) {
-                    tam++;
-                    numero_pasaporte3.style.borderColor = "red";
-                } else {
-                    numero_pasaporte3.style.borderColor = "gray";
-                }
-                var nombre4 = document.getElementById("nombre4");
-                if (!(requiredField(nombre4.value))) {
-                    tam++;
-                    nombre4.style.borderColor = "red";
-                } else {
-                    nombre4.style.borderColor = "gray";
-                }
-                var apellidos4 = document.getElementById("apellidos4");
-                if (!(requiredField(apellidos4.value))) {
-                    tam++;
-                    apellidos4.style.borderColor = "red";
-                } else {
-                    apellidos4.style.borderColor = "gray";
-                }
-                var numero_pasaporte4 = document.getElementById("numero_pasaporte4");
-                if (!(requiredField(numero_pasaporte4.value))) {
-                    tam++;
-                    numero_pasaporte4.style.borderColor = "red";
-                } else {
-                    numero_pasaporte4.style.borderColor = "gray";
-                }
-                var nombre5 = document.getElementById("nombre5");
-                if (!(requiredField(nombre5.value))) {
-                    tam++;
-                    nombre5.style.borderColor = "red";
-                } else {
-                    nombre5.style.borderColor = "gray";
-                }
-                var apellidos5 = document.getElementById("apellidos5");
-                if (!(requiredField(apellidos5.value))) {
-                    tam++;
-                    apellidos5.style.borderColor = "red";
-                } else {
-                    apellidos5.style.borderColor = "gray";
-                }
-                var numero_pasaporte5 = document.getElementById("numero_pasaporte5");
-                if (!(requiredField(numero_pasaporte5.value))) {
-                    tam++;
-                    numero_pasaporte5.style.borderColor = "red";
-                } else {
-                    numero_pasaporte5.style.borderColor = "gray";
-                }*/
-                var numTarjeta = document.getElementById("numTarjeta");
-                if (!(requiredField(numTarjeta.value))) {
-                    tam++;
-                    numTarjeta.style.borderColor = "red";
-                } else {
-                    numTarjeta.style.borderColor = "gray";
-                }
-                if (tam > 0) {
 
-                    return false;
+                function showMessage() {
+                    window.alert("Reserva exitosa");
                 }
-                return true;
-            }
-            function requiredField(valor) {
-                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
-                    return false;
+                function validacionForm() {
+                    var tam = 0;
+                    var nombre0 = document.getElementById("nombre0");
+                    if (!(requiredField(nombre0.value))) {
+                        tam++;
+                        nombre0.style.borderColor = "red";
+                    } else {
+                        nombre0.style.borderColor = "gray";
+                    }
+                    var apellidos0 = document.getElementById("apellidos0");
+                    if (!(requiredField(apellidos0.value))) {
+                        tam++;
+                        apellidos0.style.borderColor = "red";
+                    } else {
+                        apellidos0.style.borderColor = "gray";
+                    }
+                    var numero_pasaporte0 = document.getElementById("numero_pasaporte0");
+                    if (!(requiredField(numero_pasaporte0.value))) {
+                        tam++;
+                        numero_pasaporte0.style.borderColor = "red";
+                    } else {
+                        numero_pasaporte0.style.borderColor = "gray";
+                    }
+                    /*var nombre1 = document.getElementById("nombre1");
+                     if (!(requiredField(nombre1.value))) {
+                     tam++;
+                     nombre1.style.borderColor = "red";
+                     } else {
+                     nombre1.style.borderColor = "gray";
+                     }
+                     var apellidos1 = document.getElementById("apellidos1");
+                     if (!(requiredField(apellidos1.value))) {
+                     tam++;
+                     apellidos1.style.borderColor = "red";
+                     } else {
+                     apellidos1.style.borderColor = "gray";
+                     }
+                     var numero_pasaporte1 = document.getElementById("numero_pasaporte1");
+                     if (!(requiredField(numero_pasaporte1.value))) {
+                     tam++;
+                     numero_pasaporte1.style.borderColor = "red";
+                     } else {
+                     numero_pasaporte1.style.borderColor = "gray";
+                     }
+                     var nombre2 = document.getElementById("nombre2");
+                     if (!(requiredField(nombre2.value))) {
+                     tam++;
+                     nombre2.style.borderColor = "red";
+                     } else {
+                     nombre2.style.borderColor = "gray";
+                     }
+                     var apellidos2 = document.getElementById("apellidos2");
+                     if (!(requiredField(apellidos2.value))) {
+                     tam++;
+                     apellidos2.style.borderColor = "red";
+                     } else {
+                     apellidos2.style.borderColor = "gray";
+                     }
+                     var numero_pasaporte2 = document.getElementById("numero_pasaporte2");
+                     if (!(requiredField(numero_pasaporte2.value))) {
+                     tam++;
+                     numero_pasaporte2.style.borderColor = "red";
+                     } else {
+                     numero_pasaporte2.style.borderColor = "gray";
+                     }
+                     var nombre3 = document.getElementById("nombre3");
+                     if (!(requiredField(nombre3.value))) {
+                     tam++;
+                     nombre3.style.borderColor = "red";
+                     } else {
+                     nombre3.style.borderColor = "gray";
+                     }
+                     var apellidos3 = document.getElementById("apellidos3");
+                     if (!(requiredField(apellidos3.value))) {
+                     tam++;
+                     apellidos3.style.borderColor = "red";
+                     } else {
+                     apellidos3.style.borderColor = "gray";
+                     }
+                     var numero_pasaporte3 = document.getElementById("numero_pasaporte3");
+                     if (!(requiredField(numero_pasaporte3.value))) {
+                     tam++;
+                     numero_pasaporte3.style.borderColor = "red";
+                     } else {
+                     numero_pasaporte3.style.borderColor = "gray";
+                     }
+                     var nombre4 = document.getElementById("nombre4");
+                     if (!(requiredField(nombre4.value))) {
+                     tam++;
+                     nombre4.style.borderColor = "red";
+                     } else {
+                     nombre4.style.borderColor = "gray";
+                     }
+                     var apellidos4 = document.getElementById("apellidos4");
+                     if (!(requiredField(apellidos4.value))) {
+                     tam++;
+                     apellidos4.style.borderColor = "red";
+                     } else {
+                     apellidos4.style.borderColor = "gray";
+                     }
+                     var numero_pasaporte4 = document.getElementById("numero_pasaporte4");
+                     if (!(requiredField(numero_pasaporte4.value))) {
+                     tam++;
+                     numero_pasaporte4.style.borderColor = "red";
+                     } else {
+                     numero_pasaporte4.style.borderColor = "gray";
+                     }
+                     var nombre5 = document.getElementById("nombre5");
+                     if (!(requiredField(nombre5.value))) {
+                     tam++;
+                     nombre5.style.borderColor = "red";
+                     } else {
+                     nombre5.style.borderColor = "gray";
+                     }
+                     var apellidos5 = document.getElementById("apellidos5");
+                     if (!(requiredField(apellidos5.value))) {
+                     tam++;
+                     apellidos5.style.borderColor = "red";
+                     } else {
+                     apellidos5.style.borderColor = "gray";
+                     }
+                     var numero_pasaporte5 = document.getElementById("numero_pasaporte5");
+                     if (!(requiredField(numero_pasaporte5.value))) {
+                     tam++;
+                     numero_pasaporte5.style.borderColor = "red";
+                     } else {
+                     numero_pasaporte5.style.borderColor = "gray";
+                     }*/
+                    var numTarjeta = document.getElementById("numTarjeta");
+                    if (!(requiredField(numTarjeta.value))) {
+                        tam++;
+                        numTarjeta.style.borderColor = "red";
+                    } else {
+                        numTarjeta.style.borderColor = "gray";
+                    }
+                    if (tam > 0) {
+
+                        return false;
+                    }
+                    return true;
                 }
-                return true;
-            }
+                function requiredField(valor) {
+                    if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+                        return false;
+                    }
+                    return true;
+                }
 
 
-            document.addEventListener("DOMContentLoaded", pageLoad);
+                document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
     </body>
 </html>
