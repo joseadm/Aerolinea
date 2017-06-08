@@ -579,6 +579,7 @@
                     input.setAttribute("placeholder", "Nombre");
                     input.setAttribute("class", "form-control");
                     input.setAttribute("type", "text");
+                    input.setAttribute("maxlength",45);
                     div2.appendChild(input);
                     div.appendChild(div2);
                     tabla.appendChild(div);
@@ -601,6 +602,7 @@
                     input.setAttribute("placeholder", "Apellidos");
                     input.setAttribute("class", "form-control");
                     input.setAttribute("type", "text");
+                    input.setAttribute("maxlength",45);
                     div2.appendChild(input);
                     div.appendChild(div2);
                     tabla.appendChild(div);
@@ -623,6 +625,7 @@
                     input.setAttribute("placeholder", "Numero Pasaporte");
                     input.setAttribute("class", "form-control");
                     input.setAttribute("type", "text");
+                    input.setAttribute("maxlength",15);
                     input.onkeypress = justNumbers;
                     div2.appendChild(input);
                     div.appendChild(div2);
