@@ -335,7 +335,10 @@
                     }
                     if (this.view.validacionForm()) {
                         this.view.showMessage();
-                        document.location = "/Aerolinea/index.jsp";
+                        Proxy.GeneratePDF(this.model.reservacion, this.model.viajes, function (result){
+                        });
+                        window.open("GeneratePDF");
+                        document.location = "/Aerolinea/reserva.jsp";
                     }
                 },
                 ReservacionIda: function(reserva){

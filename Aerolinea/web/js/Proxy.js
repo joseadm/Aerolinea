@@ -15,39 +15,24 @@ Proxy.getCiudades = function (callBack) {
     };
     AJAX_req.send();
 };
-Proxy.callPDF = function (callBack) {
+Proxy.GeneratePDF = function(reservacion,viajes,callBack){
+    jsonReservacion = JSON.stringify(reservacion,JsonUtils.replacer);
+    jsonViajes = JSON.stringify(viajes,JsonUtils.replacer);
     var AJAX_req = new XMLHttpRequest();
-    url = "/Aerolinea/GeneratePDF?action=generatePDF";
-    AJAX_req.open("GET", url, true);
+    url="/Aerolinea/GeneratePDF";
+    AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    AJAX_req.onreadystatechange = function () {
-        if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
-            var object = JSON.parse(AJAX_req.responseText, JsonUtils.revive);
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            jsonText=AJAX_req.responseText;
+            var object = JSON.parse( jsonText,JsonUtils.revive );
             callBack(object);
         }
     };
-    AJAX_req.send();
+    AJAX_req.send("reservacion="+jsonReservacion+"&viajes="+jsonViajes);   
 };
 
-Proxy.getPDF = function (callBack) {
-    alert("Inside create PDF ajax");
-    $.ajax({
-        url: '/Aerolinea/GeneratePDF',
-        type: 'get',
-        dataType: 'json',
-        contentType: 'application/json',
 
-        success: function (map) {
-            console.log(map);
-        },
-
-        error: function (map) {
-            alert(map);
-            alert("error occured!!!");
-        },
-
-    });
-};
 Proxy.getPromo = function (callBack) {
     var AJAX_req = new XMLHttpRequest();
     url = "/Aerolinea/AirlineService?action=vueloListPromo";
