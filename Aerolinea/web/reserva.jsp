@@ -26,7 +26,7 @@
         <div class="container"> 
             <fieldset>
                 <!-- Nombre Formulario -->
-                <legend align="center">Itenerario</legend>
+                <legend align="center">Itinerario</legend>
                 <!-- Itenerario.................. -->
                 <div class="container">
                     <div class="table-responsive">
