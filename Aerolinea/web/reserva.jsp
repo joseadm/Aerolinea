@@ -96,7 +96,7 @@
                             <div class="table-responsive">
                                 <table id="paginacion3" class="display nowrap" cellspacing="0" width="100%">
                                     <thead>
-                                        <tr><th>Cantidad de Tiquetes</th><th>Salida</th><th>Destino</th><th>Fecha</th><th>Total</th></tr>
+                                        <tr><th>Cantidad de Vuelos</th><th>Cantidad de Tiquetes</th><th>Fecha</th><th>Total</th></tr>
                                     </thead>
                                     <tbody id="desgloseReservacion">
                                     </tbody>
@@ -328,10 +328,7 @@
                     }
                     if (this.view.validacionForm()) {
                         this.view.showMessage();
-                        Proxy.GeneratePDF(this.model.reservacion, this.model.viajes, function (result){
-                        });
-                        window.open("GeneratePDF");
-                        document.location = "/Aerolinea/reserva.jsp";
+                        document.location = "/Aerolinea/index.jsp";
                     }
                 },
                 ReservacionIda: function(reserva){
@@ -483,18 +480,36 @@
             }
             function showReserva() {
             var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+             model.reservacion.precioTotal = cant_pasajeros * model.viajes[0].vuelo.precio;
+             model.reservacion.fecha_reserva = new Date();
+            var number = 1;
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            var today = dd+'/'+mm+'/'+yyyy;
+            model.reservacion.fecha_reserva = today;
+             if (this.model.viajes[1] != null) {
+                            var subtotal1 = model.reservacion.precioTotal;
+                            var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
+                            this.model.reservacion.precioTotal = subtotal1 + subtotal2;
+                            number++;
+                            
+            }
                     var t = $('#paginacion3').DataTable();
                     $('#paginacion3').dataTable().fnClearTable();
-                    for (var index = 0; index < model.reservas.length; index++) {
                     t.row.add([
+                    number,
                     cant_pasajeros,
-                    model.reservas.viaje1.vuelo.ciudad_origen,
-                    model.reservas.viaje1.vuelo.ciudad_destino,
-                    model.reservas.viaje1.fecha,
-                    model.reservas.fecha_reserva,
-                    model.reservas.precioTotal
+                    model.reservacion.fecha_reserva,
+                    "$ "+model.reservacion.precioTotal
                     ]).draw(false);
-            }
             }
             function showPasajeros() {
             var tabla = document.getElementById("table-pasajeros");
@@ -642,7 +657,7 @@
                         ol.className = "seats";
                         ol.type = "A";
                     for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
-                        typeAvion(cant_asientos_por_fila);
+                        typeAvion2(cant_asientos_por_fila);
                         li2 = document.createElement("li");
                         li2.className = "seat";
                         tmp = document.createElement("input");
@@ -662,9 +677,11 @@
             }
             }
             function typeAvion(asientos) {
-                if (asientos >= 9) {
+                if (asientos >= 9 && this.model.viajes[0] != null) {
                     document.getElementById("tablaAsientos").style.padding = "0px 200px 0px 15px";
                 }
+            }
+            function typeAvion2(asientos) {
                 if (this.model.viajes[1] != null && asientos >= 9) {
                     document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
                 }
