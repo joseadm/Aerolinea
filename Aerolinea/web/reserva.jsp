@@ -151,11 +151,11 @@
                         </form>
                     </div>
                 </div></center>
-                            <div class="row" align="center">
-                                    <button onclick='controller.ReservaAdd();' class="btn btn-success btn-lg" id="aceptar">Aceptar</button>
-                                    <button onclick="window.location.href='/Aerolinea/index.jsp'" class="btn btn-danger btn-lg" id="cancelar">Cancelar</button>
-                            </div>
-         </div>
+            <div class="row" align="center">
+                <button onclick='controller.ReservaAdd();' class="btn btn-success btn-lg" id="aceptar">Aceptar</button>
+                <button onclick="window.location.href = '/Aerolinea/index.jsp'" class="btn btn-danger btn-lg" id="cancelar">Cancelar</button>
+            </div>
+        </div>
         <!-- Footer -->
         <div class="container">
             <footer class="footer">
@@ -209,8 +209,8 @@
                     });
                     if (this.model.viajes[1] != null) {
                         Proxy.getAsientosVuelta(model.viajes[1], function (result) {
-                         this.model.asientosVuelta = result;
-                         view.showOcupado();
+                            this.model.asientosVuelta = result;
+                            view.showOcupado();
                         });
                     }
                 },
@@ -292,132 +292,132 @@
                     var model = this.model;
                     model.tiquete = new Tiquete();
                 },
-                guid: function(){
+                guid: function () {
                     function s4() {
                         return Math.floor((1 + Math.random()) * 0x10000)
-                            .toString(16)
-                            .substring(1);
+                                .toString(16)
+                                .substring(1);
                     }
                     return s4() + '-' + s4() + '-' +
-                    s4();
+                            s4();
                 },
                 ReservaAdd: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     var number = 0;
-                        if(this.view.validacionForm()){
+                    if (this.view.validacionForm() && this.view.valPasajeros()) {
                         var loginUsuario = new Usuario("<%=user1.getUsuario()%>", "<%=user1.getContrasena()%>", "<%=user1.getNombre()%>",
                                 "<%=user1.getApellidos()%>", "<%=user1.getCorreo()%>", new Date('<%=user1.getFecha_nac()%>'),
                                 "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
-                        var codigoReserva = this.guid()+"-<%=user1.getUsuario()%>";
+                        var codigoReserva = this.guid() + "-<%=user1.getUsuario()%>";
                         model.reservacion.codigo = codigoReserva;
                         model.reservacion.nombreUsuario = loginUsuario;
                         model.reservacion.viaje1 = model.viajes[0];
                         model.reservacion.precioTotal = cant_pasajeros * model.viajes[0].vuelo.precio;
                         model.reservacion.fecha_reserva = new Date();
                         if (this.model.viajes[1] == null) {
-                            if(this.validateEmptySeats()){
-                            this.AsientoUpdate1();
-                            this.ReservacionIda(this.model.reservacion);
-                            this.TiqueteAddIda(this.model.reservacion);
-                            number++;
-                        }else{
-                            this.view.showMessageError();
-                        }
+                            if (this.validateEmptySeats()) {
+                                this.AsientoUpdate1();
+                                this.ReservacionIda(this.model.reservacion);
+                                this.TiqueteAddIda(this.model.reservacion);
+                                number++;
+                            } else {
+                                this.view.showMessageError();
+                            }
                         }
                         if (this.model.viajes[1] != null) {
-                            if(this.validateEmptySeats2()){
-                            this.model.reservacion.viaje2 = model.viajes[1];
-                            var subtotal1 = model.reservacion.precioTotal;
-                            var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
-                            this.model.reservacion.precioTotal = subtotal1 + subtotal2;
-                            this.AsientoUpdate2();
-                            this.ReservacionVuelta(this.model.reservacion);
-                            this.TiqueteAddIda(this.model.reservacion);
-                            this.TiqueteAddVuelta(this.model.reservacion);
-                            number++;
-                        }else{
-                            this.view.showMessageError();
-                        }
+                            if (this.validateEmptySeats2()) {
+                                this.model.reservacion.viaje2 = model.viajes[1];
+                                var subtotal1 = model.reservacion.precioTotal;
+                                var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
+                                this.model.reservacion.precioTotal = subtotal1 + subtotal2;
+                                this.AsientoUpdate2();
+                                this.ReservacionVuelta(this.model.reservacion);
+                                this.TiqueteAddIda(this.model.reservacion);
+                                this.TiqueteAddVuelta(this.model.reservacion);
+                                number++;
+                            } else {
+                                this.view.showMessageError();
+                            }
                         }
                     }
-                    if (number ==1 || number ==2) {
+                    if (number == 1 || number == 2) {
                         this.view.showMessage();
                         document.location = "/Aerolinea/index.jsp";
                     }
                 },
-                ReservacionIda: function(reserva){
+                ReservacionIda: function (reserva) {
                     Proxy.ReservacionAdd(reserva, function (result) {
-                                model.reservacion = result;
-                            });
+                        model.reservacion = result;
+                    });
                 },
-                ReservacionVuelta: function(reserva){
+                ReservacionVuelta: function (reserva) {
                     Proxy.ReservacionAdd2(reserva, function (result) {
-                                model.reservacion = result;
-                            });
+                        model.reservacion = result;
+                    });
                 },
                 TiqueteAddIda: function (reserva) {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     var j = 0;
-                     for (var i = 0; j < cant_pasajeros && i < x.length;i++){
-                    if (x[i].checked && !x[i].disabled) {
-                        var nombreP = document.getElementById("nombre" + j).value;
-                        var apellidosP = document.getElementById("apellidos" + j).value;
-                        var pasaporteP = document.getElementById("numero_pasaporte" + j).value;
-                        model.tiquete.codigo = 0;
-                        model.tiquete.nombre_pasajero = nombreP;
-                        model.tiquete.apellidos_pasajero = apellidosP;
-                        model.tiquete.pasaporte_pasajero = pasaporteP;
-                        model.tiquete.codigo_reservacion = reserva;
-                        model.asiento.estado = false;
-                        model.asiento.numero = $(x[i]).attr('id');
-                        model.asiento.numero_viaje = this.model.viajes[0];
-                        model.tiquete.codigo_asiento = model.asiento;
-                        j++;
-                        Proxy.tiqueteAdd(this.model.tiquete,function (result) {
+                    for (var i = 0; j < cant_pasajeros && i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            var nombreP = document.getElementById("nombre" + j).value;
+                            var apellidosP = document.getElementById("apellidos" + j).value;
+                            var pasaporteP = document.getElementById("numero_pasaporte" + j).value;
+                            model.tiquete.codigo = 0;
+                            model.tiquete.nombre_pasajero = nombreP;
+                            model.tiquete.apellidos_pasajero = apellidosP;
+                            model.tiquete.pasaporte_pasajero = pasaporteP;
+                            model.tiquete.codigo_reservacion = reserva;
+                            model.asiento.estado = false;
+                            model.asiento.numero = $(x[i]).attr('id');
+                            model.asiento.numero_viaje = this.model.viajes[0];
+                            model.tiquete.codigo_asiento = model.asiento;
+                            j++;
+                            Proxy.tiqueteAdd(this.model.tiquete, function (result) {
                                 this.model.tiquete.codigo = result;
-                        });
+                            });
+                        }
                     }
-                }
                 },
                 TiqueteAddVuelta: function (reserva) {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
                     var j = 0;
-                     for (var i = 0; j < cant_pasajeros && i < x.length;i++){
-                    if (x[i].checked && !x[i].disabled) {
-                        var nombreP = document.getElementById("nombre" + j).value;
-                        var apellidosP = document.getElementById("apellidos" + j).value;
-                        var pasaporteP = document.getElementById("numero_pasaporte" + j).value;
-                        model.tiquete.codigo = 0;
-                        model.tiquete.nombre_pasajero = nombreP;
-                        model.tiquete.apellidos_pasajero = apellidosP;
-                        model.tiquete.pasaporte_pasajero = pasaporteP;
-                        model.tiquete.codigo_reservacion = reserva;
-                        model.asiento.codigo = 0;
-                        model.asiento.estado = false;
-                        model.asiento.numero = $(x[i]).attr('id');
-                        model.asiento.numero_viaje = this.model.viajes[1];
-                        model.tiquete.codigo_asiento = this.model.asiento;
-                        j++;
-                        Proxy.tiqueteAdd(this.model.tiquete,function (result) {
+                    for (var i = 0; j < cant_pasajeros && i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            var nombreP = document.getElementById("nombre" + j).value;
+                            var apellidosP = document.getElementById("apellidos" + j).value;
+                            var pasaporteP = document.getElementById("numero_pasaporte" + j).value;
+                            model.tiquete.codigo = 0;
+                            model.tiquete.nombre_pasajero = nombreP;
+                            model.tiquete.apellidos_pasajero = apellidosP;
+                            model.tiquete.pasaporte_pasajero = pasaporteP;
+                            model.tiquete.codigo_reservacion = reserva;
+                            model.asiento.codigo = 0;
+                            model.asiento.estado = false;
+                            model.asiento.numero = $(x[i]).attr('id');
+                            model.asiento.numero_viaje = this.model.viajes[1];
+                            model.tiquete.codigo_asiento = this.model.asiento;
+                            j++;
+                            Proxy.tiqueteAdd(this.model.tiquete, function (result) {
                                 this.model.tiquete = result;
-                        });
+                            });
+                        }
                     }
-                }
                 },
                 AsientoUpdate1: function () {
-                        var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                        for (var i = 0; i < x.length; i++) {
-                            if (x[i].checked && !x[i].disabled) {
-                                model.asiento.estado = false;
-                                model.asiento.numero = $(x[i]).attr('id');
-                                model.asiento.numero_viaje = this.model.viajes[0];
-                                Proxy.AsientoUpdate(this.model.asiento, function (result) {
-                                    model.asiento = result;
-                                });
-                            }
-                            }
+                    var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                    for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            model.asiento.estado = false;
+                            model.asiento.numero = $(x[i]).attr('id');
+                            model.asiento.numero_viaje = this.model.viajes[0];
+                            Proxy.AsientoUpdate(this.model.asiento, function (result) {
+                                model.asiento = result;
+                            });
+                        }
+                    }
                 },
                 AsientoUpdate2: function () {
                     var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
@@ -433,34 +433,34 @@
                         }
                     }
                 },
-                 validateEmptySeats: function(){
-                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                     var count=0;
-                      var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                      for (var i = 0; i < x.length; i++) {
-                            if (x[i].checked && !x[i].disabled) {
-                                count++;
-                            }
+                validateEmptySeats: function () {
+                    var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                    var count = 0;
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                    for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            count++;
                         }
-                    if(count == 0 || count<cant_pasajeros || count>cant_pasajeros){
+                    }
+                    if (count == 0 || count < cant_pasajeros || count > cant_pasajeros) {
                         return false;
                     }
                     return true;
-                 },
-                 validateEmptySeats2: function(){
-                     var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
-                     var count=0;
-                      var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                      for (var i = 0; i < x.length; i++) {
-                            if (x[i].checked && !x[i].disabled) {
-                                count++;
-                            }
+                },
+                validateEmptySeats2: function () {
+                    var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                    var count = 0;
+                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                    for (var i = 0; i < x.length; i++) {
+                        if (x[i].checked && !x[i].disabled) {
+                            count++;
                         }
-                    if(count == 0 || count<cant_pasajeros || count>cant_pasajeros){
+                    }
+                    if (count == 0 || count < cant_pasajeros || count > cant_pasajeros) {
                         return false;
                     }
                     return true;
-                 }
+                }
             };
         </script>
         <script> // View
@@ -477,88 +477,88 @@
                 showReserva();
             }
             function showOcupado() {
-             var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
-                    for (var i = 0; i < x.length; i++) {
-                        for (var index = 0; index < model.asientosVuelta.length; index++) {
-                        if ($(x[i]).attr('id') == model.asientosVuelta[index].numero &&  model.asientosVuelta[index].estado == 0 ) {
+                var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                for (var i = 0; i < x.length; i++) {
+                    for (var index = 0; index < model.asientosVuelta.length; index++) {
+                        if ($(x[i]).attr('id') == model.asientosVuelta[index].numero && model.asientosVuelta[index].estado == 0) {
                             x[i].disabled = true;
-                            
+
                         }
+                    }
                 }
-            }
             }
             function showOcupado2() {
-            var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                    for (var i = 0; i < x.length; i++) {
-                        for (var index = 0; index < model.asientosIda.length; index++) {
-                        if ($(x[i]).attr('id') == model.asientosIda[index].numero &&  model.asientosIda[index].estado == 0 ) {
+                var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                for (var i = 0; i < x.length; i++) {
+                    for (var index = 0; index < model.asientosIda.length; index++) {
+                        if ($(x[i]).attr('id') == model.asientosIda[index].numero && model.asientosIda[index].estado == 0) {
                             x[i].disabled = true;
-                            
+
                         }
+                    }
                 }
             }
-            }
             function showViajes() {
-            var t = $('#paginacion').DataTable();
-                    $('#paginacion').dataTable().fnClearTable();
-                    console.log(model.viajes.length);
-                    for (var index = 0; index < model.viajes.length; index++) {
+                var t = $('#paginacion').DataTable();
+                $('#paginacion').dataTable().fnClearTable();
+                console.log(model.viajes.length);
+                for (var index = 0; index < model.viajes.length; index++) {
                     t.row.add([
-                    model.viajes[index].vuelo.numero_vuelo,
-                    model.viajes[index].avion.marca + " " + model.viajes[index].avion.modelo,
-                    model.viajes[index].vuelo.ciudad_origen.nombre,
-                    model.viajes[index].vuelo.ciudad_destino.nombre,
-                    model.viajes[index].fecha,
-                    model.viajes[index].vuelo.hora,
-                    model.viajes[index].vuelo.duracion,
-                    controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion)
+                        model.viajes[index].vuelo.numero_vuelo,
+                        model.viajes[index].avion.marca + " " + model.viajes[index].avion.modelo,
+                        model.viajes[index].vuelo.ciudad_origen.nombre,
+                        model.viajes[index].vuelo.ciudad_destino.nombre,
+                        model.viajes[index].fecha,
+                        model.viajes[index].vuelo.hora,
+                        model.viajes[index].vuelo.duracion,
+                        controller.sumaTiempos(model.viajes[index].vuelo.hora, model.viajes[index].vuelo.duracion)
                     ]).draw(false);
-            }
+                }
             }
             function showReserva() {
-            var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-             model.reservacion.precioTotal = cant_pasajeros * model.viajes[0].vuelo.precio;
-             model.reservacion.fecha_reserva = new Date();
-            var number = 1;
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth()+1;
-            var yyyy = today.getFullYear();
-            if(dd<10){
-                dd='0'+dd;
-            } 
-            if(mm<10){
-                mm='0'+mm;
-            } 
-            var today = dd+'/'+mm+'/'+yyyy;
-            model.reservacion.fecha_reserva = today;
-             if (this.model.viajes[1] != null) {
-                            var subtotal1 = model.reservacion.precioTotal;
-                            var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
-                            this.model.reservacion.precioTotal = subtotal1 + subtotal2;
-                            number++;
-                            cant_pasajeros = cant_pasajeros*2;
-                            
-            }
-                    var t = $('#paginacion3').DataTable();
-                    $('#paginacion3').dataTable().fnClearTable();
-                    t.row.add([
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                model.reservacion.precioTotal = cant_pasajeros * model.viajes[0].vuelo.precio;
+                model.reservacion.fecha_reserva = new Date();
+                var number = 1;
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                var today = dd + '/' + mm + '/' + yyyy;
+                model.reservacion.fecha_reserva = today;
+                if (this.model.viajes[1] != null) {
+                    var subtotal1 = model.reservacion.precioTotal;
+                    var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
+                    this.model.reservacion.precioTotal = subtotal1 + subtotal2;
+                    number++;
+                    cant_pasajeros = cant_pasajeros * 2;
+
+                }
+                var t = $('#paginacion3').DataTable();
+                $('#paginacion3').dataTable().fnClearTable();
+                t.row.add([
                     number,
                     cant_pasajeros,
                     model.reservacion.fecha_reserva,
-                    "$ "+model.reservacion.precioTotal
-                    ]).draw(false);
+                    "$ " + model.reservacion.precioTotal
+                ]).draw(false);
             }
             function showPasajeros() {
-            var tabla = document.getElementById("table-pasajeros");
-                    var label;
-                    var div;
-                    var div2;
-                    var span;
-                    var input;
-                    var i;
-                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                    for (var j = 0; j < cant_pasajeros; j++) {
+                var tabla = document.getElementById("table-pasajeros");
+                var label;
+                var div;
+                var div2;
+                var span;
+                var input;
+                var i;
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                for (var j = 0; j < cant_pasajeros; j++) {
                     div = document.createElement("div");
                     div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
                     label = document.createElement("label");
@@ -630,62 +630,66 @@
                 tabla.appendChild(document.createElement("br"));
             }
             function showTiquet() {
-            var t = $('#paginacion3').DataTable();
-                    $('#paginacion3').dataTable().fnClearTable();
+                var t = $('#paginacion3').DataTable();
+                $('#paginacion3').dataTable().fnClearTable();
             }
             $(document).ready(function () {
-            var table = $('#paginacion').DataTable({
+                var table = $('#paginacion').DataTable({
                     "paging": false,
                     "ordering": false,
                     "info": false,
                     "searching": false
-            });
-            var table3 = $('#paginacion3').DataTable({
+                });
+                var table3 = $('#paginacion3').DataTable({
                     "paging": false,
                     "ordering": false,
                     "info": false,
                     "searching": false
-            });
+                });
             });
             function createSeat() {
-                            var tabla = document.getElementById("tablaAsientos");
-                            var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-                                    "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
-                            var li, ol, li2, tmp, lbl;
-                            var filas = model.viajes[0].avion.cant_filas;
-                            var cant_asientos_por_fila = model.viajes[0].avion.cant_asientos_por_fila;
-                            for (var i = 1; i <= filas; i++) { //cant filas
-                            li = document.createElement("li");
-                            li.className = "row row--" + i;
-                            ol = document.createElement("ol");
-                            ol.className = "seats";
-                            ol.type = "A";
-                            for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
-                            typeAvion(cant_asientos_por_fila);
-                            li2 = document.createElement("li");
-                            li2.className = "seat";
-                            tmp = document.createElement("input");
-                            tmp.type = "checkbox";
-                            tmp.id = i + etiquetas[j] + model.viajes[0].numero_viaje;
-                            tmp.disabled = false;
-                            lbl = document.createElement("label");
-                            lbl.htmlFor = i + etiquetas[j] + model.viajes[0].numero_viaje;
-                            lbl.appendChild(document.createTextNode(i + etiquetas[j]));
-                            li2.appendChild(tmp);
-                            li2.appendChild(lbl);
-                            ol.appendChild(li2);
-                            }
-                            li.appendChild(ol);
-                            tabla.appendChild(li);
-                        }
+                var dive = document.getElementsByClassName("plane");
+                dive.className = "class col-xs-12 col-sm-4 col-md-4";
+                var tabla = document.getElementById("tablaAsientos");
+                var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+                    "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                var li, ol, li2, tmp, lbl;
+                var filas = model.viajes[0].avion.cant_filas;
+                var cant_asientos_por_fila = model.viajes[0].avion.cant_asientos_por_fila;
+                for (var i = 1; i <= filas; i++) { //cant filas
+                    li = document.createElement("li");
+                    li.className = "row row--" + i;
+                    ol = document.createElement("ol");
+                    ol.className = "seats";
+                    ol.type = "A";
+                    for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
+                        typeAvion(cant_asientos_por_fila);
+                        li2 = document.createElement("li");
+                        li2.className = "seat";
+                        tmp = document.createElement("input");
+                        tmp.type = "checkbox";
+                        tmp.id = i + etiquetas[j] + model.viajes[0].numero_viaje;
+                        tmp.disabled = false;
+                        lbl = document.createElement("label");
+                        lbl.htmlFor = i + etiquetas[j] + model.viajes[0].numero_viaje;
+                        lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+                        li2.appendChild(tmp);
+                        li2.appendChild(lbl);
+                        ol.appendChild(li2);
                     }
+                    li.appendChild(ol);
+                    tabla.appendChild(li);
+                }
+            }
             function createSeat2() {
-                    if (model.viajes[1] == null) {
-                        $("#asientosVuelta").hide();
-                    } else {
+                if (model.viajes[1] == null) {
+                    $("#asientosVuelta").hide();
+                } else {
+                    var dive = document.getElementsByClassName("plane");
+                    dive.className = "class col-xs-12 col-sm-4 col-md-4";
                     var tabla = document.getElementById("tablaAsientos2");
                     var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-                            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
+                        "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
                     var li, ol, li2, tmp, lbl;
                     var filas = model.viajes[1].avion.cant_filas;
                     var cant_asientos_por_fila = model.viajes[1].avion.cant_asientos_por_fila;
@@ -695,25 +699,25 @@
                         ol = document.createElement("ol");
                         ol.className = "seats";
                         ol.type = "A";
-                    for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
-                        typeAvion2(cant_asientos_por_fila);
-                        li2 = document.createElement("li");
-                        li2.className = "seat";
-                        tmp = document.createElement("input");
-                        tmp.type = "checkbox";
-                        tmp.id = i + etiquetas[j] + model.viajes[1].numero_viaje;
-                        tmp.disabled = false;
-                        lbl = document.createElement("label");
-                        lbl.htmlFor = i + etiquetas[j] + model.viajes[1].numero_viaje;
-                        lbl.appendChild(document.createTextNode(i + etiquetas[j]));
-                        li2.appendChild(tmp);
-                        li2.appendChild(lbl);
-                        ol.appendChild(li2);
+                        for (var j = 1; j <= cant_asientos_por_fila; j++) { //cant asientos por fila
+                            typeAvion2(cant_asientos_por_fila);
+                            li2 = document.createElement("li");
+                            li2.className = "seat";
+                            tmp = document.createElement("input");
+                            tmp.type = "checkbox";
+                            tmp.id = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                            tmp.disabled = false;
+                            lbl = document.createElement("label");
+                            lbl.htmlFor = i + etiquetas[j] + model.viajes[1].numero_viaje;
+                            lbl.appendChild(document.createTextNode(i + etiquetas[j]));
+                            li2.appendChild(tmp);
+                            li2.appendChild(lbl);
+                            ol.appendChild(li2);
+                        }
+                        li.appendChild(ol);
+                        tabla.appendChild(li);
+                    }
                 }
-                    li.appendChild(ol);
-                    tabla.appendChild(li);
-                }
-            }
             }
             function typeAvion(asientos) {
                 if (asientos >= 9 && this.model.viajes[0] != null) {
@@ -733,55 +737,116 @@
             }
             function validacionForm() {
                 var tam = 0;
-                 var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                 var numTarjeta = document.getElementById("numTarjeta");
-                for (var j = 0; j < cant_pasajeros; j++){
-                        var nombreP = document.getElementById("nombre" + j);
-                        var apellidosP = document.getElementById("apellidos" + j);
-                        var pasaporteP = document.getElementById("numero_pasaporte" + j);
-                        if (!(requiredField(nombreP.value))) {
-                            tam++;
-                            nombreP.style.borderColor = "red";
-                        } else {
-                            nombreP.style.borderColor = "gray";
-                        }
-                        if (!(requiredField(apellidosP.value))) {
-                            tam++;
-                            apellidosP.style.borderColor = "red";
-                        } else {
-                            apellidosP.style.borderColor = "gray";
-                        }
-                        if (!(requiredField(pasaporteP.value))) {
-                            tam++;
-                            pasaporteP.style.borderColor = "red";
-                        } else {
-                            pasaporteP.style.borderColor = "gray";
-                        }
-                        
-                }                 
-                    if (!(requiredField(numTarjeta.value))) {
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                var numTarjeta = document.getElementById("numTarjeta");
+                for (var j = 0; j < cant_pasajeros; j++) {
+                    var nombreP = document.getElementById("nombre" + j);
+                    var apellidosP = document.getElementById("apellidos" + j);
+                    var pasaporteP = document.getElementById("numero_pasaporte" + j);
+                    if (!(requiredField(nombreP.value))) {
                         tam++;
-                        numTarjeta.style.borderColor = "red";
+                        nombreP.style.borderColor = "red";
                     } else {
-                        numTarjeta.style.borderColor = "gray";
+                        nombreP.style.borderColor = "gray";
                     }
-                    if (tam > 0) {
-                        return false;
+                    if (!(requiredField(apellidosP.value))) {
+                        tam++;
+                        apellidosP.style.borderColor = "red";
+                    } else {
+                        apellidosP.style.borderColor = "gray";
                     }
+                    if (!(requiredField(pasaporteP.value))) {
+                        tam++;
+                        pasaporteP.style.borderColor = "red";
+                    } else {
+                        pasaporteP.style.borderColor = "gray";
+                    }
+
+                }
+                if (!(requiredField(numTarjeta.value))) {
+                    tam++;
+                    numTarjeta.style.borderColor = "red";
+                } else {
+                    numTarjeta.style.borderColor = "gray";
+                }
+                if (tam > 0) {
+                    return false;
+                }
                 return true;
             }
             function requiredField(valor) {
-            if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
-                return false;
-            }
+                if (valor === null || valor.length === 0 || /^\s+$/.test(valor)) {
+                    return false;
+                }
                 return true;
             }
-            function justNumbers (e) {
-                    var key = window.Event ? e.which : e.keyCode;
-                    if (key == 8 || key == 127 || key == 9)
-                        return true;
-                    return (key >= 48 && key <= 57);
+            function justNumbers(e) {
+                var key = window.Event ? e.which : e.keyCode;
+                if (key == 8 || key == 127 || key == 9)
+                    return true;
+                return (key >= 48 && key <= 57);
             }
+
+            function checks() {
+                var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                var cont = 0;
+                for (var i = 0; i < x.length; i++) {
+                    if (x[i].checked && !x[i].disabled)
+                        cont++;
+                }
+                if (model.viajes[1] != null) {
+                    var z = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                    for (var i = 0; i < z.length; i++) {
+                        if (z[i].checked && !z[i].disabled)
+                            cont++;
+                    }
+                }
+                return cont++;
+            }
+
+            function validarTabla1() {
+                var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                var cont = 0;
+                for (var i = 0; i < x.length; i++) {
+                    if (x[i].checked && !x[i].disabled)
+                        cont++;
+                }
+                return cont;
+            }
+
+            /*function validacionClick() {
+             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+             for (var i = 0; i < x.length; i++) {
+             x[i].addEventListener("click", function(){
+             CANT_PAS++;
+             //alert(CANT_PAS);
+             });
+             }
+             }*/
+
+            function valPasajeros() {
+                var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                var tmp = checks();
+
+                if (model.viajes[1] != null) {
+                    cant_pasajeros = cant_pasajeros * 2;
+                    console.log(cant_pasajeros);
+                    if (validarTabla1() !== (cant_pasajeros / 2)) {
+                        alert("Advertencia: Seleccione " + cant_pasajeros / 2 + " asientos de IDA y " + cant_pasajeros / 2 + " asientos de VUELTA");
+                        return false;
+                    }
+                }
+                if (tmp < cant_pasajeros) {
+                    alert("Advertencia: no ha seleccionado la cantidad de asientos disponibles: ".concat(cant_pasajeros));
+                    return false;
+                }
+                if (tmp > cant_pasajeros) {
+                    alert("Advertencia: ha seleccionado mas asientos de lo debido!".concat(tmp, cant_pasajeros));
+                    return false;
+                }
+                return true;
+            }
+
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
     </body>
