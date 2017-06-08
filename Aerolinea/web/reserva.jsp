@@ -211,8 +211,6 @@
                 initReservaciones: function () {
                     var model = this.model;
                     model.reservacion = new Reservacion();
-                    model.reservacion1 = new Reservacion();
-                    model.reservacion2 = new Reservacion();
                 },
                 initTravels: function () {
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
@@ -295,8 +293,6 @@
                 initAsiento: function () {
                     var model = this.model;
                     model.asiento = new Asiento();
-                    model.asiento1 = new Asiento();
-                    model.asiento2 = new Asiento();
                 },
                 initAvion: function () {
                     var model = this.model;
@@ -306,27 +302,37 @@
                     var model = this.model;
                     model.tiquete = new Tiquete();
                 },
+                guid: function(){
+                    function s4() {
+                        return Math.floor((1 + Math.random()) * 0x10000)
+                            .toString(16)
+                            .substring(1);
+                    }
+                    return s4() + '-' + s4() + '-' +
+                    s4();
+                },
                 ReservaAdd: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     if (this.view.validacionForm()) {
                         var loginUsuario = new Usuario("<%=user1.getUsuario()%>", "<%=user1.getContrasena()%>", "<%=user1.getNombre()%>",
                                 "<%=user1.getApellidos()%>", "<%=user1.getCorreo()%>", new Date('<%=user1.getFecha_nac()%>'),
                                 "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
-                        var codigoReserva = "<%=user1.getUsuario()%>" + this.model.viajes[0].numero_viaje;
-                        this.model.reservacion.codigo = codigoReserva;
-                        this.model.reservacion.nombreUsuario = loginUsuario;
-                        this.model.reservacion.viaje1 = this.model.viajes[0];
-                        this.model.reservacion.precioTotal = cant_pasajeros * this.model.viajes[0].vuelo.precio;
-                        this.model.reservacion.fecha_reserva = new Date();
+                        var codigoReserva = this.guid()+"-<%=user1.getUsuario()%>";
+                        model.reservacion.codigo = codigoReserva;
+                        model.reservacion.nombreUsuario = loginUsuario;
+                        model.reservacion.viaje1 = model.viajes[0];
+                        model.reservacion.precioTotal = cant_pasajeros * model.viajes[0].vuelo.precio;
+                        model.reservacion.fecha_reserva = new Date();
                         this.AsientoUpdate1();
                         if (this.model.viajes[1] != null) {
-                            this.model.reservacion.viaje2 = this.model.viajes[1];
-                            var subtotal1 = this.model.reservacion.precioTotal;
-                            var subtotal2 = cant_pasajeros * this.model.viajes[1].vuelo.precio;
+                            this.model.reservacion.viaje2 = model.viajes[1];
+                            var subtotal1 = model.reservacion.precioTotal;
+                            var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
                             this.model.reservacion.precioTotal = subtotal1 + subtotal2;
                             this.AsientoUpdate2();
                             this.ReservacionVuelta(this.model.reservacion);
-                            this.TiqueteAddVuelta(this.model.reservacion2);
+                            this.TiqueteAddIda(this.model.reservacion);
+                            this.TiqueteAddVuelta(this.model.reservacion);
                         }
                         if (this.model.viajes[1] == null) {
                             this.ReservacionIda(this.model.reservacion);
@@ -345,7 +351,7 @@
                 },
                 ReservacionVuelta: function(reserva){
                     Proxy.ReservacionAdd2(reserva, function (result) {
-                                this.model.reservacion2 = result;
+                                model.reservacion = result;
                             });
                 },
                 TiqueteAddIda: function (reserva) {
@@ -357,14 +363,14 @@
                         var nombreP = document.getElementById("nombre" + j).value;
                         var apellidosP = document.getElementById("apellidos" + j).value;
                         var pasaporteP = document.getElementById("numero_pasaporte" + j).value;
-                        this.model.tiquete.codigo = 0;
-                        this.model.tiquete.nombre_pasajero = nombreP;
-                        this.model.tiquete.apellidos_pasajero = apellidosP;
-                        this.model.tiquete.pasaporte_pasajero = pasaporteP;
+                        model.tiquete.codigo = 0;
+                        model.tiquete.nombre_pasajero = nombreP;
+                        model.tiquete.apellidos_pasajero = apellidosP;
+                        model.tiquete.pasaporte_pasajero = pasaporteP;
                         model.tiquete.codigo_reservacion = reserva;
-                        this.model.asiento.estado = false;
-                        this.model.asiento.numero = $(x[i]).attr('id');
-                        this.model.asiento.numero_viaje = this.model.viajes[0];
+                        model.asiento.estado = false;
+                        model.asiento.numero = $(x[i]).attr('id');
+                        model.asiento.numero_viaje = this.model.viajes[0];
                         model.tiquete.codigo_asiento = model.asiento;
                         j++;
                         Proxy.tiqueteAdd(this.model.tiquete,function (result) {
@@ -382,16 +388,16 @@
                         var nombreP = document.getElementById("nombre" + j).value;
                         var apellidosP = document.getElementById("apellidos" + j).value;
                         var pasaporteP = document.getElementById("numero_pasaporte" + j).value;
-                        this.model.tiquete.codigo = 0;
-                        this.model.tiquete.nombre_pasajero = nombreP;
-                        this.model.tiquete.apellidos_pasajero = apellidosP;
-                        this.model.tiquete.pasaporte_pasajero = pasaporteP;
-                        this.model.tiquete.codigo_reservacion = reserva;
-                        this.model.asiento.codigo = 0;
-                        this.model.asiento.estado = false;
-                        this.model.asiento.numero = $(x[i]).attr('id');
-                        this.model.asiento.numero_viaje = this.model.viajes[1];
-                        this.model.tiquete.codigo_asiento = this.model.asiento;
+                        model.tiquete.codigo = 0;
+                        model.tiquete.nombre_pasajero = nombreP;
+                        model.tiquete.apellidos_pasajero = apellidosP;
+                        model.tiquete.pasaporte_pasajero = pasaporteP;
+                        model.tiquete.codigo_reservacion = reserva;
+                        model.asiento.codigo = 0;
+                        model.asiento.estado = false;
+                        model.asiento.numero = $(x[i]).attr('id');
+                        model.asiento.numero_viaje = this.model.viajes[1];
+                        model.tiquete.codigo_asiento = this.model.asiento;
                         j++;
                         Proxy.tiqueteAdd(this.model.tiquete,function (result) {
                                 this.model.tiquete = result;
@@ -403,9 +409,9 @@
                         var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                         for (var i = 0; i < x.length; i++) {
                             if (x[i].checked && !x[i].disabled) {
-                                this.model.asiento.estado = false;
-                                this.model.asiento.numero = $(x[i]).attr('id');
-                                this.model.asiento.numero_viaje = this.model.viajes[0];
+                                model.asiento.estado = false;
+                                model.asiento.numero = $(x[i]).attr('id');
+                                model.asiento.numero_viaje = this.model.viajes[0];
                                 Proxy.AsientoUpdate(this.model.asiento, function (result) {
                                     model.asiento = result;
                                 });
@@ -416,12 +422,12 @@
                     var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
                         if (x[i].checked && !x[i].disabled) {
-                            this.model.asiento.codigo = 0;
-                            this.model.asiento.estado = false;
-                            this.model.asiento.numero = $(x[i]).attr('id');
-                            this.model.asiento.numero_viaje = this.model.viajes[1];
-                            Proxy.AsientoUpdate(this.model.asiento, function (result) {
-                                this.model.asiento = result;
+                            model.asiento.codigo = 0;
+                            model.asiento.estado = false;
+                            model.asiento.numero = $(x[i]).attr('id');
+                            model.asiento.numero_viaje = this.model.viajes[1];
+                            Proxy.AsientoUpdate(model.asiento, function (result) {
+                                model.asiento = result;
                             });
                         }
                     }
