@@ -121,18 +121,14 @@
                     this.initReservaciones1();
                     this.initReservaciones2();
                     Proxy.selectFacturaUltimos12(function (result) {
-                        console.log(result);
                         model.reservaciones = result;
                         console.log(model.reservaciones);
+                        view.showReservaciones1();
                     });
-                    view.showReservaciones1();
                      Proxy.selectReCurrentYear(function (result) {
-                        console.log(result);
                         model.reservaciones = result;
-                    });
-                    view.showReservaciones2();
-                   
-                    
+                        view.showReservaciones2();
+                    }); 
                 },
                 initTiquetes: function () {
                     var model = this.model;
