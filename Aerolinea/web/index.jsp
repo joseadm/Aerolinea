@@ -236,13 +236,13 @@
                             view.showBuscado();
                         });
                     }
-                    if (radio2.checked && fechaVuelta !== "") {
+                    if (radio2.checked && fechaVuelta != "") {
                         Proxy.viajesSearch(origen, destino, diaIda, fechaIDa, function (result) {
                             model.buscadosIda = result;
                         });
                         Proxy.viajesSearchByDestiny(origen, destino, diaVuelta, fechaVuelta, function (result) {
                             model.buscadosVuelta = result;
-                            if (model.buscadosIda !== null && model.buscadosVuelta !== null) {
+                            if (model.buscadosIda != null && model.buscadosVuelta != null) {
                                 view.showBuscado();
                                 view.showBuscadoVuelta();
                             }

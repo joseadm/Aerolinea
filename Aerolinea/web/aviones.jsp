@@ -174,6 +174,7 @@
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
                     cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
+                    if(this.model.avion.cant_filas>61){
                     if (view.validacionForm())
                         view.showMessage();
                     if (view.validacionForm()) {
@@ -181,6 +182,9 @@
                             document.location = "/Aerolinea/aviones.jsp";
                         });
                     }
+                    }else{
+                        view.showMessageError();
+                }
                 },
                 AvionUpdate: function (codigo) {
                     var model = this.model;
@@ -194,6 +198,7 @@
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
                     cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
+                    if(this.model.avion.cant_filas>61){
                     if (view.validacionForm())
                         view.showMessageUpdate();
                     if (view.validacionForm()) {
@@ -202,6 +207,9 @@
                            
                         });
                     }
+                    }else{
+                        view.showMessageError();
+                }
                 },
                 LimpiaPantalla: function () {
                     view.clean();
@@ -279,6 +287,9 @@
             }
             function showMessage() {
                 window.alert("Registro exitoso");
+            }
+            function showMessageError() {
+                window.alert("Cantidad de filas excede el máximo permitido");
             }
             function showMessageUpdate() {
                 window.alert("Actualizacion exitosa");
