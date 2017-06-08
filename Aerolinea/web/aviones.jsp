@@ -174,7 +174,7 @@
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
                     cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
-                    if(this.model.avion.cant_filas>61){
+                    if(this.model.avion.cant_filas<61){
                     if (view.validacionForm())
                         view.showMessage();
                     if (view.validacionForm()) {
@@ -198,7 +198,7 @@
                     this.model.avion.cant_asientos_por_fila = this.view.document.getElementById("cant_asientos_por_fila").value;
                     cantidadPasajeros = parseInt(this.view.document.getElementById("cant_filas").value) * parseInt(this.view.document.getElementById("cant_asientos_por_fila").value);
                     this.model.avion.cant_pasajeros = cantidadPasajeros;
-                    if(this.model.avion.cant_filas>61){
+                    if(this.model.avion.cant_filas<61){
                     if (view.validacionForm())
                         view.showMessageUpdate();
                     if (view.validacionForm()) {
