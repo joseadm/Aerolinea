@@ -168,7 +168,6 @@
             $('#paginacion')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
-
             $('#paginacion3')
                     .removeClass('display')
                     .addClass('table table-striped table-bordered');
@@ -178,7 +177,6 @@
             function Model() {
                 this.Model();
             }
-
             Model.prototype = {
                 Model: function () {
                     this.pasajeros = [];
@@ -207,7 +205,6 @@
                     //this.loadSeats();
                     this.initTiquete();
                 },
-
                 initReservaciones: function () {
                     var model = this.model;
                     model.reservacion = new Reservacion();
@@ -216,10 +213,8 @@
                     model.viajes = JSON.parse(sessionStorage.getItem("viajes") !== null ? sessionStorage.getItem("viajes") : "[]", Storage.retrieve("viajes"));
                 },
                 sumaTiempos: function (val1, tiempo) {
-
                     t1 = val1;
                     t2 = tiempo;
-
                     var dot1 = t1.indexOf(":");
                     var dot2 = t2.indexOf(":");
                     var m1 = t1.substr(0, dot1);
@@ -242,36 +237,28 @@
                     return horaFinal = this.formatString2(String(mRes), 2) + ":" + this.formatString(String(sRes), 2);
                 },
                 formatString2: function (string, len) {
-
                     if (string.length < len) {
                         addchar = (len - string.length);
                         for (i = 0; i < addchar; i++) {
                             string = "0" + string;
                         }
                     }
-
                     if (string.length > len) {
                         string = substr(string, 0, len);
                     }
-
                     return string;
                 },
-
                 formatString: function (string, len) {
-
                     if (string.length < len) {
                         addchar = (len - string.length);
                         for (i = 0; i < addchar; i++) {
                             string = string + "0";
                         }
                     }
-
                     if (string.length > len) {
                         string = substr(string, 0, len);
                     }
-
                     return string;
-
                 },
                 PasajerosAdd: function () {
                     var nombre = this.view.document.getElementById("nombre").value;
@@ -458,7 +445,6 @@
                 showReserva();
                 //showOcupado2();
             }
-
             function showOcupado() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
@@ -508,7 +494,6 @@
             }
             }
             function showPasajeros() {
-
             var tabla = document.getElementById("table-pasajeros");
                     var label;
                     var div;
@@ -518,7 +503,6 @@
                     var i;
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                     for (var j = 0; j < cant_pasajeros; j++) {
-
                     div = document.createElement("div");
                     div.setAttribute("class", "col-xs-12 col-sm-4 col-md-4");
                     label = document.createElement("label");
@@ -592,8 +576,6 @@
             var t = $('#paginacion3').DataTable();
                     $('#paginacion3').dataTable().fnClearTable();
             }
-
-
             $(document).ready(function () {
             var table = $('#paginacion').DataTable({
                     "paging": false,
@@ -640,9 +622,7 @@
                             tabla.appendChild(li);
                         }
                     }
-
             function createSeat2() {
-
             if (model.viajes[1] == null) {
             $("#asientosVuelta").hide();
             } else {
@@ -678,7 +658,6 @@
                 }
             }
             }
-
             function typeAvion(asientos) {
                 if (asientos >= 9) {
                     document.getElementById("tablaAsientos").style.padding = "0px 200px 0px 15px";
@@ -687,7 +666,6 @@
                     document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
                 }
             }
-
             function reservarAsientos() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     var reserva;
@@ -700,7 +678,6 @@
                         }
                     }
             }
-
             function reservarAsientos2() {
             var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
@@ -709,7 +686,6 @@
                         }
                     }
             }
-
             function showMessage() {
             window.alert("Reserva exitosa");
             }
@@ -859,8 +835,6 @@
             }
                 return true;
             }
-
-
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
     </body>
