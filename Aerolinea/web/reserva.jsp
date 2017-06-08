@@ -837,7 +837,7 @@
                     }
                 }
                 if (tmp < cant_pasajeros) {
-                    alert("Advertencia: no ha seleccionado la cantidad de asientos disponibles: ".concat(cant_pasajeros));
+                    alert("Advertencia: no ha seleccionado la cantidad de asientos disponibles: ".concat(cant_pasajeros-tmp));
                     return false;
                 }
                 if (tmp > cant_pasajeros) {
