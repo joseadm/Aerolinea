@@ -118,7 +118,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                            <input id="direccion" name="direccion" placeholder="Direccion" class="form-control" value="alajuela" type="text" disabled>
+                            <input id="direccion" name="direccion" placeholder="Direccion" class="form-control" type="text" disabled>
                         </div>
                     </div>
                     </div>
