@@ -161,7 +161,7 @@
                     return v1.numero_vuelo === numeroVuelo;
                 });
                 var count = 0;
-                if (view.validacionForm()) {
+                if (view.validacionForm() && avion != null && vuelo != null) {
                     var FlightDay = vuelo.dia;
                     var numberDay = this.numberDays(FlightDay);
                     var startDate = new Date(dateBegin1);
@@ -178,10 +178,13 @@
                             count++;
                         }
                     }
-                    if (view.validacionForm()) {
+                    if (count>0) {
                         view.showMessageCount(count);
                         document.location = "/Aerolinea/viajes.jsp";
                     }
+                }
+                if (count===0) {
+                        view.showMessageError();
                 }
             }
         },
@@ -300,6 +303,9 @@
     }
     function showMessage() {
         window.alert("Registro exitoso");
+    }
+    function showMessageError() {
+        window.alert("Error al Registrar viajes");
     }
     function showMessageCount(number) {
         window.alert("Registro exitoso de " + number + " viajes");
