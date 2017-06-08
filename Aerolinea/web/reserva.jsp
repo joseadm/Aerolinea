@@ -442,7 +442,7 @@
                                 count++;
                             }
                         }
-                    if(count == 0 || count<cant_pasajeros){
+                    if(count == 0 || count<cant_pasajeros || count>cant_pasajeros){
                         return false;
                     }
                     return true;
@@ -456,7 +456,7 @@
                                 count++;
                             }
                         }
-                    if(count == 0 || count<cant_pasajeros){
+                    if(count == 0 || count<cant_pasajeros || count>cant_pasajeros){
                         return false;
                     }
                     return true;
