@@ -202,8 +202,16 @@
                     });
                     this.initAsiento();
                     this.initReservaciones();
-                    //this.loadSeats();
                     this.initTiquete();
+                    Proxy.getAsientosIda(model.viajes[0], function (result) {
+                        this.model.asientosIda = result;
+                        view.showOcupado2();
+                    });
+                    if (this.model.viajes[1] != null) {
+                        Proxy.getAsientosVuelta(model.viajes[1], function (result) {
+                         this.model.asientosVuelta = result;
+                        });
+                    }
                 },
                 initReservaciones: function () {
                     var model = this.model;
@@ -418,17 +426,7 @@
                             });
                         }
                     }
-                },
-                loadSeats: function() {
-                 Proxy.getAsientosIda(model.viajes[0], function (result) {
-                    model.asientosIda = result;
-                 });
-                 if (this.model.viajes[1] != null) {
-                    Proxy.getAsientosVuelta(model.viajes[1], function (result) {
-                        model.asientosVuelta = result;
-                    });
                 }
-            }
             };
         </script>
         <script> // View
@@ -443,7 +441,6 @@
                 showTiquet();
                 showPasajeros();
                 showReserva();
-                //showOcupado2();
             }
             function showOcupado() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
@@ -453,14 +450,17 @@
                         }
                     }
             }
-            /*function showOcupado2() {
+            function showOcupado2() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
-                        if (model.asientosIda[i].estado == 0) {
+                        for (var index = 0; index < model.asientosIda.length; index++) {
+                        if ($(x[i]).attr('id') == model.asientosIda[index].numero &&  model.asientosIda[index].estado == 0 ) {
                             x[i].disabled = true;
+                            
                         }
-                    }
-            }*/
+                }
+            }
+        }
             function showViajes() {
             var t = $('#paginacion').DataTable();
                     $('#paginacion').dataTable().fnClearTable();
