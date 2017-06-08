@@ -30,7 +30,7 @@
             <div class="table-responsive">
                 <table id="paginacion" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
-                        <tr><th>Codigo</th><th>Nombre</th><th>viaje 1</th><th>viaje 2</th><th>Fecha de Reserva</th><th>Precio Total</th></tr>
+                        <tr><th>Codigo de Reserva</th><th>Nombre</th><th>viaje 1</th><th>viaje 2</th><th>Fecha de Reserva</th><th>Precio Total</th></tr>
                     </thead>
                     <tbody id="listaReservaciones">
                     </tbody>
@@ -106,7 +106,7 @@
                         model.reservaciones[index].viaje1.numero_viaje,
                         model.reservaciones[index].viaje2.numero_viaje,
                         model.reservaciones[index].fecha_reserva,
-                        model.reservaciones[index].precioTotal
+                        "$ "+model.reservaciones[index].precioTotal
                     ]).draw(false);
                 }
             }
