@@ -210,6 +210,7 @@
                     if (this.model.viajes[1] != null) {
                         Proxy.getAsientosVuelta(model.viajes[1], function (result) {
                          this.model.asientosVuelta = result;
+                         view.showOcupado();
                         });
                     }
                 },
@@ -279,12 +280,6 @@
                         numero_pasajero
                     ]).draw(false);
                 },
-                justNumbers: function (e) {
-                    var key = window.Event ? e.which : e.keyCode;
-                    if (key == 8 || key == 127 || key == 9)
-                        return true;
-                    return (key >= 48 && key <= 57);
-                },
                 initAsiento: function () {
                     var model = this.model;
                     model.asiento = new Asiento();
@@ -308,7 +303,8 @@
                 },
                 ReservaAdd: function () {
                     var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                    if (this.view.validacionForm()) {
+                    var number = 0;
+                        if(this.view.validacionForm()){
                         var loginUsuario = new Usuario("<%=user1.getUsuario()%>", "<%=user1.getContrasena()%>", "<%=user1.getNombre()%>",
                                 "<%=user1.getApellidos()%>", "<%=user1.getCorreo()%>", new Date('<%=user1.getFecha_nac()%>'),
                                 "<%=user1.getDireccion()%>",<%=user1.getTelefono()%>,<%=user1.getCelular()%>,<%=user1.getTipo()%>);
@@ -318,8 +314,18 @@
                         model.reservacion.viaje1 = model.viajes[0];
                         model.reservacion.precioTotal = cant_pasajeros * model.viajes[0].vuelo.precio;
                         model.reservacion.fecha_reserva = new Date();
-                        this.AsientoUpdate1();
+                        if (this.model.viajes[1] == null) {
+                            if(this.validateEmptySeats()){
+                            this.AsientoUpdate1();
+                            this.ReservacionIda(this.model.reservacion);
+                            this.TiqueteAddIda(this.model.reservacion);
+                            number++;
+                        }else{
+                            this.view.showMessageError();
+                        }
+                        }
                         if (this.model.viajes[1] != null) {
+                            if(this.validateEmptySeats2()){
                             this.model.reservacion.viaje2 = model.viajes[1];
                             var subtotal1 = model.reservacion.precioTotal;
                             var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
@@ -328,13 +334,13 @@
                             this.ReservacionVuelta(this.model.reservacion);
                             this.TiqueteAddIda(this.model.reservacion);
                             this.TiqueteAddVuelta(this.model.reservacion);
+                            number++;
+                        }else{
+                            this.view.showMessageError();
                         }
-                        if (this.model.viajes[1] == null) {
-                            this.ReservacionIda(this.model.reservacion);
-                            this.TiqueteAddIda(this.model.reservacion);
                         }
                     }
-                    if (this.view.validacionForm()) {
+                    if (number ==1 || number ==2) {
                         this.view.showMessage();
                         document.location = "/Aerolinea/index.jsp";
                     }
@@ -426,7 +432,35 @@
                             });
                         }
                     }
-                }
+                },
+                 validateEmptySeats: function(){
+                     var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+                     var count=0;
+                      var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                      for (var i = 0; i < x.length; i++) {
+                            if (x[i].checked && !x[i].disabled) {
+                                count++;
+                            }
+                        }
+                    if(count == 0 || count<cant_pasajeros){
+                        return false;
+                    }
+                    return true;
+                 },
+                 validateEmptySeats2: function(){
+                     var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
+                     var count=0;
+                      var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                      for (var i = 0; i < x.length; i++) {
+                            if (x[i].checked && !x[i].disabled) {
+                                count++;
+                            }
+                        }
+                    if(count == 0 || count<cant_pasajeros){
+                        return false;
+                    }
+                    return true;
+                 }
             };
         </script>
         <script> // View
@@ -443,12 +477,15 @@
                 showReserva();
             }
             function showOcupado() {
-            var x = document.getElementById("tablaAsientos").querySelectorAll("input");
+             var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
                     for (var i = 0; i < x.length; i++) {
-                        if ((model.asiento.numero_viaje === model.viajes[0].numero_viaje) && (!model.asiento.estado)) {
+                        for (var index = 0; index < model.asientosVuelta.length; index++) {
+                        if ($(x[i]).attr('id') == model.asientosVuelta[index].numero &&  model.asientosVuelta[index].estado == 0 ) {
                             x[i].disabled = true;
+                            
                         }
-                    }
+                }
+            }
             }
             function showOcupado2() {
             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
@@ -460,7 +497,7 @@
                         }
                 }
             }
-        }
+            }
             function showViajes() {
             var t = $('#paginacion').DataTable();
                     $('#paginacion').dataTable().fnClearTable();
@@ -500,6 +537,7 @@
                             var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
                             this.model.reservacion.precioTotal = subtotal1 + subtotal2;
                             number++;
+                            cant_pasajeros = cant_pasajeros*2;
                             
             }
                     var t = $('#paginacion3').DataTable();
@@ -584,6 +622,7 @@
                     input.setAttribute("placeholder", "Numero Pasaporte");
                     input.setAttribute("class", "form-control");
                     input.setAttribute("type", "text");
+                    input.onkeypress = justNumbers;
                     div2.appendChild(input);
                     div.appendChild(div2);
                     tabla.appendChild(div);
@@ -609,7 +648,7 @@
             });
             });
             function createSeat() {
-                    var tabla = document.getElementById("tablaAsientos");
+                            var tabla = document.getElementById("tablaAsientos");
                             var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                                     "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
                             var li, ol, li2, tmp, lbl;
@@ -641,9 +680,9 @@
                         }
                     }
             function createSeat2() {
-            if (model.viajes[1] == null) {
-            $("#asientosVuelta").hide();
-            } else {
+                    if (model.viajes[1] == null) {
+                        $("#asientosVuelta").hide();
+                    } else {
                     var tabla = document.getElementById("tablaAsientos2");
                     var etiquetas = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
@@ -686,167 +725,49 @@
                     document.getElementById("tablaAsientos2").style.padding = "0px 200px 0px 15px";
                 }
             }
-            function reservarAsientos() {
-            var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-                    var reserva;
-                    var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
-                    var user = "andrey";
-                    // var cambio = new TipoCambio().getVenta(); No lo agarra
-                    for (var i = 0; i < x.length; i++) {
-                        if (x[i].checked && !x[i].disabled) {
-                             x[i].disabled = true;
-                        }
-                    }
-            }
-            function reservarAsientos2() {
-            var x = document.getElementById("tablaAsientos2").querySelectorAll("input");
-                    for (var i = 0; i < x.length; i++) {
-                        if (x[i].checked && !x[i].disabled) {
-                            x[i].disabled = true;
-                        }
-                    }
-            }
             function showMessage() {
-            window.alert("Reserva exitosa");
+                window.alert("Reserva exitosa");
+            }
+            function showMessageError() {
+                window.alert("Seleccione los asientos para continuar con la reserva");
             }
             function validacionForm() {
-            var tam = 0;
-                    var nombre0 = document.getElementById("nombre0");
-                    if (!(requiredField(nombre0.value))) {
-            tam++;
-                    nombre0.style.borderColor = "red";
-            } else {
-            nombre0.style.borderColor = "gray";
-            }
-            var apellidos0 = document.getElementById("apellidos0");
-                    if (!(requiredField(apellidos0.value))) {
-            tam++;
-                    apellidos0.style.borderColor = "red";
-            } else {
-            apellidos0.style.borderColor = "gray";
-            }
-            var numero_pasaporte0 = document.getElementById("numero_pasaporte0");
-                    if (!(requiredField(numero_pasaporte0.value))) {
-            tam++;
-                    numero_pasaporte0.style.borderColor = "red";
-            } else {
-            numero_pasaporte0.style.borderColor = "gray";
-            }
-            /*var nombre1 = document.getElementById("nombre1");
-             if (!(requiredField(nombre1.value))) {
-             tam++;
-             nombre1.style.borderColor = "red";
-             } else {
-             nombre1.style.borderColor = "gray";
-             }
-             var apellidos1 = document.getElementById("apellidos1");
-             if (!(requiredField(apellidos1.value))) {
-             tam++;
-             apellidos1.style.borderColor = "red";
-             } else {
-             apellidos1.style.borderColor = "gray";
-             }
-             var numero_pasaporte1 = document.getElementById("numero_pasaporte1");
-             if (!(requiredField(numero_pasaporte1.value))) {
-             tam++;
-             numero_pasaporte1.style.borderColor = "red";
-             } else {
-             numero_pasaporte1.style.borderColor = "gray";
-             }
-             var nombre2 = document.getElementById("nombre2");
-             if (!(requiredField(nombre2.value))) {
-             tam++;
-             nombre2.style.borderColor = "red";
-             } else {
-             nombre2.style.borderColor = "gray";
-             }
-             var apellidos2 = document.getElementById("apellidos2");
-             if (!(requiredField(apellidos2.value))) {
-             tam++;
-             apellidos2.style.borderColor = "red";
-             } else {
-             apellidos2.style.borderColor = "gray";
-             }
-             var numero_pasaporte2 = document.getElementById("numero_pasaporte2");
-             if (!(requiredField(numero_pasaporte2.value))) {
-             tam++;
-             numero_pasaporte2.style.borderColor = "red";
-             } else {
-             numero_pasaporte2.style.borderColor = "gray";
-             }
-             var nombre3 = document.getElementById("nombre3");
-             if (!(requiredField(nombre3.value))) {
-             tam++;
-             nombre3.style.borderColor = "red";
-             } else {
-             nombre3.style.borderColor = "gray";
-             }
-             var apellidos3 = document.getElementById("apellidos3");
-             if (!(requiredField(apellidos3.value))) {
-             tam++;
-             apellidos3.style.borderColor = "red";
-             } else {
-             apellidos3.style.borderColor = "gray";
-             }
-             var numero_pasaporte3 = document.getElementById("numero_pasaporte3");
-             if (!(requiredField(numero_pasaporte3.value))) {
-             tam++;
-             numero_pasaporte3.style.borderColor = "red";
-             } else {
-             numero_pasaporte3.style.borderColor = "gray";
-             }
-             var nombre4 = document.getElementById("nombre4");
-             if (!(requiredField(nombre4.value))) {
-             tam++;
-             nombre4.style.borderColor = "red";
-             } else {
-             nombre4.style.borderColor = "gray";
-             }
-             var apellidos4 = document.getElementById("apellidos4");
-             if (!(requiredField(apellidos4.value))) {
-             tam++;
-             apellidos4.style.borderColor = "red";
-             } else {
-             apellidos4.style.borderColor = "gray";
-             }
-             var numero_pasaporte4 = document.getElementById("numero_pasaporte4");
-             if (!(requiredField(numero_pasaporte4.value))) {
-             tam++;
-             numero_pasaporte4.style.borderColor = "red";
-             } else {
-             numero_pasaporte4.style.borderColor = "gray";
-             }
-             var nombre5 = document.getElementById("nombre5");
-             if (!(requiredField(nombre5.value))) {
-             tam++;
-             nombre5.style.borderColor = "red";
-             } else {
-             nombre5.style.borderColor = "gray";
-             }
-             var apellidos5 = document.getElementById("apellidos5");
-             if (!(requiredField(apellidos5.value))) {
-             tam++;
-             apellidos5.style.borderColor = "red";
-             } else {
-             apellidos5.style.borderColor = "gray";
-             }
-             var numero_pasaporte5 = document.getElementById("numero_pasaporte5");
-             if (!(requiredField(numero_pasaporte5.value))) {
-             tam++;
-             numero_pasaporte5.style.borderColor = "red";
-             } else {
-             numero_pasaporte5.style.borderColor = "gray";
-             }*/
-            var numTarjeta = document.getElementById("numTarjeta");
+                var tam = 0;
+                 var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
+                 var numTarjeta = document.getElementById("numTarjeta");
+                for (var j = 0; j < cant_pasajeros; j++){
+                        var nombreP = document.getElementById("nombre" + j);
+                        var apellidosP = document.getElementById("apellidos" + j);
+                        var pasaporteP = document.getElementById("numero_pasaporte" + j);
+                        if (!(requiredField(nombreP.value))) {
+                            tam++;
+                            nombreP.style.borderColor = "red";
+                        } else {
+                            nombreP.style.borderColor = "gray";
+                        }
+                        if (!(requiredField(apellidosP.value))) {
+                            tam++;
+                            apellidosP.style.borderColor = "red";
+                        } else {
+                            apellidosP.style.borderColor = "gray";
+                        }
+                        if (!(requiredField(pasaporteP.value))) {
+                            tam++;
+                            pasaporteP.style.borderColor = "red";
+                        } else {
+                            pasaporteP.style.borderColor = "gray";
+                        }
+                        
+                }                 
                     if (!(requiredField(numTarjeta.value))) {
-            tam++;
-                    numTarjeta.style.borderColor = "red";
-            } else {
-            numTarjeta.style.borderColor = "gray";
-            }
-            if (tam > 0) {
-                return false;
-            }
+                        tam++;
+                        numTarjeta.style.borderColor = "red";
+                    } else {
+                        numTarjeta.style.borderColor = "gray";
+                    }
+                    if (tam > 0) {
+                        return false;
+                    }
                 return true;
             }
             function requiredField(valor) {
@@ -854,6 +775,12 @@
                 return false;
             }
                 return true;
+            }
+            function justNumbers (e) {
+                    var key = window.Event ? e.which : e.keyCode;
+                    if (key == 8 || key == 127 || key == 9)
+                        return true;
+                    return (key >= 48 && key <= 57);
             }
             document.addEventListener("DOMContentLoaded", pageLoad);
         </script>
