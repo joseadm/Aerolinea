@@ -118,7 +118,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                            <input id="direccion" name="direccion" placeholder="Direccion" class="form-control"  type="text" disabled>
+                            <input id="direccion" name="direccion" placeholder="Direccion" class="form-control" value="alajuela" type="text" disabled>
                         </div>
                     </div>
                     </div>
@@ -157,7 +157,7 @@
             <script type="text/javascript">
                 $(function () {
                     $('#fechaNacimiento').datepicker({
-                        format: 'dd/mm/yyyy'
+                        format: 'yyyy-mm-dd'
                     });
                 });
                 function initMap() {
@@ -248,12 +248,13 @@
                         this.model.usuario.celular = this.view.document.getElementById("celular").value;
                         this.model.usuario.direccion = this.view.document.getElementById("direccion").value;
                         this.model.usuario.tipo = 1;
-                        if (view.validacionForm())
-                            this.view.showMessage();
-                        if (view.validacionForm() /*&&!(usuarioExiste(this.model.usuario.usuario))*/) {
+                        if (view.validacionForm()) {
                             Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
-                                document.location = "/Aerolinea/registro.jsp";
                             });
+                        }
+                        if (view.validacionForm()){
+                            this.view.showMessage();
+                            document.location = "/Aerolinea/login.jsp";
                         }
 
                     },

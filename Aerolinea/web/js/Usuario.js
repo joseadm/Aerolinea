@@ -11,7 +11,7 @@ Usuario.prototype={
 	correo:"",
 	fecha_nac:"",
 	direccion:"",
-	telefono:"",
+	telefono:0,
 	celular:0,
         tipo:0,
   Usuario: function(usuario,contrasena,nombre,apellidos,correo,fecha_nac,direccion,telefono,celular,tipo){
