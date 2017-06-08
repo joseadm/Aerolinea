@@ -330,6 +330,7 @@
                                 var subtotal1 = model.reservacion.precioTotal;
                                 var subtotal2 = cant_pasajeros * model.viajes[1].vuelo.precio;
                                 this.model.reservacion.precioTotal = subtotal1 + subtotal2;
+                                this.AsientoUpdate1();
                                 this.AsientoUpdate2();
                                 this.ReservacionVuelta(this.model.reservacion);
                                 this.TiqueteAddIda(this.model.reservacion);
@@ -813,17 +814,7 @@
                 }
                 return cont;
             }
-
-            /*function validacionClick() {
-             var x = document.getElementById("tablaAsientos").querySelectorAll("input");
-             for (var i = 0; i < x.length; i++) {
-             x[i].addEventListener("click", function(){
-             CANT_PAS++;
-             //alert(CANT_PAS);
-             });
-             }
-             }*/
-
+            
             function valPasajeros() {
                 var cant_pasajeros = sessionStorage.getItem("cantidadPasajeros");
                 var tmp = checks();

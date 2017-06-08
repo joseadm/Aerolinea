@@ -297,18 +297,8 @@
                     titulo.appendChild(document.createTextNode(modelView.promo[index].ciudad_origen.nombre + " " + modelView.promo[index].ciudad_destino.nombre));
                     precio = document.createElement("h5");
                     precio.appendChild(document.createTextNode("Obten tu viaje por tan solo " + modelView.promo[index].precio + "$"));
-                    /*boton = document.createElement("button");
-                    boton.setAttribute("class", "btn btn-view btn-primary");
-                    boton.appendChild(document.createTextNode("Ordenar"));
-                    boton.addEventListener('click', function (e) {
-                        var v1 = new Viaje(modelView.promo[index].numero_viaje, modelView.promo[index].fecha, modelView.promo[index].avion, modelView.promo[index].vuelo);
-                        viajes.push(v1);
-                        sessionStorage.setItem("viajes", JSON.stringify(viajes, JsonUtils.replacer));
-                        document.location = "reserva.jsp";
-                    });*/
                     div2.appendChild(titulo);
                     div2.appendChild(precio);
-                    //div2.appendChild(boton);
                     div1.appendChild(div2);
                     lista.appendChild(div1);
                 }
