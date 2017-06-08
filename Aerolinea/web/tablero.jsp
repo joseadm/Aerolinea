@@ -115,8 +115,7 @@
             Controller.prototype = {
                 Controller: function (model, view) {
                     this.model = model;
-                    this.view = view;
-                    
+                    this.view = view;                  
                     this.initTiquetes();
                     this.initReservaciones1();
                     this.initReservaciones2();

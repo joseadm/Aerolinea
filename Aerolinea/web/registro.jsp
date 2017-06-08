@@ -228,9 +228,6 @@
                     Controller: function (model, view) {
                         this.model = model;
                         this.view = view;
-                        /*Proxy.getUsuarios(function (result) {
-                         model.usuarios = result;
-                         });*/
                         this.initUsuario();
                     },
                     initUsuario: function () {
@@ -257,8 +254,6 @@
                             Proxy.UsuarioAdd(this.model.usuario, function (UsuarioNumber) {
                                 document.location = "/Aerolinea/registro.jsp";
                             });
-
-
                         }
 
                     },
