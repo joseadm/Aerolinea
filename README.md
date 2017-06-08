@@ -1,31 +1,26 @@
-## Synopsis
+## Aerolinea
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+Proyecto de Programacion lV cuyo objetivo es desarrollar una aplicacion web para una empresa de aerolineas capaz de gestionar los vuelos, ciudades, viajes y aviones, ademas con un modulo de usuario el cual permite a los clientes, realizar compras de tiquetes y reservaciones para sus respectivos vuelos
 
-## Code Example
+## Lenguajes
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+HTML, CSS, Javascript, Java
 
-## Motivation
+## Base de datos
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+MySQL Workbench
 
-## Installation
+## Librerias
 
-Provide code examples and explanations of how to get the project.
+Gson, iText, SQL Connector
 
-## API Reference
+## Contribuciones
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+Jose Delgado Matamoros
+Andrey Chaverri
+Jose Manuel Hidalgo
+Alonso Chenx2
 
-## Tests
+## Licencia
 
-Describe and show how to run the tests with code examples.
-
-## Contributors
-
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
-
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
+Todos los derechos reservados
