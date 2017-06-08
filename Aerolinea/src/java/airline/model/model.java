@@ -823,18 +823,55 @@ public class model {
         }
         return ticket;
     }
-    private static String toStringList(ResultSet rs) throws Exception {
-     try {
-       
-         return rs.getString("nombre_pasajero");
-     } catch (SQLException ex) {
-         return null;
-     }
-    }
     private static Tiquete toPasajeroTiquete(ResultSet rs) throws Exception {
         try {
             Tiquete obj = new Tiquete();
             obj.setNombre_pasajero(rs.getString("nombre_pasajero"));
+            return obj;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    //Cantidad facturado en los ultimos 12 meses----------------------------
+      public static List<Reservacion> selectFacturaUltimos12() throws Exception {
+          //Usuario es el nombre de usuario
+        List<Reservacion> re;
+        re = new ArrayList();
+        try {
+            String sql = "select sum(precioTotal)"
+                    + " from Reservacion "
+                    + "where fecha_reserva >= DATE_SUB(NOW(),INTERVAL 1 YEAR);";
+            ResultSet rs = reservaciones.executeQuery(sql);
+            while (rs.next()) {
+                 re.add(toReservaTotal(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("Ningun usuario ha viajado en este avion");
+        }
+        return re;
+    }
+      //Cantidad facturado en el  año actual----------------------------
+      public static List<Reservacion> selectReCurrentYear() throws Exception {
+          //Usuario es el nombre de usuario
+        List<Reservacion> re;
+        re = new ArrayList();
+        try {
+            String sql = "select sum(precioTotal) "
+                    + "from Reservacion"
+                    + " where year(fecha_reserva) = year(curdate());";
+            ResultSet rs = reservaciones.executeQuery(sql);
+            while (rs.next()) {
+                 re.add(toReservaTotal(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("Ningun usuario ha viajado en este avion");
+        }
+        return re;
+    }
+    private static Reservacion toReservaTotal(ResultSet rs) throws Exception {
+        try {
+            Reservacion obj = new Reservacion();
+            obj.setPrecioTotal(rs.getInt("sum(precioTotal)"));
             return obj;
         } catch (SQLException ex) {
             return null;

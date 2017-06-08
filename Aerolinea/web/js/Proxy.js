@@ -88,6 +88,36 @@ Proxy.getVuelos = function (callBack) {
     };
     AJAX_req.send();
 };
+Proxy.selectFacturaUltimos12 = function (callBack) {
+    $.ajax({
+        url: '/Aerolinea/AirlineService?action=selectFacturaUltimos12',
+        data: {
+            format: 'json'
+        },
+        dataType: 'text',
+        type: 'GET',
+        success: function (data) {
+            var object = $.parseJSON(data, JsonUtils.revive);
+            callBack(object);
+        }
+    });
+};
+Proxy.selectReCurrentYear = function (callBack) {
+    $.ajax({
+        url: '/Aerolinea/AirlineService?action=selectReCurrentYear',
+        data: {
+            format: 'json'
+        },
+        dataType: 'text',
+        type: 'GET',
+        success: function (data) {
+            var object = $.parseJSON(data, JsonUtils.revive);
+            callBack(object);
+        }
+    });
+};
+
+
 Proxy.getViaje = function (numero, callBack) {
     $.ajax({
         url: '/Aerolinea/AirlineService?action=getViaje',

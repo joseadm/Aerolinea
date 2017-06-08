@@ -57,7 +57,29 @@
             </div>
             </div>
             </div>
-              
+            
+            <div class="row">
+           <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Total Facturado en los ultimos 12 meses </div>
+                <div class="panel-body">
+                 <input type="text" class="form-control" id="last12" disabled>   
+                </div>
+            </div>
+           </div>
+           </div>
+            
+            <div class="row">
+           <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Total Facturado en el año actual </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="currentYear" disabled>   
+                </div>
+            </div>
+           </div>
+           </div>
+            
             <div class="panel-heading">Listado de clientes</div>
 
           </div>
@@ -81,6 +103,7 @@
             Model.prototype = {
                 Model: function () {
                     this.tiquetes = [];
+                    this.reservaciones = [];
                 }
             };
         </script>
@@ -95,15 +118,39 @@
                     this.view = view;
                     
                     this.initTiquetes();
+                    this.initReservaciones1();
+                    this.initReservaciones2();
+                    Proxy.selectFacturaUltimos12(function (result) {
+                        console.log(result);
+                        model.reservaciones = result;
+                        console.log(model.reservaciones);
+                    });
+                    view.showReservaciones1();
+                     Proxy.selectReCurrentYear(function (result) {
+                        console.log(result);
+                        model.reservaciones = result;
+                    });
+                    view.showReservaciones2();
+                   
+                    
                 },
                 initTiquetes: function () {
                     var model = this.model;
                     model.tiquete = new Tiquete();
                 },
+                initReservaciones1: function () {
+                    var model = this.model;
+                    model.reservacion1 = new Reservacion();
+                },
+                initReservaciones2: function () {
+                    var model = this.model;
+                    model.reservacion2 = new Reservacion();
+                },
                  buscarPasajeros: function () {
                     var model = this.model;
                     var view = this.view;
                     var avion = this.view.document.getElementById("placa").value;
+                    
                     if (view.validacionPlaca()){
                     Proxy.selectClientsByPlane(avion ,function (result) {
                         console.log(result);
@@ -128,10 +175,17 @@
             function showMessageNoSeEnctraronPasajeros() {
                 window.alert("No se encontraron Pasjaeros");
             }
+            function showReservaciones1(){
+                document.getElementById("last12").value = model.reservaciones[0].precioTotal;
+            }
+            function showReservaciones2(){
+                document.getElementById("currentYear").value = model.reservaciones[0].precioTotal;
+            }
             function showPasajeros() {
                 var t = $('#paginacion').DataTable();
                 $('#paginacion').dataTable().fnClearTable();
                 for (var index in model.tiquetes) {
+                    console.log(index);
                     t.row.add([
                         model.tiquetes[index].nombre_pasajero
                     ]).draw(false);

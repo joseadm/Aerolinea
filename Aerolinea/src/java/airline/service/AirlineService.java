@@ -102,6 +102,16 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(viajes);
                     out.write(json);
                     break;
+                case "selectFacturaUltimos12":
+                    reservaciones = model.selectFacturaUltimos12();
+                    json = gson.toJson(reservaciones);
+                    out.write(json);
+                    break;
+                case "selectReCurrentYear":
+                    reservaciones = model.selectReCurrentYear();
+                    json = gson.toJson(reservaciones);
+                    out.write(json);
+                    break;
                 case "selectReservacionByUser":
                     String Nusuario = request.getParameter("usuario");
                     reservaciones = model.selectReservacionByUser(Nusuario);
