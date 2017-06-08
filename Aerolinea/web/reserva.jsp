@@ -841,7 +841,7 @@
                     return false;
                 }
                 if (tmp > cant_pasajeros) {
-                    alert("Advertencia: ha seleccionado mas asientos de lo debido!".concat(tmp, cant_pasajeros));
+                    alert("Advertencia: ha seleccionado mas asientos de lo debido!");
                     return false;
                 }
                 return true;
