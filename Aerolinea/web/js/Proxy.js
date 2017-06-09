@@ -15,6 +15,21 @@ Proxy.getCiudades = function (callBack) {
     };
     AJAX_req.send();
 };
+Proxy.selectTiquetes = function (reserva, callBack) {
+    $.ajax({
+        url: '/Aerolinea/AirlineService?action=selectTiquetes',
+        data: {
+            format: 'json',
+            reservacionNumero: reserva
+        },
+        dataType: 'text',
+        type: 'GET',
+        success: function (data) {
+            var object = $.parseJSON(data, JsonUtils.revive);
+            callBack(object);
+        }
+    });
+};
 Proxy.GeneratePDF = function(reservacion,viajes,callBack){
     jsonReservacion = JSON.stringify(reservacion,JsonUtils.replacer);
     jsonViajes = JSON.stringify(viajes,JsonUtils.replacer);

@@ -342,8 +342,9 @@
                         }
                     }
                     if (number == 1 || number == 2) {
+                        sessionStorage.setItem("codigoReserva", model.reservacion.codigo);
                         this.view.showMessage();
-                        document.location = "/Aerolinea/index.jsp";
+                        document.location = "/Aerolinea/reporte.jsp";
                     }
                 },
                 ReservacionIda: function (reserva) {

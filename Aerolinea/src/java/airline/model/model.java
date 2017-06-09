@@ -502,7 +502,6 @@ public class model {
             return null;
         }
     }
-   
     public static void insertUsuario(Usuario usuario) throws Exception {
         //  return 1;
 
@@ -685,11 +684,11 @@ public class model {
         }
         return re;
     }
-     public static Reservacion selectReservacion(int numero) throws Exception {
+     public static Reservacion selectReservacion(String numero) throws Exception {
           //Usuario es el nombre de usuario
         Reservacion re = new Reservacion();
         try {
-            String sql = "select * from Reservacion where codigo = "+numero+"";
+            String sql = "select * from Reservacion where codigo = '"+numero+"'";
             ResultSet rs = reservaciones.executeQuery(sql);
             while (rs.next()) {
                 re = (toReservacion(rs));
@@ -699,21 +698,21 @@ public class model {
         }
         return re;
     }
-    public int getIDLastReserv()throws Exception{
-        String sql= "select MAX(codigo) FROM Reservacion";
-        ResultSet rs= reservaciones.executeQuery(sql);
-        if(rs.next()){
-            return rs.getInt("MAX(codigo)");
-        }
-        else{
-            throw new Exception("No hay facturas en espera");
-        }
-    }
-     public Reservacion getLastReser() throws Exception{
-        int lastId = this.getIDLastReserv();
-        return this.selectReservacion(lastId);
-        
-    }
+//    public int getIDLastReserv()throws Exception{
+//        String sql= "select MAX(codigo) FROM Reservacion";
+//        ResultSet rs= reservaciones.executeQuery(sql);
+//        if(rs.next()){
+//            return rs.getInt("MAX(codigo)");
+//        }
+//        else{
+//            throw new Exception("No hay facturas en espera");
+//        }
+//    }
+//     public Reservacion getLastReser() throws Exception{
+//        int lastId = this.getIDLastReserv();
+//        return this.selectReservacion(lastId);
+//        
+//    }
     private static Reservacion toReservacion(ResultSet rs) throws Exception {
      try {
          Reservacion obj = new Reservacion();
@@ -831,6 +830,42 @@ public class model {
         } catch (SQLException ex) {
             return null;
         }
+    }
+    private static Tiquete toPasajeroTiquete2(ResultSet rs) throws Exception {
+        try {
+            Tiquete obj = new Tiquete();
+            obj.setCodigo(rs.getInt("codigo"));
+            Reservacion r = new Reservacion();
+            r.setCodigo(rs.getString("codigo_reservacion"));
+            r = selectReservacion(r.getCodigo());
+            obj.setCodigo_reservacion(r);
+            Asiento a = new Asiento();
+            a.setNumero(rs.getString("codigo_asiento"));
+            a = selectSitByNumber(a.getNumero());
+            obj.setCodigo_asiento(a);
+            obj.setNombre_pasajero(rs.getString("nombre_pasajero"));
+            obj.setApellidos_pasajero(rs.getString("apellidosPasajero"));
+            obj.setPasaporte_pasajero(rs.getInt("pasaporte"));
+            
+            return obj;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    public static List<Tiquete> selectTiquete(String numero) throws Exception {
+          //Usuario es el nombre de usuario
+        List<Tiquete> t;
+        t = new ArrayList();
+        try {
+            String sql = "select * from Tiquete where codigo_reservacion = '"+numero+"'";
+            ResultSet rs = tiquetes.executeQuery(sql);
+            while (rs.next()) {
+                t.add(toPasajeroTiquete2(rs));
+            }
+        } catch (SQLException ex) {
+            throw new Exception("No existen tiquetes");
+        }
+        return t;
     }
     //Cantidad facturado en los ultimos 12 meses----------------------------
       public static List<Reservacion> selectFacturaUltimos12() throws Exception {

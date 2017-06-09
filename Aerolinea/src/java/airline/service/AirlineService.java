@@ -124,6 +124,12 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(tiquetes);
                     out.write(json);
                     break;
+                case "selectTiquetes":
+                    String reserv1 = request.getParameter("reservacionNumero");
+                    tiquetes = model.selectTiquete(reserv1);
+                    json = gson.toJson(tiquetes);
+                    out.write(json);
+                    break;
                 case "viajesListAll":
                     viajes = model.selectAllTravels();
                     json = gson.toJson(viajes);
